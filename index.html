@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vero — Build Better Money Habits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: rgba(0, 192, 172, 0.85);
+      --color-primary-solid: #00C0AC;
+      --color-secondary: #005149;
+      --color-accent: #FFC857;
+      --color-bg: #F7FBFA;
+      --color-surface: rgba(255, 255, 255, 0.6);
+      --color-border: rgba(0, 81, 73, 0.12);
+      --color-glow-1: #D4EDEB;
+      --color-glow-2: #A8E3DC;
+      --color-text: #003C36;
+      --color-text-muted: rgba(0, 60, 54, 0.55);
+      --color-success: #22C55E;
+      --color-warning: #F59E0B;
+      --color-error: #EF4444;
+
+      /* Glassmorphism tokens */
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: 1px solid rgba(0, 81, 73, 0.10);
+      --glass-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.6), 0px 10px 30px rgba(0, 81, 73, 0.08);
+      --glass-blur: blur(20px);
+      --glass-radius: 20px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      line-height: 1.7;
+      font-size: 16px;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* ── Background Glow Layers ── */
+    .bg-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-glow::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, var(--color-glow-1) 0%, transparent 70%);
+      opacity: 0.6;
+      filter: blur(120px);
+    }
+
+    .bg-glow::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: -10%;
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle, var(--color-primary-solid) 0%, transparent 70%);
+      opacity: 0.15;
+      filter: blur(160px);
+    }
+
+    /* ── Content Layer ── */
+    .content-layer {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky;
+      top: 24px;
+      z-index: 100;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--glass-radius);
+    }
+
+    .navbar-logo {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--color-secondary);
+      text-decoration: none;
+    }
+
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .navbar-links a:hover {
+      color: var(--color-text);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: rgba(0, 192, 172, 0.12);
+      border: 1px solid rgba(0, 192, 172, 0.25);
+      color: #00C0AC;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      border-radius: var(--glass-radius);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      background: rgba(0, 192, 172, 0.2);
+      color: #00C0AC;
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      min-height: calc(100vh - 120px);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* 8a. Social Proof Badge */
+    .social-proof-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 16px;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--glass-radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .social-proof-badge .stars {
+      color: var(--color-accent);
+      letter-spacing: 1px;
+    }
+
+    /* 8b. Hero Headline */
+    .hero-headline {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 64px;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--color-secondary);
+    }
+
+    .hero-headline .gradient-text {
+      background: linear-gradient(135deg, var(--color-primary-solid), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* 8c. Subheadline */
+    .hero-subheadline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+      color: var(--color-text-muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* 8d. Primary CTA */
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: fit-content;
+      padding: 16px 28px;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.35), 0 4px 24px rgba(0, 192, 172, 0.35);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-primary-solid);
+      transform: scale(1.02);
+    }
+
+    .hero-cta .cta-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      font-size: 14px;
+    }
+
+    /* ── Hero Right — App Mockup ── */
+    .hero-mockup {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mockup-phone {
+      width: 340px;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 32px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transform: scale(1.05);
+      mix-blend-mode: normal;
+    }
+
+    .mockup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mockup-greeting {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--color-secondary);
+    }
+
+    .mockup-streak {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--color-text);
+      background: rgba(255, 200, 87, 0.15);
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    /* Progress Section */
+    .mockup-progress {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 81, 73, 0.08);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .progress-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-amounts {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .progress-current {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--color-secondary);
+    }
+
+    .progress-goal {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: rgba(0, 192, 172, 0.12);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      width: 59%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary-solid), var(--color-glow-2));
+      border-radius: 8px;
+    }
+
+    /* Challenge Cards */
+    .mockup-challenges {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mockup-section-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .challenge-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 81, 73, 0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .challenge-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .challenge-icon {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 192, 172, 0.08);
+      border-radius: 10px;
+    }
+
+    .challenge-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .challenge-pts {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-accent);
+      background: rgba(255, 200, 87, 0.12);
+      padding: 4px 10px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    /* Reward Badge */
+    .mockup-reward {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(255, 200, 87, 0.15), rgba(0, 192, 172, 0.08));
+      border: 1px solid rgba(255, 200, 87, 0.25);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .reward-icon {
+      font-size: 22px;
+    }
+
+    .reward-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-secondary);
+    }
+
+    .reward-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-accent);
+      margin-left: auto;
+      background: rgba(255, 200, 87, 0.18);
+      padding: 3px 8px;
+      border-radius: 8px;
+    }
+
+    /* ── Trusted-By Logo Strip ── */
+    .trusted-strip {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 60px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .trusted-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .trusted-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+
+    .trusted-logo {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--color-secondary);
+      filter: grayscale(100%) opacity(0.35);
+      transition: filter 0.2s ease;
+      user-select: none;
+    }
+
+    .trusted-logo:hover {
+      filter: grayscale(100%) opacity(0.55);
+    }
+
+    /* ── Section Shared Styles ── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-primary-solid);
+      margin-bottom: 12px;
+    }
+
+    .section-headline {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      color: var(--color-secondary);
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      max-width: 560px;
+    }
+
+    /* ── Problem Section ── */
+    .problem {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .problem-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .stat-card {
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--glass-radius);
+      padding: 24px 28px;
+      transition: transform 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-number {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      color: var(--color-secondary);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Insight Section ── */
+    .insight {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .insight .section-body {
+      max-width: 520px;
+    }
+
+    .insight .section-headline {
+      font-size: 48px;
+    }
+
+    /* ── Solution Section ── */
+    .solution-content {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .solution-content .section-body {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .solution-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .solution-card {
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--glass-radius);
+      padding: 32px 24px;
+      transition: transform 0.2s ease;
+    }
+
+    .solution-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .solution-card-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .solution-card-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--color-secondary);
+      margin-bottom: 8px;
+    }
+
+    .solution-card-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── How It Works Section ── */
+    .how-it-works-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .step-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--color-secondary);
+      margin-bottom: 8px;
+    }
+
+    .step-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .step-connector {
+      display: none;
+    }
+
+    /* ── Social Proof / Testimonials ── */
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--glass-radius);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .testimonial-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-glow-1), var(--color-primary-solid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .testimonial-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--color-text);
+    }
+
+    .testimonial-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Impact Metrics ── */
+    .impact-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .impact-card {
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--glass-radius);
+      padding: 32px 20px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .impact-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .impact-number {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      color: var(--color-primary-solid);
+      margin-bottom: 8px;
+    }
+
+    .impact-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Behaviour Change ── */
+    .behaviour-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .behaviour-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .behaviour-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .behaviour-column-title {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .behaviour-column-title.before {
+      color: var(--color-text-muted);
+    }
+
+    .behaviour-column-title.after {
+      color: var(--color-primary-solid);
+    }
+
+    .behaviour-item {
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: 16px;
+      padding: 18px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .behaviour-item:hover {
+      transform: translateX(4px);
+    }
+
+    .behaviour-item.after-item {
+      border: 1px solid rgba(0, 192, 172, 0.2);
+    }
+
+    .behaviour-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--color-primary-solid);
+      padding-top: 40px;
+    }
+
+    /* ── Ecosystem Section ── */
+    .ecosystem {
+      text-align: center;
+    }
+
+    .ecosystem .section-body {
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+
+    .ecosystem-partners {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .ecosystem-card {
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      border-radius: var(--glass-radius);
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .ecosystem-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .ecosystem-icon {
+      font-size: 28px;
+    }
+
+    .ecosystem-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--color-secondary);
+    }
+
+    /* ── Final CTA Section ── */
+    .final-cta {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 100px 24px 120px;
+    }
+
+    .final-cta .section-headline {
+      font-size: 48px;
+      max-width: 600px;
+      margin-bottom: 32px;
+    }
+
+    .final-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.35), 0 4px 24px rgba(0, 192, 172, 0.35);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .final-cta-btn:hover {
+      background: var(--color-primary-solid);
+      transform: scale(1.02);
+    }
+
+    .final-cta-btn .cta-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      font-size: 14px;
+    }
+
+    /* ── Mobile Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-secondary);
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-top: 40px;
+        min-height: auto;
+      }
+
+      .hero-mockup {
+        order: -1;
+      }
+
+      .hero-headline {
+        font-size: 36px;
+      }
+
+      .hero-subheadline {
+        font-size: 16px;
+      }
+
+      .navbar-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-cta-li {
+        display: none;
+      }
+
+      .mockup-phone {
+        width: 100%;
+        max-width: 340px;
+        transform: scale(1);
+      }
+
+      .trusted-logos {
+        gap: 40px;
+      }
+
+      .trusted-logo {
+        font-size: 15px;
+      }
+
+      /* New sections responsive */
+      .problem {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .section-headline {
+        font-size: 32px;
+      }
+
+      .insight .section-headline {
+        font-size: 32px;
+      }
+
+      .solution-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .behaviour-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .behaviour-arrow {
+        transform: rotate(90deg);
+        padding-top: 0;
+      }
+
+      .final-cta .section-headline {
+        font-size: 32px;
+      }
+
+      .section {
+        padding: 64px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Glow Layers -->
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- Content Layer -->
+  <div class="content-layer">
+
+    <!-- ── Navbar ── -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <a href="#" class="navbar-logo">Vero</a>
+        <ul class="navbar-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Company</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li class="nav-cta-li"><a href="#" class="nav-cta">Join Waitlist →</a></li>
+        </ul>
+        <button class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── Hero Section ── -->
+    <section class="hero">
+
+      <!-- Left Column — Content -->
+      <div class="hero-content">
+
+        <!-- 8a. Social Proof Badge -->
+        <div class="social-proof-badge">
+          <span class="stars">★★★★★</span>
+          <span>Rated 4.9/5 by 2,700+ customers</span>
+        </div>
+
+        <!-- 8b. Hero Headline -->
+        <h1 class="hero-headline">
+          Helping You Build <span class="gradient-text">Better Money</span> Habits
+        </h1>
+
+        <!-- 8c. Subheadline -->
+        <p class="hero-subheadline">
+          Financial knowledge alone doesn't change behaviour. Vero is an AI-powered financial wellness platform that helps Gen Z build stronger money habits through personalised gamification.
+        </p>
+
+        <!-- 8d. Primary CTA Button -->
+        <button class="hero-cta" type="button">
+          Join Waitlist
+          <span class="cta-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- Right Column — App Mockup -->
+      <div class="hero-mockup">
+        <div class="mockup-phone">
+
+          <!-- App Header -->
+          <div class="mockup-header">
+            <span class="mockup-greeting">Good morning 👋</span>
+            <span class="mockup-streak">🔥 7 days</span>
+          </div>
+
+          <!-- Savings Progress -->
+          <div class="mockup-progress">
+            <div class="progress-label">Monthly Goal</div>
+            <div class="progress-amounts">
+              <span class="progress-current">£200</span>
+              <span class="progress-goal">/ £340</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <!-- Challenges -->
+          <div class="mockup-challenges">
+            <span class="mockup-section-title">Today's Challenges</span>
+
+            <div class="challenge-card">
+              <div class="challenge-info">
+                <span class="challenge-icon">☕</span>
+                <span class="challenge-text">Skip one coffee today</span>
+              </div>
+              <span class="challenge-pts">+15 pts</span>
+            </div>
+
+            <div class="challenge-card">
+              <div class="challenge-info">
+                <span class="challenge-icon">🛒</span>
+                <span class="challenge-text">No impulse buys this week</span>
+              </div>
+              <span class="challenge-pts">+50 pts</span>
+            </div>
+          </div>
+
+          <!-- Reward Badge -->
+          <div class="mockup-reward">
+            <span class="reward-icon">🎁</span>
+            <span class="reward-text">Grocery Voucher unlocked!</span>
+            <span class="reward-tag">NEW</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Trusted-By Logo Strip ── -->
+    <section class="trusted-strip">
+      <p class="trusted-label">Trusted by Universities &amp; Student Communities</p>
+      <div class="trusted-logos">
+        <span class="trusted-logo">UCL</span>
+        <span class="trusted-logo">King's College</span>
+        <span class="trusted-logo">LSE</span>
+        <span class="trusted-logo">Monzo</span>
+        <span class="trusted-logo">Revolut</span>
+      </div>
+    </section>
+
+    <!-- ── Problem Section ── -->
+    <section class="section">
+      <div class="problem">
+        <div class="problem-copy">
+          <p class="section-label">The Problem</p>
+          <h2 class="section-headline">The System Is Built to Make You Spend</h2>
+          <p class="section-body">
+            Today's digital world makes spending effortless.
+            One-click checkouts, targeted ads, and endless scrolling are designed to keep you buying — often without thinking.
+            Small, everyday purchases quietly build up into long-term financial pressure.
+          </p>
+        </div>
+        <div class="problem-stats">
+          <div class="stat-card">
+            <div class="stat-number">56%</div>
+            <div class="stat-label">struggle with impulse spending</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">£17,000</div>
+            <div class="stat-label">lost over 5 years from £8/day impulse buys</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">78%</div>
+            <div class="stat-label">feel managing money is stressful</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Insight Section ── -->
+    <section class="section insight">
+      <p class="section-label">The Insight</p>
+      <h2 class="section-headline">Awareness Doesn't Change Behaviour</h2>
+      <p class="section-body">
+        Most financial apps show you where your money went.
+        But they don't help you change what happens next.
+        Some even reward spending — making the problem worse.
+      </p>
+    </section>
+
+    <!-- ── Solution Section ── -->
+    <section class="section">
+      <div class="solution-content">
+        <p class="section-label">The Solution</p>
+        <h2 class="section-headline">Meet Vero</h2>
+        <p class="section-body">
+          Vero helps you build better money habits through small, consistent actions.
+          Instead of tracking alone, Vero guides you — turning everyday financial decisions into simple challenges that help you stay in control.
+        </p>
+      </div>
+      <div class="solution-cards">
+        <div class="solution-card">
+          <span class="solution-card-icon">🎯</span>
+          <h3 class="solution-card-title">Personalised Challenges</h3>
+          <p class="solution-card-text">AI-powered micro-challenges tailored to your spending habits and goals.</p>
+        </div>
+        <div class="solution-card">
+          <span class="solution-card-icon">🔥</span>
+          <h3 class="solution-card-title">Streaks &amp; Rewards</h3>
+          <p class="solution-card-text">Stay motivated with streaks, points, and real rewards for building consistency.</p>
+        </div>
+        <div class="solution-card">
+          <span class="solution-card-icon">📊</span>
+          <h3 class="solution-card-title">Smart Tracking</h3>
+          <p class="solution-card-text">Effortless expense logging that shows you the full picture without the friction.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── How It Works Section ── -->
+    <section class="section">
+      <div class="how-it-works-header">
+        <p class="section-label">How It Works</p>
+        <h2 class="section-headline">Three Steps to Better Habits</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Track effortlessly</h3>
+          <p class="step-text">Log expenses naturally, without friction</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Get personalised challenges</h3>
+          <p class="step-text">AI suggests small actions tailored to your habits</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Build consistency</h3>
+          <p class="step-text">Stay on track with streaks, rewards, and feedback</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Social Proof / Testimonials ── -->
+    <section class="section">
+      <div class="testimonials-header">
+        <p class="section-label">Social Proof</p>
+        <h2 class="section-headline">What Our Users Say</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"It feels like a game — I actually stick to it."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div>
+              <div class="testimonial-name">Amara K.</div>
+              <div class="testimonial-role">University Student</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I started thinking twice before spending."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">J</div>
+            <div>
+              <div class="testimonial-name">James T.</div>
+              <div class="testimonial-role">Early Adopter</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Tracking money finally feels easy."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
+            <div>
+              <div class="testimonial-name">Sophie L.</div>
+              <div class="testimonial-role">Beta Tester</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Impact Metrics ── -->
+    <section class="section">
+      <div class="impact-header">
+        <p class="section-label">Impact</p>
+        <h2 class="section-headline">Real Results from Real Users</h2>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-number">82%</div>
+          <div class="impact-label">feel more in control of their money</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">64%</div>
+          <div class="impact-label">track expenses more consistently</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">55%</div>
+          <div class="impact-label">maintain 7+ day streaks</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">42%</div>
+          <div class="impact-label">reduced financial stress</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Behaviour Change Section ── -->
+    <section class="section">
+      <div class="behaviour-header">
+        <p class="section-label">Your Differentiator</p>
+        <h2 class="section-headline">The Vero Difference</h2>
+      </div>
+      <div class="behaviour-grid">
+        <div class="behaviour-column">
+          <h3 class="behaviour-column-title before">Before Vero</h3>
+          <div class="behaviour-item">😩 Tracking feels like a chore</div>
+          <div class="behaviour-item">💸 Spending is reactive</div>
+          <div class="behaviour-item">😟 Financial stress builds up</div>
+        </div>
+        <div class="behaviour-arrow">→</div>
+        <div class="behaviour-column">
+          <h3 class="behaviour-column-title after">After Vero</h3>
+          <div class="behaviour-item after-item">✅ Tracking becomes a habit</div>
+          <div class="behaviour-item after-item">🎯 Spending becomes intentional</div>
+          <div class="behaviour-item after-item">💪 Confidence replaces stress</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Ecosystem / Partnerships ── -->
+    <section class="section ecosystem">
+      <p class="section-label">Ecosystem</p>
+      <h2 class="section-headline">Built for a Healthier Financial Ecosystem</h2>
+      <p class="section-body">
+        Vero connects students, universities, and brands to build a healthier financial ecosystem.
+        Instead of encouraging spending, we reward smarter decisions — supporting both users and partners.
+      </p>
+      <div class="ecosystem-partners">
+        <div class="ecosystem-card">
+          <span class="ecosystem-icon">🎓</span>
+          <span class="ecosystem-name">Universities</span>
+        </div>
+        <div class="ecosystem-card">
+          <span class="ecosystem-icon">🏪</span>
+          <span class="ecosystem-name">Brands</span>
+        </div>
+        <div class="ecosystem-card">
+          <span class="ecosystem-icon">🏦</span>
+          <span class="ecosystem-name">Financial Institutions</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Final CTA Section ── -->
+    <section class="section final-cta">
+      <h2 class="section-headline">Start Building Better Money Habits Today</h2>
+      <button class="final-cta-btn" type="button">
+        Get Started with Vero
+        <span class="cta-arrow">→</span>
+      </button>
+    </section>
+
+  </div>
+</body>
+</html>
