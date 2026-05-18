@@ -1,0 +1,242 @@
+Vero Financial Ltd (“we”, “us”, or “our”) is a company registered in England and Wales (company number 16652225). We are committed to protecting and respecting your privacy and to providing clear, transparent information about how your personal data is used.
+
+
+
+We are the data controller for the personal data we collect through our website and mobile application, and for the purposes of providing the services described in this Privacy Policy (together, the “Services”).
+
+
+
+We are registered with the Information Commissioner’s Office (ICO), registeration reference: ZC084647
+
+Definitions
+
+For the purposes of this Privacy Policy, the following definitions apply:
+
+
+
+Personal Data
+
+Any information relating to an identified or identifiable individual. This includes, for example, your name, email address, account identifiers, online identifiers, and information you choose to provide when using the Services.
+
+Collection of personal data
+
+When you use the Services, we collect and process personal data that you voluntarily provide to us, including:
+
+
+
+Account details (such as email address and username)
+
+Expenses and financial information you manually enter
+
+Budget preferences and goals
+
+Gamification and progress data
+
+Communications with our support team
+
+
+
+We do not access your bank accounts, collect bank credentials, or retrieve data from third-party financial institutions in the MVP version of Vero.
+
+What data we collect
+
+We collect only the data necessary to operate the Service and deliver its features.
+
+
+
+a) Account information
+
+Email address
+
+Username or display name
+
+Encrypted password
+
+User ID
+
+
+
+b) User-entered financial data
+
+Expenses you manually input (amounts, categories, dates, optional notes)
+
+Budget goals and preferences
+
+AI-generated insights based solely on the data you provide
+
+Gamification data (XP, streaks, challenges, progress)
+
+
+
+c) Technical & usage data
+
+IP address
+
+Device type, operating system, and app version
+
+Log files and error reports
+
+Basic usage analytics to improve app performance
+
+
+
+d) Communications
+
+Messages you send to our support team
+
+Email preferences and communication history
+
+Images
+
+If you choose to upload images (for example, attaching a receipt to an expense or adding a profile picture), we will store and process those images solely to provide the relevant feature.
+
+
+
+Uploading images is optional, and you may use the Services without doing so.
+
+Use of your personal data
+
+We use the personal data you provide to:
+
+
+
+Operate and deliver the Services
+
+Enable manual expense tracking and budgeting
+
+Generate AI-powered insights based on your inputs
+
+Provide gamified features that support positive financial habits
+
+Maintain the security and performance of the Services
+
+Communicate with you about your account or support requests
+
+
+
+The information we collect is used only for the purposes described in this Privacy Policy and in accordance with applicable data protection laws.
+
+Legal basis for processing (GDPR)
+
+We process your personal data under the following legal bases:
+
+
+
+Contract – to provide the Service you sign up for
+
+Legitimate interests – to secure, maintain, and improve the Service
+
+Consent – for optional communications such as marketing emails (where applicable)
+
+
+
+You may withdraw consent at any time.
+
+Automated processing & insights
+
+Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial habits.
+
+
+
+These features:
+
+
+
+ • Are informational and motivational only
+
+ • Do not guarantee specific financial outcomes
+
+ • Should not be relied upon as professional advice
+
+How long we keep your data
+
+Your personal data is stored while your account remains active
+
+You may delete your account at any time
+
+Once deleted, your personal data is permanently erased or anonymised within a reasonable timeframe
+
+Technical logs are retained only as long as necessary for security and diagnostics
+
+Who we share data with
+
+We do not sell your personal data.
+
+
+
+We may share limited data with trusted third-party service providers who help us operate Vero, such as:
+
+
+
+Cloud hosting providers
+
+Email and notification services
+
+Analytics and error-monitoring tools
+
+
+
+All service providers are bound by contractual obligations to protect your data and process it only on our instructions.
+
+Where your data is stored
+
+Your data is stored on secure servers located in the United Kingdom and/or European Economic Area (EEA).
+
+
+
+If data is transferred outside these regions in the future, appropriate safeguards will be applied in accordance with data protection laws.
+
+Your rights
+
+You have the right to:
+
+
+
+Access your personal data
+
+Correct inaccurate or incomplete data
+
+Delete your data
+
+Export your data in a portable format
+
+Withdraw consent (where applicable)
+
+Object to certain processing activities
+
+
+
+You can exercise these rights through in-app settings or by contacting us.
+
+We respond to requests within 30 days.
+
+Security
+
+We use appropriate technical and organisational measures to protect your data, including:
+
+Encrypted connections (HTTPS)
+
+Secure password hashing
+
+Access controls and monitoring
+
+Regular system updates and security reviews
+
+
+
+No system is completely secure, but we take reasonable steps to safeguard your information.
+
+Changes to this policy
+
+We may update this Privacy Policy from time to time.
+
+
+
+If changes are material, we will notify you through the app or by email.
+
+The latest version will always be available on our website.
+
+Contact us
+
+If you have any questions, concerns, or complaints about the Service, or if you would like to get in touch with us, please contact our support team at vero.fincorp@gmail.com.
+
