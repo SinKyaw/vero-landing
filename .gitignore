@@ -1,1 +1,28 @@
 # *.pdf
+# Dependency directories
+node_modules/
+dist/
+.build/
+.cache/
+.sass-cache/
+.parcel-cache/
+# OS generated files
+.DS_Store
+Thumbs.db
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# Environment variables
+.env
+.env.*
+# IDE / editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
