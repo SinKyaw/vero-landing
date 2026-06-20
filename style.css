@@ -2037,3 +2037,141 @@ body {
     padding: 20px;
   }
 }
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.download-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.download-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.download-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 60, 54, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.download-modal-panel {
+  position: relative;
+  width: min(100%, 460px);
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.94);
+  border: var(--glass-border);
+  box-shadow: 0 24px 80px rgba(0, 60, 54, 0.24);
+  border-radius: 20px;
+  text-align: center;
+  transform: translateY(8px) scale(0.98);
+  transition: transform 0.2s ease;
+}
+
+.download-modal.is-open .download-modal-panel {
+  transform: translateY(0) scale(1);
+}
+
+.download-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0, 81, 73, 0.12);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--color-secondary);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.download-modal-close:hover,
+.download-modal-close:focus-visible {
+  background: #fff;
+  transform: scale(1.04);
+}
+
+.download-modal-copy .section-label {
+  font-size: 15px;
+}
+
+.download-modal-title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--color-secondary);
+  margin-bottom: 22px;
+}
+
+.download-modal-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.download-modal-buttons a {
+  display: inline-flex;
+}
+
+.download-modal-badge {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.download-badge {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .download-modal-panel {
+    padding: 32px 22px 26px;
+  }
+
+  .download-modal-title {
+    font-size: 26px;
+  }
+
+  .download-modal-buttons {
+    flex-direction: column;
+  }
+
+  .download-modal-badge {
+    height: 42px;
+  }
+
+  .download-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

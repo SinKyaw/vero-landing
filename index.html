@@ -32,12 +32,10 @@
           <li><a href="about-us.html">About Us</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="affiliate.html">Affiliate</a></li>
-          <li class="nav-cta-li"><a href="https://apps.apple.com/th/app/vero/id6759962937" class="nav-cta"
-              target="_blank" rel="noopener noreferrer">Download Vero →</a></li>
+          <li class="nav-cta-li"><a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a></li>
         </ul>
         <!-- Mobile Download Button (replaces hamburger menu) -->
-        <a href="https://apps.apple.com/th/app/vero/id6759962937" class="nav-cta mobile-download-btn" target="_blank"
-          rel="noopener noreferrer" style="display:none;">
+        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
           Download Vero →
         </a>
       </div>
@@ -64,7 +62,7 @@
 
         <!-- CTA Buttons -->
         <div class="hero-cta-row">
-          <a class="hero-cta" href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
+          <a class="hero-cta js-download-choice" href="#download-options">
             Try for Free
             <span class="cta-arrow">→</span>
           </a>
@@ -73,10 +71,6 @@
           </a>
         </div>
 
-        <!-- App Store Badge -->
-        <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
-          <img src="assets/appstore-download.png" alt="Download on the App Store" style="height:44px;width:auto;" />
-        </a>
 
       </div>
 
@@ -327,29 +321,29 @@
       <p class="section-body">
         Take control of your spending, reduce stress, and start earning rewards.
       </p>
-      <a class="final-cta-btn" href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank"
-        rel="noopener noreferrer">
+      <a class="final-cta-btn js-download-choice" href="#download-options">
         Download Vero
         <span class="cta-arrow">→</span>
       </a>
       <br />
-      <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
-        <img src="assets/appstore-download.png" alt="Download on the App Store"
-          style="height:44px;width:auto;margin-top:18px;" />
-      </a>
     </section>
 
     <!-- ── Footer ── -->
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a href="#" class="footer-logo"><img src="/assets/logo-primary.png" alt="Vero logo"
-              style="height:28px;width:auto;vertical-align:middle;" /></a>
+          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
+              style="height:32px;width:auto;vertical-align:middle;" /></a>
           <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
-            <img src="assets/appstore-download.png" alt="Download on the App Store"
-              style="height:38px;width:auto;margin-top:14px;" />
-          </a>
+          <div class="download-buttons">
+            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
+              <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
+              rel="noopener">
+              <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" class="download-badge" />
+            </a>
+          </div>
         </div>
         <div class="footer-links">
           <div class="footer-column">
@@ -378,6 +372,73 @@
     </footer>
 
   </div>
+
+  <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
+    aria-hidden="true">
+    <div class="download-modal-backdrop" data-download-close></div>
+    <div class="download-modal-panel" role="document">
+      <button class="download-modal-close" type="button" aria-label="Close download options" data-download-close>
+        &times;
+      </button>
+      <div class="download-modal-copy">
+        <p class="section-label">Download Vero</p>
+      </div>
+      <div class="download-modal-buttons">
+        <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+          <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-modal-badge" />
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
+          rel="noopener noreferrer">
+          <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play"
+            class="download-modal-badge" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const modal = document.querySelector('.download-modal');
+      const triggers = document.querySelectorAll('.js-download-choice');
+      const closeControls = document.querySelectorAll('[data-download-close]');
+      let previousFocus = null;
+
+      const openModal = () => {
+        previousFocus = document.activeElement;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        modal.querySelector('.download-modal-close').focus();
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+
+        if (previousFocus) {
+          previousFocus.focus();
+        }
+      };
+
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          openModal();
+        });
+      });
+
+      closeControls.forEach((control) => {
+        control.addEventListener('click', closeModal);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>
