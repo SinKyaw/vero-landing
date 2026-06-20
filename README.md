@@ -84,4 +84,3 @@ Scripts defined in `package.json`:
 This project is provided as‑is. Feel free to use it as a reference or template.
 
 ---
-*Created with ❤️ for demonstration purposes.*
