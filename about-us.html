@@ -11,6 +11,57 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .social-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin: 24px auto 0;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 96px;
+      min-width: 96px;
+      min-height: 110px;
+      border-radius: 22px;
+      background: rgba(45, 223, 193, 0.14);
+      align-items: center;
+      justify-content: center;
+      padding: 16px 0;
+      transition: transform 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-2px);
+      background: rgba(45, 223, 193, 0.26);
+    }
+
+    .social-links img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .social-icon--large {
+      width: 60px;
+      height: 60px;
+    }
+
+    .social-links a span {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #111111;
+      text-align: center;
+      line-height: 1.2;
+    }
+  </style>
 </head>
 
 <body>
@@ -30,6 +81,7 @@
           <li><a href="index.html#features">Features</a></li>
           <li><a href="about-us.html" class="nav-link-active">About Us</a></li>
           <li><a href="index.html#pricing">Pricing</a></li>
+          <li><a href="affiliate.html">Affiliate</a></li>
           <li class="nav-cta-li"><a href="https://apps.apple.com/th/app/vero/id6759962937" class="nav-cta"
               target="_blank" rel="noopener noreferrer">Download Vero →</a></li>
         </ul>
@@ -46,14 +98,6 @@
           <span class="gradient-text">if your money habits are still crap</span>
         </h1>
         <div class="about-hero-ctas">
-          <a href="https://apps.apple.com/th/app/vero/id6759962937" class="hero-cta" target="_blank" rel="noopener">
-            Start Habit Change
-            <span class="cta-arrow">→</span>
-          </a>
-          <a href="https://www.linkedin.com/company/vero-financial/about/" class="about-cta-secondary" target="_blank"
-            rel="noopener noreferrer">
-            Join Community
-          </a>
         </div>
       </div>
     </section>
@@ -258,6 +302,29 @@
           <h3 class="value-title">Take Imperfect Steps</h3>
           <p class="value-text">We move forward 1% better each day. Mistakes are important for growth!</p>
         </div>
+      </div>
+    </section>
+
+    <!-- ── Our Community ── -->
+    <section class="section">
+      <div class="section-center">
+        <p class="section-label">Vero's Socials</p>
+        <h2 class="section-headline">Our Community</h2>
+      </div>
+      <div class="social-links">
+        <a href="https://www.instagram.com/behind.vero/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/instagram_logo.png" alt="Instagram" class="social-icon social-icon--large" />
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">
+          <img src="assets/tiktok_logo.png" alt="TikTok" class="social-icon" />
+          <span>TikTok</span>
+        </a>
+        <a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank"
+          rel="noopener noreferrer">
+          <img src="assets/linkedin_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
+          <span>LinkedIn</span>
+        </a>
       </div>
     </section>
 

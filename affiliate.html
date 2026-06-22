@@ -192,15 +192,15 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
           <li><a href="about-us.html">About Us</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
           <li><a href="affiliate.html" class="active">Affiliate</a></li>
           <li class="nav-cta-li">
-            <a href="https://apps.apple.com/th/app/vero/id6759962937" class="nav-cta" target="_blank" rel="noopener noreferrer">
+            <a href="#download-options" class="nav-cta js-download-choice">
               Download Vero →
             </a>
           </li>
         </ul>
-        <a href="https://apps.apple.com/th/app/vero/id6759962937" class="nav-cta mobile-download-btn" target="_blank"
-          rel="noopener noreferrer" style="display:none;">
+        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
           Download Vero →
         </a>
       </div>
@@ -276,9 +276,9 @@
           The Affiliate Programme is managed entirely within the Vero mobile app.
           Open your Profile, tap <strong>Affiliate Programme</strong>, and apply instantly.
         </p>
-        <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener" class="apply-btn"
+        <a href="#download-options" class="apply-btn js-download-choice"
           style="display:inline-block;text-decoration:none;max-width:280px;">
-          Download Vero on the App Store
+          Download Vero
         </a>
       </div>
     </section>
@@ -321,5 +321,72 @@
       </p>
     </footer>
   </div>
+
+  <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
+    aria-hidden="true">
+    <div class="download-modal-backdrop" data-download-close></div>
+    <div class="download-modal-panel" role="document">
+      <button class="download-modal-close" type="button" aria-label="Close download options" data-download-close>
+        &times;
+      </button>
+      <div class="download-modal-copy">
+        <p class="section-label">Download Vero</p>
+      </div>
+      <div class="download-modal-buttons">
+        <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+          <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-modal-badge" />
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
+          rel="noopener noreferrer">
+          <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play"
+            class="download-modal-badge" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const modal = document.querySelector('.download-modal');
+      const triggers = document.querySelectorAll('.js-download-choice');
+      const closeControls = document.querySelectorAll('[data-download-close]');
+      let previousFocus = null;
+
+      const openModal = () => {
+        previousFocus = document.activeElement;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        modal.querySelector('.download-modal-close').focus();
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+
+        if (previousFocus) {
+          previousFocus.focus();
+        }
+      };
+
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          openModal();
+        });
+      });
+
+      closeControls.forEach((control) => {
+        control.addEventListener('click', closeModal);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
