@@ -203,6 +203,11 @@
         <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
           Download Vero →
         </a>
+        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
 
@@ -386,6 +391,32 @@
           closeModal();
         }
       });
+
+      const hamburger = document.querySelector('.hamburger');
+      const navbar = document.querySelector('.navbar');
+      const navbarLinks = document.querySelectorAll('.navbar-links a');
+
+      if (hamburger && navbar) {
+        const closeMenu = () => {
+          navbar.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        };
+
+        hamburger.addEventListener('click', () => {
+          const isOpen = navbar.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navbarLinks.forEach((link) => {
+          link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('click', (event) => {
+          if (!navbar.classList.contains('open')) return;
+          if (navbar.contains(event.target) || hamburger.contains(event.target)) return;
+          closeMenu();
+        });
+      }
     })();
   </script>
 </body>

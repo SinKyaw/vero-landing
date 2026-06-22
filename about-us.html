@@ -87,6 +87,11 @@
         </ul>
         <a href="https://apps.apple.com/th/app/vero/id6759962937" class="nav-cta mobile-download-btn" target="_blank"
           rel="noopener noreferrer" style="display:none;">Download Vero →</a>
+        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
 
@@ -312,7 +317,7 @@
         <h2 class="section-headline">Our Community</h2>
       </div>
       <div class="social-links">
-        <a href="https://www.instagram.com/behind.vero/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">
           <img src="assets/instagram_logo.png" alt="Instagram" class="social-icon social-icon--large" />
           <span>Instagram</span>
         </a>
@@ -324,6 +329,11 @@
           rel="noopener noreferrer">
           <img src="assets/linkedin_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
           <span>LinkedIn</span>
+        </a>
+        <a href="https://discord.gg/MZP9CDfy" target="_blank"
+          rel="noopener noreferrer">
+          <img src="assets/discord_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
+          <span>Discord</span>
         </a>
       </div>
     </section>
@@ -402,6 +412,35 @@
     </footer>
 
   </div>
+  <script>
+    (() => {
+      const hamburger = document.querySelector('.hamburger');
+      const navbar = document.querySelector('.navbar');
+      const navbarLinks = document.querySelectorAll('.navbar-links a');
+
+      if (!hamburger || !navbar) return;
+
+      const closeMenu = () => {
+        navbar.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      };
+
+      hamburger.addEventListener('click', () => {
+        const isOpen = navbar.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      navbarLinks.forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!navbar.classList.contains('open')) return;
+        if (navbar.contains(event.target) || hamburger.contains(event.target)) return;
+        closeMenu();
+      });
+    })();
+  </script>
 </body>
 
 </html>

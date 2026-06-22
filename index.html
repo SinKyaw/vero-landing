@@ -38,6 +38,11 @@
         <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
           Download Vero →
         </a>
+        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
 
@@ -399,6 +404,9 @@
       const modal = document.querySelector('.download-modal');
       const triggers = document.querySelectorAll('.js-download-choice');
       const closeControls = document.querySelectorAll('[data-download-close]');
+      const hamburger = document.querySelector('.hamburger');
+      const navbar = document.querySelector('.navbar');
+      const navbarLinks = document.querySelectorAll('.navbar-links a');
       let previousFocus = null;
 
       const openModal = () => {
@@ -428,6 +436,24 @@
 
       closeControls.forEach((control) => {
         control.addEventListener('click', closeModal);
+      });
+
+      if (hamburger) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = navbar.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+
+      navbarLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          if (navbar.classList.contains('open')) {
+            navbar.classList.remove('open');
+            if (hamburger) {
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
       });
 
       document.addEventListener('keydown', (event) => {
