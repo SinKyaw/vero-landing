@@ -317,14 +317,49 @@
       </div>
     </section>
 
-    <!-- Footer (matching index.html pattern) -->
-    <footer style="text-align:center;padding:40px 24px 32px;color:#888;font-size:0.85rem;">
-      <p>© 2025 Vero Finance Ltd. All rights reserved.</p>
-      <p style="margin-top:8px;">
-        <a href="privacy-policy.html" style="color:#2DDFC1;text-decoration:none;margin:0 8px;">Privacy Policy</a>
-        <a href="terms.html" style="color:#2DDFC1;text-decoration:none;margin:0 8px;">Terms of Service</a>
-      </p>
+    <!-- ── Footer ── -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
+              style="height:32px;width:auto;vertical-align:middle;" /></a>
+          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
+          <div class="download-buttons">
+            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
+              <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
+              rel="noopener">
+              <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" class="download-badge" />
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <span class="footer-column-title">Product</span>
+            <a href="#how-it-works">How it Works</a>
+            <a href="#pricing">Pricing</a>
+            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank"
+              rel="noopener noreferrer">Download</a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-column-title">Company</span>
+            <a href="about-us.html">About Us</a>
+            <a href="https://www.linkedin.com/company/vero-financial/about/" target="_blank"
+              rel="noopener noreferrer">Blog</a>
+          </div>
+          <div class="footer-column">
+            <span class="footer-column-title">Legal</span>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Vero. All rights reserved.
+      </div>
     </footer>
+
   </div>
 
   <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
@@ -355,6 +390,9 @@
       const modal = document.querySelector('.download-modal');
       const triggers = document.querySelectorAll('.js-download-choice');
       const closeControls = document.querySelectorAll('[data-download-close]');
+      const hamburger = document.querySelector('.hamburger');
+      const navbar = document.querySelector('.navbar');
+      const navbarLinks = document.querySelectorAll('.navbar-links a');
       let previousFocus = null;
 
       const openModal = () => {
@@ -386,38 +424,31 @@
         control.addEventListener('click', closeModal);
       });
 
+      if (hamburger) {
+        hamburger.addEventListener('click', () => {
+          const isOpen = navbar.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+
+      navbarLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          if (navbar.classList.contains('open')) {
+            navbar.classList.remove('open');
+            if (hamburger) {
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+      });
+
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && modal.classList.contains('is-open')) {
           closeModal();
         }
       });
-
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-
-      if (hamburger && navbar) {
-        const closeMenu = () => {
-          navbar.classList.remove('open');
-          hamburger.setAttribute('aria-expanded', 'false');
-        };
-
-        hamburger.addEventListener('click', () => {
-          const isOpen = navbar.classList.toggle('open');
-          hamburger.setAttribute('aria-expanded', String(isOpen));
-        });
-
-        navbarLinks.forEach((link) => {
-          link.addEventListener('click', closeMenu);
-        });
-
-        document.addEventListener('click', (event) => {
-          if (!navbar.classList.contains('open')) return;
-          if (navbar.contains(event.target) || hamburger.contains(event.target)) return;
-          closeMenu();
-        });
-      }
     })();
   </script>
 </body>
+
 </html>
