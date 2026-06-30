@@ -1,0 +1,21 @@
+<main id="blog-container">
+  <p>Loading posts...</p>
+</main>
+
+<script>
+  async function loadBlogs() {
+    const res = await fetch('/api/blogs');
+    const pages = await res.json();
+    const container = document.getElementById('blog-container');
+
+    container.innerHTML = pages.map(page => `
+      <article>
+        <h2>
+          <a href="/post.html?id=${page.id}">${page.child_page.title}</a>
+        </h2>
+      </article>
+    `).join('');
+  }
+
+  loadBlogs();
+</script>
