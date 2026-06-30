@@ -96,7 +96,36 @@
     #post-content p,
     #post-content li {
       line-height: 2;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+    }
+
+
+    #post-content h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+    }
+
+    #post-content h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+
+    #post-content h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    #post-content h4 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -136,12 +165,25 @@
       </div>
     </nav>
 
+
+
+    <!-- blog content -->
     <main>
       <div class="blog-content">
         <div id="post-content">
           <p style="text-align:center; font-size:2rem; font-weight:700;">Loading blog...</p>
         </div>
 
+        <!-- CTA -->
+        <section id="final-cta" class="section final-cta" style="display:none; padding: 0;">
+          <a class="final-cta-btn js-download-choice" href="#download-options">
+            Download Vero
+            <span class="cta-arrow">→</span>
+          </a>
+          <br />
+        </section>
+
+        <!-- more posts -->
         <section id="more-posts" style="display:none;">
           <h2>More Posts</h2>
           <div id="more-posts-list"></div>
@@ -292,6 +334,8 @@
           return `<h2>${extractText(block.heading_2.rich_text)}</h2>`;
         case 'heading_3':
           return `<h3>${extractText(block.heading_3.rich_text)}</h3>`;
+        case 'heading_4':
+          return `<h4>${extractText(block.heading_4.rich_text)}</h4>`;
         case 'paragraph':
           return `<p>${extractText(block.paragraph.rich_text)}</p>`;
         case 'bulleted_list_item':
@@ -401,6 +445,7 @@
       const titleHtml = `<h1>${pageTitle}</h1>`;
       document.getElementById('post-content').innerHTML =
         titleHtml + bylineHtml + contentBlocks.map(renderBlock).join('');
+      document.getElementById('final-cta').style.display = 'block';
 
       // render "More Posts" if there are additional posts beyond the first
       if (restPages.length > 0) {
