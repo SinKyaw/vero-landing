@@ -11,9 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="assets/site.js" defer></script>
 </head>
 
-<body>
+<body data-navbar-close-on-outside-click="true">
   <!-- Background Glow Layers -->
   <div class="bg-glow" aria-hidden="true"></div>
 
@@ -24,7 +25,7 @@
     <nav class="navbar">
       <div class="navbar-inner">
         <a href="index.html" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
+            class="brand-logo-image" /></a>
         <ul class="navbar-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
@@ -34,7 +35,7 @@
               target="_blank" rel="noopener noreferrer">Download Vero →</a></li>
         </ul>
         <a href="https://apps.apple.com/th/app/vero/id6759962937" class="nav-cta mobile-download-btn" target="_blank"
-          rel="noopener noreferrer" style="display:none;">Download Vero →</a>
+          rel="noopener noreferrer">Download Vero →</a>
         <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
           <span></span>
           <span></span>
@@ -58,7 +59,7 @@
           <p>Vero Financial Ltd (“we”, “us”, or “our”) is a company registered in England and Wales (company number
             16652225). We are committed to protecting and respecting your privacy and to providing clear, transparent
             information about how your personal data is used.</p>
-          <p style="margin-top:12px;">We are the data controller for the personal data we collect through our website
+          <p class="section-body-tight">We are the data controller for the personal data we collect through our website
             and mobile application. We are registered with the Information Commissioner’s Office (ICO), registration
             reference: ZC084647.</p>
         </div>
@@ -228,7 +229,7 @@
         </div>
 
         <div class="legal-contact-card">
-          <h2 class="legal-section-heading" style="margin-bottom:10px;">Contact us</h2>
+          <h2 class="legal-section-heading">Contact us</h2>
           <p>If you have any questions, concerns, or complaints about the Service, or if you would like to get in touch
             with us, please contact our support team at <a
               href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
@@ -242,11 +243,10 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <a href="index.html" class="footer-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:28px;width:auto;vertical-align:middle;" /></a>
+              class="brand-logo-image" /></a>
           <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
           <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
-            <img src="assets/appstore-download.png" alt="Download on the App Store"
-              style="height:38px;width:auto;margin-top:14px;" />
+            <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
           </a>
         </div>
         <div class="footer-links">
@@ -276,35 +276,6 @@
     </footer>
 
   </div>
-  <script>
-    (() => {
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-
-      if (!hamburger || !navbar) return;
-
-      const closeMenu = () => {
-        navbar.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      };
-
-      hamburger.addEventListener('click', () => {
-        const isOpen = navbar.classList.toggle('open');
-        hamburger.setAttribute('aria-expanded', String(isOpen));
-      });
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', closeMenu);
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!navbar.classList.contains('open')) return;
-        if (navbar.contains(event.target) || hamburger.contains(event.target)) return;
-        closeMenu();
-      });
-    })();
-  </script>
 </body>
 
 </html>

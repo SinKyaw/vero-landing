@@ -11,57 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .social-links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin: 24px auto 0;
-    }
-
-    .social-links a {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 96px;
-      min-width: 96px;
-      min-height: 110px;
-      border-radius: 22px;
-      background: rgba(45, 223, 193, 0.14);
-      align-items: center;
-      justify-content: center;
-      padding: 16px 0;
-      transition: transform 0.2s ease, background 0.2s ease;
-      text-decoration: none;
-    }
-
-    .social-links a:hover {
-      transform: translateY(-2px);
-      background: rgba(45, 223, 193, 0.26);
-    }
-
-    .social-links img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-
-    .social-icon--large {
-      width: 60px;
-      height: 60px;
-    }
-
-    .social-links a span {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #111111;
-      text-align: center;
-      line-height: 1.2;
-    }
-  </style>
+  <script src="assets/site.js" defer></script>
 </head>
 
 <body>
@@ -72,34 +22,7 @@
   <div class="content-layer">
 
     <!-- ── Navbar ── -->
-    <nav class="navbar">
-      <div class="navbar-inner">
-        <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
-        <ul class="navbar-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#features">Features</a></li>
-          <li><a href="about-us.html">About Us</a></li>
-          <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="affiliate.html" class="active">Affiliate</a></li>
-          <li><a href="post.html" class="active">Blog</a></li>
-          <li class="nav-cta-li">
-            <a href="#download-options" class="nav-cta js-download-choice">
-              Download Vero →
-            </a>
-          </li>
-        </ul>
-        <!-- Mobile Download Button (replaces hamburger menu) -->
-        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
-        </a>
-        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </nav>
+    <div data-include="partials/navbar.html"></div>
 
     <!-- ── About Hero ── -->
     <section class="about-hero">
@@ -123,7 +46,7 @@
             Vero was built by five Gen Z founders from different countries and economic backgrounds, united by one
             belief: our generation doesn’t have a financial knowledge problem — it has a behavioural one.
           </p>
-          <p class="section-body" style="margin-top:16px;">
+          <p class="section-body section-body-spaced">
             And behaviour is far harder to change, especially in a system designed to work against you...
           </p>
         </div>
@@ -323,22 +246,22 @@
         <h2 class="section-headline">Our Community</h2>
       </div>
       <div class="social-links">
-        <a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">
-          <img src="assets/instagram_logo.png" alt="Instagram" class="social-icon social-icon--large" />
+        <a class="social-link" href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/instagram_logo.png" alt="Instagram" class="social-link--large" />
           <span>Instagram</span>
         </a>
-        <a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">
-          <img src="assets/tiktok_logo.png" alt="TikTok" class="social-icon" />
+        <a class="social-link" href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">
+          <img src="assets/tiktok_logo.png" alt="TikTok" />
           <span>TikTok</span>
         </a>
-        <a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank"
+        <a class="social-link" href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank"
           rel="noopener noreferrer">
-          <img src="assets/linkedin_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
+          <img src="assets/linkedin_logo.png" alt="LinkedIn" class="social-link--large" />
           <span>LinkedIn</span>
         </a>
-        <a href="https://discord.gg/MZP9CDfy" target="_blank"
+        <a class="social-link" href="https://discord.gg/MZP9CDfy" target="_blank"
           rel="noopener noreferrer">
-          <img src="assets/discord_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
+          <img src="assets/discord_logo.png" alt="LinkedIn" class="social-link--large" />
           <span>Discord</span>
         </a>
       </div>
@@ -380,47 +303,7 @@
     </section> -->
 
     <!-- ── Footer ── -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
-          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <div class="download-buttons">
-            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
-              <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-              rel="noopener">
-              <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" class="download-badge" />
-            </a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <span class="footer-column-title">Product</span>
-            <a href="#how-it-works">How it Works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank"
-              rel="noopener noreferrer">Download</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Company</span>
-            <a href="about-us.html">About Us</a>
-            <a href="https://www.linkedin.com/company/vero-financial/about/" target="_blank"
-              rel="noopener noreferrer">Blog</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Legal</span>
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms.html">Terms &amp; Conditions</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © 2026 Vero. All rights reserved.
-      </div>
-    </footer>
+    <div data-include="partials/footer.html"></div>
 
   </div>
 
@@ -447,70 +330,7 @@
     </div>
   </div>
 
-  <script>
-    (() => {
-      const modal = document.querySelector('.download-modal');
-      const triggers = document.querySelectorAll('.js-download-choice');
-      const closeControls = document.querySelectorAll('[data-download-close]');
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-      let previousFocus = null;
-
-      const openModal = () => {
-        previousFocus = document.activeElement;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        modal.querySelector('.download-modal-close').focus();
-      };
-
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-
-        if (previousFocus) {
-          previousFocus.focus();
-        }
-      };
-
-      triggers.forEach((trigger) => {
-        trigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          openModal();
-        });
-      });
-
-      closeControls.forEach((control) => {
-        control.addEventListener('click', closeModal);
-      });
-
-      if (hamburger) {
-        hamburger.addEventListener('click', () => {
-          const isOpen = navbar.classList.toggle('open');
-          hamburger.setAttribute('aria-expanded', String(isOpen));
-        });
-      }
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          if (navbar.classList.contains('open')) {
-            navbar.classList.remove('open');
-            if (hamburger) {
-              hamburger.setAttribute('aria-expanded', 'false');
-            }
-          }
-        });
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-          closeModal();
-        }
-      });
-    })();
-  </script>
+  
 </body>
 
 </html>

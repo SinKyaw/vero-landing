@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="assets/site.js" defer></script>
 </head>
 
 <body>
@@ -22,30 +23,7 @@
   <div class="content-layer">
 
     <!-- ── Navbar ── -->
-    <nav class="navbar">
-      <div class="navbar-inner">
-        <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
-        <ul class="navbar-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="about-us.html">About Us</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="affiliate.html">Affiliate</a></li>
-          <li><a href="post.html">Blog</a></li>
-          <li class="nav-cta-li"><a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a></li>
-        </ul>
-        <!-- Mobile Download Button (replaces hamburger menu) -->
-        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
-        </a>
-        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </nav>
+    <div data-include="partials/navbar.html"></div>
 
     <!-- ── Hero Section ── -->
     <section id="hero" class="hero">
@@ -333,47 +311,7 @@
     </section>
 
     <!-- ── Footer ── -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
-          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <div class="download-buttons">
-            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
-              <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-              rel="noopener">
-              <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" class="download-badge" />
-            </a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <span class="footer-column-title">Product</span>
-            <a href="#how-it-works">How it Works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank"
-              rel="noopener noreferrer">Download</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Company</span>
-            <a href="about-us.html">About Us</a>
-            <a href="https://www.linkedin.com/company/vero-financial/about/" target="_blank"
-              rel="noopener noreferrer">Blog</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Legal</span>
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms.html">Terms &amp; Conditions</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © 2026 Vero. All rights reserved.
-      </div>
-    </footer>
+    <div data-include="partials/footer.html"></div>
 
   </div>
 
@@ -385,7 +323,7 @@
         &times;
       </button>
       <div class="download-modal-copy">
-        <p class="section-label">Download Vero</p>
+        <p class="section-label" id="download-title">Download Vero</p>
       </div>
       <div class="download-modal-buttons">
         <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
@@ -400,70 +338,6 @@
     </div>
   </div>
 
-  <script>
-    (() => {
-      const modal = document.querySelector('.download-modal');
-      const triggers = document.querySelectorAll('.js-download-choice');
-      const closeControls = document.querySelectorAll('[data-download-close]');
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-      let previousFocus = null;
-
-      const openModal = () => {
-        previousFocus = document.activeElement;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        modal.querySelector('.download-modal-close').focus();
-      };
-
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-
-        if (previousFocus) {
-          previousFocus.focus();
-        }
-      };
-
-      triggers.forEach((trigger) => {
-        trigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          openModal();
-        });
-      });
-
-      closeControls.forEach((control) => {
-        control.addEventListener('click', closeModal);
-      });
-
-      if (hamburger) {
-        hamburger.addEventListener('click', () => {
-          const isOpen = navbar.classList.toggle('open');
-          hamburger.setAttribute('aria-expanded', String(isOpen));
-        });
-      }
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          if (navbar.classList.contains('open')) {
-            navbar.classList.remove('open');
-            if (hamburger) {
-              hamburger.setAttribute('aria-expanded', 'false');
-            }
-          }
-        });
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-          closeModal();
-        }
-      });
-    })();
-  </script>
 </body>
 
 </html>

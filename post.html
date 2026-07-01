@@ -11,123 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .social-links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin: 24px auto 0;
-    }
-
-    .social-links a {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 96px;
-      min-width: 96px;
-      min-height: 110px;
-      border-radius: 22px;
-      background: rgba(45, 223, 193, 0.14);
-      align-items: center;
-      justify-content: center;
-      padding: 16px 0;
-      transition: transform 0.2s ease, background 0.2s ease;
-      text-decoration: none;
-    }
-
-    .social-links a:hover {
-      transform: translateY(-2px);
-      background: rgba(45, 223, 193, 0.26);
-    }
-
-    .social-links img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-
-    .social-icon--large {
-      width: 60px;
-      height: 60px;
-    }
-
-    .social-links a span {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #111111;
-      text-align: center;
-      line-height: 1.2;
-    }
-
-    /*blog byline (author/read time/date row)*/
-    .blog-byline {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      color: #555;
-      margin: 8px 0 24px;
-    }
-
-    .byline-author {
-      font-weight: 600;
-      color: #111;
-    }
-
-    .byline-dot {
-      color: #999;
-    }
-
-    /*author avatar pulled from notion callout icon - kept small, separate from blog-content img rule below*/
-    .byline-avatar {
-      width: 28px;
-      height: 28px;
-      min-width: 28px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    /*blog body spacing*/
-    #post-content p,
-    #post-content li {
-      line-height: 2;
-      margin-bottom: 15px;
-    }
-
-
-    #post-content h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      margin-top: 32px;
-      margin-bottom: 16px;
-    }
-
-    #post-content h2 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-top: 28px;
-      margin-bottom: 14px;
-    }
-
-    #post-content h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-top: 24px;
-      margin-bottom: 12px;
-    }
-
-    #post-content h4 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-  </style>
+  <script src="assets/site.js" defer></script>
+  <script src="assets/blog.js" defer></script>
 </head>
 
 
@@ -141,41 +26,18 @@
   <div class="content-layer">
 
     <!--Navbar-->
-    <nav class="navbar">
-      <div class="navbar-inner">
-        <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
-        <ul class="navbar-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#features">Features</a></li>
-          <li><a href="about-us.html">About Us</a></li>
-          <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="affiliate.html">Affiliate</a></li>
-          <li><a href="post.html">Blog</a></li>
-          <li class="nav-cta-li"><a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a></li>
-        </ul>
-        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
-        </a>
-        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </nav>
-
+    <div data-include="partials/navbar.html"></div>
 
 
     <!-- blog content -->
     <main>
       <div class="blog-content">
         <div id="post-content">
-          <p style="text-align:center; font-size:2rem; font-weight:700;">Loading blog...</p>
+          <p class="blog-loading">Loading blog...</p>
         </div>
 
         <!-- CTA -->
-        <section id="final-cta" class="section final-cta" style="display:none; padding: 0;">
+        <section id="final-cta" class="section final-cta" hidden>
           <a class="final-cta-btn js-download-choice" href="#download-options">
             Download Vero
             <span class="cta-arrow">→</span>
@@ -184,7 +46,7 @@
         </section>
 
         <!-- more posts -->
-        <section id="more-posts" style="display:none;">
+        <section id="more-posts" hidden>
           <h2>More Posts</h2>
           <div id="more-posts-list"></div>
         </section>
@@ -192,47 +54,7 @@
     </main>
 
     <!--Footer -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
-          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <div class="download-buttons">
-            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
-              <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-              rel="noopener">
-              <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" class="download-badge" />
-            </a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <span class="footer-column-title">Product</span>
-            <a href="#how-it-works">How it Works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank"
-              rel="noopener noreferrer">Download</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Company</span>
-            <a href="about-us.html">About Us</a>
-            <a href="https://www.linkedin.com/company/vero-financial/about/" target="_blank"
-              rel="noopener noreferrer">Blog</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Legal</span>
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms.html">Terms &amp; Conditions</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © 2026 Vero. All rights reserved.
-      </div>
-    </footer>
+    <div data-include="partials/footer.html"></div>
 
   </div>
 
@@ -244,7 +66,7 @@
         &times;
       </button>
       <div class="download-modal-copy">
-        <p class="section-label">Download Vero</p>
+        <p class="section-label" id="download-title">Download Vero</p>
       </div>
       <div class="download-modal-buttons">
         <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
@@ -260,208 +82,7 @@
   </div>
 
 
-
-
-  <!--Hamburger menu -->
-  <script>
-    (() => {
-      const modal = document.querySelector('.download-modal');
-      const triggers = document.querySelectorAll('.js-download-choice');
-      const closeControls = document.querySelectorAll('[data-download-close]');
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-      let previousFocus = null;
-
-      const openModal = () => {
-        previousFocus = document.activeElement;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        modal.querySelector('.download-modal-close').focus();
-      };
-
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        if (previousFocus) previousFocus.focus();
-      };
-
-      triggers.forEach((trigger) => {
-        trigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          openModal();
-        });
-      });
-
-      closeControls.forEach((control) => {
-        control.addEventListener('click', closeModal);
-      });
-
-      if (hamburger) {
-        hamburger.addEventListener('click', () => {
-          const isOpen = navbar.classList.toggle('open');
-          hamburger.setAttribute('aria-expanded', String(isOpen));
-        });
-      }
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          if (navbar.classList.contains('open')) {
-            navbar.classList.remove('open');
-            if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
-          }
-        });
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-          closeModal();
-        }
-      });
-    })();
-  </script>
-
-
-  <!--Logic for handling displaying Notion content -->
-  <script>
-    function renderBlock(block) {
-      switch (block.type) {
-        case 'heading_1':
-          return `<h1>${extractText(block.heading_1.rich_text)}</h1>`;
-        case 'heading_2':
-          return `<h2>${extractText(block.heading_2.rich_text)}</h2>`;
-        case 'heading_3':
-          return `<h3>${extractText(block.heading_3.rich_text)}</h3>`;
-        case 'heading_4':
-          return `<h4>${extractText(block.heading_4.rich_text)}</h4>`;
-        case 'paragraph':
-          return `<p>${extractText(block.paragraph.rich_text)}</p>`;
-        case 'bulleted_list_item':
-          return `<li>${extractText(block.bulleted_list_item.rich_text)}</li>`;
-        case 'image':
-          const url = block.image.type === 'external'
-            ? block.image.external.url
-            : block.image.file.url;
-          return `<img src="${url}" style="max-width:100%" alt="" />`;
-        default:
-          return '';
-      }
-    }
-
-    //converts notion rich text array into html, applying bold/italic
-    function extractText(richText) {
-      return richText.map(t => {
-        let text = t.plain_text;
-        if (t.annotations.bold) text = `<strong>${text}</strong>`;
-        if (t.annotations.italic) text = `<em>${text}</em>`;
-        return text;
-      }).join('');
-    }
-
-    //not currently used (kept for potential nested page support later)
-    function getFirstChildPageId(blocks) {
-      const firstChildPage = blocks.find(block => block.type === 'child_page');
-      return firstChildPage ? firstChildPage.id : null;
-    }
-
-    //fetches all blocks belonging to a given notion page id
-    async function fetchBlocks(pageId) {
-      const postRes = await fetch(`/api/blog?id=${encodeURIComponent(pageId)}`);
-      return postRes.json();
-    }
-
-    //main function - fetches first blog post + remaining posts and renders them
-    async function loadPage() {
-      // fetch all child pages from SEO Blogs
-      const listRes = await fetch('/api/blogs');
-      const pages = await listRes.json();
-
-      if (!pages.length) {
-        document.getElementById('post-content').innerHTML = '<p>No posts found.</p>';
-        return;
-      }
-
-      const firstPage = pages[0];
-      const restPages = pages.slice(1);
-
-      const allBlocks = await fetchBlocks(firstPage.id);
-      const pageTitle = firstPage.child_page.title;
-
-      // check the first block for a combined "Author: ... | Read Time: ... | Date: ..." line
-      // this line is formatted as a notion callout block (not a plain paragraph)
-      let author = '';
-      let readTime = '';
-      let date = '';
-      let avatarUrl = ''; // pulled from the callout's icon (custom emoji image)
-      const metaBlockIds = new Set();
-
-      const firstBlock = allBlocks[0];
-      if (firstBlock && firstBlock.type === 'callout') {
-        const text = extractText(firstBlock.callout.rich_text);
-
-        // parse the avatar image - notion stores uploaded callout icons as custom_emoji
-        const icon = firstBlock.callout.icon;
-        if (icon) {
-          if (icon.type === 'file') {
-            avatarUrl = icon.file.url;
-          } else if (icon.type === 'external') {
-            avatarUrl = icon.external.url;
-          } else if (icon.type === 'custom_emoji') {
-            avatarUrl = icon.custom_emoji.url;
-          }
-        }
-
-        // match author/read time/date fields - case + whitespace insensitive, order independent
-        if (/author:/i.test(text)) {
-          const authorMatch = text.match(/author:\s*(.*?)(\s*\||$)/i);
-          const readTimeMatch = text.match(/read time:\s*(.*?)(\s*\||$)/i);
-          const dateMatch = text.match(/date:\s*(.*?)(\s*\||$)/i);
-
-          author = authorMatch ? authorMatch[1].trim() : '';
-          readTime = readTimeMatch ? `${readTimeMatch[1].trim()} read` : '';
-          date = dateMatch ? dateMatch[1].trim() : '';
-
-          metaBlockIds.add(firstBlock.id);
-        }
-      }
-
-      // everything except the matched meta block renders as normal body content
-      const contentBlocks = allBlocks.filter(block => !metaBlockIds.has(block.id));
-
-      // build the medium-style byline row (avatar + author + read time + date)
-      const bylineParts = [author, readTime, date].filter(Boolean);
-      const bylineHtml = bylineParts.length > 0
-        ? `<div class="blog-byline">
-          ${avatarUrl ? `<img src="${avatarUrl}" class="byline-avatar" alt="" />` : ''}
-          ${bylineParts.map((part, i) => `
-            ${i > 0 ? '<span class="byline-dot">·</span>' : ''}
-            <span class="${i === 0 ? 'byline-author' : 'byline-meta'}">${part}</span>
-          `).join('')}
-        </div>`
-        : '';
-
-      const titleHtml = `<h1>${pageTitle}</h1>`;
-      document.getElementById('post-content').innerHTML =
-        titleHtml + bylineHtml + contentBlocks.map(renderBlock).join('');
-      document.getElementById('final-cta').style.display = 'block';
-
-      // render "More Posts" if there are additional posts beyond the first
-      if (restPages.length > 0) {
-        const moreSection = document.getElementById('more-posts');
-        const moreList = document.getElementById('more-posts-list');
-        moreSection.style.display = 'block';
-        moreList.innerHTML = restPages.map(page => `
-        <article>
-          <a href="/post.html?id=${page.id}">${page.child_page.title}</a>
-        </article>
-      `).join('');
-      }
-    }
-
-    loadPage();
-  </script>
+  
 </body>
 
 </html>
