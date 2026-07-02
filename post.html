@@ -127,6 +127,90 @@
       margin-top: 20px;
       margin-bottom: 10px;
     }
+
+    .blog-card {
+      display: flex;
+      align-items: stretch;
+      min-height: 280px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .blog-card-image {
+      width: 50%;
+      max-width: 50%;
+      min-height: 280px;
+      flex-shrink: 0;
+      object-fit: cover;
+      background: rgba(45, 223, 193, 0.10);
+      display: block;
+    }
+
+    .blog-card-body {
+      width: 50%;
+      min-width: 0;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .blog-card-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #2DDFC1;
+    }
+
+    .blog-card-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .blog-card-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .blog-card-link {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 20px;
+      border: 1px solid #005149;
+      border-radius: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #fff;
+      background-color: #005149;
+      text-decoration: none;
+      width: fit-content;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .blog-card-link:hover {
+      background-color: #003d36;
+      border-color: #003d36;
+      color: #fff;
+    }
+
+    .post-loading {
+      padding: 48px 24px;
+      text-align: center;
+      color: #666;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
   </style>
 </head>
 
@@ -170,12 +254,23 @@
     <!-- blog content -->
     <main>
       <div class="blog-content">
-        <div id="post-content">
-          <p style="text-align:center; font-size:2rem; font-weight:700;">Loading blog...</p>
+
+            <!-- listing header -->
+        <div id="blog-intro" class="solution-content blog-intro">
+          <p class="section-label">Our Blog</p>
+          <h1 class="section-headline">The latest stories about Vero</h1>
         </div>
 
-        <!-- CTA -->
-        <section id="final-cta" class="section final-cta" style="display:none; padding: 0;">
+        <!-- listing view -->
+        <div id="blog-listing"></div>
+
+        <!-- single post view -->
+        <div id="post-content" style="display:none;" aria-live="polite">
+          <div class="post-loading">Loading post...</div>
+        </div>
+
+        <!-- CTA (single post only) -->
+        <section id="final-cta" class="section final-cta" style="display:none; padding:0;">
           <a class="final-cta-btn js-download-choice" href="#download-options">
             Download Vero
             <span class="cta-arrow">→</span>
@@ -183,11 +278,6 @@
           <br />
         </section>
 
-        <!-- more posts -->
-        <section id="more-posts" style="display:none;">
-          <h2>More Posts</h2>
-          <div id="more-posts-list"></div>
-        </section>
       </div>
     </main>
 
@@ -219,8 +309,7 @@
           <div class="footer-column">
             <span class="footer-column-title">Company</span>
             <a href="about-us.html">About Us</a>
-            <a href="https://www.linkedin.com/company/vero-financial/about/" target="_blank"
-              rel="noopener noreferrer">Blog</a>
+            <a href="post.html">Blog</a>
           </div>
           <div class="footer-column">
             <span class="footer-column-title">Legal</span>
@@ -325,6 +414,7 @@
 
 
   <!--Logic for handling displaying Notion content -->
+<!--Logic for handling displaying Notion content -->
   <script>
     function renderBlock(block) {
       switch (block.type) {
@@ -340,17 +430,17 @@
           return `<p>${extractText(block.paragraph.rich_text)}</p>`;
         case 'bulleted_list_item':
           return `<li>${extractText(block.bulleted_list_item.rich_text)}</li>`;
-        case 'image':
+        case 'image': {
           const url = block.image.type === 'external'
             ? block.image.external.url
             : block.image.file.url;
           return `<img src="${url}" style="max-width:100%" alt="" />`;
+        }
         default:
           return '';
       }
     }
 
-    //converts notion rich text array into html, applying bold/italic
     function extractText(richText) {
       return richText.map(t => {
         let text = t.plain_text;
@@ -360,107 +450,147 @@
       }).join('');
     }
 
-    //not currently used (kept for potential nested page support later)
-    function getFirstChildPageId(blocks) {
-      const firstChildPage = blocks.find(block => block.type === 'child_page');
-      return firstChildPage ? firstChildPage.id : null;
+    function getFirstImageUrl(blocks) {
+      const imageBlock = blocks.find(b => b.type === 'image');
+      if (!imageBlock) return null;
+      return imageBlock.image.type === 'external'
+        ? imageBlock.image.external.url
+        : imageBlock.image.file.url;
     }
 
-    //fetches all blocks belonging to a given notion page id
     async function fetchBlocks(pageId) {
-      const postRes = await fetch(`/api/blog?id=${encodeURIComponent(pageId)}`);
-      return postRes.json();
+      const res = await fetch(`/api/blog?id=${encodeURIComponent(pageId)}`);
+      return res.json();
     }
 
-    //main function - fetches first blog post + remaining posts and renders them
-    async function loadPage() {
-      // fetch all child pages from SEO Blogs
-      const listRes = await fetch('/api/blogs');
-      const pages = await listRes.json();
+    async function loadBlogListing() {
+      const listing = document.getElementById('blog-listing');
+      listing.innerHTML = '<p style="text-align:center; font-size:2rem; font-weight:700;">Loading posts...</p>';
+      const res = await fetch('/api/blogs');
+      const pages = await res.json();
 
       if (!pages.length) {
-        document.getElementById('post-content').innerHTML = '<p>No posts found.</p>';
+        listing.innerHTML = '<p>No posts found.</p>';
         return;
       }
 
-      const firstPage = pages[0];
-      const restPages = pages.slice(1);
+      // fetch blocks for all pages to get image + date from callout
+      const blocksMap = {};
+      await Promise.all(pages.map(async (page) => {
+        try {
+          blocksMap[page.id] = await fetchBlocks(page.id);
+        } catch {
+          blocksMap[page.id] = [];
+        }
+      }));
 
-      const allBlocks = await fetchBlocks(firstPage.id);
-      const pageTitle = firstPage.child_page.title;
+      listing.innerHTML = pages.map(page => {
+        const blocks = blocksMap[page.id] || [];
 
-      // check the first block for a combined "Author: ... | Read Time: ... | Date: ..." line
-      // this line is formatted as a notion callout block (not a plain paragraph)
-      let author = '';
-      let readTime = '';
-      let date = '';
-      let avatarUrl = ''; // pulled from the callout's icon (custom emoji image)
-      const metaBlockIds = new Set();
-
-      const firstBlock = allBlocks[0];
-      if (firstBlock && firstBlock.type === 'callout') {
-        const text = extractText(firstBlock.callout.rich_text);
-
-        // parse the avatar image - notion stores uploaded callout icons as custom_emoji
-        const icon = firstBlock.callout.icon;
-        if (icon) {
-          if (icon.type === 'file') {
-            avatarUrl = icon.file.url;
-          } else if (icon.type === 'external') {
-            avatarUrl = icon.external.url;
-          } else if (icon.type === 'custom_emoji') {
-            avatarUrl = icon.custom_emoji.url;
-          }
+        // extract date from callout
+        let date = '';
+        const firstBlock = blocks[0];
+        if (firstBlock && firstBlock.type === 'callout') {
+          const text = firstBlock.callout.rich_text.map(t => t.plain_text).join('');
+          const dateMatch = text.match(/date:\s*(.*?)(\s*\||$)/i);
+          date = dateMatch ? dateMatch[1].trim() : '';
         }
 
-        // match author/read time/date fields - case + whitespace insensitive, order independent
+        // extract first image
+        const imgUrl = getFirstImageUrl(blocks);
+
+        return `
+          <div class="blog-card">
+            ${imgUrl
+              ? `<img src="${imgUrl}" class="blog-card-image" alt="" />`
+              : `<div class="blog-card-image"></div>`
+            }
+            <div class="blog-card-body">
+              <h2 class="blog-card-title">${page.child_page.title}</h2>
+              ${date ? `<span class="blog-card-date">${date}</span>` : ''}
+              <a class="blog-card-link" href="/post.html?id=${encodeURIComponent(page.id)}">Read More +</a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function loadPostPage() {
+      const postContent = document.getElementById('post-content');
+      const blogIntro = document.getElementById('blog-intro');
+      const finalCta = document.getElementById('final-cta');
+
+      postContent.innerHTML = '<div class="post-loading">Loading post...</div>';
+      postContent.style.display = 'block';
+      blogIntro.style.display = 'none';
+      finalCta.style.display = 'none';
+
+      const res = await fetch('/api/blogs');
+      const pages = await res.json();
+
+      if (!pages.length) {
+        postContent.innerHTML = '<p>No posts found.</p>';
+        return;
+      }
+
+      const requestedId = new URLSearchParams(window.location.search).get('id');
+      const page = requestedId
+        ? pages.find(p => p.id === requestedId) || pages[0]
+        : pages[0];
+
+      const allBlocks = await fetchBlocks(page.id);
+      const pageTitle = page.child_page.title;
+
+      let author = '', readTime = '', date = '', avatarUrl = '';
+      const metaBlockIds = new Set();
+      const firstBlock = allBlocks[0];
+
+      if (firstBlock && firstBlock.type === 'callout') {
+        const text = extractText(firstBlock.callout.rich_text);
+        const icon = firstBlock.callout.icon;
+
+        if (icon) {
+          if (icon.type === 'file') avatarUrl = icon.file.url;
+          else if (icon.type === 'external') avatarUrl = icon.external.url;
+          else if (icon.type === 'custom_emoji') avatarUrl = icon.custom_emoji.url;
+        }
+
         if (/author:/i.test(text)) {
           const authorMatch = text.match(/author:\s*(.*?)(\s*\||$)/i);
           const readTimeMatch = text.match(/read time:\s*(.*?)(\s*\||$)/i);
           const dateMatch = text.match(/date:\s*(.*?)(\s*\||$)/i);
-
           author = authorMatch ? authorMatch[1].trim() : '';
           readTime = readTimeMatch ? `${readTimeMatch[1].trim()} read` : '';
           date = dateMatch ? dateMatch[1].trim() : '';
-
           metaBlockIds.add(firstBlock.id);
         }
       }
 
-      // everything except the matched meta block renders as normal body content
-      const contentBlocks = allBlocks.filter(block => !metaBlockIds.has(block.id));
-
-      // build the medium-style byline row (avatar + author + read time + date)
+      const contentBlocks = allBlocks.filter(b => !metaBlockIds.has(b.id));
       const bylineParts = [author, readTime, date].filter(Boolean);
       const bylineHtml = bylineParts.length > 0
         ? `<div class="blog-byline">
-          ${avatarUrl ? `<img src="${avatarUrl}" class="byline-avatar" alt="" />` : ''}
-          ${bylineParts.map((part, i) => `
-            ${i > 0 ? '<span class="byline-dot">·</span>' : ''}
-            <span class="${i === 0 ? 'byline-author' : 'byline-meta'}">${part}</span>
-          `).join('')}
-        </div>`
+            ${avatarUrl ? `<img src="${avatarUrl}" class="byline-avatar" alt="" />` : ''}
+            ${bylineParts.map((part, i) => `
+              ${i > 0 ? '<span class="byline-dot">·</span>' : ''}
+              <span class="${i === 0 ? 'byline-author' : 'byline-meta'}">${part}</span>
+            `).join('')}
+          </div>`
         : '';
 
-      const titleHtml = `<h1>${pageTitle}</h1>`;
-      document.getElementById('post-content').innerHTML =
-        titleHtml + bylineHtml + contentBlocks.map(renderBlock).join('');
+      postContent.innerHTML = `<h1>${pageTitle}</h1>${bylineHtml}${contentBlocks.map(renderBlock).join('')}`;
+      postContent.style.display = 'block';
+      document.getElementById('blog-intro').style.display = 'none'; // hide on single post
       document.getElementById('final-cta').style.display = 'block';
-
-      // render "More Posts" if there are additional posts beyond the first
-      if (restPages.length > 0) {
-        const moreSection = document.getElementById('more-posts');
-        const moreList = document.getElementById('more-posts-list');
-        moreSection.style.display = 'block';
-        moreList.innerHTML = restPages.map(page => `
-        <article>
-          <a href="/post.html?id=${page.id}">${page.child_page.title}</a>
-        </article>
-      `).join('');
-      }
     }
 
-    loadPage();
+    // route based on whether ?id= is in the URL
+    const requestedId = new URLSearchParams(window.location.search).get('id');
+    if (requestedId) {
+      loadPostPage();
+    } else {
+      loadBlogListing();
+    }
   </script>
 </body>
 
