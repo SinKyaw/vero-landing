@@ -1847,6 +1847,27 @@ body {
   color: #ffffff;
 }
 
+@media (max-width: 768px) {
+  .blog-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .blog-card-image {
+    width: 100%;
+    max-width: 100%;
+    min-height: 200px;
+  }
+
+  .blog-card-body {
+    width: 100%;
+    padding: 24px;
+  }
+
+  .blog-card-title {
+    font-size: 28px;
+  }
+}
 
 /* ── How It Started ── */
 .how-started {
