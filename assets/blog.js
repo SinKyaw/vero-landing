@@ -97,30 +97,92 @@
     }
   };
 
-  const loadPostPage = async () => {
-    const postContent = document.getElementById('post-content');
+  const renderBlogCards = (pages, blocksMap) => pages.map((page) => {
+    const blocks = blocksMap[page.id] || [];
+    const firstBlock = blocks[0];
+    let date = '';
 
-    if (!postContent) {
-      return;
+    if (firstBlock && firstBlock.type === 'callout') {
+      const text = extractPlainText(firstBlock.callout.rich_text);
+      const dateMatch = text.match(/date:\s*(.*?)(\s*\||$)/i);
+      date = dateMatch ? dateMatch[1].trim() : '';
     }
 
-    const finalCta = document.getElementById('final-cta');
-    const moreSection = document.getElementById('more-posts');
-    const moreList = document.getElementById('more-posts-list');
+    return `
+      <div class="blog-card">
+        <div class="blog-card-image"></div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">${escapeHTML(page.child_page.title)}</h2>
+          ${date ? `<span class="blog-card-date">${escapeHTML(date)}</span>` : ''}
+          <a class="blog-card-link" href="/post.html?id=${encodeURIComponent(page.id)}">Read More +</a>
+        </div>
+      </div>
+    `;
+  }).join('');
 
+  const setBlogView = (isPostView) => {
+    const intro = document.getElementById('blog-intro');
+    const listing = document.getElementById('blog-listing');
+
+    if (intro) intro.hidden = isPostView;
+    if (listing) listing.hidden = isPostView;
+  };
+
+  const loadBlogListing = async () => {
+    const listing = document.getElementById('blog-listing');
+    if (!listing) return;
+    setBlogView(false);
+    listing.innerHTML = '<p class="blog-loading">Loading blog posts...</p>';
+    listing.hidden = false;
     try {
       const pages = await fetchJson('/api/blogs');
 
+      if (!pages.length) {
+        listing.innerHTML = '<p>No posts found.</p>';
+        listing.hidden = false;
+        return;
+      }
+
+      // fetch blocks for each page to extract date from callout
+      const blocksMap = {};
+      await Promise.all(pages.map(async (page) => {
+        try {
+          const blocks = await fetchJson(`/api/blog?id=${encodeURIComponent(page.id)}`);
+          blocksMap[page.id] = blocks;
+        } catch {
+          blocksMap[page.id] = [];
+        }
+      }));
+
+      listing.innerHTML = renderBlogCards(pages, blocksMap);
+      listing.hidden = false;
+    } catch (error) {
+      listing.innerHTML = '<p>Unable to load posts.</p>';
+      listing.hidden = false;
+    }
+  };
+
+  const loadPostPage = async () => {
+    const postContent = document.getElementById('post-content');
+    if (!postContent) return;
+
+    const requestedId = new URLSearchParams(window.location.search).get('id');
+    if (!requestedId) return; // no id = listing view, not post view
+
+    setBlogView(true);
+    postContent.hidden = false;
+
+    const finalCta = document.getElementById('final-cta');
+    if (finalCta) finalCta.hidden = true;
+
+    try {
+      const pages = await fetchJson('/api/blogs');
       if (!pages.length) {
         postContent.innerHTML = '<p>No posts found.</p>';
         return;
       }
 
-      const requestedId = new URLSearchParams(window.location.search).get('id');
-      const firstPage = requestedId
-        ? pages.find((page) => page.id === requestedId) || pages[0]
-        : pages[0];
-      const restPages = pages.filter((page) => page.id !== firstPage.id);
+      const firstPage = pages.find((page) => page.id === requestedId) || pages[0];
       const allBlocks = await fetchJson(`/api/blog?id=${encodeURIComponent(firstPage.id)}`);
       const pageTitle = firstPage.child_page.title;
       let author = '';
@@ -135,13 +197,9 @@
         const icon = firstBlock.callout.icon;
 
         if (icon) {
-          if (icon.type === 'file') {
-            avatarUrl = icon.file.url;
-          } else if (icon.type === 'external') {
-            avatarUrl = icon.external.url;
-          } else if (icon.type === 'custom_emoji') {
-            avatarUrl = icon.custom_emoji.url;
-          }
+          if (icon.type === 'file') avatarUrl = icon.file.url;
+          else if (icon.type === 'external') avatarUrl = icon.external.url;
+          else if (icon.type === 'custom_emoji') avatarUrl = icon.custom_emoji.url;
         }
 
         if (/author:/i.test(text)) {
@@ -152,7 +210,6 @@
           author = authorMatch ? authorMatch[1].trim() : '';
           readTime = readTimeMatch ? `${readTimeMatch[1].trim()} read` : '';
           date = dateMatch ? dateMatch[1].trim() : '';
-
           metaBlockIds.add(firstBlock.id);
         }
       }
@@ -171,21 +228,22 @@
 
       postContent.innerHTML = `<h1>${escapeHTML(pageTitle)}</h1>${bylineHtml}${contentBlocks.map(renderBlock).join('')}`;
 
-      if (finalCta) {
-        finalCta.hidden = false;
-      }
+      if (finalCta) finalCta.hidden = false;
 
-      if (moreSection && moreList && restPages.length > 0) {
-        moreSection.hidden = false;
-        moreList.innerHTML = renderMorePosts(restPages);
-      }
     } catch (error) {
       postContent.innerHTML = '<p>Unable to load this post.</p>';
+      if (finalCta) finalCta.hidden = true;
     }
   };
 
   ready(() => {
-    loadBlogList();
-    loadPostPage();
+    const hasId = new URLSearchParams(window.location.search).has('id');
+    if (hasId) {
+      loadPostPage();
+    } else {
+      loadBlogListing();
+    }
   });
+
 })();
+

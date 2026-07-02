@@ -32,11 +32,19 @@
     <!-- blog content -->
     <main>
       <div class="blog-content">
-        <div id="post-content">
+        <div id="blog-intro" class="solution-content blog-intro">
+          <p class="section-label">Our Blog</p>
+          <h1 class="section-headline">The latest stories about Vero</h1>
+        </div>
+        <!-- listing view -->
+        <div id="blog-listing" hidden></div>
+
+        <!-- single post view -->
+        <div id="post-content" hidden>
           <p class="blog-loading">Loading blog...</p>
         </div>
 
-        <!-- CTA -->
+        <!-- CTA (single post only) -->
         <section id="final-cta" class="section final-cta" hidden>
           <a class="final-cta-btn js-download-choice" href="#download-options">
             Download Vero
@@ -45,11 +53,6 @@
           <br />
         </section>
 
-        <!-- more posts -->
-        <section id="more-posts" hidden>
-          <h2>More Posts</h2>
-          <div id="more-posts-list"></div>
-        </section>
       </div>
     </main>
 

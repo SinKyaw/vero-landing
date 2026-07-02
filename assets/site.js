@@ -27,6 +27,14 @@
       hamburger.setAttribute('aria-expanded', 'false');
     };
 
+    const updateNavbarState = () => {
+      navbar.classList.toggle('is-scrolled', window.scrollY > 12);
+    };
+
+    updateNavbarState();
+    window.addEventListener('scroll', updateNavbarState, { passive: true });
+    window.addEventListener('resize', updateNavbarState);
+
     hamburger.addEventListener('click', () => {
       const isOpen = navbar.classList.toggle('open');
       hamburger.setAttribute('aria-expanded', String(isOpen));
