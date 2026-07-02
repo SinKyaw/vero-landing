@@ -97,6 +97,14 @@
     }
   };
 
+  const getFirstImageUrl = (blocks) => {
+    const imageBlock = blocks.find((block) => block.type === 'image');
+    if (!imageBlock) return null;
+    return imageBlock.image.type === 'external'
+      ? imageBlock.image.external.url
+      : imageBlock.image.file.url;
+  };
+
   const renderBlogCards = (pages, blocksMap) => pages.map((page) => {
     const blocks = blocksMap[page.id] || [];
     const firstBlock = blocks[0];
@@ -110,7 +118,12 @@
 
     return `
       <div class="blog-card">
-        <div class="blog-card-image"></div>
+        ${(() => {
+          const imgUrl = getFirstImageUrl(blocks);
+          return imgUrl
+            ? `<img src="${escapeHTML(imgUrl)}" class="blog-card-image" alt="" />`
+            : `<div class="blog-card-image"></div>`;
+        })()}
         <div class="blog-card-body">
           <h2 class="blog-card-title">${escapeHTML(page.child_page.title)}</h2>
           ${date ? `<span class="blog-card-date">${escapeHTML(date)}</span>` : ''}

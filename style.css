@@ -1771,24 +1771,28 @@ body {
 /*blog*/
 .blog-card {
   display: flex;
+  align-items: stretch;
   min-height: 280px;
-  margin-bottom: 2px;
-  border: 4px solid #005149;
+  margin-bottom: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 8px;
   overflow: hidden;
-  background: #ffffff;
 }
 
 .blog-card-image {
   width: 50%;
+  max-width: 50%;
   min-height: 280px;
-  background: rgba(45, 223, 193, 0.10);
   flex-shrink: 0;
+  object-fit: cover;
+  background: rgba(45, 223, 193, 0.10);
+  display: block;
 }
 
 .blog-card-body {
   width: 50%;
-  padding: 48px 48px;
+  min-width: 0; /* prevents flex overflow */
+  padding: 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
