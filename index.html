@@ -401,6 +401,7 @@
 
   <script>
     (() => {
+      // Grab the UI pieces for the download modal and mobile menu.
       const modal = document.querySelector('.download-modal');
       const triggers = document.querySelectorAll('.js-download-choice');
       const closeControls = document.querySelectorAll('[data-download-close]');
@@ -409,6 +410,7 @@
       const navbarLinks = document.querySelectorAll('.navbar-links a');
       let previousFocus = null;
 
+      // Open the download modal and move focus into it.
       const openModal = () => {
         previousFocus = document.activeElement;
         modal.classList.add('is-open');
@@ -417,6 +419,7 @@
         modal.querySelector('.download-modal-close').focus();
       };
 
+      // Close the modal and return focus to the element that opened it.
       const closeModal = () => {
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
@@ -427,6 +430,7 @@
         }
       };
 
+      // Toggle the mobile menu state.
       const toggleMenu = (shouldOpen) => {
         navbar.classList.toggle('open', shouldOpen);
         hamburger.setAttribute('aria-expanded', String(shouldOpen));

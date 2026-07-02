@@ -368,9 +368,10 @@
 
 
 
-  <!--Hamburger menu -->
+  <!-- Hamburger menu and modal controls -->
   <script>
     (() => {
+      // Grab the UI pieces for the modal and mobile navigation.
       const modal = document.querySelector('.download-modal');
       const triggers = document.querySelectorAll('.js-download-choice');
       const closeControls = document.querySelectorAll('[data-download-close]');
@@ -379,6 +380,7 @@
       const navbarLinks = document.querySelectorAll('.navbar-links a');
       let previousFocus = null;
 
+      // Open the download modal and keep focus inside it.
       const openModal = () => {
         previousFocus = document.activeElement;
         modal.classList.add('is-open');
@@ -387,6 +389,7 @@
         modal.querySelector('.download-modal-close').focus();
       };
 
+      // Close the modal and return focus to the trigger.
       const closeModal = () => {
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
@@ -394,6 +397,7 @@
         if (previousFocus) previousFocus.focus();
       };
 
+      // Toggle the mobile nav open and closed.
       const toggleMenu = (shouldOpen) => {
         navbar.classList.toggle('open', shouldOpen);
         hamburger.setAttribute('aria-expanded', String(shouldOpen));
@@ -450,9 +454,9 @@
   </script>
 
 
-  <!--Logic for handling displaying Notion content -->
-<!--Logic for handling displaying Notion content -->
+  <!-- Render Notion content into the post page -->
   <script>
+    // Turn a Notion block into the matching HTML for the page.
     function renderBlock(block) {
       switch (block.type) {
         case 'heading_1':
@@ -478,6 +482,7 @@
       }
     }
 
+    // Pull the plain text from a Notion rich text array.
     function extractText(richText) {
       return richText.map(t => {
         let text = t.plain_text;
@@ -487,6 +492,7 @@
       }).join('');
     }
 
+    // Find the first image block so the listing can show a thumbnail.
     function getFirstImageUrl(blocks) {
       const imageBlock = blocks.find(b => b.type === 'image');
       if (!imageBlock) return null;
@@ -495,11 +501,13 @@
         : imageBlock.image.file.url;
     }
 
+    // Fetch the content blocks for one blog page.
     async function fetchBlocks(pageId) {
       const res = await fetch(`/api/blog?id=${encodeURIComponent(pageId)}`);
       return res.json();
     }
 
+    // Build the blog listing page from the Notion pages.
     async function loadBlogListing() {
       const listing = document.getElementById('blog-listing');
       listing.innerHTML = '<p style="text-align:center; font-size:2rem; font-weight:700;">Loading posts...</p>';
@@ -552,6 +560,7 @@
       }).join('');
     }
 
+    // Render the selected post page and hide the intro section.
     async function loadPostPage() {
       const postContent = document.getElementById('post-content');
       const blogIntro = document.getElementById('blog-intro');
@@ -621,7 +630,7 @@
       document.getElementById('final-cta').style.display = 'block';
     }
 
-    // route based on whether ?id= is in the URL
+    // Route based on whether the URL has a post id.
     const requestedId = new URLSearchParams(window.location.search).get('id');
     if (requestedId) {
       loadPostPage();

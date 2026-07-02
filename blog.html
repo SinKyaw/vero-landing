@@ -3,6 +3,7 @@
 </main>
 
 <script>
+  // Load the blog list from the API and render it into the page.
   async function loadBlogs() {
     const res = await fetch('/api/blogs');
     const pages = await res.json();
