@@ -128,10 +128,23 @@
   };
 
   ready(() => {
-    includePartials().then(() => {
+    const initializePage = () => {
       initNavbar();
       initDownloadModal();
       if (typeof window.initSite === 'function') window.initSite();
-    });
+    };
+
+    const scheduleInitialisation = () => {
+      if (typeof window.requestAnimationFrame === 'function') {
+        window.requestAnimationFrame(() => {
+          includePartials().finally(initializePage);
+        });
+        return;
+      }
+
+      includePartials().finally(initializePage);
+    };
+
+    scheduleInitialisation();
   });
 })();

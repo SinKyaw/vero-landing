@@ -15,14 +15,22 @@
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
 
+  const requestCache = new Map();
+
   const fetchJson = async (url) => {
+    if (requestCache.has(url)) {
+      return requestCache.get(url);
+    }
+
     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
     }
 
-    return response.json();
+    const data = await response.json();
+    requestCache.set(url, data);
+    return data;
   };
 
   const extractText = (richText) => richText.map((textNode) => {
@@ -144,9 +152,11 @@
   const loadBlogListing = async () => {
     const listing = document.getElementById('blog-listing');
     if (!listing) return;
+
     setBlogView(false);
     listing.innerHTML = '<p class="blog-loading">Loading blog posts...</p>';
     listing.hidden = false;
+
     try {
       const pages = await fetchJson('/api/blogs');
 
@@ -156,9 +166,11 @@
         return;
       }
 
-      // fetch blocks for each page to extract date from callout
+      listing.innerHTML = renderBlogCards(pages, {});
+      listing.hidden = false;
+
       const blocksMap = {};
-      await Promise.all(pages.map(async (page) => {
+      await Promise.allSettled(pages.map(async (page) => {
         try {
           const blocks = await fetchJson(`/api/blog?id=${encodeURIComponent(page.id)}`);
           blocksMap[page.id] = blocks;
@@ -167,8 +179,9 @@
         }
       }));
 
-      listing.innerHTML = renderBlogCards(pages, blocksMap);
-      listing.hidden = false;
+      if (listing.isConnected) {
+        listing.innerHTML = renderBlogCards(pages, blocksMap);
+      }
     } catch (error) {
       listing.innerHTML = '<p>Unable to load posts.</p>';
       listing.hidden = false;
@@ -249,13 +262,25 @@
     }
   };
 
+  const scheduleBlogWork = (callback) => {
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(() => callback(), { timeout: 500 });
+      return;
+    }
+
+    window.setTimeout(callback, 0);
+  };
+
   ready(() => {
     const hasId = new URLSearchParams(window.location.search).has('id');
-    if (hasId) {
-      loadPostPage();
-    } else {
-      loadBlogListing();
-    }
+
+    scheduleBlogWork(() => {
+      if (hasId) {
+        loadPostPage();
+      } else {
+        loadBlogListing();
+      }
+    });
   });
 
 })();
