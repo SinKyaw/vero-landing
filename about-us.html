@@ -474,6 +474,12 @@
         }
       };
 
+      const toggleMenu = (shouldOpen) => {
+        navbar.classList.toggle('open', shouldOpen);
+        hamburger.setAttribute('aria-expanded', String(shouldOpen));
+        document.body.classList.toggle('menu-open', shouldOpen);
+      };
+
       triggers.forEach((trigger) => {
         trigger.addEventListener('click', (event) => {
           event.preventDefault();
@@ -487,25 +493,37 @@
 
       if (hamburger) {
         hamburger.addEventListener('click', () => {
-          const isOpen = navbar.classList.toggle('open');
-          hamburger.setAttribute('aria-expanded', String(isOpen));
+          toggleMenu(!navbar.classList.contains('open'));
         });
       }
 
       navbarLinks.forEach((link) => {
         link.addEventListener('click', () => {
           if (navbar.classList.contains('open')) {
-            navbar.classList.remove('open');
-            if (hamburger) {
-              hamburger.setAttribute('aria-expanded', 'false');
-            }
+            toggleMenu(false);
           }
         });
       });
 
+      document.addEventListener('click', (event) => {
+        if (!navbar.classList.contains('open')) return;
+        if (navbar.contains(event.target) || (hamburger && hamburger.contains(event.target))) return;
+        toggleMenu(false);
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900 && navbar.classList.contains('open')) {
+          toggleMenu(false);
+        }
+      });
+
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-          closeModal();
+        if (event.key === 'Escape') {
+          if (modal.classList.contains('is-open')) {
+            closeModal();
+          } else if (navbar.classList.contains('open')) {
+            toggleMenu(false);
+          }
         }
       });
     })();
