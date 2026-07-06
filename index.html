@@ -33,8 +33,10 @@
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="affiliate.html">Affiliate</a></li>
           <li><a href="post.html">Blog</a></li>
-          <li class="nav-cta-li"><a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a></li>
         </ul>
+        <div class="navbar-right">
+          <a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a>
+        </div>
         <!-- Mobile Download Button (replaces hamburger menu) -->
         <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
           Download Vero →
@@ -54,16 +56,16 @@
       <div class="hero-content">
 
         <!-- Hero Headline -->
-        <h1 class="hero-headline">
-          Enjoy Life<br>
-          <span class="headline-strikethrough">Despite</span>&nbsp;<span
-            class="headline-highlight">Because of</span>&nbsp;Saving.
+        <h1 class="hero-headline" aria-label="Enjoy Life Because of Saving.">
+          <span id="typewriter-line1"></span><br>
+          <span id="typewriter-line2"></span><span class="typewriter-cursor">|</span>
         </h1>
 
+
+        
         <!-- Subheadline -->
         <p class="hero-subheadline">
-          Financial knowledge alone doesn't change behaviour. Vero is an AI-powered financial wellness
-          platform that helps Gen Z build stronger money habits through personalised gamification.
+          Made by Gen Z, built for Gen Z.
         </p>
 
         <!-- CTA Buttons -->
@@ -72,18 +74,20 @@
             Try for Free
             <span class="cta-arrow">→</span>
           </a>
-          <a class="hero-cta-secondary" href="#video">
-            <span>▶</span> Watch a demo
+          <a class="hero-cta-secondary" href="#features">
+            See how it works
           </a>
         </div>
 
 
       </div>
 
+
+      <!-- Replace this entire thing with an image of Verdi. Can make it animated later -->
       <!-- Video with Floating Badges -->
       <div class="hero-video-wrapper" id="video">
 
-        <!-- Floating Badges -->
+        <!-- Floating Badges - use these later maybe in the advice section
         <div class="hero-badge badge-1">
           <img src="assets/vero-xp.png" alt="XP" class="badge-icon" />
           <span>+50 XP</span>
@@ -95,9 +99,9 @@
         <div class="hero-badge badge-5">
           <img src="assets/vero-streak.png" alt="Streak" class="badge-icon" />
           <span>+100 Streak</span>
-        </div>
+        </div> -->
 
-        <!-- YouTube Embed -->
+        <!-- YouTube Embed - Replace this with Verdi animation -->
         <div class="hero-video-embed">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/zx2D9ix3hsc?si=AiM36aZeMBdFAvkv"
             title="Vero Product Video" frameborder="0"
@@ -109,75 +113,96 @@
     </section>
 
     <!-- ── Problem Section ── -->
-    <section id="problem" class="section">
-      <div class="problem">
-        <div class="problem-copy">
-          <p class="section-label">The Problem</p>
-          <h2 class="section-headline">Tired of Always Feeling Broke?</h2>
+    <div class="section-band section-band--problem">
+      <section id="problem" class="section">
+        <div class="problem">
+          <div class="problem-copy">
+            <p class="section-label">The Problem</p>
+            <h2 class="section-headline">Tired of Always Feeling Broke?</h2>
+            <p class="section-body">
+              It's not about how much money you make — it's about how you manage it.
+              In today's world, spending is frictionless. One-click checkouts, targeted ads, and constant scrolling make
+              it easy to lose control without realising it.
+            </p>
+          </div>
+          <div class="problem-stats">
+            <div class="stat-card">
+              <div class="stat-number" data-target="56" data-suffix="%">0%</div>
+              <div class="stat-label">say impulse purchases are their biggest budgeting challenge</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-target="17000" data-prefix="£" data-separator=",">£0</div>
+              <div class="stat-label">lost over 5 years from £8/day unplanned purchases</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-target="49" data-suffix="%">0%</div>
+              <div class="stat-label">of UK Gen Z feel stressed or anxious about money most of the time</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ── Solution / Value Prop Section ── -->
+    <div class="section-band section-band--features">
+      <section id="features" class="section">
+        <div class="solution-content">
+          <p class="section-label">The Solution</p>
+          <h2 class="section-headline">Here's How Vero Changes That</h2>
           <p class="section-body">
-            It's not about how much money you make — it's about how you manage it.
-            In today's world, spending is frictionless. One-click checkouts, targeted ads, and constant scrolling make
-            it easy to lose control without realising it.
+            We make financial discipline feel natural and even fun — through personalised gamification and AI.
+            Instead of just tracking your money, we help you build habits that actually stick.
           </p>
         </div>
-        <div class="problem-stats">
-          <div class="stat-card">
-            <div class="stat-number">56%</div>
-            <div class="stat-label">say impulse purchases are their biggest budgeting challenge</div>
+        <div class="solution-cards">
+          <div class="solution-card">
+            <span class="solution-card-icon">💬</span>
+            <h3 class="solution-card-title">AI Chat Tracker</h3>
+            <p class="solution-card-text">Track your expenses as easily as texting a friend. Just type it — Vero logs it.</p>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">£17,000</div>
-            <div class="stat-label">lost over 5 years from £8/day unplanned purchases</div>
+          <div class="solution-card">
+            <span class="solution-card-icon">🎯</span>
+            <h3 class="solution-card-title">Saving Challenges</h3>
+            <p class="solution-card-text">Take on personalised missions designed to help you save consistently.</p>
           </div>
-          <div class="stat-card">
-            <div class="stat-number">49%</div>
-            <div class="stat-label">of UK Gen Z feel stressed or anxious about money most of the time</div>
+          <div class="solution-card">
+            <span class="solution-card-icon">📊</span>
+            <h3 class="solution-card-title">Smart Insights</h3>
+            <p class="solution-card-text">Understand your spending patterns and get actionable guidance.</p>
+          </div>
+          <div class="solution-card">
+            <span class="solution-card-icon">🏆</span>
+            <h3 class="solution-card-title">Gamification &amp; Rewards</h3>
+            <p class="solution-card-text">Earn tokens, climb leaderboards, and redeem real rewards — all by making better decisions.</p>
           </div>
         </div>
+      </section>
+    </div>
+
+    <!-- ── How We're Different Section ── -->
+    <section id="differentiation" class="section">
+      <div class="solution-content">
+        <p class="section-label">Why Vero</p>
+        <h2 class="section-headline">How We're Different</h2>
+        <p class="section-body">
+          Most finance apps show you the numbers. Vero changes how you think about them — combining AI-driven personalisation with the motivation mechanics of your favourite games.
+        </p>
       </div>
     </section>
 
-    <!-- ── Solution / Value Prop Section ── -->
-    <section id="features" class="section">
-      <div class="solution-content">
-        <p class="section-label">The Solution</p>
-        <h2 class="section-headline">Here's How Vero Changes That</h2>
-        <p class="section-body">
-          We make financial discipline feel natural — even fun — through personalised gamification and AI.
-          Instead of just tracking money, we help you build habits that actually stick.
-        </p>
-      </div>
-      <div class="solution-cards">
-        <div class="solution-card">
-          <span class="solution-card-icon">💬</span>
-          <h3 class="solution-card-title">AI Chat Tracker</h3>
-          <p class="solution-card-text">Track your expenses as easily as texting a friend. Just type it — Vero logs it.
-          </p>
-        </div>
-        <div class="solution-card">
-          <span class="solution-card-icon">🎯</span>
-          <h3 class="solution-card-title">Saving Challenges</h3>
-          <p class="solution-card-text">Take on personalised missions designed to help you save consistently.</p>
-        </div>
-        <div class="solution-card">
-          <span class="solution-card-icon">📊</span>
-          <h3 class="solution-card-title">Smart Insights</h3>
-          <p class="solution-card-text">Understand your spending patterns and get actionable guidance.</p>
-        </div>
-        <div class="solution-card">
-          <span class="solution-card-icon">🏆</span>
-          <h3 class="solution-card-title">Gamification &amp; Rewards</h3>
-          <p class="solution-card-text">Earn tokens, climb leaderboards, and redeem real rewards — all by making better
-            decisions.</p>
-        </div>
-      </div>
+        <!-- ── How It Works Section ── -->
+     <!--This will eventually have to be a different section without any kind of -->
+    <section id="demo-animation" class="section">
+
+
     </section>
 
     <!-- ── Social Proof / Testimonials ── -->
+     <!-- ── Add the quotaton blocks ── -->
     <section id="testimonials" class="section">
       <div class="testimonials-header">
-        <p class="section-label">Social Proof</p>
-        <h2 class="section-headline">What Early Users Say</h2>
+        <p class="section-label">Our Impact</p>
+        <h2 class="section-headline">What Users Say</h2>
       </div>
       <div class="testimonial-grid">
         <div class="testimonial-card">
@@ -213,11 +238,14 @@
       </div>
     </section>
 
+
+
+
     <!-- ── FAQ Section ── -->
     <section id="faq" class="section">
       <div class="faq-header">
         <p class="section-label">FAQ</p>
-        <h2 class="section-headline">Frequently Asked Questions</h2>
+        <h2 class="section-headline">Questions? We've got Answers</h2>
       </div>
       <div class="faq-list">
         <details class="faq-item">
@@ -247,47 +275,15 @@
       </div>
     </section>
 
-    <!-- ── How It Works Section ── -->
-    <section id="how-it-works" class="section">
-      <div class="how-it-works-header">
-        <p class="section-label">How It Works</p>
-        <h2 class="section-headline">How Vero Works</h2>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3 class="step-title">Set Your Budget</h3>
-          <p class="step-text">Create your plan your way, or let Vero guide you.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3 class="step-title">Log by Chatting</h3>
-          <p class="step-text">Simply type your expenses — no manual tracking needed.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3 class="step-title">Take on Challenges</h3>
-          <p class="step-text">Build better habits through small, consistent actions.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <h3 class="step-title">Compete &amp; Stay Consistent</h3>
-          <p class="step-text">Climb the leaderboard and stay accountable.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">5</div>
-          <h3 class="step-title">Review Your Spending</h3>
-          <p class="step-text">See where your money goes and improve your decisions.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">6</div>
-          <h3 class="step-title">Earn Rewards</h3>
-          <p class="step-text">Turn discipline into real-life perks.</p>
-        </div>
-      </div>
-    </section>
+    
+    
 
-    <!-- ── Pricing Section ── -->
+
+
+
+
+
+    <!-- ── Pricing Section - keep it brief and snappy fo rnow── -->
     <section id="pricing" class="section">
       <div class="pricing-header">
         <p class="section-label">Pricing</p>
@@ -319,6 +315,8 @@
       </div>
     </section>
 
+
+
     <!-- ── Final CTA Section ── -->
     <section id="final-cta" class="section final-cta">
       <h2 class="section-headline">Build Better Money Habits Today</h2>
@@ -331,6 +329,22 @@
       </a>
       <br />
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- ── Footer ── -->
     <footer class="site-footer">
@@ -376,6 +390,7 @@
 
   </div>
 
+
   <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
     aria-hidden="true">
     <div class="download-modal-backdrop" data-download-close></div>
@@ -399,6 +414,9 @@
     </div>
   </div>
 
+
+
+
   <script>
     (() => {
       // Grab the UI pieces for the download modal and mobile menu.
@@ -409,6 +427,18 @@
       const navbar = document.querySelector('.navbar');
       const navbarLinks = document.querySelectorAll('.navbar-links a');
       let previousFocus = null;
+
+      
+       // ADD THIS: scroll-based navbar fade
+      const FADE_DISTANCE = 150; // pixels of scroll over which the fade completes
+      const updateNavbarFade = () => {
+      const progress = Math.min(window.scrollY / FADE_DISTANCE, 1);
+      const opacity = 1 - (progress * 0.85);
+      const blur = progress * 28;
+      navbar.style.setProperty('--navbar-opacity', opacity.toFixed(2));
+      navbar.style.setProperty('--navbar-blur', `${blur}px`);
+      };
+
 
       // Open the download modal and move focus into it.
       const openModal = () => {
@@ -469,10 +499,14 @@
       });
 
       window.addEventListener('resize', () => {
-        if (window.innerWidth > 900 && navbar.classList.contains('open')) {
+        if (window.innerWidth > 1100 && navbar.classList.contains('open')) {
           toggleMenu(false);
         }
       });
+
+      // ADD THIS: right after the resize listener
+      window.addEventListener('scroll', updateNavbarFade);
+      updateNavbarFade(); // run once on load in case the page loads mid-scroll
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
@@ -483,6 +517,77 @@
           }
         }
       });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const statEls = document.querySelectorAll('.stat-number[data-target]');
+
+      function animateStat(el) {
+        const target = parseInt(el.dataset.target, 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const separator = el.dataset.separator || '';
+        const duration = 1600;
+        const start = performance.now();
+
+        function format(val) {
+          if (separator) return prefix + Math.round(val).toLocaleString('en-GB') + suffix;
+          return prefix + Math.round(val) + suffix;
+        }
+
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = format(eased * target);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            statEls.forEach(animateStat);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const statsSection = document.querySelector('.problem-stats');
+      if (statsSection) observer.observe(statsSection);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const line1 = 'You already know about saving';
+      const line2 = 'Vero makes you want to.';
+      const el1 = document.getElementById('typewriter-line1');
+      const el2 = document.getElementById('typewriter-line2');
+      const cursor = document.querySelector('.typewriter-cursor');
+      let i = 0;
+
+      function type() {
+        if (i <= line1.length) {
+          el1.textContent = line1.slice(0, i);
+          i++;
+          setTimeout(type, 60);
+        } else {
+          const j = i - line1.length;
+          el2.textContent = line2.slice(0, j);
+          i++;
+          if (j < line2.length) {
+            setTimeout(type, 60);
+          } else {
+            cursor.classList.add('done');
+          }
+        }
+      }
+
+      type();
     })();
   </script>
 </body>
