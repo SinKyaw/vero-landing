@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -30,7 +30,7 @@
     }
 
     /* ── Section transition wrapper ── */
-    .sc { opacity: 0; }
+    .js-fade-sections .sc { opacity: 0; }
     #final-cta .sc { width: 100%; display: flex; flex-direction: column; align-items: center; }
 
   </style>
@@ -40,6 +40,7 @@
   <!-- Background Glow Layers -->
   <div class="bg-glow" aria-hidden="true"></div>
 
+  <script>if (!window.matchMedia('(hover: none) and (pointer: coarse)').matches) document.documentElement.classList.add('js-fade-sections');</script>
   <!-- Content Layer -->
   <div class="content-layer">
 
@@ -80,7 +81,7 @@
         <!-- Hero Headline -->
         <h1 class="hero-headline" aria-label="Enjoy Life Because of Saving.">
           <span id="typewriter-line1"></span><br>
-          <span id="typewriter-line2"></span><span class="typewriter-cursor">|</span>
+          <span id="typewriter-despite"></span><span id="typewriter-line2"></span><span id="typewriter-suffix"></span><span class="typewriter-cursor">|</span>
         </h1>
 
 
@@ -166,10 +167,6 @@
         <div class="solution-content sc-anim">
           <p class="section-label">The Solution</p>
           <h2 class="section-headline">Here's How Vero Changes That</h2>
-          <p class="section-body">
-            We make financial discipline feel natural and even fun — through personalised gamification and AI.
-            Instead of just tracking your money, we help you build habits that actually stick.
-          </p>
         </div>
         <div class="solution-cards">
           <div class="solution-card sc-anim">
@@ -405,11 +402,7 @@
       </div>
     </section>
 
-
-
-
-
-    <!-- ── Footer ── -->
+    <!-- u{2500}u{2500} Footer u{2500}u{2500} -->
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
@@ -579,37 +572,144 @@
 
   <script>
     (function () {
-      // ── Staged section transitions ──
-      // Flow: outgoing content fades → background cross-fades → incoming content fades in
-      // Fast scroll compresses timing rather than skipping animation
+      const container = document.querySelector('.solution-cards');
+      const panel = document.createElement('div');
+      panel.className = 'feature-expand-panel';
+      panel.innerHTML = '<span class="feature-expand-icon"></span><h3 class="feature-expand-title"></h3><p class="feature-expand-desc"></p>';
+      container.appendChild(panel);
 
-      const BASE = { out: 280, bg: 350, inn: 280 };
+      let activeCard = null;
+      let savedOffsets = null;
+      let expandTimer = null;
+
+      const FADE_MS     = 280;
+      const EXPAND_MS   = 650;
+      const DELAY_MS    = 220;
+      const COLLAPSE_MS = 560;
+
+      function open(card) {
+        if (activeCard) return;
+        activeCard = card;
+
+        const cr = card.getBoundingClientRect();
+        const pr = container.getBoundingClientRect();
+        savedOffsets = { top: cr.top - pr.top, left: cr.left - pr.left, w: cr.width, h: cr.height };
+
+        panel.querySelector('.feature-expand-icon').textContent  = card.querySelector('.solution-card-icon').textContent;
+        panel.querySelector('.feature-expand-title').textContent = card.querySelector('.solution-card-title').textContent;
+        panel.querySelector('.feature-expand-desc').textContent  = card.querySelector('.solution-card-text').textContent;
+
+        // Fade siblings out first
+        document.querySelectorAll('.solution-card').forEach(c => {
+          if (c !== card) {
+            c.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+            c.style.opacity = '0';
+          }
+        });
+
+        // Expand panel after siblings have started fading
+        expandTimer = setTimeout(() => {
+          panel.style.transition = 'none';
+          panel.style.top    = savedOffsets.top  + 'px';
+          panel.style.left   = savedOffsets.left + 'px';
+          panel.style.width  = savedOffsets.w    + 'px';
+          panel.style.height = savedOffsets.h    + 'px';
+          panel.style.opacity = '0';
+          panel.style.display = 'flex';
+
+          void panel.offsetWidth;
+
+          panel.style.transition = [
+            'top '    + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+            'left '   + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+            'width '  + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+            'height ' + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+            'opacity 0.35s ease'
+          ].join(', ');
+          panel.style.top    = '0';
+          panel.style.left   = '0';
+          panel.style.width  = '100%';
+          panel.style.height = '100%';
+          panel.style.opacity = '1';
+        }, DELAY_MS);
+      }
+
+      function close() {
+        if (!activeCard || !savedOffsets) return;
+        if (expandTimer) { clearTimeout(expandTimer); expandTimer = null; }
+
+        panel.style.transition = [
+          'top '    + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'left '   + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'width '  + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'height ' + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'opacity 0.25s ease 0.3s'
+        ].join(', ');
+        panel.style.top    = savedOffsets.top  + 'px';
+        panel.style.left   = savedOffsets.left + 'px';
+        panel.style.width  = savedOffsets.w    + 'px';
+        panel.style.height = savedOffsets.h    + 'px';
+        panel.style.opacity = '0';
+
+        function onEnd(e) {
+          if (e.propertyName !== 'opacity') return;
+          panel.removeEventListener('transitionend', onEnd);
+          panel.style.display = 'none';
+          activeCard = null;
+          savedOffsets = null;
+          document.querySelectorAll('.solution-card').forEach(c => {
+            c.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+            c.style.opacity = '1';
+          });
+        }
+        panel.addEventListener('transitionend', onEnd);
+      }
+
+      document.querySelectorAll('.solution-card').forEach(card => {
+        card.addEventListener('click', (e) => { e.stopPropagation(); open(card); });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (activeCard && !panel.contains(e.target)) close();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && activeCard) close();
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // u{2500}u{2500} Staged section transitions u{2500}u{2500}
+      const BASE = { out: 280, inn: 280 };
 
       const cfg = [
-        { id: 'hero',            pageSel: '#hero',                   contentSel: '#hero .hero-content',          color: '#F7FBFA' },
-        { id: 'problem',         pageSel: '.section-band--problem',  contentSel: '#problem .sc',                 color: 'rgba(245, 14, 72, 0.12)' },
-        { id: 'features',        pageSel: '.section-band--features', contentSel: '#features .sc',                color: '#FBF5DC' },
-        { id: 'differentiation', pageSel: '#differentiation',        contentSel: '#differentiation .sc',         color: 'rgba(0, 192, 172, 0.08)' },
-        { id: 'demo-animation',  pageSel: '#demo-animation',         contentSel: '#demo-animation .sc',          color: '#F7FBFA' },
-        { id: 'testimonials',    pageSel: '#testimonials',           contentSel: '#testimonials .sc',            color: '#F7FBFA' },
-        { id: 'faq',             pageSel: '#faq',                    contentSel: '#faq .sc',                     color: '#F7FBFA' },
-        { id: 'pricing',         pageSel: '#pricing',                contentSel: '#pricing .sc',                 color: '#F7FBFA' },
-        { id: 'final-cta',       pageSel: '#final-cta',              contentSel: '#final-cta .sc',               color: '#F7FBFA' },
+        { id: 'hero',            pageSel: '#hero',                   contentSel: '#hero .hero-content'          },
+        { id: 'problem',         pageSel: '.section-band--problem',  contentSel: '#problem .sc'                 },
+        { id: 'features',        pageSel: '.section-band--features', contentSel: '#features .sc'                },
+        { id: 'differentiation', pageSel: '#differentiation',        contentSel: '#differentiation .sc'         },
+        { id: 'demo-animation',  pageSel: '#demo-animation',         contentSel: '#demo-animation .sc'          },
+        { id: 'testimonials',    pageSel: '#testimonials',           contentSel: '#testimonials .sc'            },
+        { id: 'faq',             pageSel: '#faq',                    contentSel: '#faq .sc'                     },
+        { id: 'pricing',         pageSel: '#pricing',                contentSel: '#pricing .sc'                 },
+        { id: 'final-cta',       pageSel: '#final-cta',              contentSel: '#final-cta .sc'               },
       ];
 
       const pages = cfg.map(c => ({
         id: c.id,
         el: document.querySelector(c.pageSel),
         content: document.querySelector(c.contentSel),
-        color: c.color,
       })).filter(p => p.el && p.content);
 
       if (!pages.length) return;
 
+      // Touch devices: plain scrolling, no fade system
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
       const problemPage = pages.find(p => p.id === 'problem');
 
       // Set initial state
-      document.body.style.backgroundColor = pages[0].color;
       pages.forEach((p, i) => { p.content.style.opacity = i === 0 ? '1' : '0'; });
 
       let current = pages[0];
@@ -624,7 +724,7 @@
       }
 
       function setOpacity(el, val, ms) {
-        el.style.transition = `opacity ${ms}ms ease`;
+        el.style.transition = 'opacity ' + ms + 'ms ease';
         el.style.opacity = String(val);
       }
 
@@ -639,16 +739,13 @@
         const els = [...sc.querySelectorAll('.sc-anim')];
         if (!els.length) return;
 
-        // Reset all to hidden without triggering their transition
         els.forEach(el => {
           el.style.transition = 'none';
           el.classList.remove('sc-anim-visible');
         });
 
-        // Reflow so the hidden state commits before transitions are re-enabled
         void sc.offsetWidth;
 
-        // Re-enable CSS transitions then stagger each element in
         els.forEach(el => { el.style.transition = ''; });
 
         els.forEach((el, i) => {
@@ -666,13 +763,11 @@
         const f = speedFactor();
         lastSwap = Date.now();
         const outMs = BASE.out / f;
-        const bgMs  = BASE.bg  / f;
         const inMs  = BASE.inn / f;
 
         const prev = current;
         current = next;
 
-        // Snap any other lingering pages instantly to hidden
         pages.forEach(p => {
           if (p !== prev && p !== next) {
             p.content.style.transition = 'none';
@@ -680,61 +775,42 @@
           }
         });
 
-        // Phase 1: fade out leaving content; reset its stagger elements for next visit
         setOpacity(prev.content, 0, outMs);
         prev.content.querySelectorAll('.sc-anim').forEach(el => {
           el.style.transition = 'none';
           el.classList.remove('sc-anim-visible');
         });
 
-        // Phase 2: background cross-fade
         timers.push(setTimeout(() => {
-          document.body.style.transition = `background-color ${bgMs}ms ease`;
-          document.body.style.backgroundColor = next.color;
-
-          // Phase 3: stagger children in one by one
-          timers.push(setTimeout(() => {
-            if (next.id === 'hero') {
-              setOpacity(next.content, 1, inMs);
-            } else {
-              staggerIn(next);
-            }
-            // Reanimate stats every time problem section becomes active
-            if (next === problemPage && typeof window._veroAnimateStats === 'function') {
-              window._veroAnimateStats();
-            }
-          }, bgMs));
+          if (next.id === 'hero') {
+            setOpacity(next.content, 1, inMs);
+          } else {
+            staggerIn(next);
+          }
+          if (next === problemPage && typeof window._veroAnimateStats === 'function') {
+            window._veroAnimateStats();
+          }
         }, outMs));
       }
 
-      // Active page = whichever section's bounds contain the viewport centre
-      function pageAtCenter() {
-        const mid = window.innerHeight / 2;
-        for (const p of pages) {
-          const r = p.el.getBoundingClientRect();
-          if (r.top <= mid && r.bottom > mid) return p;
-        }
-        return null;
-      }
-
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const p = pageAtCenter();
-          if (p && p !== current) goTo(p);
-          ticking = false;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const page = pages.find(p => p.el === entry.target);
+          if (page && page !== current) goTo(page);
         });
-      }, { passive: true });
+      }, { rootMargin: '-30% 0px -30% 0px', threshold: 0 });
 
-      // On resize, snap state without animation
+      pages.forEach(p => io.observe(p.el));
+
       window.addEventListener('resize', () => {
-        const p = pageAtCenter();
+        const mid = window.innerHeight / 2;
+        const p = pages.find(pg => {
+          const r = pg.el.getBoundingClientRect();
+          return r.top <= mid && r.bottom > mid;
+        });
         if (p && p !== current) {
           current = p;
-          document.body.style.transition = 'none';
-          document.body.style.backgroundColor = p.color;
           pages.forEach(pg => {
             pg.content.style.transition = 'none';
             pg.content.style.opacity = pg === p ? '1' : '0';
@@ -780,37 +856,68 @@
 
   <script>
     (function () {
-      const line1 = 'You already know about saving';
-      const line2 = 'Vero makes it fun.';
+      const line1Text = 'Enjoy Life';
+      const despiteText = 'Despite';
       const el1 = document.getElementById('typewriter-line1');
       const el2 = document.getElementById('typewriter-line2');
+      const despite = document.getElementById('typewriter-despite');
+      const suffix = document.getElementById('typewriter-suffix');
       const cursor = document.querySelector('.typewriter-cursor');
-      let i = 0;
 
-      function type() {
-        if (i <= line1.length) {
-          el1.textContent = line1.slice(0, i);
-          i++;
-          setTimeout(type, 50);
+      el2.style.opacity = '0';
+      suffix.style.opacity = '0';
+      despite.classList.add('headline-strikethrough');
+
+      function typeLine1(i) {
+        el1.textContent = line1Text.slice(0, i);
+        if (i < line1Text.length) {
+          setTimeout(() => typeLine1(i + 1), 70);
         } else {
-          const j = i - line1.length;
-          el2.textContent = line2.slice(0, j);
-          i++;
-          if (j < line2.length) {
-            setTimeout(type, 50);
-          } else {
-            cursor.classList.add('done');
-            const sub = document.querySelector('.hero-subheadline');
-            const verdi = document.querySelector('.hero-verdi');
-            const cta = document.querySelector('.hero-cta-row');
-            if (sub) sub.classList.add('hero-visible');
-            setTimeout(() => { if (verdi) verdi.classList.add('hero-visible'); }, 150);
-            setTimeout(() => { if (cta) cta.classList.add('hero-visible'); }, 300);
-          }
+          setTimeout(() => typeDespite(0), 200);
         }
       }
 
-      type();
+      function typeDespite(i) {
+        despite.textContent = despiteText.slice(0, i);
+        if (i < despiteText.length) {
+          setTimeout(() => typeDespite(i + 1), 70);
+        } else {
+          setTimeout(revealStrikethrough, 150);
+        }
+      }
+
+      function revealStrikethrough() {
+        despite.textContent = 'Despite ';
+        despite.classList.add('strikethrough-visible');
+        setTimeout(revealBecauseOf, 550);
+      }
+
+      function revealBecauseOf() {
+        el2.textContent = 'Because of';
+        el2.classList.add('headline-highlight');
+        el2.style.transition = 'opacity 0.5s ease';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el2.style.opacity = '1';
+        }));
+        setTimeout(revealSuffix, 600);
+      }
+
+      function revealSuffix() {
+        suffix.textContent = ' Saving.';
+        suffix.style.transition = 'opacity 0.4s ease';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          suffix.style.opacity = '1';
+        }));
+        cursor.classList.add('done');
+        const sub = document.querySelector('.hero-subheadline');
+        const verdi = document.querySelector('.hero-verdi');
+        const cta = document.querySelector('.hero-cta-row');
+        if (sub) sub.classList.add('hero-visible');
+        setTimeout(() => { if (verdi) verdi.classList.add('hero-visible'); }, 150);
+        setTimeout(() => { if (cta) cta.classList.add('hero-visible'); }, 300);
+      }
+
+      typeLine1(0);
     })();
   </script>
 </body>

@@ -291,7 +291,7 @@
         </div>
 
         <!-- CTA (single post only) -->
-        <section id="final-cta" class="section final-cta" style="display:none; padding:0;">
+        <section id="post-cta" class="section final-cta" style="display:none; padding:0;">
           <a class="final-cta-btn js-download-choice" href="#download-options">
             Download Vero
             <span class="cta-arrow">→</span>
@@ -577,7 +577,7 @@
     async function loadPostPage() {
       const postContent = document.getElementById('post-content');
       const blogIntro = document.getElementById('blog-intro');
-      const finalCta = document.getElementById('final-cta');
+      const finalCta = document.getElementById('post-cta');
 
       postContent.innerHTML = '<div class="post-loading">Loading post...</div>';
       postContent.style.display = 'block';
@@ -640,7 +640,7 @@
       postContent.innerHTML = `<h1>${pageTitle}</h1>${bylineHtml}${contentBlocks.map(renderBlock).join('')}`;
       postContent.style.display = 'block';
       document.getElementById('blog-intro').style.display = 'none'; // hide on single post
-      document.getElementById('final-cta').style.display = 'block';
+      document.getElementById('post-cta').style.display = 'block';
     }
 
     // Route based on whether the URL has a post id.
