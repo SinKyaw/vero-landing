@@ -72,23 +72,22 @@
   <div class="content-layer">
 
     <!-- ── Navbar ── -->
+    <!-- ── Navbar ── -->
     <nav class="navbar">
       <div class="navbar-inner">
-        <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
+        <a href="index.html" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
             style="height:32px;width:auto;vertical-align:middle;" /></a>
         <ul class="navbar-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
           <li><a href="about-us.html">About Us</a></li>
           <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="affiliate.html" class="active">Affiliate</a></li>
-          <li><a href="post.html" class="active">Blog</a></li>
-          <li class="nav-cta-li">
-            <a href="#download-options" class="nav-cta js-download-choice">
-              Download Vero →
-            </a>
-          </li>
+          <li><a href="affiliate.html">Affiliate</a></li>
+          <li><a href="post.html">Blog</a></li>
         </ul>
+        <div class="navbar-right">
+          <a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a>
+        </div>
         <!-- Mobile Download Button (replaces hamburger menu) -->
         <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
           Download Vero →
@@ -464,6 +463,15 @@
           toggleMenu(false);
         }
       });
+
+      const FADE_DISTANCE = 150;
+      const updateNavbarFade = () => {
+        const progress = Math.min(window.scrollY / FADE_DISTANCE, 1);
+        navbar.style.setProperty('--navbar-opacity', (1 - progress * 0.85).toFixed(2));
+        navbar.style.setProperty('--navbar-blur', `${progress * 28}px`);
+      };
+      window.addEventListener('scroll', updateNavbarFade);
+      updateNavbarFade();
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {

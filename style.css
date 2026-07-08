@@ -71,6 +71,7 @@ body {
   font-size: 16px;
   position: relative;
   min-height: 100vh;
+
 }
 
 /* ── Background Glow Layers ── */
@@ -117,7 +118,7 @@ body {
 
 /* ── Navbar ── */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 24px;
   z-index: 100;
   width: 100%;
@@ -739,7 +740,7 @@ body {
 .section {
   max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 64px 24px;
 }
 
 .section-label {
@@ -894,6 +895,101 @@ body {
   font-size: 15px;
   color: var(--color-text-muted);
   line-height: 1.6;
+}
+
+/* ── Comparison Table (How We're Different) ── */
+.comparison-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 24px;
+  border-radius: var(--glass-radius);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 14px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.comparison-table tbody tr:last-child td,
+.comparison-table tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.comparison-table thead th {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-secondary);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.comparison-table .col-label {
+  width: 110px;
+}
+
+.comparison-table .row-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.comparison-table td.col-vero,
+.comparison-table th.col-vero {
+  background: var(--color-primary-solid);
+  color: #ffffff;
+  font-weight: 700;
+  border-bottom-color: rgba(255, 255, 255, 0.18);
+}
+
+.comparison-table thead th.col-vero {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 18px;
+  border-top: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.col-vero-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 11px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+#differentiation .solution-content {
+  margin-bottom: 0;
 }
 
 /* ── How We're Different Section ── */
@@ -1318,7 +1414,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 24px 120px;
+  padding: 64px 24px 80px;
 }
 
 .final-cta .section-headline {
@@ -1581,12 +1677,26 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .comparison-table thead th {
+    font-size: 14px;
+  }
+
+  .comparison-table thead th.col-vero {
+    font-size: 16px;
+  }
+
   .final-cta .section-headline {
     font-size: 32px;
   }
 
   .section {
-    padding: 64px 24px;
+    padding: 48px 24px;
   }
 
   .footer-inner {
@@ -2341,3 +2451,59 @@ body.menu-open {
   object-fit: cover;
   flex-shrink: 0;
 }
+
+/* ── Section Band Backgrounds ── */
+.section-band--problem,
+.section-band--features {
+  background: transparent;
+}
+
+/* ── Section stagger elements — start hidden, JS adds .sc-anim-visible ── */
+.sc-anim {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.sc-anim.sc-anim-visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ── Full-screen sections, one at a time ── */
+#hero,
+.section-band--problem,
+.section-band--features,
+#differentiation,
+#demo-animation,
+#testimonials,
+#faq,
+#pricing,
+#final-cta {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Extra top padding on hero to clear the fixed navbar */
+#hero {
+  padding-top: 140px;
+}
+
+.hero-verdi {
+  width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 8px 24px rgba(0, 192, 172, 0.20));
+}
+
+@media (max-width: 1100px) {
+  #hero {
+    padding-top: 110px;
+  }
+
+  .hero-verdi {
+    width: 110px;
+  }
+}
+
