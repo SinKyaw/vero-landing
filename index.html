@@ -132,25 +132,25 @@
       <section id="problem" class="section">
         <div class="sc">
         <div class="problem">
-          <div class="problem-copy sc-anim">
+          <div class="problem-copy">
             <p class="section-label">The Problem</p>
             <h2 class="section-headline">Tired of Always Feeling Broke?</h2>
-            <p class="section-body">
+            <p class="section-body sc-anim">
               It's not about how much money you make — it's about how you manage it.
               In today's world, spending is frictionless. One-click checkouts, targeted ads, and constant scrolling make
               it easy to lose control without realising it.
             </p>
           </div>
           <div class="problem-stats">
-            <div class="stat-card sc-anim">
+            <div class="stat-card sc-anim sc-anim--right">
               <div class="stat-number" data-target="56" data-suffix="%">0%</div>
               <div class="stat-label">say impulse purchases are their biggest budgeting challenge</div>
             </div>
-            <div class="stat-card sc-anim">
+            <div class="stat-card sc-anim sc-anim--right">
               <div class="stat-number" data-target="17000" data-prefix="£" data-separator=",">£0</div>
               <div class="stat-label">lost over 5 years from £8/day unplanned purchases</div>
             </div>
-            <div class="stat-card sc-anim">
+            <div class="stat-card sc-anim sc-anim--right">
               <div class="stat-number" data-target="49" data-suffix="%">0%</div>
               <div class="stat-label">of UK Gen Z feel stressed or anxious about money most of the time</div>
             </div>
@@ -164,9 +164,9 @@
     <div class="section-band section-band--features">
       <section id="features" class="section">
         <div class="sc">
-        <div class="solution-content sc-anim">
-          <p class="section-label">The Solution</p>
-          <h2 class="section-headline">Here's How Vero Changes That</h2>
+        <div class="solution-content">
+          <p class="section-label">Our Solution</p>
+          <h2 class="section-headline">Here's How Vero Helps You</h2>
         </div>
         <div class="solution-cards">
           <div class="solution-card sc-anim">
@@ -197,7 +197,7 @@
     <!-- ── How We're Different Section ── -->
     <section id="differentiation" class="section">
       <div class="sc">
-        <div class="solution-content sc-anim">
+        <div class="solution-content">
           <p class="section-label">Why Vero</p>
           <h2 class="section-headline">How We're Different</h2>
           <p class="section-body">
@@ -250,7 +250,7 @@
         <!-- ── How It Works Section ── -->
      <!--This will eventually have to be a different section without any kind of -->
     <section id="demo-animation" class="section">
-      <div class="sc"><div class="solution-content sc-anim">
+      <div class="sc"><div class="solution-content">
         <p class="section-label">See It In Action</p>
         <h2 class="section-headline">Watch How Vero Works</h2>
         <p class="section-body">
@@ -266,10 +266,11 @@
      <!-- ── Add the quotaton blocks ── -->
     <section id="testimonials" class="section">
       <div class="sc">
-      <div class="testimonials-header sc-anim">
+      <div class="testimonials-header">
         <p class="section-label">Our Impact</p>
-        <h2 class="section-headline">What Users Say</h2>
+        <h2 class="section-headline">What Ours Users Say And Feel</h2>
       </div>
+      <!--This will have to be the quotation marks text bubbles on one side with these quotes inside, and then a big stat on the other side (left)-->
       <div class="testimonial-grid">
         <div class="testimonial-card sc-anim">
           <p class="testimonial-quote">"It's so much easier than spreadsheets — I just message a cute elephant."</p>
@@ -311,7 +312,7 @@
     <!-- ── FAQ Section ── -->
     <section id="faq" class="section">
       <div class="sc">
-      <div class="faq-header sc-anim">
+      <div class="faq-header">
         <p class="section-label">FAQ</p>
         <h2 class="section-headline">Questions? We've got Answers</h2>
       </div>
@@ -355,7 +356,7 @@
     <!-- ── Pricing Section - keep it brief and snappy fo rnow── -->
     <section id="pricing" class="section">
       <div class="sc">
-      <div class="pricing-header sc-anim">
+      <div class="pricing-header">
         <p class="section-label">Pricing</p>
         <h2 class="section-headline">Start Free. Upgrade When You're Ready.</h2>
       </div>
@@ -391,7 +392,7 @@
     <!-- ── Final CTA Section ── -->
     <section id="final-cta" class="section final-cta">
       <div class="sc">
-      <h2 class="section-headline sc-anim">Build Better Money Habits Today</h2>
+      <h2 class="section-headline">Build Better Money Habits Today</h2>
       <p class="section-body sc-anim">
         Take control of your spending, reduce stress, and start earning rewards.
       </p>
@@ -729,7 +730,7 @@
       }
 
       const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const STEP = REDUCED ? 0 : 150;
+      const STEP = REDUCED ? 80 : 220;
 
       function staggerIn(page) {
         const sc = page.content;
@@ -745,13 +746,26 @@
         });
 
         void sc.offsetWidth;
-
         els.forEach(el => { el.style.transition = ''; });
 
-        els.forEach((el, i) => {
-          timers.push(setTimeout(() => {
-            el.classList.add('sc-anim-visible');
-          }, i * STEP));
+        let visibleIdx = 0;
+        els.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight && rect.bottom > 0;
+
+          if (inView) {
+            timers.push(setTimeout(() => {
+              el.classList.add('sc-anim-visible');
+            }, 200 + visibleIdx * STEP));
+            visibleIdx++;
+          } else {
+            const obs = new IntersectionObserver(entries => {
+              if (!entries[0].isIntersecting) return;
+              el.classList.add('sc-anim-visible');
+              obs.disconnect();
+            }, { threshold: 0.1 });
+            obs.observe(el);
+          }
         });
       }
 
@@ -817,6 +831,46 @@
           });
         }
       });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const sectionSelectors = [
+        '#hero', '.section-band--problem', '.section-band--features',
+        '#differentiation', '#demo-animation', '#testimonials',
+        '#faq', '#pricing', '#final-cta'
+      ];
+      const sections = sectionSelectors.map(s => document.querySelector(s)).filter(Boolean);
+      if (!sections.length) return;
+
+      function snapIfBetween() {
+        const scrollTop = document.documentElement.scrollTop;
+        const vh = window.innerHeight;
+
+        // Find which section we should be at
+        let best = sections[0];
+        for (const s of sections) {
+          if (s.offsetTop <= scrollTop + vh * 0.4) best = s;
+        }
+
+        // If we're more than 8px away from that section's top, snap to the next one
+        const dist = scrollTop - best.offsetTop;
+        if (dist > 8) {
+          const idx = sections.indexOf(best);
+          const target = sections[idx + 1] || best;
+          window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+        } else if (dist < -8) {
+          window.scrollTo({ top: best.offsetTop, behavior: 'smooth' });
+        }
+      }
+
+      if ('onscrollend' in window) {
+        window.addEventListener('scrollend', snapIfBetween);
+      } else {
+        let t;
+        window.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(snapIfBetween, 120); });
+      }
     })();
   </script>
 
@@ -895,26 +949,29 @@
       function revealBecauseOf() {
         el2.textContent = 'Because of';
         el2.classList.add('headline-highlight');
-        el2.style.transition = 'opacity 0.5s ease';
+        el2.style.transition = 'opacity 1.4s ease';
         requestAnimationFrame(() => requestAnimationFrame(() => {
           el2.style.opacity = '1';
         }));
-        setTimeout(revealSuffix, 600);
+        setTimeout(typeSuffix, 1300);
       }
 
-      function revealSuffix() {
-        suffix.textContent = ' Saving.';
-        suffix.style.transition = 'opacity 0.4s ease';
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          suffix.style.opacity = '1';
-        }));
-        cursor.classList.add('done');
-        const sub = document.querySelector('.hero-subheadline');
-        const verdi = document.querySelector('.hero-verdi');
-        const cta = document.querySelector('.hero-cta-row');
-        if (sub) sub.classList.add('hero-visible');
-        setTimeout(() => { if (verdi) verdi.classList.add('hero-visible'); }, 150);
-        setTimeout(() => { if (cta) cta.classList.add('hero-visible'); }, 300);
+      function typeSuffix(i) {
+        i = i || 0;
+        const suffixText = ' Saving.';
+        suffix.style.opacity = '1';
+        suffix.textContent = suffixText.slice(0, i);
+        if (i < suffixText.length) {
+          setTimeout(() => typeSuffix(i + 1), 50);
+        } else {
+          cursor.classList.add('done');
+          const sub = document.querySelector('.hero-subheadline');
+          const verdi = document.querySelector('.hero-verdi');
+          const cta = document.querySelector('.hero-cta-row');
+          if (sub) sub.classList.add('hero-visible');
+          setTimeout(() => { if (verdi) verdi.classList.add('hero-visible'); }, 150);
+          setTimeout(() => { if (cta) cta.classList.add('hero-visible'); }, 300);
+        }
       }
 
       typeLine1(0);

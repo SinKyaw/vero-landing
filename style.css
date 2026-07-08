@@ -832,6 +832,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: clamp(12px, min(3.1vh, 2.3vw), 28px);
+  align-items: center;
 }
 
 .stat-card {
@@ -843,6 +844,11 @@ body {
   border-radius: var(--glass-radius);
   padding: clamp(14px, min(2.7vh, 2vw), 24px) 28px;
   transition: transform 0.2s ease;
+  aspect-ratio: 1 / 1;
+  width: min(100%, 220px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .stat-card:hover {
@@ -2546,6 +2552,9 @@ body.menu-open {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.js-fade-sections .sc-anim.sc-anim--right {
+  transform: translateX(48px);
 }
 .js-fade-sections .sc-anim.sc-anim-visible {
   opacity: 1;
