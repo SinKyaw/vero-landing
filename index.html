@@ -250,13 +250,47 @@
         <!-- ── How It Works Section ── -->
      <!--This will eventually have to be a different section without any kind of -->
     <section id="demo-animation" class="section">
-      <div class="sc"><div class="solution-content">
-        <p class="section-label">See It In Action</p>
-        <h2 class="section-headline">Watch How Vero Works</h2>
-        <p class="section-body">
-          From logging a coffee to climbing the leaderboard — see how Vero turns everyday decisions into progress.
-        </p>
-      </div></div>
+      <div class="sc">
+        <div class="solution-content">
+          <p class="section-label">See It In Action</p>
+          <h2 class="section-headline">Watch How Vero Works</h2>
+          <p class="section-body">
+            From logging a coffee to climbing the leaderboard — see how Vero turns everyday decisions into progress.
+          </p>
+        </div>
+
+        <!-- Expense-logging demo — mirrors the in-app flow: free-text input → Verdi → logged expense -->
+        <div class="demo-stage" aria-hidden="true">
+          <!-- Free-text input card -->
+          <div class="demo-card demo-input">
+            <span class="demo-input-hint">Tell me what you spent 👀</span>
+            <p class="demo-input-text"><span class="demo-typed"></span><span class="demo-caret">|</span></p>
+            <span class="demo-processing">Vero is processing your expenses…</span>
+          </div>
+
+          <!-- Verdi -->
+          <div class="demo-verdi">
+            <img src="assets/verdi.png" alt="Verdi" class="demo-verdi-img" />
+          </div>
+
+          <!-- Logged expense result card: the box fades in with the group, the
+               entry inside it grows in once the expense has been "processed" -->
+          <div class="demo-card demo-result-box">
+            <div class="demo-result-content">
+              <p class="demo-result-title">Expense Logged!</p>
+              <p class="demo-result-sub">That's another smart money move.</p>
+              <div class="demo-expense-row">
+                <span class="demo-expense-icon">🍔</span>
+                <div class="demo-expense-info">
+                  <span class="demo-expense-name">Takeaway</span>
+                  <span class="demo-expense-cat">Food &amp; Drink</span>
+                </div>
+                <span class="demo-expense-amount">£4.50</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
 
@@ -730,7 +764,7 @@
       }
 
       const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const STEP = REDUCED ? 80 : 220;
+      const STEP = REDUCED ? 80 : 320;
 
       function staggerIn(page) {
         const sc = page.content;
@@ -836,46 +870,6 @@
 
   <script>
     (function () {
-      const sectionSelectors = [
-        '#hero', '.section-band--problem', '.section-band--features',
-        '#differentiation', '#demo-animation', '#testimonials',
-        '#faq', '#pricing', '#final-cta'
-      ];
-      const sections = sectionSelectors.map(s => document.querySelector(s)).filter(Boolean);
-      if (!sections.length) return;
-
-      function snapIfBetween() {
-        const scrollTop = document.documentElement.scrollTop;
-        const vh = window.innerHeight;
-
-        // Find which section we should be at
-        let best = sections[0];
-        for (const s of sections) {
-          if (s.offsetTop <= scrollTop + vh * 0.4) best = s;
-        }
-
-        // If we're more than 8px away from that section's top, snap to the next one
-        const dist = scrollTop - best.offsetTop;
-        if (dist > 8) {
-          const idx = sections.indexOf(best);
-          const target = sections[idx + 1] || best;
-          window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-        } else if (dist < -8) {
-          window.scrollTo({ top: best.offsetTop, behavior: 'smooth' });
-        }
-      }
-
-      if ('onscrollend' in window) {
-        window.addEventListener('scrollend', snapIfBetween);
-      } else {
-        let t;
-        window.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(snapIfBetween, 120); });
-      }
-    })();
-  </script>
-
-  <script>
-    (function () {
       const statEls = document.querySelectorAll('.stat-number[data-target]');
 
       function animateStat(el) {
@@ -905,6 +899,88 @@
       window._veroAnimateStats = function () {
         statEls.forEach(animateStat);
       };
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // Expense-logging demo (mirrors the app flow). Whenever the section comes
+      // into view: the boxes + Verdi fade in together, the entry is typed out,
+      // then after a short "processing" pause the logged entry grows into the
+      // right box. Loops while in view; fully resets when it leaves.
+      const section = document.getElementById('demo-animation');
+      const stage = section && section.querySelector('.demo-stage');
+      if (!stage) return;
+
+      const typed = stage.querySelector('.demo-typed');
+      const caret = stage.querySelector('.demo-caret');
+      const hint = stage.querySelector('.demo-input-hint');
+      const processing = stage.querySelector('.demo-processing');
+      const resultContent = stage.querySelector('.demo-result-content');
+
+      const FULL = '£4.50 takeaway';
+
+      let timers = [];
+      let running = false;
+
+      const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
+      const wait = (fn, ms) => { timers.push(setTimeout(fn, ms)); };
+
+      // Reset the typing/result state (keeps the group faded in for the loop).
+      function resetSequence() {
+        clearTimers();
+        typed.textContent = '';
+        hint.style.opacity = '1';
+        caret.classList.remove('demo-caret--hidden');
+        processing.classList.remove('is-visible');
+        resultContent.classList.remove('is-visible');
+      }
+
+      function typeChar(i) {
+        if (i === 0) hint.style.opacity = '0';
+        typed.textContent = FULL.slice(0, i);
+
+        if (i < FULL.length) {
+          wait(() => typeChar(i + 1), 90);
+          return;
+        }
+
+        // Finished typing → Verdi "processes" for 3s → entry grows into the box → loop
+        caret.classList.add('demo-caret--hidden');
+        processing.classList.add('is-visible');
+        wait(() => {
+          processing.classList.remove('is-visible');
+          resultContent.classList.add('is-visible');
+        }, 3000);
+        wait(() => { resetSequence(); wait(() => typeChar(0), 600); }, 6000);
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+
+        resetSequence();
+        // 1) fade the boxes + Verdi in together, then 2) start typing.
+        requestAnimationFrame(() => stage.classList.add('is-in'));
+        wait(() => typeChar(0), 900);
+      }
+
+      function stop() {
+        running = false;
+        clearTimers();
+        stage.classList.remove('is-in');
+        resetSequence();
+      }
+
+      // Fire when the section is centred in the viewport. A centre-band rootMargin
+      // (rather than a visible-ratio threshold) works for any section height —
+      // including sections taller than the viewport on short screens — and behaves
+      // identically on the desktop deck and on mobile's natural scroll.
+      const io = new IntersectionObserver((entries) => {
+        entries[0].isIntersecting ? start() : stop();
+      }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+
+      io.observe(section);
     })();
   </script>
 

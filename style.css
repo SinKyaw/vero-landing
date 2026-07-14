@@ -60,9 +60,20 @@
 }
 
 html {
-  scroll-snap-type: y mandatory;
   scroll-padding-top: 80px;
   scroll-behavior: smooth;
+}
+
+/* Snap the "deck" sections on desktop only. `mandatory` firmly pins each
+   section to the top for the deck feel. It stays safe on any screen because:
+   sections use min-height (not fixed height), so content taller than the
+   viewport grows the section — and when a snap area is larger than the
+   viewport the browser suspends snapping so that content is never trapped.
+   We also omit scroll-snap-stop, so tall sections and keyboard nav flow freely.
+   .js-fade-sections is on <html> for non-touch devices only, so mobile never
+   snaps (it keeps plain, natural document scrolling). */
+html.js-fade-sections {
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -75,8 +86,7 @@ body {
   line-height: 1.7;
   font-size: 16px;
   position: relative;
-  min-height: 100vh;
-
+  min-height: 100dvh;
 }
 
 /* ── Background Glow Layers ── */
@@ -206,7 +216,7 @@ body {
   flex-direction: column;
   position: fixed;
   inset: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   gap: 16px;
   padding: 116px 24px 24px;
   background: rgba(0, 81, 73, 0.85);
@@ -801,18 +811,19 @@ body {
 }
 
 /* ── Section Bands ── */
-/* Scroll snap targets — each section snaps to the top of the viewport */
-#hero,
-.section-band--problem,
-.section-band--features,
-#differentiation,
-#demo-animation,
-#testimonials,
-#faq,
-#pricing,
-#final-cta {
+/* Scroll snap targets — each section snaps to the top of the viewport.
+   Desktop-only via .js-fade-sections; no scroll-snap-stop so tall sections
+   and keyboard navigation are never trapped. */
+.js-fade-sections #hero,
+.js-fade-sections .section-band--problem,
+.js-fade-sections .section-band--features,
+.js-fade-sections #differentiation,
+.js-fade-sections #demo-animation,
+.js-fade-sections #testimonials,
+.js-fade-sections #faq,
+.js-fade-sections #pricing,
+.js-fade-sections #final-cta {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .section-band {
@@ -936,6 +947,192 @@ body {
   font-size: 15px;
   color: var(--color-text-muted);
   line-height: 1.6;
+}
+
+/* ── Expense-logging demo (mirrors the mobile app's flow) ── */
+.demo-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 28px);
+  width: 100%;
+  max-width: 900px;
+  margin: clamp(28px, 5vh, 56px) auto 0;
+  /* The whole group (both boxes + Verdi) fades in together, like a card.
+     The demo script adds .is-in once the section is in view. */
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.demo-stage.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.demo-card {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 81, 73, 0.12), 0 4px 14px rgba(0, 81, 73, 0.06);
+  padding: clamp(18px, 2.4vw, 28px);
+}
+
+/* Input card */
+.demo-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  min-height: 150px;
+}
+
+.demo-input-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition: opacity 0.3s ease;
+}
+
+.demo-input-text {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.2;
+  color: var(--color-secondary);
+  min-height: 1.2em;
+  margin: 0;
+}
+
+.demo-caret {
+  display: inline-block;
+  font-weight: 400;
+  color: var(--color-primary-solid);
+  animation: demo-blink 1s step-end infinite;
+}
+.demo-caret.demo-caret--hidden {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes demo-blink {
+  50% { opacity: 0; }
+}
+
+.demo-processing {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.demo-processing.is-visible {
+  opacity: 1;
+}
+
+/* Verdi */
+.demo-verdi {
+  flex: 0 0 auto;
+}
+.demo-verdi-img {
+  display: block;
+  width: clamp(110px, 16vw, 180px);
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0, 192, 172, 0.20));
+}
+
+/* Result card: the box reserves its space and fades in with the group; the
+   entry inside grows in once processing finishes. */
+.demo-result-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+}
+.demo-result-content {
+  width: 100%;
+  opacity: 0;
+  transform: scale(0.9);
+  transform-origin: center;
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.demo-result-content.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.demo-result-title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--color-secondary);
+  margin: 0 0 4px;
+}
+.demo-result-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0 0 16px;
+}
+
+.demo-expense-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 81, 73, 0.06);
+}
+.demo-expense-icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+  background: var(--color-bg);
+  border-radius: 12px;
+}
+.demo-expense-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.demo-expense-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-secondary);
+}
+.demo-expense-cat {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+.demo-expense-amount {
+  flex: 0 0 auto;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-secondary);
+}
+
+/* Stack the flow vertically on narrow screens (Verdi sits between the cards) */
+@media (max-width: 760px) {
+  .demo-stage {
+    flex-direction: column;
+  }
+  .demo-verdi-img {
+    width: 130px;
+  }
 }
 
 /* ── Comparison Table (How We're Different) ── */
@@ -2551,7 +2748,7 @@ body.menu-open {
 .js-fade-sections .sc-anim {
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .js-fade-sections .sc-anim.sc-anim--right {
   transform: translateX(48px);
@@ -2562,38 +2759,44 @@ body.menu-open {
 }
 
 
-/* ── Full-screen sections, one at a time ── */
-#hero,
-.section-band--problem,
-.section-band--features,
-#differentiation,
-#demo-animation,
-#testimonials,
-#faq,
-#pricing,
-#final-cta {
-  height: 100vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+/* ── Full-screen "deck" sections (desktop only) ──
+   Scoped to .js-fade-sections, which is added only on non-touch devices.
+   min-height (not height) lets a section grow past the viewport and scroll
+   naturally instead of clipping. On mobile these rules don't apply, so
+   sections take their natural content height in normal document flow. */
+.js-fade-sections #hero,
+.js-fade-sections .section-band--problem,
+.js-fade-sections .section-band--features,
+.js-fade-sections #differentiation,
+.js-fade-sections #demo-animation,
+.js-fade-sections #testimonials,
+.js-fade-sections #faq,
+.js-fade-sections #pricing,
+.js-fade-sections #final-cta {
+  min-height: 100dvh;
 }
 
-#hero::-webkit-scrollbar,
-.section-band--problem::-webkit-scrollbar,
-.section-band--features::-webkit-scrollbar,
-#differentiation::-webkit-scrollbar,
-#demo-animation::-webkit-scrollbar,
-#testimonials::-webkit-scrollbar,
-#faq::-webkit-scrollbar,
-#pricing::-webkit-scrollbar,
-#final-cta::-webkit-scrollbar {
-  display: none;
-}
-
-#final-cta {
-  height: auto;
+.js-fade-sections #final-cta {
   min-height: unset;
-  padding-bottom: 120whrepx;
+  padding-bottom: 120px;
+}
+
+/* Vertically centre each deck section's content within its full-height panel,
+   so any extra space is balanced above and below rather than pooling at the
+   bottom — a short section still reads as one deliberately-presented screen.
+   Because panels use min-height (not height), content taller than the viewport
+   grows the panel and scrolls normally instead of being clipped by centring.
+   Hero opts out (top-aligned under the navbar); final-cta is natural height. */
+.js-fade-sections .section-band--problem,
+.js-fade-sections .section-band--features,
+.js-fade-sections #differentiation,
+.js-fade-sections #demo-animation,
+.js-fade-sections #testimonials,
+.js-fade-sections #faq,
+.js-fade-sections #pricing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Extra top padding on hero to clear the fixed navbar */
@@ -2624,10 +2827,10 @@ body.menu-open {
 
 
 
-/* Mobile: plain scrolling, no snap */
+/* Mobile: instant (non-smooth) scrolling. Snap is already desktop-only
+   (scoped to html.js-fade-sections), so there is nothing to disable here. */
 @media (hover: none) and (pointer: coarse) {
   html {
-    scroll-snap-type: none;
     scroll-behavior: auto;
   }
 }
