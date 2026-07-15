@@ -29,8 +29,7 @@
       transform: none;
     }
 
-    /* ── Section transition wrapper ── */
-    .js-fade-sections .sc { opacity: 0; }
+    /* ── Section content wrapper ── */
     #final-cta .sc { width: 100%; display: flex; flex-direction: column; align-items: center; }
 
   </style>
@@ -716,155 +715,35 @@
 
   <script>
     (function () {
-      // u{2500}u{2500} Staged section transitions u{2500}u{2500}
-      const BASE = { out: 280, inn: 280 };
-
-      const cfg = [
-        { id: 'hero',            pageSel: '#hero',                   contentSel: '#hero .hero-content'          },
-        { id: 'problem',         pageSel: '.section-band--problem',  contentSel: '#problem .sc'                 },
-        { id: 'features',        pageSel: '.section-band--features', contentSel: '#features .sc'                },
-        { id: 'differentiation', pageSel: '#differentiation',        contentSel: '#differentiation .sc'         },
-        { id: 'demo-animation',  pageSel: '#demo-animation',         contentSel: '#demo-animation .sc'          },
-        { id: 'testimonials',    pageSel: '#testimonials',           contentSel: '#testimonials .sc'            },
-        { id: 'faq',             pageSel: '#faq',                    contentSel: '#faq .sc'                     },
-        { id: 'pricing',         pageSel: '#pricing',                contentSel: '#pricing .sc'                 },
-        { id: 'final-cta',       pageSel: '#final-cta',              contentSel: '#final-cta .sc'               },
-      ];
-
-      const pages = cfg.map(c => ({
-        id: c.id,
-        el: document.querySelector(c.pageSel),
-        content: document.querySelector(c.contentSel),
-      })).filter(p => p.el && p.content);
-
-      if (!pages.length) return;
-
-      // Touch devices: plain scrolling, no fade system
+      // ── Reveal on scroll ──
+      // Regular, natural scrolling. As each section's content enters the
+      // viewport, its .sc-anim elements fade/slide in once, in DOM order
+      // (eyebrow → title → body → cards), then stay put. Nothing fades back
+      // out. Desktop only: on touch the .js-fade-sections class is absent, so
+      // .sc-anim never hides and everything shows in plain document flow.
       if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
 
-      const problemPage = pages.find(p => p.id === 'problem');
-
-      // Set initial state
-      pages.forEach((p, i) => { p.content.style.opacity = i === 0 ? '1' : '0'; });
-
-      let current = pages[0];
-      let lastSwap = 0;
-      let timers = [];
-
-      function speedFactor() {
-        const gap = Date.now() - lastSwap;
-        if (gap < 300) return 3;
-        if (gap < 600) return 2;
-        return 1;
-      }
-
-      function setOpacity(el, val, ms) {
-        el.style.transition = 'opacity ' + ms + 'ms ease';
-        el.style.opacity = String(val);
-      }
-
       const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const STEP = REDUCED ? 80 : 320;
+      const STEP = REDUCED ? 120 : 1100;
 
-      function staggerIn(page) {
-        const sc = page.content;
-        sc.style.transition = 'none';
-        sc.style.opacity = '1';
-
-        const els = [...sc.querySelectorAll('.sc-anim')];
-        if (!els.length) return;
-
-        els.forEach(el => {
-          el.style.transition = 'none';
-          el.classList.remove('sc-anim-visible');
-        });
-
-        void sc.offsetWidth;
-        els.forEach(el => { el.style.transition = ''; });
-
-        let visibleIdx = 0;
-        els.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          const inView = rect.top < window.innerHeight && rect.bottom > 0;
-
-          if (inView) {
-            timers.push(setTimeout(() => {
-              el.classList.add('sc-anim-visible');
-            }, 200 + visibleIdx * STEP));
-            visibleIdx++;
-          } else {
-            const obs = new IntersectionObserver(entries => {
-              if (!entries[0].isIntersecting) return;
-              el.classList.add('sc-anim-visible');
-              obs.disconnect();
-            }, { threshold: 0.1 });
-            obs.observe(el);
-          }
-        });
-      }
-
-      function goTo(next) {
-        if (next === current) return;
-        timers.forEach(clearTimeout);
-        timers = [];
-
-        const f = speedFactor();
-        lastSwap = Date.now();
-        const outMs = BASE.out / f;
-        const inMs  = BASE.inn / f;
-
-        const prev = current;
-        current = next;
-
-        pages.forEach(p => {
-          if (p !== prev && p !== next) {
-            p.content.style.transition = 'none';
-            p.content.style.opacity = '0';
-          }
-        });
-
-        setOpacity(prev.content, 0, outMs);
-        prev.content.querySelectorAll('.sc-anim').forEach(el => {
-          el.style.transition = 'none';
-          el.classList.remove('sc-anim-visible');
-        });
-
-        timers.push(setTimeout(() => {
-          if (next.id === 'hero') {
-            setOpacity(next.content, 1, inMs);
-          } else {
-            staggerIn(next);
-          }
-          if (next === problemPage && typeof window._veroAnimateStats === 'function') {
-            window._veroAnimateStats();
-          }
-        }, outMs));
-      }
-
-      const io = new IntersectionObserver((entries) => {
+      const io = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
-          const page = pages.find(p => p.el === entry.target);
-          if (page && page !== current) goTo(page);
-        });
-      }, { rootMargin: '-30% 0px -30% 0px', threshold: 0 });
+          const sc = entry.target;
+          obs.unobserve(sc);
 
-      pages.forEach(p => io.observe(p.el));
-
-      window.addEventListener('resize', () => {
-        const mid = window.innerHeight / 2;
-        const p = pages.find(pg => {
-          const r = pg.el.getBoundingClientRect();
-          return r.top <= mid && r.bottom > mid;
-        });
-        if (p && p !== current) {
-          current = p;
-          pages.forEach(pg => {
-            pg.content.style.transition = 'none';
-            pg.content.style.opacity = pg === p ? '1' : '0';
+          [...sc.querySelectorAll('.sc-anim')].forEach((el, i) => {
+            setTimeout(() => el.classList.add('sc-anim-visible'), i * STEP);
           });
-        }
-      });
+
+          // Count-up stats animation runs when the problem section reveals.
+          if (sc.closest('#problem') && typeof window._veroAnimateStats === 'function') {
+            window._veroAnimateStats();
+          }
+        });
+      }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
+
+      document.querySelectorAll('.sc').forEach(sc => io.observe(sc));
     })();
   </script>
 

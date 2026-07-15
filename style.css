@@ -64,18 +64,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Snap the "deck" sections on desktop only. `mandatory` firmly pins each
-   section to the top for the deck feel. It stays safe on any screen because:
-   sections use min-height (not fixed height), so content taller than the
-   viewport grows the section — and when a snap area is larger than the
-   viewport the browser suspends snapping so that content is never trapped.
-   We also omit scroll-snap-stop, so tall sections and keyboard nav flow freely.
-   .js-fade-sections is on <html> for non-touch devices only, so mobile never
-   snaps (it keeps plain, natural document scrolling). */
-html.js-fade-sections {
-  scroll-snap-type: y mandatory;
-}
-
 body {
   font-family: 'Inter', sans-serif;
   background: var(--color-bg);
@@ -811,21 +799,6 @@ body {
 }
 
 /* ── Section Bands ── */
-/* Scroll snap targets — each section snaps to the top of the viewport.
-   Desktop-only via .js-fade-sections; no scroll-snap-stop so tall sections
-   and keyboard navigation are never trapped. */
-.js-fade-sections #hero,
-.js-fade-sections .section-band--problem,
-.js-fade-sections .section-band--features,
-.js-fade-sections #differentiation,
-.js-fade-sections #demo-animation,
-.js-fade-sections #testimonials,
-.js-fade-sections #faq,
-.js-fade-sections #pricing,
-.js-fade-sections #final-cta {
-  scroll-snap-align: start;
-}
-
 .section-band {
   width: 100%;
 }
@@ -2747,8 +2720,8 @@ body.menu-open {
 /* ── Section stagger elements — hidden only when fade system is active (desktop) ── */
 .js-fade-sections .sc-anim {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(20px);
+  transition: opacity 1.6s ease, transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .js-fade-sections .sc-anim.sc-anim--right {
   transform: translateX(48px);
