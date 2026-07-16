@@ -28,6 +28,13 @@
       opacity: 1;
       transform: none;
     }
+    /* The mascot can carry a little personality — scale in with a gentle
+       overshoot, while the text elements above stay clean/no-bounce. */
+    .hero-verdi {
+      transform: translateY(14px) scale(0.94);
+      transition: opacity 0.5s ease,
+        transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
 
     /* ── Section content wrapper ── */
     #final-cta .sc { width: 100%; display: flex; flex-direction: column; align-items: center; }
@@ -199,7 +206,7 @@
         <div class="solution-content">
           <p class="section-label">Why Vero</p>
           <h2 class="section-headline">How We're Different</h2>
-          <p class="section-body">
+          <p class="section-body sc-anim">
             Most finance apps show you the numbers. Vero changes how you think about them.
           </p>
         </div>
@@ -253,7 +260,7 @@
         <div class="solution-content">
           <p class="section-label">See It In Action</p>
           <h2 class="section-headline">Watch How Vero Works</h2>
-          <p class="section-body">
+          <p class="section-body sc-anim">
             From logging a coffee to climbing the leaderboard — see how Vero turns everyday decisions into progress.
           </p>
         </div>
@@ -303,33 +310,38 @@
         <p class="section-label">Our Impact</p>
         <h2 class="section-headline">What Ours Users Say And Feel</h2>
       </div>
-      <!--This will have to be the quotation marks text bubbles on one side with these quotes inside, and then a big stat on the other side (left)-->
-      <div class="testimonial-grid">
-        <div class="testimonial-card sc-anim">
-          <p class="testimonial-quote">"It's so much easier than spreadsheets — I just message a cute elephant."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
-            <div>
+      <div class="testimonials-body">
+        <!-- Left: big square stat boxes (placeholder figures for now) -->
+        <div class="testimonials-stats">
+          <div class="testimonial-stat sc-anim">
+            <div class="testimonial-stat-number">87%</div>
+            <div class="testimonial-stat-label">Placeholder — stat description goes here</div>
+          </div>
+          <div class="testimonial-stat sc-anim">
+            <div class="testimonial-stat-number">3x</div>
+            <div class="testimonial-stat-label">Placeholder — stat description goes here</div>
+          </div>
+        </div>
+
+        <!-- Right: quote speech bubbles, stacked -->
+        <div class="testimonials-quotes">
+          <div class="testimonial-bubble sc-anim">
+            <p class="testimonial-quote">It's so much easier than spreadsheets — I just message a cute elephant.</p>
+            <div class="testimonial-author">
               <div class="testimonial-name">Anna</div>
               <div class="testimonial-role">Age 24</div>
             </div>
           </div>
-        </div>
-        <div class="testimonial-card sc-anim">
-          <p class="testimonial-quote">"Rewards actually help me save more."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">E</div>
-            <div>
+          <div class="testimonial-bubble sc-anim">
+            <p class="testimonial-quote">Rewards actually help me save more.</p>
+            <div class="testimonial-author">
               <div class="testimonial-name">Elly</div>
               <div class="testimonial-role">Age 25</div>
             </div>
           </div>
-        </div>
-        <div class="testimonial-card sc-anim">
-          <p class="testimonial-quote">"It feels like a game — that's why I stick with it."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
-            <div>
+          <div class="testimonial-bubble sc-anim">
+            <p class="testimonial-quote">It feels like a game — that's why I stick with it.</p>
+            <div class="testimonial-author">
               <div class="testimonial-name">Arvin</div>
               <div class="testimonial-role">Age 21</div>
             </div>
@@ -344,7 +356,7 @@
 
     <!-- ── FAQ Section ── -->
     <section id="faq" class="section">
-      <div class="sc">
+      <div class="sc" data-step="200">
       <div class="faq-header">
         <p class="section-label">FAQ</p>
         <h2 class="section-headline">Questions? We've got Answers</h2>
@@ -588,6 +600,9 @@
         const progress = Math.min(window.scrollY / FADE_DISTANCE, 1);
         navbar.style.setProperty('--navbar-opacity', (1 - progress * 0.85).toFixed(2));
         navbar.style.setProperty('--navbar-blur', `${progress * 28}px`);
+        // Drives the link text from light → dark as the bar goes transparent,
+        // so the labels stay readable against the light page behind them.
+        navbar.style.setProperty('--navbar-progress', progress.toFixed(2));
       };
       window.addEventListener('scroll', updateNavbarFade);
       updateNavbarFade();
@@ -723,8 +738,7 @@
       // .sc-anim never hides and everything shows in plain document flow.
       if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
 
-      const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const STEP = REDUCED ? 120 : 1100;
+      const STEP = 450;
 
       const io = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -732,14 +746,21 @@
           const sc = entry.target;
           obs.unobserve(sc);
 
-          [...sc.querySelectorAll('.sc-anim')].forEach((el, i) => {
-            setTimeout(() => el.classList.add('sc-anim-visible'), i * STEP);
-          });
+          // Sections may set data-step to override the default beat — useful
+          // for longer lists (e.g. the FAQ) that would otherwise drag on.
+          const step = Number(sc.dataset.step) || STEP;
 
-          // Count-up stats animation runs when the problem section reveals.
-          if (sc.closest('#problem') && typeof window._veroAnimateStats === 'function') {
-            window._veroAnimateStats();
-          }
+          [...sc.querySelectorAll('.sc-anim')].forEach((el, i) => {
+            setTimeout(() => {
+              el.classList.add('sc-anim-visible');
+
+              // Any count-up numbers inside this element start counting as soon
+              // as the card begins revealing — each card fires independently.
+              if (typeof window._veroAnimateStat === 'function') {
+                el.querySelectorAll('.stat-number[data-target]').forEach(window._veroAnimateStat);
+              }
+            }, i * step);
+          });
         });
       }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
 
@@ -749,8 +770,6 @@
 
   <script>
     (function () {
-      const statEls = document.querySelectorAll('.stat-number[data-target]');
-
       function animateStat(el) {
         const target = parseInt(el.dataset.target, 10);
         const prefix = el.dataset.prefix || '';
@@ -768,16 +787,22 @@
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           el.textContent = format(eased * target);
-          if (progress < 1) requestAnimationFrame(step);
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            // Landed on the final value — give it a quick scale punch.
+            el.classList.remove('stat-number--pop');
+            void el.offsetWidth; // restart the animation if it replays
+            el.classList.add('stat-number--pop');
+          }
         }
 
         requestAnimationFrame(step);
       }
 
-      // Called by the section transition script each time problem becomes active
-      window._veroAnimateStats = function () {
-        statEls.forEach(animateStat);
-      };
+      // Called by the reveal script once each stat card has finished appearing,
+      // so the count-up plays on a fully-visible card rather than a hidden one.
+      window._veroAnimateStat = animateStat;
     })();
   </script>
 
@@ -904,11 +929,11 @@
       function revealBecauseOf() {
         el2.textContent = 'Because of';
         el2.classList.add('headline-highlight');
-        el2.style.transition = 'opacity 1.4s ease';
+        el2.style.transition = 'opacity 0.85s ease';
         requestAnimationFrame(() => requestAnimationFrame(() => {
           el2.style.opacity = '1';
         }));
-        setTimeout(typeSuffix, 1300);
+        setTimeout(typeSuffix, 850);
       }
 
       function typeSuffix(i) {
@@ -923,9 +948,12 @@
           const sub = document.querySelector('.hero-subheadline');
           const verdi = document.querySelector('.hero-verdi');
           const cta = document.querySelector('.hero-cta-row');
+          // Stagger the hero group on the same 600ms beat as the section
+          // reveals elsewhere on the page, once the title finishes typing.
+          const STEP = 450;
           if (sub) sub.classList.add('hero-visible');
-          setTimeout(() => { if (verdi) verdi.classList.add('hero-visible'); }, 150);
-          setTimeout(() => { if (cta) cta.classList.add('hero-visible'); }, 300);
+          setTimeout(() => { if (verdi) verdi.classList.add('hero-visible'); }, STEP);
+          setTimeout(() => { if (cta) cta.classList.add('hero-visible'); }, STEP * 2);
         }
       }
 

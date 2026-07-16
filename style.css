@@ -45,11 +45,21 @@
   --color-warning: #F59E0B;
   --color-error: #EF4444;
 
-  /* Glassmorphism tokens */
-  --glass-bg: rgba(255, 255, 255, 0.65);
+  /* Extended accent palette — mirrors the mobile app (tailwind.config.js) so
+     the site can carry the same colourful, gamified feel while staying on
+     brand. Used for colour-coding cards, stats and highlights. */
+  --accent-teal: #00C0AC;   /* veroTeal */
+  --accent-blue: #2B59C3;   /* laserBlue */
+  --accent-gold: #F49E4C;   /* sandyBrown */
+  --accent-purple: #6D5AE0; /* "bold" tier */
+  --accent-mint: #E7FDFB;   /* tertiary — pale wash */
+
+  /* Glassmorphism tokens — kept subtle: mostly-solid surfaces with a hint of
+     translucency, rather than heavy frosted glass on every card. */
+  --glass-bg: rgba(255, 255, 255, 0.72);
   --glass-border: 1px solid rgba(0, 81, 73, 0.10);
   --glass-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.6), 0px 10px 30px rgba(0, 81, 73, 0.08);
-  --glass-blur: blur(20px);
+  --glass-blur: blur(14px);
   --glass-radius: 20px;
 }
 
@@ -57,6 +67,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Keyboard focus only — mouse/touch users never see it, keyboard users get a
+   clear teal ring. Uses outline so it doesn't disturb existing box-shadows. */
+:focus-visible {
+  outline: 3px solid rgba(0, 192, 172, 0.55);
+  outline-offset: 2px;
 }
 
 html {
@@ -98,7 +115,7 @@ body {
   width: 60%;
   height: 60%;
   background: radial-gradient(circle, var(--color-glow-1) 0%, transparent 70%);
-  opacity: 0.6;
+  opacity: 0.3;
   filter: blur(120px);
 }
 
@@ -110,7 +127,7 @@ body {
   width: 50%;
   height: 50%;
   background: radial-gradient(circle, var(--color-primary-solid) 0%, transparent 70%);
-  opacity: 0.15;
+  opacity: 0.08;
   filter: blur(160px);
 }
 
@@ -132,7 +149,14 @@ body {
 }
 
 .navbar-inner {
-  background: rgba(0, 81, 73, var(--navbar-opacity, 1));
+  /* Consistent dark teal, but a subtle diagonal gradient keeps it from
+     reading as one flat block. Both stops carry --navbar-opacity so the
+     scroll fade still works. */
+  background: linear-gradient(
+    180deg,
+    rgba(0, 92, 83, var(--navbar-opacity, 1)) 0%,
+    rgba(0, 70, 63, var(--navbar-opacity, 1)) 100%
+  );
   display: flex;
   align-items: center;
   padding: 14px 28px;
@@ -169,17 +193,28 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 14px;
-  color: var(--color-glow-1);
+  /* Light label on the dark bar at the top; darkens toward the brand teal as
+     the navbar fades transparent on scroll (driven by --navbar-progress). */
+  color: color-mix(in srgb,
+    var(--color-glow-1),
+    var(--color-secondary) calc(var(--navbar-progress, 0) * 100%));
   text-decoration: none;
   padding: 6px 12px;
   border-radius: 6px;
   transition: background 0.2s ease, color 0.2s ease;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  /* The dark drop-shadow only helps over the dark bar — fade it out in step. */
+  text-shadow: 0 1px 6px rgba(0, 0, 0, calc(0.45 * (1 - var(--navbar-progress, 0))));
 }
 
 .navbar-links a:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  /* Pill + text both shift from light-on-dark to dark-on-light so the hover
+     stays legible whether the bar is opaque or transparent. */
+  background: color-mix(in srgb,
+    rgba(255, 255, 255, 0.14),
+    rgba(0, 81, 73, 0.10) calc(var(--navbar-progress, 0) * 100%));
+  color: color-mix(in srgb,
+    #ffffff,
+    var(--color-secondary) calc(var(--navbar-progress, 0) * 100%));
 }
 
 .navbar.open {
@@ -847,6 +882,16 @@ body {
   margin-bottom: 4px;
 }
 
+/* Brief scale punch the moment a count-up lands on its final value. */
+@keyframes stat-pop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+.stat-number--pop {
+  animation: stat-pop 0.4s ease-out;
+}
+
 .stat-label {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
@@ -887,24 +932,37 @@ body {
 }
 
 .solution-card {
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  background: var(--glass-bg);
-  border: var(--glass-border);
+  /* Each card carries its own --accent (assigned below); the fill, border and
+     icon chip derive from it, so the four cards read as a colour-coded set that
+     matches the app's tier colours. */
+  --accent: var(--accent-teal);
+  background: color-mix(in srgb, var(--accent) 6%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
   box-shadow: var(--glass-shadow);
   border-radius: var(--glass-radius);
   padding: clamp(18px, min(3.6vh, 2.7vw), 32px) 24px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 
 .solution-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 .solution-card-icon {
-  font-size: 32px;
+  /* Coloured rounded chip around the icon — reads as intentional even with the
+     placeholder emoji, and frames a custom SVG icon nicely later. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  font-size: 28px;
   margin-bottom: 16px;
-  display: block;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 14%, #ffffff);
+  color: var(--accent);
 }
 
 .solution-card-title {
@@ -1302,30 +1360,97 @@ body {
   margin-bottom: clamp(22px, min(5.3vh, 4vw), 48px);
 }
 
-.testimonial-grid {
+/* Two columns: square stat boxes on the left, stacked quote bubbles on the
+   right. Each column stacks its own items vertically. */
+/* Content-sized columns centred with a generous middle gap: square stat boxes
+   on the left, near-square quote bubbles on the right, breathing space between. */
+.testimonials-body {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: auto auto;
+  justify-content: center;
+  column-gap: clamp(48px, 8vw, 140px);
+  align-items: start;
+}
+
+.testimonials-stats,
+.testimonials-quotes {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
-.testimonial-card {
+/* ── Left: big square stat boxes ── */
+.testimonial-stat {
+  width: clamp(220px, 24vw, 300px);
+  aspect-ratio: 1 / 1;
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   background: var(--glass-bg);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--glass-radius);
-  padding: clamp(18px, min(3.6vh, 2.7vw), 32px) 24px;
+  padding: clamp(20px, 3vw, 36px);
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, min(2.2vh, 1.7vw), 20px);
+  justify-content: center;
+  gap: 12px;
   transition: transform 0.2s ease;
 }
 
-.testimonial-card:hover {
+.testimonial-stat:hover {
   transform: translateY(-4px);
 }
 
+.testimonial-stat-number {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1;
+  color: var(--color-secondary);
+}
+
+.testimonial-stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 1.4vw, 17px);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ── Right: quote speech bubbles ── */
+.testimonial-bubble {
+  position: relative;
+  max-width: clamp(300px, 32vw, 400px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--glass-radius);
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s ease;
+}
+
+.testimonial-bubble:hover {
+  transform: translateY(-4px);
+}
+
+/* Tail tucked into the lower-right corner so it reads like a regular speech
+   bubble. Slightly asymmetric borders angle the point toward the corner. */
+.testimonial-bubble::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  bottom: -10px;
+  border-width: 11px 6px 0 14px;
+  border-style: solid;
+  border-color: var(--glass-bg) transparent transparent transparent;
+}
+
+/* Stylistic teal quotation marks enclosing the quote — opening above the
+   text (left), closing below it (right). */
 .testimonial-quote {
   font-family: 'Inter', sans-serif;
   font-size: 17px;
@@ -1335,25 +1460,31 @@ body {
   font-style: italic;
 }
 
+.testimonial-quote::before,
+.testimonial-quote::after {
+  display: block;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 0.5;
+  color: var(--accent-teal);
+}
+
+.testimonial-quote::before {
+  content: '\201C';
+  margin-bottom: 14px;
+}
+
+.testimonial-quote::after {
+  content: '\201D';
+  margin-top: 20px;
+  text-align: right;
+}
+
 .testimonial-author {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: auto;
-}
-
-.testimonial-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-glow-1), var(--color-primary-solid));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
 }
 
 .testimonial-name {
@@ -1444,8 +1575,12 @@ body {
 }
 
 .pricing-card.featured {
-  border: 1px solid rgba(0, 192, 172, 0.3);
-  background: rgba(255, 255, 255, 0.75);
+  /* Teal wash + stronger border and a soft coloured glow so the premium tier
+     reads as the highlighted choice, not just a bordered box. */
+  border: 1px solid color-mix(in srgb, var(--accent-teal) 45%, transparent);
+  background: color-mix(in srgb, var(--accent-teal) 8%, #ffffff);
+  box-shadow: var(--glass-shadow),
+    0 16px 40px color-mix(in srgb, var(--accent-teal) 18%, transparent);
 }
 
 .pricing-card-name {
@@ -1876,7 +2011,7 @@ body {
     gap: 40px;
   }
 
-  .testimonial-grid {
+  .testimonials-body {
     grid-template-columns: 1fr;
   }
 
@@ -2712,9 +2847,14 @@ body.menu-open {
 }
 
 /* ── Section Band Backgrounds ── */
-.section-band--problem,
+/* A whisper of tint (distinct hues) gives the page rhythm so consecutive
+   sections don't read as one flat white expanse. Kept very low so text
+   contrast and the background glow are unaffected. */
+.section-band--problem {
+  background: color-mix(in srgb, var(--accent-blue) 4%, transparent);
+}
 .section-band--features {
-  background: transparent;
+  background: color-mix(in srgb, var(--accent-teal) 5%, transparent);
 }
 
 /* ── Section stagger elements — hidden only when fade system is active (desktop) ── */
@@ -2729,6 +2869,12 @@ body.menu-open {
 .js-fade-sections .sc-anim.sc-anim-visible {
   opacity: 1;
   transform: none;
+}
+
+/* The featured pricing card gets a larger, scale-up entrance so it wins the
+   eye as the pricing row reveals. Overrides only the pre-visible transform. */
+.js-fade-sections .pricing-card.featured.sc-anim:not(.sc-anim-visible) {
+  transform: translateY(28px) scale(0.92);
 }
 
 
@@ -2847,8 +2993,12 @@ body.menu-open {
 
   /* Testimonials */
   .testimonials-header { margin-bottom: 28px; }
-  .testimonial-card { padding: 20px 16px; gap: 12px; }
+  .testimonials-stats,
+  .testimonials-quotes { gap: 16px; }
+  .testimonial-bubble { max-width: none; padding: 20px 18px; }
   .testimonial-quote { font-size: 15px; }
+  /* Full-width, and drop the square ratio so boxes don't get huge stacked. */
+  .testimonial-stat { width: 100%; aspect-ratio: auto; padding: 28px 22px; }
 
   /* Impact */
   .impact-header { margin-bottom: 28px; }
