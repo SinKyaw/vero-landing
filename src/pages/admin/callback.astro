@@ -1,0 +1,31 @@
+---
+export const prerender = false;
+import { createServerSupabase } from '../../lib/supabase';
+import type { EmailOtpType } from '@supabase/supabase-js';
+
+// The magic link in the email lands here. Preferred path: the email template
+// links with `?token_hash=...&type=magiclink`, which we verify server-side — no
+// PKCE verifier, so the link works from ANY browser/device. Fallback path
+// (`?code=...`) is the old same-browser PKCE flow, kept so nothing breaks if the
+// email template hasn't been updated yet.
+const url = Astro.url;
+const tokenHash = url.searchParams.get('token_hash');
+const type = url.searchParams.get('type') as EmailOtpType | null;
+const code = url.searchParams.get('code');
+
+const supabase = createServerSupabase(Astro.cookies, Astro.request);
+
+if (tokenHash && type) {
+  const { error } = await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
+  if (error) return Astro.redirect('/admin/login?link_error=1');
+  return Astro.redirect('/admin');
+}
+
+if (code) {
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  if (error) return Astro.redirect('/admin/login?link_error=1');
+  return Astro.redirect('/admin');
+}
+
+return Astro.redirect('/admin/login?link_error=1');
+---

@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Vero Affiliate Programme - Earn £5 Per Referral">
+  <!-- Hero -->
+  <section class="affiliate-hero sc" data-step="180">
+    <div class="social-proof-badge sc-anim" style="display:inline-flex;gap:6px;align-items:center;background:rgba(45,223,193,0.12);padding:6px 14px;border-radius:999px;font-size:0.85rem;margin-bottom:20px;">
+      <span>💰</span>
+      <span>Earn real cash for every friend you refer</span>
+    </div>
+    <h1 class="sc-anim">Share Vero.<br>Earn <span class="highlight-teal">£5</span> per referral.</h1>
+    <p class="sc-anim">
+      Join the Vero Affiliate Programme and earn £5 in cash for every friend who signs up
+      and claims their first reward within 14 days. No cap on earnings.
+    </p>
+    <a href="#apply" class="hero-cta-secondary sc-anim">Apply Now</a>
+  </section>
+
+  <!-- How it works -->
+  <div class="steps-grid sc" data-step="130">
+    <div class="step-card sc-anim">
+      <div class="step-icon">✅</div>
+      <h3>1. Apply in-app</h3>
+      <p>Open Vero, go to Profile → Affiliate Programme. Meet the eligibility criteria and apply instantly.</p>
+    </div>
+    <div class="step-card sc-anim">
+      <div class="step-icon">🔗</div>
+      <h3>2. Share your code</h3>
+      <p>Get your unique 6-character referral code. Share it with friends via any messaging or social app.</p>
+    </div>
+    <div class="step-card sc-anim">
+      <div class="step-icon">🎁</div>
+      <h3>3. Friend signs up &amp; earns</h3>
+      <p>Your friend enters your code when creating their Vero account and claims their first reward.</p>
+    </div>
+    <div class="step-card sc-anim">
+      <div class="step-icon">💸</div>
+      <h3>4. You get paid £5</h3>
+      <p>Once confirmed, we send £5 straight to your bank account. Manual review within 7 business days.</p>
+    </div>
+  </div>
+
+  <!-- Eligibility -->
+  <section class="apply-section sc" data-step="150">
+    <h2 class="sc-anim">Eligibility</h2>
+    <div class="step-card sc-anim" style="text-align:left;">
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
+        <li style="display:flex;align-items:flex-start;gap:10px;">
+          <span style="color:#2DDFC1;font-size:1.1rem;">✓</span>
+          <span>Your Vero account is email-verified</span>
+        </li>
+        <li style="display:flex;align-items:flex-start;gap:10px;">
+          <span style="color:#2DDFC1;font-size:1.1rem;">✓</span>
+          <span>Your account is at least 7 days old</span>
+        </li>
+        <li style="display:flex;align-items:flex-start;gap:10px;">
+          <span style="color:#2DDFC1;font-size:1.1rem;">✓</span>
+          <span>You have claimed at least one reward in the app</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Apply (via mobile app) -->
+  <section id="apply" class="apply-section sc" data-step="150">
+    <h2 class="sc-anim">Apply via the Vero app</h2>
+    <div class="apply-form sc-anim" style="text-align:center;">
+      <div class="step-icon" style="font-size:3rem;">📱</div>
+      <p style="color:#555;line-height:1.7;margin-bottom:24px;">
+        The Affiliate Programme is managed entirely within the Vero mobile app.
+        Open your Profile, tap <strong>Affiliate Programme</strong>, and apply instantly.
+      </p>
+      <a href="#download-options" class="hero-cta js-download-choice">Download Vero</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section sc" data-step="120">
+    <h2 class="sc-anim">Frequently Asked Questions</h2>
+    <div class="faq-item sc-anim">
+      <h4>How much do I earn per referral?</h4>
+      <p>£5 per successful referral. A referral is "successful" when your friend signs up with your code and claims their first reward within 14 days of signing up.</p>
+    </div>
+    <div class="faq-item sc-anim">
+      <h4>Is there a cap on how much I can earn?</h4>
+      <p>No cap. Refer as many friends as you like and earn £5 for each successful conversion.</p>
+    </div>
+    <div class="faq-item sc-anim">
+      <h4>How long does payment take?</h4>
+      <p>Payouts are reviewed manually and paid within 7 business days of a successful conversion. We'll contact you via your registered email to arrange bank transfer details.</p>
+    </div>
+    <div class="faq-item sc-anim">
+      <h4>What does my friend get?</h4>
+      <p>Your friend receives bonus XP and tokens when they sign up with your referral code — giving them a head start on the Vero rewards system.</p>
+    </div>
+    <div class="faq-item sc-anim">
+      <h4>Can I refer myself?</h4>
+      <p>No. Self-referrals are not allowed and will be automatically detected and rejected.</p>
+    </div>
+    <div class="faq-item sc-anim">
+      <h4>What happens if a referral is suspected of fraud?</h4>
+      <p>Payouts undergo a manual review period. Any suspicious activity (e.g. fake accounts) will be flagged and the payout will be cancelled.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .affiliate-hero {
+    padding: 100px 24px 60px;
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .affiliate-hero h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: var(--text-primary, #0f1117);
+  }
+  .affiliate-hero p {
+    font-size: 1.1rem;
+    color: var(--text-secondary, #555);
+    max-width: 540px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .highlight-teal { color: #2DDFC1; }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+  .step-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    text-align: center;
+  }
+  .step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+  .step-card h3 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: #0f1117;
+  }
+  .step-card p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+  }
+  .apply-section {
+    max-width: 560px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+  .apply-section h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #0f1117;
+  }
+  .apply-form {
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px 32px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .form-group input:focus { border-color: #2DDFC1; }
+  .form-message {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: none;
+  }
+  .form-message.success {
+    display: block;
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+  }
+  .form-message.error {
+    display: block;
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+  }
+  .code-display {
+    font-size: 2rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #2DDFC1;
+  }
+  .faq-section {
+    max-width: 700px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+  .faq-section h2 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #0f1117;
+  }
+  .faq-item {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  }
+  .faq-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f1117;
+    margin-bottom: 8px;
+  }
+  .faq-item p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

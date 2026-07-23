@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// Long-form legal content lives in a raw HTML partial (verbatim from the
+// original page) and is injected at build time, so it renders as static,
+// fully-indexable HTML. Styling comes from the .legal-* rules in global.css.
+import content from '../content-partials/privacy-policy.html?raw';
+---
+
+<BaseLayout title="Privacy Policy - Vero">
+  <Fragment set:html={content} />
+</BaseLayout>

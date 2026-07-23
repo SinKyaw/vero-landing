@@ -1,0 +1,28 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import PostEditor from '../../../components/admin/PostEditor.tsx';
+import { createServerSupabase } from '../../../lib/supabase';
+import type { Post } from '../../../lib/blog';
+
+const { id } = Astro.params;
+let post: Post | null = null;
+
+if (id && id !== 'new') {
+  const supabase = createServerSupabase(Astro.cookies, Astro.request);
+  const { data } = await supabase.from('posts').select('*').eq('id', id).maybeSingle();
+  if (!data) return Astro.redirect('/admin');
+  post = data as Post;
+}
+
+const email = Astro.locals.user?.email ?? '';
+---
+
+<AdminLayout title={post ? 'Edit post — Vero' : 'New post — Vero'}>
+  <div class="admin-wrap admin-editor-wrap">
+    <div class="admin-topbar">
+      <a href="/admin" class="admin-btn admin-btn--ghost">← Back</a>
+    </div>
+    <PostEditor client:only="react" post={post} defaultAuthorEmail={email} />
+  </div>
+</AdminLayout>

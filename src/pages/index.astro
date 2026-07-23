@@ -1,0 +1,693 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Vero - Build Better Money Habits">
+  <!-- Keep the browser from restoring scroll on reload so the hero sequence
+       always plays from the top. -->
+  <script is:inline slot="head">
+    history.scrollRestoration = 'manual';
+  </script>
+
+  <!-- ── Hero Section ── -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <!-- Hero Headline -->
+      <h1 class="hero-headline" aria-label="Enjoy Life Because of Saving.">
+        <span id="typewriter-line1"></span><br />
+        <span id="typewriter-despite"></span><span id="typewriter-line2"></span><span id="typewriter-suffix"></span><span class="typewriter-cursor">|</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="hero-subheadline">
+        Made by Gen Z, built for Gen Z.
+      </p>
+
+      <!-- Verdi mascot -->
+      <img src="/assets/verdi-logging-expense.png" alt="Verdi, your financial companion" class="hero-verdi" />
+
+      <!-- CTA Buttons -->
+      <div class="hero-cta-row">
+        <a class="hero-cta js-download-choice" href="#download-options">
+          Try for Free
+        </a>
+        <a class="hero-cta-secondary" href="#features">
+          See how it works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Problem Section ── -->
+  <div class="section-band section-band--problem">
+    <section id="problem" class="section">
+      <div class="sc" data-step="220">
+        <div class="problem">
+          <div class="problem-copy">
+            <p class="section-label sc-anim">The Problem</p>
+            <h2 class="section-headline sc-anim">Tired of Always Feeling Broke?</h2>
+            <p class="section-body sc-anim">
+              It's not about how much money you make — it's about <span class="hl">how you manage it</span>.
+              In today's world, spending is frictionless. One-click checkouts, targeted ads, and constant scrolling make
+              it easy to lose control without realising it.
+            </p>
+            <!-- Placeholder image — swap for the final art later -->
+            <img src="/assets/verdi-sleep.png" alt="" aria-hidden="true" class="problem-image sc-anim" />
+          </div>
+          <div class="problem-stats">
+            <div class="stat-card sc-anim sc-anim--right">
+              <div class="stat-number" data-target="56" data-suffix="%">0%</div>
+              <div class="stat-label">say impulse purchases are their biggest budgeting challenge</div>
+            </div>
+            <div class="stat-card sc-anim sc-anim--right">
+              <div class="stat-number" data-target="17000" data-prefix="£" data-separator=",">£0</div>
+              <div class="stat-label">lost over 5 years from £8/day unplanned purchases</div>
+            </div>
+            <div class="stat-card sc-anim sc-anim--right">
+              <div class="stat-number" data-target="49" data-suffix="%">0%</div>
+              <div class="stat-label">of UK Gen Z feel stressed or anxious about money most of the time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Solution / Value Prop Section ── -->
+  <div class="section-band section-band--features">
+    <section id="features" class="section">
+      <div class="sc">
+        <div class="solution-content">
+          <p class="section-label">Our Solution</p>
+          <h2 class="section-headline">Here's How Vero Helps You</h2>
+        </div>
+        <div class="solution-cards">
+          <div class="solution-card sc-anim">
+            <span class="solution-card-icon">💬</span>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">AI Chat Tracker</h3>
+              <p class="solution-card-text">Track your expenses as easily as texting a friend. Just type it — Vero logs it.</p>
+            </div>
+          </div>
+          <div class="solution-card sc-anim">
+            <span class="solution-card-icon">🎯</span>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">Saving Challenges</h3>
+              <p class="solution-card-text">Take on personalised missions designed to help you save consistently.</p>
+            </div>
+          </div>
+          <div class="solution-card sc-anim">
+            <span class="solution-card-icon">📊</span>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">Smart Insights</h3>
+              <p class="solution-card-text">Understand your spending patterns and get actionable guidance.</p>
+            </div>
+          </div>
+          <div class="solution-card sc-anim">
+            <span class="solution-card-icon">🏆</span>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">Gamification &amp; Rewards</h3>
+              <p class="solution-card-text">Earn tokens, climb leaderboards, and redeem real rewards — all by making better decisions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Demo Animation Section ── -->
+  <section id="demo-animation" class="section">
+    <div class="sc">
+      <div class="solution-content">
+        <p class="section-label">See It In Action</p>
+        <h2 class="section-headline">Watch How Vero Works</h2>
+        <p class="section-body sc-anim">
+          From logging a coffee to climbing the leaderboard — see how Vero turns <span class="hl">everyday decisions into progress</span>.
+        </p>
+      </div>
+
+      <!-- Expense-logging demo — mirrors the in-app flow: free-text input → Verdi → logged expense -->
+      <div class="demo-stage" aria-hidden="true">
+        <!-- Free-text input card -->
+        <div class="demo-card demo-input">
+          <span class="demo-input-hint">Tell me what you spent 👀</span>
+          <p class="demo-input-text"><span class="demo-typed"></span><span class="demo-caret">|</span></p>
+          <span class="demo-processing">Vero is processing your expenses…</span>
+        </div>
+
+        <!-- Verdi -->
+        <div class="demo-verdi">
+          <img src="/assets/verdi.png" alt="Verdi" class="demo-verdi-img" />
+        </div>
+
+        <!-- Logged expense result card -->
+        <div class="demo-card demo-result-box">
+          <div class="demo-result-content">
+            <p class="demo-result-title">Expense Logged!</p>
+            <p class="demo-result-sub">That's another smart money move.</p>
+            <div class="demo-expense-row">
+              <span class="demo-expense-icon">🍔</span>
+              <div class="demo-expense-info">
+                <span class="demo-expense-name">Takeaway</span>
+                <span class="demo-expense-cat">Food &amp; Drink</span>
+              </div>
+              <span class="demo-expense-amount">£4.50</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How We're Different Section ── -->
+  <section id="differentiation" class="section">
+    <div class="sc">
+      <div class="solution-content">
+        <p class="section-label">Why Vero</p>
+        <h2 class="section-headline">How We're Different</h2>
+        <p class="section-body sc-anim">
+          Most finance apps show you the numbers. Vero changes <span class="hl">how you think about them</span>.
+        </p>
+      </div>
+      <div class="comparison-table-wrapper sc-anim">
+        <table class="comparison-table" aria-label="Vero compared to alternatives">
+          <thead>
+            <tr>
+              <th scope="col" class="col-label"></th>
+              <th scope="col">Doing nothing</th>
+              <th scope="col">Budgeting apps</th>
+              <th scope="col" class="col-vero">
+                <span class="col-vero-badge">✓</span> Vero
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="row-label">Logging</th>
+              <td>Mental math &amp; vibes</td>
+              <td>Manual entry &amp; forms</td>
+              <td class="col-vero">Text Verdi — done in seconds</td>
+            </tr>
+            <tr>
+              <th scope="row" class="row-label">Motivation</th>
+              <td>Guilt after the fact</td>
+              <td>Charts you stop checking</td>
+              <td class="col-vero">XP, streaks &amp; real rewards</td>
+            </tr>
+            <tr>
+              <th scope="row" class="row-label">The payoff</th>
+              <td>£17k gone in 5 years</td>
+              <td>You saved… now what?</td>
+              <td class="col-vero">Rewards worth more than you pay</td>
+            </tr>
+            <tr>
+              <th scope="row" class="row-label">The feeling</th>
+              <td>Anxiety</td>
+              <td>Another chore</td>
+              <td class="col-vero">Feels like a game</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Social Proof / Testimonials ── -->
+  <section id="testimonials" class="section">
+    <div class="sc">
+      <div class="testimonials-header">
+        <p class="section-label">Our Impact</p>
+        <h2 class="section-headline">What Ours Users Say And Feel</h2>
+      </div>
+      <div class="testimonials-body">
+        <!-- Left: big square stat boxes (placeholder figures for now) -->
+        <div class="testimonials-stats">
+          <div class="testimonial-stat sc-anim">
+            <div class="testimonial-stat-number">87%</div>
+            <div class="testimonial-stat-label">Placeholder — stat description goes here</div>
+          </div>
+          <div class="testimonial-stat sc-anim">
+            <div class="testimonial-stat-number">3x</div>
+            <div class="testimonial-stat-label">Placeholder — stat description goes here</div>
+          </div>
+        </div>
+
+        <!-- Right: quote speech bubbles, stacked -->
+        <div class="testimonials-quotes">
+          <div class="testimonial-bubble sc-anim">
+            <p class="testimonial-quote">It's so much easier than spreadsheets — I just message a cute elephant.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-name">Anna</div>
+              <div class="testimonial-role">Age 24</div>
+            </div>
+          </div>
+          <div class="testimonial-bubble sc-anim">
+            <p class="testimonial-quote">Rewards actually help me save more.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-name">Elly</div>
+              <div class="testimonial-role">Age 25</div>
+            </div>
+          </div>
+          <div class="testimonial-bubble sc-anim">
+            <p class="testimonial-quote">It feels like a game — that's why I stick with it.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-name">Arvin</div>
+              <div class="testimonial-role">Age 21</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing Section ── -->
+  <section id="pricing" class="section">
+    <div class="sc">
+      <div class="pricing-header">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-headline">Start Free. Upgrade When You're Ready.</h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card sc-anim">
+          <span class="vero-chip pricing-badge">Starter</span>
+          <h3 class="pricing-card-name">Free</h3>
+          <div class="pricing-price">£0 <span>/month</span></div>
+          <ul class="pricing-features">
+            <li>Basic rewards</li>
+            <li>Savings challenges</li>
+            <li>Monthly insights</li>
+            <li>Standard token earning</li>
+            <li>Includes ads</li>
+          </ul>
+        </div>
+        <div class="pricing-card featured sc-anim">
+          <span class="vero-chip vero-chip--teal pricing-badge">Most popular</span>
+          <h3 class="pricing-card-name">Premium</h3>
+          <div class="pricing-price">£3.99 <span>/month</span></div>
+          <ul class="pricing-features">
+            <li>Faster reward redemption</li>
+            <li>Advanced challenges</li>
+            <li>Exclusive rewards</li>
+            <li>Daily, weekly, monthly insights</li>
+            <li>Ad-free experience</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ Section ── -->
+  <section id="faq" class="section">
+    <div class="sc" data-step="200">
+      <div class="faq-header">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-headline">Questions? We've got Answers</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item sc-anim">
+          <summary>Is Vero safe?</summary>
+          <p>Your data is private. We don't access your bank account.</p>
+        </details>
+        <details class="faq-item sc-anim">
+          <summary>Is Vero free?</summary>
+          <p>Yes — with optional premium features for £3.99/month.</p>
+        </details>
+        <details class="faq-item sc-anim">
+          <summary>Why gamification?</summary>
+          <p>Because behaviour change requires engagement, not just awareness.</p>
+        </details>
+        <details class="faq-item sc-anim">
+          <summary>Do rewards encourage spending?</summary>
+          <p>No — they reward control, not consumption.</p>
+        </details>
+        <details class="faq-item sc-anim">
+          <summary>Who is Verdi?</summary>
+          <p>Your in-app companion — designed to guide and motivate you.</p>
+        </details>
+        <details class="faq-item sc-anim">
+          <summary>What does "Vero" mean?</summary>
+          <p>"True" — representing honest, sustainable financial habits.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA Section ── -->
+  <section id="final-cta" class="section final-cta">
+    <div class="sc">
+      <h2 class="section-headline">Build Better Money Habits Today</h2>
+      <p class="section-body sc-anim">
+        Take control of your spending, reduce stress, and <span class="hl">start earning rewards</span>.
+      </p>
+      <a class="final-cta-btn js-download-choice sc-anim" href="#download-options">
+        Download Vero
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<!-- ── Hero sequence + final-cta wrapper styles (index-only, global) ── -->
+<style is:global>
+  .hero-subheadline,
+  .hero-verdi,
+  .hero-cta-row {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .hero-subheadline.hero-visible,
+  .hero-verdi.hero-visible,
+  .hero-cta-row.hero-visible {
+    opacity: 1;
+    transform: none;
+  }
+  /* The mascot can carry a little personality — scale in with a gentle
+     overshoot, while the text elements above stay clean/no-bounce. */
+  .hero-verdi {
+    transform: translateY(14px) scale(0.94);
+    transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+
+  #final-cta .sc {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+
+<!-- ── Feature card tap-to-expand (desktop only) ── -->
+<script is:inline>
+  (function () {
+    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
+    const container = document.querySelector('.solution-cards');
+    if (!container) return;
+    const panel = document.createElement('div');
+    panel.className = 'feature-expand-panel';
+    panel.innerHTML =
+      '<span class="feature-expand-icon"></span><h3 class="feature-expand-title"></h3><p class="feature-expand-desc"></p>';
+    container.appendChild(panel);
+
+    let activeCard = null;
+    let savedOffsets = null;
+    let expandTimer = null;
+
+    const FADE_MS = 280;
+    const EXPAND_MS = 650;
+    const DELAY_MS = 220;
+    const COLLAPSE_MS = 560;
+
+    function open(card) {
+      if (activeCard) return;
+      activeCard = card;
+
+      const cr = card.getBoundingClientRect();
+      const pr = container.getBoundingClientRect();
+      savedOffsets = { top: cr.top - pr.top, left: cr.left - pr.left, w: cr.width, h: cr.height };
+
+      panel.querySelector('.feature-expand-icon').textContent = card.querySelector('.solution-card-icon').textContent;
+      panel.querySelector('.feature-expand-title').textContent = card.querySelector('.solution-card-title').textContent;
+      panel.querySelector('.feature-expand-desc').textContent = card.querySelector('.solution-card-text').textContent;
+
+      document.querySelectorAll('.solution-card').forEach((c) => {
+        if (c !== card) {
+          c.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+          c.style.opacity = '0';
+        }
+      });
+
+      expandTimer = setTimeout(() => {
+        panel.style.transition = 'none';
+        panel.style.top = savedOffsets.top + 'px';
+        panel.style.left = savedOffsets.left + 'px';
+        panel.style.width = savedOffsets.w + 'px';
+        panel.style.height = savedOffsets.h + 'px';
+        panel.style.opacity = '0';
+        panel.style.display = 'flex';
+
+        void panel.offsetWidth;
+
+        panel.style.transition = [
+          'top ' + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'left ' + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'width ' + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'height ' + EXPAND_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+          'opacity 0.35s ease',
+        ].join(', ');
+        panel.style.top = '0';
+        panel.style.left = '0';
+        panel.style.width = '100%';
+        panel.style.height = '100%';
+        panel.style.opacity = '1';
+      }, DELAY_MS);
+    }
+
+    function close() {
+      if (!activeCard || !savedOffsets) return;
+      if (expandTimer) {
+        clearTimeout(expandTimer);
+        expandTimer = null;
+      }
+
+      panel.style.transition = [
+        'top ' + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+        'left ' + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+        'width ' + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+        'height ' + COLLAPSE_MS + 'ms cubic-bezier(0.4,0,0.2,1)',
+        'opacity 0.25s ease 0.3s',
+      ].join(', ');
+      panel.style.top = savedOffsets.top + 'px';
+      panel.style.left = savedOffsets.left + 'px';
+      panel.style.width = savedOffsets.w + 'px';
+      panel.style.height = savedOffsets.h + 'px';
+      panel.style.opacity = '0';
+
+      function onEnd(e) {
+        if (e.propertyName !== 'opacity') return;
+        panel.removeEventListener('transitionend', onEnd);
+        panel.style.display = 'none';
+        activeCard = null;
+        savedOffsets = null;
+        document.querySelectorAll('.solution-card').forEach((c) => {
+          c.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+          c.style.opacity = '1';
+        });
+      }
+      panel.addEventListener('transitionend', onEnd);
+    }
+
+    document.querySelectorAll('.solution-card').forEach((card) => {
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        open(card);
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (activeCard && !panel.contains(e.target)) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && activeCard) close();
+    });
+  })();
+</script>
+
+<!-- ── Stat count-up (exposed for the reveal observer to trigger) ── -->
+<script is:inline>
+  (function () {
+    function animateStat(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const separator = el.dataset.separator || '';
+      const duration = 1600;
+      const start = performance.now();
+
+      function format(val) {
+        if (separator) return prefix + Math.round(val).toLocaleString('en-GB') + suffix;
+        return prefix + Math.round(val) + suffix;
+      }
+
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = format(eased * target);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.classList.remove('stat-number--pop');
+          void el.offsetWidth;
+          el.classList.add('stat-number--pop');
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    window._veroAnimateStat = animateStat;
+  })();
+</script>
+
+<!-- ── Expense-logging demo animation ── -->
+<script is:inline>
+  (function () {
+    const section = document.getElementById('demo-animation');
+    const stage = section && section.querySelector('.demo-stage');
+    if (!stage) return;
+
+    const typed = stage.querySelector('.demo-typed');
+    const caret = stage.querySelector('.demo-caret');
+    const hint = stage.querySelector('.demo-input-hint');
+    const processing = stage.querySelector('.demo-processing');
+    const resultContent = stage.querySelector('.demo-result-content');
+
+    const FULL = '£4.50 takeaway';
+
+    let timers = [];
+    let running = false;
+
+    const clearTimers = () => {
+      timers.forEach(clearTimeout);
+      timers = [];
+    };
+    const wait = (fn, ms) => {
+      timers.push(setTimeout(fn, ms));
+    };
+
+    function resetSequence() {
+      clearTimers();
+      typed.textContent = '';
+      hint.style.opacity = '1';
+      caret.classList.remove('demo-caret--hidden');
+      processing.classList.remove('is-visible');
+      resultContent.classList.remove('is-visible');
+    }
+
+    function typeChar(i) {
+      if (i === 0) hint.style.opacity = '0';
+      typed.textContent = FULL.slice(0, i);
+
+      if (i < FULL.length) {
+        wait(() => typeChar(i + 1), 90);
+        return;
+      }
+
+      caret.classList.add('demo-caret--hidden');
+      processing.classList.add('is-visible');
+      wait(() => {
+        processing.classList.remove('is-visible');
+        resultContent.classList.add('is-visible');
+      }, 3000);
+      wait(() => {
+        resetSequence();
+        wait(() => typeChar(0), 600);
+      }, 6000);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+
+      resetSequence();
+      requestAnimationFrame(() => stage.classList.add('is-in'));
+      wait(() => typeChar(0), 900);
+    }
+
+    function stop() {
+      running = false;
+      clearTimers();
+      stage.classList.remove('is-in');
+      resetSequence();
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries[0].isIntersecting ? start() : stop();
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+    );
+
+    io.observe(section);
+  })();
+</script>
+
+<!-- ── Hero typewriter headline ── -->
+<script is:inline>
+  (function () {
+    const line1Text = 'Enjoy Life';
+    const despiteText = 'Despite';
+    const el1 = document.getElementById('typewriter-line1');
+    const el2 = document.getElementById('typewriter-line2');
+    const despite = document.getElementById('typewriter-despite');
+    const suffix = document.getElementById('typewriter-suffix');
+    const cursor = document.querySelector('.typewriter-cursor');
+    if (!el1 || !el2 || !despite || !suffix || !cursor) return;
+
+    el2.style.opacity = '0';
+    suffix.style.opacity = '0';
+    despite.classList.add('headline-strikethrough');
+
+    function typeLine1(i) {
+      el1.textContent = line1Text.slice(0, i);
+      if (i < line1Text.length) {
+        setTimeout(() => typeLine1(i + 1), 70);
+      } else {
+        setTimeout(() => typeDespite(0), 200);
+      }
+    }
+
+    function typeDespite(i) {
+      despite.textContent = despiteText.slice(0, i);
+      if (i < despiteText.length) {
+        setTimeout(() => typeDespite(i + 1), 70);
+      } else {
+        setTimeout(revealStrikethrough, 150);
+      }
+    }
+
+    function revealStrikethrough() {
+      despite.textContent = 'Despite ';
+      despite.classList.add('strikethrough-visible');
+      setTimeout(revealBecauseOf, 550);
+    }
+
+    function revealBecauseOf() {
+      el2.textContent = 'Because of';
+      el2.classList.add('headline-highlight');
+      el2.style.transition = 'opacity 0.85s ease';
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          el2.style.opacity = '1';
+        })
+      );
+      setTimeout(typeSuffix, 850);
+    }
+
+    function typeSuffix(i) {
+      i = i || 0;
+      const suffixText = ' Saving.';
+      suffix.style.opacity = '1';
+      suffix.textContent = suffixText.slice(0, i);
+      if (i < suffixText.length) {
+        setTimeout(() => typeSuffix(i + 1), 50);
+      } else {
+        cursor.classList.add('done');
+        const sub = document.querySelector('.hero-subheadline');
+        const verdi = document.querySelector('.hero-verdi');
+        const cta = document.querySelector('.hero-cta-row');
+        const STEP = 450;
+        if (sub) sub.classList.add('hero-visible');
+        setTimeout(() => {
+          if (verdi) verdi.classList.add('hero-visible');
+        }, STEP);
+        setTimeout(() => {
+          if (cta) cta.classList.add('hero-visible');
+        }, STEP * 2);
+      }
+    }
+
+    typeLine1(0);
+  })();
+</script>

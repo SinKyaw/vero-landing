@@ -1,0 +1,51 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { createServerSupabase } from '../../lib/supabase';
+import { formatDate } from '../../lib/blog';
+
+const supabase = createServerSupabase(Astro.cookies, Astro.request);
+// RLS lets admins see everything (drafts + published).
+const { data: posts } = await supabase
+  .from('posts')
+  .select('id, title, status, published_at, updated_at')
+  .order('updated_at', { ascending: false });
+---
+
+<AdminLayout title="Blog admin — Vero">
+  <div class="admin-wrap">
+    <div class="admin-topbar">
+      <h1>Blog posts</h1>
+      <div style="display:flex; gap:10px;">
+        <a class="admin-btn" href="/admin/edit/new">+ New post</a>
+        <form method="POST" action="/admin/logout">
+          <button class="admin-btn admin-btn--ghost" type="submit">Log out</button>
+        </form>
+      </div>
+    </div>
+
+    {
+      posts && posts.length > 0 ? (
+        <ul class="admin-post-list">
+          {posts.map((p) => (
+            <li class="admin-post-row">
+              <div>
+                <div class="admin-post-row-title">{p.title}</div>
+                <div class="admin-post-row-meta">
+                  {p.status === 'published' ? `Published ${formatDate(p.published_at)}` : 'Draft'}
+                  {` · updated ${formatDate(p.updated_at)}`}
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span class:list={['admin-badge', `admin-badge--${p.status}`]}>{p.status}</span>
+                <a class="admin-btn admin-btn--ghost" href={`/admin/edit/${p.id}`}>Edit</a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="admin-empty">No posts yet — create your first one.</p>
+      )
+    }
+  </div>
+</AdminLayout>

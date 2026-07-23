@@ -1,0 +1,98 @@
+---
+export const prerender = false;
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { createServerSupabase } from '../../lib/supabase';
+import { formatDate, type Post } from '../../lib/blog';
+
+const { slug } = Astro.params;
+let post: Post | null = null;
+let loadError = false;
+try {
+  const supabase = createServerSupabase(Astro.cookies, Astro.request);
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .maybeSingle();
+  if (error) throw error;
+  post = data as Post | null;
+} catch {
+  loadError = true;
+}
+
+if (loadError) Astro.response.status = 503;
+else if (!post) Astro.response.status = 404;
+
+const bylineParts = post
+  ? [
+      post.author_name ?? '',
+      post.read_time ? `${post.read_time} read` : '',
+      formatDate(post.published_at),
+    ].filter(Boolean)
+  : [];
+---
+
+<BlogLayout
+  title={post ? `${post.title} — Vero` : 'Post not found — Vero'}
+  description={post?.excerpt ?? undefined}
+>
+  {
+    post && (
+      <Fragment slot="head">
+        <meta property="og:title" content={post.title} />
+        <meta property="og:type" content="article" />
+        {post.published_at && <meta property="article:published_time" content={post.published_at} />}
+        {post.excerpt && <meta property="og:description" content={post.excerpt} />}
+        {post.cover_url && <meta property="og:image" content={post.cover_url} />}
+      </Fragment>
+    )
+  }
+
+  <main>
+    <div class="blog-content">
+      {
+        post ? (
+          <>
+            <div id="post-content">
+              <h1>{post.title}</h1>
+              {bylineParts.length > 0 && (
+                <div class="blog-byline">
+                  {post.author_avatar_url && (
+                    <img src={post.author_avatar_url} class="byline-avatar" alt="" />
+                  )}
+                  {bylineParts.map((part, i) => (
+                    <>
+                      {i > 0 && <span class="byline-dot">·</span>}
+                      <span class={i === 0 ? 'byline-author' : 'byline-meta'}>{part}</span>
+                    </>
+                  ))}
+                </div>
+              )}
+              <Fragment set:html={post.content_html} />
+            </div>
+
+            <section id="post-cta" class="section final-cta" style="padding:0;">
+              <a class="final-cta-btn js-download-choice" href="#download-options">
+                Download Vero
+                <span class="cta-arrow">→</span>
+              </a>
+              <br />
+            </section>
+          </>
+        ) : loadError ? (
+          <div id="post-content">
+            <h1>Temporarily unavailable</h1>
+            <p>We couldn't load this post right now. Please try again shortly.</p>
+            <p><a href="/blog">← Back to the blog</a></p>
+          </div>
+        ) : (
+          <div id="post-content">
+            <h1>Post not found</h1>
+            <p><a href="/blog">← Back to the blog</a></p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+</BlogLayout>

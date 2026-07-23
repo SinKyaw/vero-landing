@@ -1,0 +1,63 @@
+---
+export const prerender = false;
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { createServerSupabase } from '../../lib/supabase';
+import { formatDate } from '../../lib/blog';
+
+let posts: Array<{ slug: string; title: string; cover_url: string | null; published_at: string | null }> = [];
+let loadError = false;
+try {
+  const supabase = createServerSupabase(Astro.cookies, Astro.request);
+  const { data, error } = await supabase
+    .from('posts')
+    .select('slug, title, cover_url, published_at')
+    .eq('status', 'published')
+    .order('published_at', { ascending: false });
+  if (error) throw error;
+  posts = data ?? [];
+} catch {
+  loadError = true;
+  Astro.response.status = 503;
+}
+---
+
+<BlogLayout title="Blog — Vero" description="The latest stories about Vero.">
+  <main>
+    <div class="blog-content">
+      <div class="solution-content blog-intro">
+        <p class="section-label">Our Blog</p>
+        <h1 class="section-headline">The latest stories about Vero</h1>
+      </div>
+
+      <div id="blog-listing">
+        {loadError && (
+          <p style="text-align:center; color:#666; font-weight:600;">
+            Posts are temporarily unavailable. Please try again shortly.
+          </p>
+        )}
+        {
+          !loadError && posts && posts.length > 0 ? (
+            posts.map((p) => (
+              <div class="blog-card">
+                {p.cover_url ? (
+                  <img src={p.cover_url} class="blog-card-image" alt="" />
+                ) : (
+                  <div class="blog-card-image" />
+                )}
+                <div class="blog-card-body">
+                  <h2 class="blog-card-title">{p.title}</h2>
+                  {p.published_at && <span class="blog-card-date">{formatDate(p.published_at)}</span>}
+                  <a class="blog-card-link" href={`/blog/${p.slug}`}>
+                    Read More +
+                  </a>
+                </div>
+              </div>
+            ))
+          ) : !loadError ? (
+            <p style="text-align:center; color:#666; font-weight:600;">No posts yet.</p>
+          ) : null
+        }
+      </div>
+    </div>
+  </main>
+</BlogLayout>

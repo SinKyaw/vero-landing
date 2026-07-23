@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// Verbatim legal content injected at build time (see privacy-policy.astro).
+import content from '../content-partials/terms.html?raw';
+---
+
+<BaseLayout title="Terms of Service - Vero">
+  <Fragment set:html={content} />
+</BaseLayout>

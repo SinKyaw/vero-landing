@@ -1,0 +1,182 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import DownloadModal from '../components/DownloadModal.astro';
+
+interface Props {
+  /** Document <title>. */
+  title: string;
+  /** Meta description for SEO. */
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Vero helps Gen Z build lasting money habits through gamification and AI.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="IzM_pd-8DogDYjW1q84qBj0t5TUV9Gc7Offsqe7nSxQ" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/assets/favicon.ico" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Reveal bootstrap: added before paint so `.sc-anim` elements start hidden
+         (no flash-of-visible-then-hide). `js-fade-sections` (non-touch only)
+         gates the desktop full-screen "deck" layout; harmless on pages without
+         those sections. -->
+    <script is:inline>
+      document.documentElement.classList.add('js-reveal');
+      if (!window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+        document.documentElement.classList.add('js-fade-sections');
+      }
+    </script>
+    <slot name="head" />
+  </head>
+
+  <body>
+    <!-- Background glow layers -->
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <div class="content-layer">
+      <Navbar />
+      <slot />
+      <Footer />
+    </div>
+
+    <DownloadModal />
+
+    <!-- ── Shared UI: download modal, mobile menu, navbar scroll-fade ── -->
+    <script>
+      (() => {
+        const modal = document.querySelector('.download-modal');
+        const triggers = document.querySelectorAll('.js-download-choice');
+        const closeControls = document.querySelectorAll('[data-download-close]');
+        const hamburger = document.querySelector('.hamburger');
+        const navbar = document.querySelector('.navbar');
+        const navbarLinks = document.querySelectorAll('.navbar-links a');
+        if (!modal || !navbar) return;
+        let previousFocus: HTMLElement | null = null;
+
+        const openModal = () => {
+          previousFocus = document.activeElement as HTMLElement;
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('modal-open');
+          (modal.querySelector('.download-modal-close') as HTMLElement | null)?.focus();
+        };
+
+        const closeModal = () => {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+          previousFocus?.focus();
+        };
+
+        const toggleMenu = (shouldOpen: boolean) => {
+          navbar.classList.toggle('open', shouldOpen);
+          hamburger?.setAttribute('aria-expanded', String(shouldOpen));
+          document.body.classList.toggle('menu-open', shouldOpen);
+        };
+
+        triggers.forEach((trigger) => {
+          trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            openModal();
+          });
+        });
+
+        closeControls.forEach((control) => {
+          control.addEventListener('click', closeModal);
+        });
+
+        hamburger?.addEventListener('click', () => {
+          toggleMenu(!navbar.classList.contains('open'));
+        });
+
+        navbarLinks.forEach((link) => {
+          link.addEventListener('click', () => {
+            if (navbar.classList.contains('open')) toggleMenu(false);
+          });
+        });
+
+        document.addEventListener('click', (event) => {
+          if (!navbar.classList.contains('open')) return;
+          const target = event.target as Node;
+          if (navbar.contains(target) || hamburger?.contains(target)) return;
+          toggleMenu(false);
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 1100 && navbar.classList.contains('open')) {
+            toggleMenu(false);
+          }
+        });
+
+        // Navbar fades from the solid gradient bar to transparent as you scroll,
+        // and --navbar-progress drives the white→teal logo/link crossfade.
+        const FADE_DISTANCE = 150;
+        const updateNavbarFade = () => {
+          const progress = Math.min(window.scrollY / FADE_DISTANCE, 1);
+          (navbar as HTMLElement).style.setProperty('--navbar-opacity', (1 - progress * 0.85).toFixed(2));
+          (navbar as HTMLElement).style.setProperty('--navbar-blur', `${progress * 28}px`);
+          (navbar as HTMLElement).style.setProperty('--navbar-progress', progress.toFixed(2));
+        };
+        window.addEventListener('scroll', updateNavbarFade, { passive: true });
+        updateNavbarFade();
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key !== 'Escape') return;
+          if (modal.classList.contains('is-open')) {
+            closeModal();
+          } else if (navbar.classList.contains('open')) {
+            toggleMenu(false);
+          }
+        });
+      })();
+    </script>
+
+    <!-- ── Reveal on scroll ──
+         Each `.sc` section reveals its `.sc-anim` children in DOM order, staggered
+         by the section's optional data-step (default 450ms). Count-up numbers start
+         when their card begins revealing (via window._veroAnimateStat, defined on
+         pages that need it). Runs on all devices; the fade is GPU-cheap. -->
+    <script>
+      (() => {
+        const STEP = 450;
+        const io = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const sc = entry.target as HTMLElement;
+              obs.unobserve(sc);
+              const step = Number(sc.dataset.step) || STEP;
+              [...sc.querySelectorAll('.sc-anim')].forEach((el, i) => {
+                setTimeout(() => {
+                  el.classList.add('sc-anim-visible');
+                  const animateStat = (window as any)._veroAnimateStat;
+                  if (typeof animateStat === 'function') {
+                    el.querySelectorAll('.stat-number[data-target]').forEach(animateStat);
+                  }
+                }, i * step);
+              });
+            });
+          },
+          { rootMargin: '0px 0px -20% 0px', threshold: 0 }
+        );
+        document.querySelectorAll('.sc').forEach((sc) => io.observe(sc));
+      })();
+    </script>
+  </body>
+</html>

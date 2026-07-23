@@ -1,0 +1,73 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+const denied = Astro.url.searchParams.has('denied');
+const linkError = Astro.url.searchParams.has('link_error');
+const initialMsg = denied
+  ? "That account isn't authorised."
+  : linkError
+    ? 'That login link was invalid or expired. Request a new one below.'
+    : '';
+---
+
+<AdminLayout title="Admin Login — Vero">
+  <div class="admin-auth">
+    <h1>Vero Admin</h1>
+    <form id="login-form">
+      <div class="admin-field">
+        <label for="email">Email</label>
+        <input class="admin-input" type="email" id="email" name="email" autocomplete="email" required />
+      </div>
+      <button class="admin-btn" type="submit" id="login-btn" style="width:100%;justify-content:center;">Email me a login link</button>
+      <p id="login-msg" class:list={['admin-msg', (denied || linkError) && 'admin-msg--error']} set:text={initialMsg}></p>
+    </form>
+  </div>
+</AdminLayout>
+
+<script>
+  import { createBrowserSupabase } from '../../lib/supabase-browser';
+
+  const supabase = createBrowserSupabase();
+  const form = document.getElementById('login-form') as HTMLFormElement;
+  const msg = document.getElementById('login-msg') as HTMLParagraphElement;
+  const btn = document.getElementById('login-btn') as HTMLButtonElement;
+
+  // If already signed in, skip the form.
+  supabase.auth.getSession().then(({ data }) => {
+    if (data.session) window.location.href = '/admin';
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+
+    btn.disabled = true;
+    msg.textContent = 'Sending…';
+    msg.className = 'admin-msg';
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        // Magic link lands on the server callback, which exchanges it for a
+        // session cookie. `shouldCreateUser: false` means only accounts we've
+        // already created (the founders) can ever receive a link.
+        emailRedirectTo: `${window.location.origin}/admin/callback`,
+        shouldCreateUser: false,
+      },
+    });
+
+    if (error) {
+      msg.textContent = error.message;
+      msg.className = 'admin-msg admin-msg--error';
+      btn.disabled = false;
+      return;
+    }
+
+    // Deliberately generic so we never reveal which emails are registered.
+    msg.textContent =
+      'If that email is authorised, a login link is on its way. Check your inbox (and spam).';
+    msg.className = 'admin-msg';
+    btn.disabled = false;
+  });
+</script>

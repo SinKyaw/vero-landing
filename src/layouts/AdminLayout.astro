@@ -1,0 +1,156 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Admin is private — never index it. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <link rel="icon" href="/assets/favicon.ico" type="image/png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="admin-body">
+    <slot />
+
+    <style is:global>
+      .admin-body {
+        background: #f4f7f6;
+        min-height: 100dvh;
+        color: #0f1117;
+        font-family: 'Inter', sans-serif;
+      }
+      .admin-wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 32px 24px 80px;
+      }
+      .admin-editor-wrap {
+        max-width: 860px;
+      }
+      .admin-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .admin-topbar h1 {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1.6rem;
+        color: var(--color-secondary);
+        margin: 0;
+      }
+      .admin-body a { color: var(--color-secondary); }
+
+      /* Buttons */
+      .admin-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        background: var(--color-primary-solid);
+        color: #fff;
+        transition: background 0.2s, transform 0.15s, opacity 0.2s;
+      }
+      .admin-btn:hover { background: #00a794; }
+      .admin-btn:disabled { opacity: 0.6; cursor: default; }
+      .admin-btn--ghost {
+        background: #fff;
+        color: var(--color-secondary);
+        border-color: rgba(0, 81, 73, 0.18);
+      }
+      .admin-btn--ghost:hover { background: #f0f5f4; }
+      .admin-btn--danger { background: #ef4444; }
+      .admin-btn--danger:hover { background: #dc2626; }
+
+      /* Inputs */
+      .admin-field { margin-bottom: 16px; }
+      .admin-field label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+      .admin-input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: 'Inter', sans-serif;
+        box-sizing: border-box;
+        background: #fff;
+      }
+      .admin-input:focus {
+        outline: none;
+        border-color: var(--color-primary-solid);
+      }
+
+      /* Login card */
+      .admin-auth {
+        max-width: 380px;
+        margin: 12vh auto 0;
+        background: #fff;
+        border-radius: 18px;
+        padding: 36px 32px;
+        box-shadow: 0 10px 40px rgba(0, 81, 73, 0.1);
+      }
+      .admin-auth h1 {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1.5rem;
+        color: var(--color-secondary);
+        margin: 0 0 20px;
+        text-align: center;
+      }
+      .admin-msg { font-size: 0.9rem; margin-top: 12px; text-align: center; min-height: 1.2em; }
+      .admin-msg--error { color: #b91c1c; }
+      .admin-msg--ok { color: #047857; }
+
+      /* Post list */
+      .admin-post-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+      .admin-post-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background: #fff;
+        border: 1px solid rgba(0, 81, 73, 0.1);
+        border-radius: 12px;
+        padding: 14px 16px;
+      }
+      .admin-post-row-title { font-weight: 600; color: #0f1117; }
+      .admin-post-row-meta { font-size: 0.82rem; color: #6b7280; margin-top: 2px; }
+      .admin-badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 3px 9px;
+        border-radius: 999px;
+      }
+      .admin-badge--draft { background: #fef3c7; color: #92400e; }
+      .admin-badge--published { background: #d1fae5; color: #065f46; }
+      .admin-empty { color: #6b7280; text-align: center; padding: 40px 0; }
+    </style>
+  </body>
+</html>
