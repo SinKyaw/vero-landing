@@ -1,21 +1,42 @@
 {
   "name": "vero-landing-page",
-  "version": "1.0.0",
-  "description": "Static landing page for Vero financial wellness app",
-  "main": "index.html",
+  "version": "2.0.0",
+  "description": "Vero marketing site (Astro)",
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
-    "start": "serve",
-    "lint": "stylelint \"**/*.css\" && htmlhint \"**/*.html\"",
-    "format": "prettier --write \"**/*.{html,css,js,json,md}\""
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "stylelint \"src/**/*.css\"",
+    "format": "prettier --write \"src/**/*.{astro,css,js,ts,json,md}\""
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/vercel": "^8.2.11",
+    "@blocknote/core": "^0.52.1",
+    "@blocknote/mantine": "^0.52.1",
+    "@blocknote/react": "^0.52.1",
+    "@blocknote/server-util": "^0.52.1",
+    "@supabase/ssr": "^0.12.3",
+    "@supabase/supabase-js": "^2.110.8",
+    "astro": "^5.1.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sanitize-html": "^2.17.6"
+  },
   "devDependencies": {
-    "serve": "^14.2.0",
+    "@types/sanitize-html": "^2.16.1",
+    "prettier": "^3.3.0",
+    "prettier-plugin-astro": "^0.14.0",
     "stylelint": "^16.0.0",
-    "stylelint-config-standard": "^36.0.0",
-    "htmlhint": "^1.1.0",
-    "prettier": "^3.3.0"
+    "stylelint-config-standard": "^36.0.0"
   }
 }

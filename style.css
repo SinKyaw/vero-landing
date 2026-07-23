@@ -61,6 +61,15 @@
   --glass-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.6), 0px 10px 30px rgba(0, 81, 73, 0.08);
   --glass-blur: blur(14px);
   --glass-radius: 20px;
+
+  /* Solid "card" surface — the mobile app's cards are crisp white with a
+     hairline border and a soft shadow (no frosted glass). Content cards on the
+     site borrow that spirit but keep the site's own larger radius and a slightly
+     warmer, deeper shadow so it reads as its own thing, not a screenshot. */
+  --card-bg: #ffffff;
+  --card-border: 1px solid rgba(0, 81, 73, 0.08);
+  --card-shadow: 0 1px 2px rgba(0, 81, 73, 0.04), 0 14px 34px rgba(0, 81, 73, 0.07);
+  --card-radius: 20px;
 }
 
 *, *::before, *::after {
@@ -79,6 +88,33 @@
 html {
   scroll-padding-top: 80px;
   scroll-behavior: smooth;
+}
+
+/* ── Chip / pill ──
+   The app leans on small rounded-full pills everywhere (LVL badges, +3 tokens,
+   XP). This is the site's take on that motif: a touch larger and calmer, used
+   for tier labels and highlights rather than dense in-app metadata. */
+.vero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  background: color-mix(in srgb, var(--color-text) 5%, transparent);
+  color: var(--color-text-muted);
+  border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+}
+
+.vero-chip--teal {
+  background: color-mix(in srgb, var(--accent-teal) 14%, transparent);
+  color: var(--color-secondary);
+  border-color: color-mix(in srgb, var(--accent-teal) 30%, transparent);
 }
 
 body {
@@ -122,13 +158,28 @@ body {
 .bg-glow::after {
   content: '';
   position: absolute;
-  top: 20%;
-  right: -10%;
-  width: 50%;
-  height: 50%;
+  top: 18%;
+  right: -12%;
+  width: 55%;
+  height: 55%;
   background: radial-gradient(circle, var(--color-primary-solid) 0%, transparent 70%);
-  opacity: 0.08;
+  opacity: 0.12;
   filter: blur(160px);
+}
+
+/* ── Subtle grain overlay ──
+   A monochrome fractal-noise texture at very low opacity. Single-tone, so it
+   adds depth without any colour — kills the "flat" look without reading as a
+   vibe-coded gradient. Fixed, non-interactive, sits above the glows but under
+   the content layer. Dial the whole effect with `opacity` below. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ── Content Layer ── */
@@ -149,13 +200,14 @@ body {
 }
 
 .navbar-inner {
-  /* Consistent dark teal, but a subtle diagonal gradient keeps it from
-     reading as one flat block. Both stops carry --navbar-opacity so the
-     scroll fade still works. */
+  /* Diagonal vibrant-teal → deep-teal gradient. Kept dark enough that the
+     white logo and light links stay legible, but with a wider, angled range
+     than a flat bar so it reads as an intentional gradient. Both stops carry
+     --navbar-opacity so the scroll fade still works. */
   background: linear-gradient(
-    180deg,
-    rgba(0, 92, 83, var(--navbar-opacity, 1)) 0%,
-    rgba(0, 70, 63, var(--navbar-opacity, 1)) 100%
+    130deg,
+    rgba(0, 138, 122, var(--navbar-opacity, 1)) 0%,
+    rgba(0, 58, 52, var(--navbar-opacity, 1)) 100%
   );
   display: flex;
   align-items: center;
@@ -174,7 +226,39 @@ body {
   font-size: 24px;
   color: var(--color-secondary);
   text-decoration: none;
+  /* Holds the two stacked logo images for the scroll crossfade */
+  position: relative;
+  display: inline-block;
+  line-height: 0;
 }
+
+/* Navbar logo crossfade: white wordmark on the dark bar at the top, fading to
+   the teal wordmark as the bar goes transparent on scroll. Driven by
+   --navbar-progress (0 at top → 1 scrolled), the same variable the links use. */
+.navbar-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+.navbar-logo-teal {
+  /* Sits on top of the white wordmark, sized naturally (inherits the 32px
+     height / auto width from .navbar-logo-img) — NOT stretched to the anchor,
+     which is flex:1 and would blow the logo up super wide. */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.navbar-logo-white {
+  opacity: calc(1 - var(--navbar-progress, 0));
+}
+.navbar-logo-teal {
+  opacity: var(--navbar-progress, 0);
+}
+/* Mobile menu open = solid dark bar, so keep the white wordmark regardless
+   of how far the page was scrolled before opening the menu. */
+.navbar.open .navbar-logo-white { opacity: 1; }
+.navbar.open .navbar-logo-teal { opacity: 0; }
 
 .navbar-right {
   flex: 1;
@@ -272,7 +356,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 15px;
-  border-radius: 16px;
+  border-radius: 999px;
   cursor: pointer;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
@@ -415,6 +499,32 @@ body {
 }
 
 /* Primary CTA */
+/* Soft "breathing" teal glow ring around the primary download CTAs — draws the
+   eye without the tackiness of a hard outline. Falls back to a static glow when
+   the box-shadow keyframes aren't animating (reduced motion). */
+@keyframes cta-glow {
+  0%, 100% {
+    box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.35),
+      0 4px 20px rgba(0, 192, 172, 0.35),
+      0 0 0 0 rgba(0, 192, 172, 0);
+  }
+  50% {
+    box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.35),
+      0 6px 28px rgba(0, 192, 172, 0.45),
+      0 0 22px 2px rgba(0, 192, 172, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta,
+  .final-cta-btn {
+    animation: none;
+    box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.35),
+      0 4px 22px rgba(0, 192, 172, 0.4),
+      0 0 16px 1px rgba(0, 192, 172, 0.4);
+  }
+}
+
 .hero-cta {
   display: inline-flex;
   align-items: center;
@@ -427,13 +537,14 @@ body {
   font-weight: 500;
   font-size: 18px;
   border: none;
-  border-radius: 16px;
+  border-radius: 999px;
   cursor: pointer;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.35), 0 4px 24px rgba(0, 192, 172, 0.35);
   transition: all 0.2s ease;
   text-decoration: none;
+  animation: cta-glow 2.8s ease-in-out infinite;
 }
 
 .hero-cta:hover {
@@ -441,16 +552,6 @@ body {
   transform: scale(1.02);
 }
 
-.hero-cta .cta-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  font-size: 14px;
-}
 
 /* Hero CTA Row */
 .hero-cta-row {
@@ -475,7 +576,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 18px;
-  border-radius: 16px;
+  border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -833,6 +934,14 @@ body {
   max-width: 560px;
 }
 
+/* Inline emphasis on the key phrase of a line — the app highlights key
+   numbers/words in teal the same way (e.g. "Keep 5% safe"). Deeper teal +
+   weight keeps it legible against the muted body colour. */
+.hl {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
 /* ── Section Bands ── */
 .section-band {
   width: 100%;
@@ -844,7 +953,34 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(28px, min(6.7vh, 5vw), 60px);
-  align-items: center;
+  /* Top-align both columns so the eyebrow/title top lines up with the top of
+     the first stat card (rather than the cards being vertically centered). */
+  align-items: start;
+}
+
+.problem-copy {
+  display: flex;
+  flex-direction: column;
+  /* Keep the eyebrow/title/paragraph grouped near the top so the image below
+     them has breathing room in the space that opens up. */
+  justify-content: flex-start;
+  gap: clamp(10px, 2vh, 18px);
+  align-self: stretch;
+}
+
+.problem-image {
+  /* Cap to the paragraph's max-width and left-align so it reads as part of the
+     copy block rather than a floating element. */
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  align-self: flex-start;
+  /* The sleeping-Verdi PNG has transparent padding baked into its square
+     canvas, so pull it up (and trim the dead space below) to sit snug under
+     the paragraph. Adjust once the real, tightly-cropped art lands. */
+  margin-top: clamp(-64px, -7vh, -36px);
+  margin-bottom: clamp(-52px, -5.5vh, -28px);
+  object-fit: contain;
 }
 
 .problem-stats {
@@ -855,12 +991,12 @@ body {
 }
 
 .stat-card {
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  background: var(--glass-bg);
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: var(--glass-radius);
+  /* App "metric box" flavour: a soft teal wash rather than glass, so the number
+     sits on a tint of its own colour (single-tone, per the site's palette). */
+  background: color-mix(in srgb, var(--accent-teal) 6%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-teal) 16%, transparent);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
   padding: clamp(14px, min(2.7vh, 2vw), 24px) 28px;
   transition: transform 0.2s ease;
   aspect-ratio: 1 / 1;
@@ -926,40 +1062,73 @@ body {
 }
 
 .solution-cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  /* Zig-zag column: one feature per row. Each is a square (title + text) with
+     the icon chip attached to its left side. Rows alternate a gentle offset
+     left/right of centre so they nearly meet in the middle (no chasm).
+     Collapses to a full-width stack at <=1100px / on touch. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0px, 0.6vh, 6px);
+}
+
+/* Alternating offset — odd rows nudge left, even rows nudge right, for a
+   readable zig-zag. */
+.solution-card:nth-child(odd) {
+  margin-right: 32%;
+}
+.solution-card:nth-child(even) {
+  margin-left: 32%;
 }
 
 .solution-card {
-  /* Each card carries its own --accent (assigned below); the fill, border and
-     icon chip derive from it, so the four cards read as a colour-coded set that
-     matches the app's tier colours. */
+  /* "Ghost" feature — clickable content, not a boxed card. The icon chip sits on
+     the left; the square body (title + text) is the interactive region. Sized to
+     content so the offset margins above position it. */
   --accent: var(--accent-teal);
-  background: color-mix(in srgb, var(--accent) 6%, #ffffff);
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
-  box-shadow: var(--glass-shadow);
-  border-radius: var(--glass-radius);
-  padding: clamp(18px, min(3.6vh, 2.7vw), 32px) 24px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: max-content;
+  max-width: 100%;
+  transition: transform 0.25s ease;
 }
-
 
 .solution-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 32px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* The square that holds the title + text. Ghost at rest — the tinted box only
+   fades in on hover to signal it's clickable. */
+.solution-card-body {
+  aspect-ratio: 1 / 1;
+  width: clamp(200px, 21vw, 264px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(18px, 2vh, 26px);
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  border-radius: var(--card-radius);
+  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.solution-card:hover .solution-card-body {
+  background: color-mix(in srgb, var(--accent) 6%, #ffffff);
+  border-color: color-mix(in srgb, var(--accent) 16%, transparent);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 .solution-card-icon {
-  /* Coloured rounded chip around the icon — reads as intentional even with the
-     placeholder emoji, and frames a custom SVG icon nicely later. */
+  /* Coloured rounded chip attached to the left side of the square. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 52px;
   height: 52px;
   font-size: 28px;
-  margin-bottom: 16px;
   border-radius: 14px;
   background: color-mix(in srgb, var(--accent) 14%, #ffffff);
   color: var(--accent);
@@ -1383,12 +1552,12 @@ body {
 .testimonial-stat {
   width: clamp(220px, 24vw, 300px);
   aspect-ratio: 1 / 1;
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  background: var(--glass-bg);
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: var(--glass-radius);
+  /* Same teal "metric box" wash as the problem stats, tying the two stat
+     treatments together across the page. */
+  background: color-mix(in srgb, var(--accent-teal) 6%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-teal) 16%, transparent);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
   padding: clamp(20px, 3vw, 36px);
   display: flex;
   flex-direction: column;
@@ -1420,12 +1589,10 @@ body {
 .testimonial-bubble {
   position: relative;
   max-width: clamp(300px, 32vw, 400px);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  background: var(--glass-bg);
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: var(--glass-radius);
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
@@ -1446,7 +1613,7 @@ body {
   bottom: -10px;
   border-width: 11px 6px 0 14px;
   border-style: solid;
-  border-color: var(--glass-bg) transparent transparent transparent;
+  border-color: var(--card-bg) transparent transparent transparent;
 }
 
 /* Stylistic teal quotation marks enclosing the quote — opening above the
@@ -1558,16 +1725,18 @@ body {
 }
 
 .pricing-card {
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  background: var(--glass-bg);
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  border-radius: var(--glass-radius);
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
   padding: clamp(22px, min(4.4vh, 3.3vw), 40px) clamp(18px, min(3.6vh, 2.7vw), 32px);
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
+}
+
+.pricing-badge {
+  margin-bottom: 14px;
 }
 
 .pricing-card:hover {
@@ -1579,7 +1748,7 @@ body {
      reads as the highlighted choice, not just a bordered box. */
   border: 1px solid color-mix(in srgb, var(--accent-teal) 45%, transparent);
   background: color-mix(in srgb, var(--accent-teal) 8%, #ffffff);
-  box-shadow: var(--glass-shadow),
+  box-shadow: var(--card-shadow),
     0 16px 40px color-mix(in srgb, var(--accent-teal) 18%, transparent);
 }
 
@@ -1643,7 +1812,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 15px;
-  border-radius: 14px;
+  border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -1705,11 +1874,9 @@ body {
 }
 
 .faq-item {
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  background: var(--glass-bg);
-  border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -1732,18 +1899,32 @@ body {
   display: none;
 }
 
+/* Toggle as a soft circular chip — echoes the app's circular radio/selection
+   motif: an outlined teal circle that fills solid teal when the item opens. */
 .faq-item summary::after {
   content: '+';
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--color-primary-solid);
-  transition: transform 0.2s ease;
   flex-shrink: 0;
   margin-left: 16px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-primary-solid);
+  background: color-mix(in srgb, var(--accent-teal) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-teal) 28%, transparent);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .faq-item[open] summary::after {
   content: '−';
+  color: #ffffff;
+  background: var(--color-primary-solid);
+  border-color: var(--color-primary-solid);
 }
 
 .faq-item p {
@@ -1785,29 +1966,19 @@ body {
   font-weight: 500;
   font-size: 18px;
   border: none;
-  border-radius: 16px;
+  border-radius: 999px;
   cursor: pointer;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   box-shadow: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.35), 0 4px 24px rgba(0, 192, 172, 0.35);
   transition: all 0.2s ease;
   text-decoration: none;
+  animation: cta-glow 2.8s ease-in-out infinite;
 }
 
 .final-cta-btn:hover {
   background: var(--color-primary-solid);
   transform: scale(1.02);
-}
-
-.final-cta-btn .cta-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  font-size: 14px;
 }
 
 /* ── Footer ── */
@@ -1998,8 +2169,24 @@ body {
     font-size: 32px;
   }
 
+  /* Drop the zig-zag: full-width stacked cards on narrower screens. Undo the
+     offsets and un-square the body so it reads as a normal stacked row. */
   .solution-cards {
-    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+  .solution-card {
+    width: 100%;
+    align-self: stretch;
+  }
+  .solution-card:nth-child(odd),
+  .solution-card:nth-child(even) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .solution-card-body {
+    aspect-ratio: auto;
+    width: auto;
+    flex: 1;
   }
 
   .diff-grid {
@@ -2013,6 +2200,7 @@ body {
 
   .testimonials-body {
     grid-template-columns: 1fr;
+    row-gap: 48px;
   }
 
   .impact-grid {
@@ -2119,7 +2307,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 16px;
-  border-radius: 16px;
+  border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -2857,23 +3045,25 @@ body.menu-open {
   background: color-mix(in srgb, var(--accent-teal) 5%, transparent);
 }
 
-/* ── Section stagger elements — hidden only when fade system is active (desktop) ── */
-.js-fade-sections .sc-anim {
+/* ── Section stagger elements — hidden only when the reveal system is active ──
+   Scoped to .js-reveal (added on every device with JS) so the fade plays on
+   mobile too. The desktop-only "deck" layout below stays on .js-fade-sections. */
+.js-reveal .sc-anim {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1.6s ease, transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.js-fade-sections .sc-anim.sc-anim--right {
+.js-reveal .sc-anim.sc-anim--right {
   transform: translateX(48px);
 }
-.js-fade-sections .sc-anim.sc-anim-visible {
+.js-reveal .sc-anim.sc-anim-visible {
   opacity: 1;
   transform: none;
 }
 
 /* The featured pricing card gets a larger, scale-up entrance so it wins the
    eye as the pricing row reveals. Overrides only the pre-visible transform. */
-.js-fade-sections .pricing-card.featured.sc-anim:not(.sc-anim-visible) {
+.js-reveal .pricing-card.featured.sc-anim:not(.sc-anim-visible) {
   transform: translateY(28px) scale(0.92);
 }
 
@@ -2898,6 +3088,13 @@ body.menu-open {
 .js-fade-sections #final-cta {
   min-height: unset;
   padding-bottom: 120px;
+}
+
+/* Hero is top-aligned (not centred like the other deck panels), so it has
+   little whitespace below its content. Add viewport-scaled bottom padding so
+   the hero→problem gap reads like the whitespace between the centred sections. */
+.js-fade-sections #hero {
+  padding-bottom: clamp(80px, 16vh, 200px);
 }
 
 /* Vertically centre each deck section's content within its full-height panel,
@@ -2952,6 +3149,73 @@ body.menu-open {
   html {
     scroll-behavior: auto;
   }
+
+  /* Feature cards: horizontal snap-scroll row instead of the desktop
+     tap-to-zoom. Each card takes ~80% width so the next one peeks in, hinting
+     that the row swipes. Overrides the stacked grid from the width breakpoint. */
+  .solution-cards {
+    display: flex;
+    grid-template-columns: none;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Undo the desktop breakout for the scroll row. */
+    width: auto;
+    margin-left: 0;
+    transform: none;
+  }
+  .solution-cards::-webkit-scrollbar {
+    display: none;
+  }
+  .solution-card {
+    flex: 0 0 80%;
+    scroll-snap-align: start;
+  }
+  /* Undo the zig-zag offsets so the scroll row isn't blown apart. */
+  .solution-card:nth-child(odd),
+  .solution-card:nth-child(even) {
+    align-self: stretch;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  /* Body fills the card in the scroll row rather than a fixed square. */
+  .solution-card-body {
+    aspect-ratio: auto;
+    width: auto;
+    flex: 1;
+  }
+}
+
+/* ── Mobile performance: strip expensive blur ──
+   Live backdrop-filter blur (glass) and huge filter:blur() glows are the main
+   cause of jank/scroll-stutter on phones. Reveal animations (opacity/transform)
+   are cheap and stay. On small or touch screens we drop live blur and use a
+   more opaque background so the glass look survives without the GPU cost. */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  :root {
+    --glass-blur: none;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Glass elements with hardcoded blur values (not driven by --glass-blur) */
+  .navbar-inner,
+  .navbar.open .navbar-links,
+  .nav-cta,
+  .hero-cta,
+  .final-cta-btn,
+  .download-modal-backdrop {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Soften the fullscreen glows: smaller blur radius = far cheaper raster,
+     and detach from scroll repaint by not compositing a blurred fixed layer. */
+  .bg-glow::before { filter: blur(60px); }
+  .bg-glow::after { filter: blur(60px); }
 }
 
 /* ── Short-screen scaling: reduce padding/fonts so nothing clips ── */

@@ -46,15 +46,17 @@
   <!-- Background Glow Layers -->
   <div class="bg-glow" aria-hidden="true"></div>
 
-  <script>if (!window.matchMedia('(hover: none) and (pointer: coarse)').matches) document.documentElement.classList.add('js-fade-sections');</script>
+  <script>document.documentElement.classList.add('js-reveal'); if (!window.matchMedia('(hover: none) and (pointer: coarse)').matches) document.documentElement.classList.add('js-fade-sections');</script>
   <!-- Content Layer -->
   <div class="content-layer">
 
     <!-- ── Navbar ── -->
     <nav class="navbar">
       <div class="navbar-inner">
-        <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
+        <a href="#" class="navbar-logo">
+          <img src="assets/logo-white.png" alt="Vero logo" class="navbar-logo-img navbar-logo-white" />
+          <img src="assets/logo-primary.png" alt="" aria-hidden="true" class="navbar-logo-img navbar-logo-teal" />
+        </a>
         <ul class="navbar-links">
           <li><a href="#">Home</a></li>
           <li><a href="#features">Features</a></li>
@@ -64,11 +66,11 @@
           <li><a href="post.html">Blog</a></li>
         </ul>
         <div class="navbar-right">
-          <a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a>
+          <a href="#download-options" class="nav-cta js-download-choice">Download Vero</a>
         </div>
         <!-- Mobile Download Button (replaces hamburger menu) -->
         <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
+          Download Vero
         </a>
         <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
           <span></span>
@@ -98,13 +100,12 @@
         </p>
 
         <!-- Verdi mascot -->
-        <img src="assets/verdi.png" alt="Verdi, your financial companion" class="hero-verdi" />
+        <img src="assets/verdi-logging-expense.png" alt="Verdi, your financial companion" class="hero-verdi" />
 
         <!-- CTA Buttons -->
         <div class="hero-cta-row">
           <a class="hero-cta js-download-choice" href="#download-options">
             Try for Free
-            <span class="cta-arrow">→</span>
           </a>
           <a class="hero-cta-secondary" href="#features">
             See how it works
@@ -136,16 +137,18 @@
     <!-- ── Problem Section ── -->
     <div class="section-band section-band--problem">
       <section id="problem" class="section">
-        <div class="sc">
+        <div class="sc" data-step="220">
         <div class="problem">
           <div class="problem-copy">
-            <p class="section-label">The Problem</p>
-            <h2 class="section-headline">Tired of Always Feeling Broke?</h2>
+            <p class="section-label sc-anim">The Problem</p>
+            <h2 class="section-headline sc-anim">Tired of Always Feeling Broke?</h2>
             <p class="section-body sc-anim">
-              It's not about how much money you make — it's about how you manage it.
+              It's not about how much money you make — it's about <span class="hl">how you manage it</span>.
               In today's world, spending is frictionless. One-click checkouts, targeted ads, and constant scrolling make
               it easy to lose control without realising it.
             </p>
+            <!-- Placeholder image — swap for the final art later -->
+            <img src="assets/verdi-sleep.png" alt="" aria-hidden="true" class="problem-image sc-anim" />
           </div>
           <div class="problem-stats">
             <div class="stat-card sc-anim sc-anim--right">
@@ -177,37 +180,91 @@
         <div class="solution-cards">
           <div class="solution-card sc-anim">
             <span class="solution-card-icon">💬</span>
-            <h3 class="solution-card-title">AI Chat Tracker</h3>
-            <p class="solution-card-text">Track your expenses as easily as texting a friend. Just type it — Vero logs it.</p>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">AI Chat Tracker</h3>
+              <p class="solution-card-text">Track your expenses as easily as texting a friend. Just type it — Vero logs it.</p>
+            </div>
           </div>
           <div class="solution-card sc-anim">
             <span class="solution-card-icon">🎯</span>
-            <h3 class="solution-card-title">Saving Challenges</h3>
-            <p class="solution-card-text">Take on personalised missions designed to help you save consistently.</p>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">Saving Challenges</h3>
+              <p class="solution-card-text">Take on personalised missions designed to help you save consistently.</p>
+            </div>
           </div>
           <div class="solution-card sc-anim">
             <span class="solution-card-icon">📊</span>
-            <h3 class="solution-card-title">Smart Insights</h3>
-            <p class="solution-card-text">Understand your spending patterns and get actionable guidance.</p>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">Smart Insights</h3>
+              <p class="solution-card-text">Understand your spending patterns and get actionable guidance.</p>
+            </div>
           </div>
           <div class="solution-card sc-anim">
             <span class="solution-card-icon">🏆</span>
-            <h3 class="solution-card-title">Gamification &amp; Rewards</h3>
-            <p class="solution-card-text">Earn tokens, climb leaderboards, and redeem real rewards — all by making better decisions.</p>
+            <div class="solution-card-body">
+              <h3 class="solution-card-title">Gamification &amp; Rewards</h3>
+              <p class="solution-card-text">Earn tokens, climb leaderboards, and redeem real rewards — all by making better decisions.</p>
+            </div>
           </div>
         </div>
         </div>
       </section>
     </div>
 
-    <!-- ── How We're Different Section ── -->
+    <!-- ── How It Works Section ── -->
+     <!--This will eventually have to be a different section without any kind of -->
+    <section id="demo-animation" class="section">
+      <div class="sc">
+        <div class="solution-content">
+          <p class="section-label">See It In Action</p>
+          <h2 class="section-headline">Watch How Vero Works</h2>
+          <p class="section-body sc-anim">
+            From logging a coffee to climbing the leaderboard — see how Vero turns <span class="hl">everyday decisions into progress</span>.
+          </p>
+        </div>
+
+        <!-- Expense-logging demo — mirrors the in-app flow: free-text input → Verdi → logged expense -->
+        <div class="demo-stage" aria-hidden="true">
+          <!-- Free-text input card -->
+          <div class="demo-card demo-input">
+            <span class="demo-input-hint">Tell me what you spent 👀</span>
+            <p class="demo-input-text"><span class="demo-typed"></span><span class="demo-caret">|</span></p>
+            <span class="demo-processing">Vero is processing your expenses…</span>
+          </div>
+
+          <!-- Verdi -->
+          <div class="demo-verdi">
+            <img src="assets/verdi.png" alt="Verdi" class="demo-verdi-img" />
+          </div>
+
+          <!-- Logged expense result card: the box fades in with the group, the
+               entry inside it grows in once the expense has been "processed" -->
+          <div class="demo-card demo-result-box">
+            <div class="demo-result-content">
+              <p class="demo-result-title">Expense Logged!</p>
+              <p class="demo-result-sub">That's another smart money move.</p>
+              <div class="demo-expense-row">
+                <span class="demo-expense-icon">🍔</span>
+                <div class="demo-expense-info">
+                  <span class="demo-expense-name">Takeaway</span>
+                  <span class="demo-expense-cat">Food &amp; Drink</span>
+                </div>
+                <span class="demo-expense-amount">£4.50</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- ── How We're Different Section ── -->
     <section id="differentiation" class="section">
       <div class="sc">
         <div class="solution-content">
           <p class="section-label">Why Vero</p>
           <h2 class="section-headline">How We're Different</h2>
           <p class="section-body sc-anim">
-            Most finance apps show you the numbers. Vero changes how you think about them.
+            Most finance apps show you the numbers. Vero changes <span class="hl">how you think about them</span>.
           </p>
         </div>
         <div class="comparison-table-wrapper sc-anim">
@@ -249,52 +306,6 @@
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-    </section>
-
-        <!-- ── How It Works Section ── -->
-     <!--This will eventually have to be a different section without any kind of -->
-    <section id="demo-animation" class="section">
-      <div class="sc">
-        <div class="solution-content">
-          <p class="section-label">See It In Action</p>
-          <h2 class="section-headline">Watch How Vero Works</h2>
-          <p class="section-body sc-anim">
-            From logging a coffee to climbing the leaderboard — see how Vero turns everyday decisions into progress.
-          </p>
-        </div>
-
-        <!-- Expense-logging demo — mirrors the in-app flow: free-text input → Verdi → logged expense -->
-        <div class="demo-stage" aria-hidden="true">
-          <!-- Free-text input card -->
-          <div class="demo-card demo-input">
-            <span class="demo-input-hint">Tell me what you spent 👀</span>
-            <p class="demo-input-text"><span class="demo-typed"></span><span class="demo-caret">|</span></p>
-            <span class="demo-processing">Vero is processing your expenses…</span>
-          </div>
-
-          <!-- Verdi -->
-          <div class="demo-verdi">
-            <img src="assets/verdi.png" alt="Verdi" class="demo-verdi-img" />
-          </div>
-
-          <!-- Logged expense result card: the box fades in with the group, the
-               entry inside it grows in once the expense has been "processed" -->
-          <div class="demo-card demo-result-box">
-            <div class="demo-result-content">
-              <p class="demo-result-title">Expense Logged!</p>
-              <p class="demo-result-sub">That's another smart money move.</p>
-              <div class="demo-expense-row">
-                <span class="demo-expense-icon">🍔</span>
-                <div class="demo-expense-info">
-                  <span class="demo-expense-name">Takeaway</span>
-                  <span class="demo-expense-cat">Food &amp; Drink</span>
-                </div>
-                <span class="demo-expense-amount">£4.50</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -354,6 +365,50 @@
 
 
 
+    <!-- ── Pricing Section - keep it brief and snappy fo rnow── -->
+    <section id="pricing" class="section">
+      <div class="sc">
+      <div class="pricing-header">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-headline">Start Free. Upgrade When You're Ready.</h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card sc-anim">
+          <span class="vero-chip pricing-badge">Starter</span>
+          <h3 class="pricing-card-name">Free</h3>
+          <div class="pricing-price">£0 <span>/month</span></div>
+          <ul class="pricing-features">
+            <li>Basic rewards</li>
+            <li>Savings challenges</li>
+            <li>Monthly insights</li>
+            <li>Standard token earning</li>
+            <li>Includes ads</li>
+          </ul>
+        </div>
+        <div class="pricing-card featured sc-anim">
+          <span class="vero-chip vero-chip--teal pricing-badge">Most popular</span>
+          <h3 class="pricing-card-name">Premium</h3>
+          <div class="pricing-price">£3.99 <span>/month</span></div>
+          <ul class="pricing-features">
+            <li>Faster reward redemption</li>
+            <li>Advanced challenges</li>
+            <li>Exclusive rewards</li>
+            <li>Daily, weekly, monthly insights</li>
+            <li>Ad-free experience</li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
     <!-- ── FAQ Section ── -->
     <section id="faq" class="section">
       <div class="sc" data-step="200">
@@ -392,58 +447,15 @@
 
 
 
-
-
-
-
-
-
-    <!-- ── Pricing Section - keep it brief and snappy fo rnow── -->
-    <section id="pricing" class="section">
-      <div class="sc">
-      <div class="pricing-header">
-        <p class="section-label">Pricing</p>
-        <h2 class="section-headline">Start Free. Upgrade When You're Ready.</h2>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card sc-anim">
-          <h3 class="pricing-card-name">Free</h3>
-          <div class="pricing-price">£0 <span>/month</span></div>
-          <ul class="pricing-features">
-            <li>Basic rewards</li>
-            <li>Savings challenges</li>
-            <li>Monthly insights</li>
-            <li>Standard token earning</li>
-            <li>Includes ads</li>
-          </ul>
-        </div>
-        <div class="pricing-card featured sc-anim">
-          <h3 class="pricing-card-name">Premium</h3>
-          <div class="pricing-price">£3.99 <span>/month</span></div>
-          <ul class="pricing-features">
-            <li>Faster reward redemption</li>
-            <li>Advanced challenges</li>
-            <li>Exclusive rewards</li>
-            <li>Daily, weekly, monthly insights</li>
-            <li>Ad-free experience</li>
-          </ul>
-        </div>
-      </div>
-      </div>
-    </section>
-
-
-
     <!-- ── Final CTA Section ── -->
     <section id="final-cta" class="section final-cta">
       <div class="sc">
       <h2 class="section-headline">Build Better Money Habits Today</h2>
       <p class="section-body sc-anim">
-        Take control of your spending, reduce stress, and start earning rewards.
+        Take control of your spending, reduce stress, and <span class="hl">start earning rewards</span>.
       </p>
       <a class="final-cta-btn js-download-choice sc-anim" href="#download-options">
         Download Vero
-        <span class="cta-arrow">→</span>
       </a>
       </div>
     </section>
@@ -452,8 +464,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
+          <a href="#" class="navbar-logo"><img src="assets/logo-white.png" alt="Vero logo" style="height:32px;width:auto;vertical-align:middle;" /></a>
           <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
           <div class="download-buttons">
             <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
@@ -621,6 +632,12 @@
 
   <script>
     (function () {
+      // Tap-to-expand "zoom" is a desktop interaction. On touch devices the
+      // feature cards become a horizontal snap-scroll row instead (see the
+      // .solution-cards rules in the coarse-pointer media query), so skip
+      // wiring up the expand panel entirely there.
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
       const container = document.querySelector('.solution-cards');
       const panel = document.createElement('div');
       panel.className = 'feature-expand-panel';
@@ -734,10 +751,10 @@
       // Regular, natural scrolling. As each section's content enters the
       // viewport, its .sc-anim elements fade/slide in once, in DOM order
       // (eyebrow → title → body → cards), then stay put. Nothing fades back
-      // out. Desktop only: on touch the .js-fade-sections class is absent, so
-      // .sc-anim never hides and everything shows in plain document flow.
-      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-
+      // out. Runs on touch too: the fade (opacity/transform) is GPU-cheap, so
+      // the reveal plays on mobile without the desktop "deck" layout, which
+      // stays gated behind .js-fade-sections. If .js-reveal is somehow absent
+      // (no JS), .sc-anim never hides and content shows in plain document flow.
       const STEP = 450;
 
       const io = new IntersectionObserver((entries, obs) => {

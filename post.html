@@ -245,8 +245,10 @@
     <!-- ── Navbar ── -->
     <nav class="navbar">
       <div class="navbar-inner">
-        <a href="index.html" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
+        <a href="index.html" class="navbar-logo">
+          <img src="assets/logo-white.png" alt="Vero logo" class="navbar-logo-img navbar-logo-white" />
+          <img src="assets/logo-primary.png" alt="" aria-hidden="true" class="navbar-logo-img navbar-logo-teal" />
+        </a>
         <ul class="navbar-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
@@ -306,8 +308,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
+          <a href="#" class="navbar-logo"><img src="assets/logo-white.png" alt="Vero logo" style="height:32px;width:auto;vertical-align:middle;" /></a>
           <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
           <div class="download-buttons">
             <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
@@ -450,6 +451,7 @@
         const progress = Math.min(window.scrollY / FADE_DISTANCE, 1);
         navbar.style.setProperty('--navbar-opacity', (1 - progress * 0.85).toFixed(2));
         navbar.style.setProperty('--navbar-blur', `${progress * 28}px`);
+        navbar.style.setProperty('--navbar-progress', progress.toFixed(2));
       };
       window.addEventListener('scroll', updateNavbarFade);
       updateNavbarFade();

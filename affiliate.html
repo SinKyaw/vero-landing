@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add('js-reveal'); if (!window.matchMedia('(hover: none) and (pointer: coarse)').matches) document.documentElement.classList.add('js-fade-sections');</script>
   <style>
     .affiliate-hero {
       padding: 100px 24px 60px;
@@ -101,22 +102,6 @@
       box-sizing: border-box;
     }
     .form-group input:focus { border-color: #2DDFC1; }
-    .apply-btn {
-      width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, #2DDFC1, #065E53);
-      color: #fff;
-      border: none;
-      border-radius: 14px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: opacity 0.2s;
-    }
-    .apply-btn:hover { opacity: 0.9; }
-    .apply-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .form-message {
       margin-top: 16px;
       text-align: center;
@@ -186,8 +171,10 @@
     <!-- ── Navbar ── -->
     <nav class="navbar">
       <div class="navbar-inner">
-        <a href="index.html" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
+        <a href="index.html" class="navbar-logo">
+          <img src="assets/logo-white.png" alt="Vero logo" class="navbar-logo-img navbar-logo-white" />
+          <img src="assets/logo-primary.png" alt="" aria-hidden="true" class="navbar-logo-img navbar-logo-teal" />
+        </a>
         <ul class="navbar-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
@@ -197,11 +184,11 @@
           <li><a href="post.html">Blog</a></li>
         </ul>
         <div class="navbar-right">
-          <a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a>
+          <a href="#download-options" class="nav-cta js-download-choice">Download Vero</a>
         </div>
         <!-- Mobile Download Button (replaces hamburger menu) -->
         <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
+          Download Vero
         </a>
         <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
           <span></span>
@@ -212,39 +199,37 @@
     </nav>
 
     <!-- Hero -->
-    <section class="affiliate-hero">
-      <div class="social-proof-badge" style="display:inline-flex;gap:6px;align-items:center;background:rgba(45,223,193,0.12);padding:6px 14px;border-radius:999px;font-size:0.85rem;margin-bottom:20px;">
+    <section class="affiliate-hero sc" data-step="180">
+      <div class="social-proof-badge sc-anim" style="display:inline-flex;gap:6px;align-items:center;background:rgba(45,223,193,0.12);padding:6px 14px;border-radius:999px;font-size:0.85rem;margin-bottom:20px;">
         <span>💰</span>
         <span>Earn real cash for every friend you refer</span>
       </div>
-      <h1>Share Vero.<br>Earn <span class="highlight-teal">£5</span> per referral.</h1>
-      <p>
+      <h1 class="sc-anim">Share Vero.<br>Earn <span class="highlight-teal">£5</span> per referral.</h1>
+      <p class="sc-anim">
         Join the Vero Affiliate Programme and earn £5 in cash for every friend who signs up
         and claims their first reward within 14 days. No cap on earnings.
       </p>
-      <a href="#apply" class="hero-cta" style="display:inline-flex;align-items:center;gap:8px;">
-        Apply Now <span>→</span>
-      </a>
+      <a href="#apply" class="hero-cta-secondary sc-anim">Apply Now</a>
     </section>
 
     <!-- How it works -->
-    <div class="steps-grid">
-      <div class="step-card">
+    <div class="steps-grid sc" data-step="130">
+      <div class="step-card sc-anim">
         <div class="step-icon">✅</div>
         <h3>1. Apply in-app</h3>
         <p>Open Vero, go to Profile → Affiliate Programme. Meet the eligibility criteria and apply instantly.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card sc-anim">
         <div class="step-icon">🔗</div>
         <h3>2. Share your code</h3>
         <p>Get your unique 6-character referral code. Share it with friends via any messaging or social app.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card sc-anim">
         <div class="step-icon">🎁</div>
         <h3>3. Friend signs up & earns</h3>
         <p>Your friend enters your code when creating their Vero account and claims their first reward.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card sc-anim">
         <div class="step-icon">💸</div>
         <h3>4. You get paid £5</h3>
         <p>Once confirmed, we send £5 straight to your bank account. Manual review within 7 business days.</p>
@@ -252,9 +237,9 @@
     </div>
 
     <!-- Eligibility -->
-    <section class="apply-section">
-      <h2>Eligibility</h2>
-      <div class="step-card" style="text-align:left;">
+    <section class="apply-section sc" data-step="150">
+      <h2 class="sc-anim">Eligibility</h2>
+      <div class="step-card sc-anim" style="text-align:left;">
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
           <li style="display:flex;align-items:flex-start;gap:10px;">
             <span style="color:#2DDFC1;font-size:1.1rem;">✓</span>
@@ -273,45 +258,42 @@
     </section>
 
     <!-- Apply Form (apply via mobile app - this section explains how) -->
-    <section id="apply" class="apply-section">
-      <h2>Apply via the Vero app</h2>
-      <div class="apply-form" style="text-align:center;">
+    <section id="apply" class="apply-section sc" data-step="150">
+      <h2 class="sc-anim">Apply via the Vero app</h2>
+      <div class="apply-form sc-anim" style="text-align:center;">
         <div class="step-icon" style="font-size:3rem;">📱</div>
         <p style="color:#555;line-height:1.7;margin-bottom:24px;">
           The Affiliate Programme is managed entirely within the Vero mobile app.
           Open your Profile, tap <strong>Affiliate Programme</strong>, and apply instantly.
         </p>
-        <a href="#download-options" class="apply-btn js-download-choice"
-          style="display:inline-block;text-decoration:none;max-width:280px;">
-          Download Vero
-        </a>
+        <a href="#download-options" class="hero-cta js-download-choice">Download Vero</a>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="faq-section">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-item">
+    <section class="faq-section sc" data-step="120">
+      <h2 class="sc-anim">Frequently Asked Questions</h2>
+      <div class="faq-item sc-anim">
         <h4>How much do I earn per referral?</h4>
         <p>£5 per successful referral. A referral is "successful" when your friend signs up with your code and claims their first reward within 14 days of signing up.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item sc-anim">
         <h4>Is there a cap on how much I can earn?</h4>
         <p>No cap. Refer as many friends as you like and earn £5 for each successful conversion.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item sc-anim">
         <h4>How long does payment take?</h4>
         <p>Payouts are reviewed manually and paid within 7 business days of a successful conversion. We'll contact you via your registered email to arrange bank transfer details.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item sc-anim">
         <h4>What does my friend get?</h4>
         <p>Your friend receives bonus XP and tokens when they sign up with your referral code — giving them a head start on the Vero rewards system.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item sc-anim">
         <h4>Can I refer myself?</h4>
         <p>No. Self-referrals are not allowed and will be automatically detected and rejected.</p>
       </div>
-      <div class="faq-item">
+      <div class="faq-item sc-anim">
         <h4>What happens if a referral is suspected of fraud?</h4>
         <p>Payouts undergo a manual review period. Any suspicious activity (e.g. fake accounts) will be flagged and the payout will be cancelled.</p>
       </div>
@@ -321,8 +303,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
+          <a href="#" class="navbar-logo"><img src="assets/logo-white.png" alt="Vero logo" style="height:32px;width:auto;vertical-align:middle;" /></a>
           <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
           <div class="download-buttons">
             <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
@@ -460,6 +441,7 @@
         const progress = Math.min(window.scrollY / FADE_DISTANCE, 1);
         navbar.style.setProperty('--navbar-opacity', (1 - progress * 0.85).toFixed(2));
         navbar.style.setProperty('--navbar-blur', `${progress * 28}px`);
+        navbar.style.setProperty('--navbar-progress', progress.toFixed(2));
       };
       window.addEventListener('scroll', updateNavbarFade);
       updateNavbarFade();
@@ -473,6 +455,25 @@
           }
         }
       });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // ── Reveal on scroll ── (mirrors index.html / about-us.html)
+      const STEP = 450;
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const sc = entry.target;
+          obs.unobserve(sc);
+          const step = Number(sc.dataset.step) || STEP;
+          [...sc.querySelectorAll('.sc-anim')].forEach((el, i) => {
+            setTimeout(() => el.classList.add('sc-anim-visible'), i * step);
+          });
+        });
+      }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
+      document.querySelectorAll('.sc').forEach(sc => io.observe(sc));
     })();
   </script>
 </body>

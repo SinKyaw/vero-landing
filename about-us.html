@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add('js-reveal'); if (!window.matchMedia('(hover: none) and (pointer: coarse)').matches) document.documentElement.classList.add('js-fade-sections');</script>
   <style>
     .social-links {
       display: flex;
@@ -75,8 +76,10 @@
     <!-- ── Navbar ── -->
     <nav class="navbar">
       <div class="navbar-inner">
-        <a href="index.html" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
+        <a href="index.html" class="navbar-logo">
+          <img src="assets/logo-white.png" alt="Vero logo" class="navbar-logo-img navbar-logo-white" />
+          <img src="assets/logo-primary.png" alt="" aria-hidden="true" class="navbar-logo-img navbar-logo-teal" />
+        </a>
         <ul class="navbar-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
@@ -101,9 +104,9 @@
     </nav>
 
     <!-- ── About Hero ── -->
-    <section class="about-hero">
+    <section class="about-hero sc">
       <div class="about-hero-inner">
-        <h1 class="about-hero-headline">
+        <h1 class="about-hero-headline sc-anim">
           We believe expense tracking isn’t enough,<br />
           <span class="gradient-text">if your money habits are still crap</span>
         </h1>
@@ -113,21 +116,21 @@
     </section>
 
     <!-- ── How it Started ── -->
-    <section class="section">
+    <section class="section sc" data-step="180">
       <div class="how-started">
         <div class="how-started-content">
-          <p class="section-label">Our Story</p>
-          <h2 class="section-headline">How it Started</h2>
-          <p class="section-body">
+          <p class="section-label sc-anim">Our Story</p>
+          <h2 class="section-headline sc-anim">How it Started</h2>
+          <p class="section-body sc-anim">
             Vero was built by five Gen Z founders from different countries and economic backgrounds, united by one
             belief: our generation doesn’t have a financial knowledge problem — it has a behavioural one.
           </p>
-          <p class="section-body" style="margin-top:16px;">
+          <p class="section-body sc-anim" style="margin-top:16px;">
             And behaviour is far harder to change, especially in a system designed to work against you...
           </p>
         </div>
         <div class="how-started-visual">
-          <div class="founder-quote-card">
+          <div class="founder-quote-card sc-anim">
             <p class="founder-quote-text">“Our generation doesn’t have a financial knowledge problem — it has a
               behavioural one.”</p>
             <p class="founder-quote-attr">— The Vero Founders</p>
@@ -137,27 +140,27 @@
     </section>
 
     <!-- ── The Problem ── -->
-    <section class="section problem-context-section">
-      <div class="problem-context-intro">
+    <section class="section problem-context-section sc" data-step="150">
+      <div class="problem-context-intro sc-anim">
         <p>Today’s digital economy makes spending effortless. One-click checkouts, targeted ads, and doomscrolling
           encourage small decisions that quietly trap you into a cycle of impulse spending, guilt, and stress.</p>
       </div>
       <div class="problem-cards-dark">
-        <div class="problem-card-dark">
+        <div class="problem-card-dark sc-anim">
           <h3 class="problem-card-title">Impulse</h3>
           <p class="problem-card-text">£8 on daily ice matcha latte (or whatever trends next) turns into £2,800 wasted
             per year.</p>
         </div>
-        <div class="problem-card-dark">
+        <div class="problem-card-dark sc-anim">
           <h3 class="problem-card-title">Guilt</h3>
           <p class="problem-card-text">Nearly half of Gen Z adults avoid checking their bank accounts.</p>
         </div>
-        <div class="problem-card-dark">
+        <div class="problem-card-dark sc-anim">
           <h3 class="problem-card-title">Stress</h3>
           <p class="problem-card-text">70% of Gen Z lose sleep because of money worries.</p>
         </div>
       </div>
-      <div class="problem-context-body">
+      <div class="problem-context-body sc-anim">
         <p>Despite the rise of budgeting apps and digital banking tools, financial discipline remains largely unsolved.
           Most platforms only show where your money went, not how to change what happens next. Others reward spending
           with cashback, points, and incentives — reinforcing the very behaviour users are trying to control.</p>
@@ -165,41 +168,41 @@
     </section>
 
     <!-- ── Why Vero Exists ── -->
-    <section class="section">
+    <section class="section sc" data-step="120">
       <div class="section-center">
-        <p class="section-label">Our Purpose</p>
-        <h2 class="section-headline">Why Vero Exists</h2>
+        <p class="section-label sc-anim">Our Purpose</p>
+        <h2 class="section-headline sc-anim">Why Vero Exists</h2>
       </div>
       <div class="mission-vision-grid">
-        <div class="mv-card">
+        <div class="mv-card sc-anim">
           <span class="mv-tag">Mission</span>
           <p class="mv-text">Empower Gen Z to take control of their financial future, helping them build money habits
             that last.</p>
         </div>
-        <div class="mv-card">
+        <div class="mv-card sc-anim">
           <span class="mv-tag">Vision</span>
           <p class="mv-text">Become the go-to financial wellbeing platform where young people feel in control of their
             money.</p>
         </div>
       </div>
       <div class="why-vero-body">
-        <p>Vero was created to help Gen Z build lasting financial habits through AI-powered personalised gamification —
+        <p class="sc-anim">Vero was created to help Gen Z build lasting financial habits through AI-powered personalised gamification —
           turning everyday financial decisions into small challenges that encourage discipline and reward progress.</p>
-        <p>By supporting young people to build savings, spend more mindfully, and reduce financial stress, Vero
+        <p class="sc-anim">By supporting young people to build savings, spend more mindfully, and reduce financial stress, Vero
           contributes to three key UN Sustainable Development Goals.</p>
       </div>
       <div class="sdg-grid">
-        <div class="sdg-card">
+        <div class="sdg-card sc-anim">
           <div class="sdg-badge">SDG 3</div>
           <h3 class="sdg-title">Health &amp; Wellbeing</h3>
           <p class="sdg-text">Reducing financial stress and its impact on mental wellbeing.</p>
         </div>
-        <div class="sdg-card">
+        <div class="sdg-card sc-anim">
           <div class="sdg-badge">SDG 4</div>
           <h3 class="sdg-title">Quality Education</h3>
           <p class="sdg-text">Embedding practical financial literacy into everyday life.</p>
         </div>
-        <div class="sdg-card">
+        <div class="sdg-card sc-anim">
           <div class="sdg-badge">SDG 10</div>
           <h3 class="sdg-title">Responsible Consumption</h3>
           <p class="sdg-text">Encouraging mindful spending and sustainable consumption habits.</p>
@@ -237,25 +240,25 @@
 
 
     <!-- ── Our Values ── -->
-    <section class="section">
+    <section class="section sc" data-step="150">
       <div class="section-center">
-        <p class="section-label">What We Stand For</p>
-        <h2 class="section-headline">Our Values</h2>
+        <p class="section-label sc-anim">What We Stand For</p>
+        <h2 class="section-headline sc-anim">Our Values</h2>
       </div>
       <div class="values-grid">
-        <div class="value-card">
+        <div class="value-card sc-anim">
           <h3 class="value-title">Grounded in empathy</h3>
           <p class="value-text">We listen first, build second. Every feature starts with users, not market trends.</p>
         </div>
-        <div class="value-card">
+        <div class="value-card sc-anim">
           <h3 class="value-title">Reframe Constraints</h3>
           <p class="value-text">We treat constraints as creative sparks, reframing problems into new possibilities.</p>
         </div>
-        <div class="value-card">
+        <div class="value-card sc-anim">
           <h3 class="value-title">Implement Fast</h3>
           <p class="value-text">We test ideas early and challenge defaults. Speed is our ally in learning.</p>
         </div>
-        <div class="value-card">
+        <div class="value-card sc-anim">
           <h3 class="value-title">Take Imperfect Steps</h3>
           <p class="value-text">We move forward 1% better each day. Mistakes are important for growth!</p>
         </div>
@@ -263,26 +266,26 @@
     </section>
 
     <!-- ── Our Community ── -->
-    <section class="section">
+    <section class="section sc" data-step="150">
       <div class="section-center">
-        <p class="section-label">Vero's Socials</p>
-        <h2 class="section-headline">Our Community</h2>
+        <p class="section-label sc-anim">Vero's Socials</p>
+        <h2 class="section-headline sc-anim">Our Community</h2>
       </div>
       <div class="social-links">
-        <a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">
+        <a class="sc-anim" href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">
           <img src="assets/instagram_logo.png" alt="Instagram" class="social-icon social-icon--large" />
           <span>Instagram</span>
         </a>
-        <a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">
+        <a class="sc-anim" href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">
           <img src="assets/tiktok_logo.png" alt="TikTok" class="social-icon" />
           <span>TikTok</span>
         </a>
-        <a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank"
+        <a class="sc-anim" href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank"
           rel="noopener noreferrer">
           <img src="assets/linkedin_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
           <span>LinkedIn</span>
         </a>
-        <a href="https://discord.gg/MZP9CDfy" target="_blank"
+        <a class="sc-anim" href="https://discord.gg/MZP9CDfy" target="_blank"
           rel="noopener noreferrer">
           <img src="assets/discord_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
           <span>Discord</span>
@@ -292,33 +295,33 @@
 
 
 
-    <section class="section">
+    <section class="section sc" data-step="130">
       <div class="section-center">
-        <p class="section-label">The People Behind Vero</p>
-        <h2 class="section-headline">Our Team</h2>
+        <p class="section-label sc-anim">The People Behind Vero</p>
+        <h2 class="section-headline sc-anim">Our Team</h2>
       </div>
       <div class="team-grid">
-        <div class="team-member">
+        <div class="team-member sc-anim">
           <div class="team-avatar-lg">B</div>
           <div class="team-name">Boss</div>
           <div class="team-role">Co-Founder</div>
         </div>
-        <div class="team-member">
+        <div class="team-member sc-anim">
           <div class="team-avatar-lg">P</div>
           <div class="team-name">Pepu</div>
           <div class="team-role">Co-Founder</div>
         </div>
-        <div class="team-member">
+        <div class="team-member sc-anim">
           <div class="team-avatar-lg">S</div>
           <div class="team-name">Sofia</div>
           <div class="team-role">Co-Founder</div>
         </div>
-        <div class="team-member">
+        <div class="team-member sc-anim">
           <div class="team-avatar-lg">L</div>
           <div class="team-name">Livia</div>
           <div class="team-role">Co-Founder</div>
         </div>
-        <div class="team-member">
+        <div class="team-member sc-anim">
           <div class="team-avatar-lg">J</div>
           <div class="team-name">Judy</div>
           <div class="team-role">Co-Founder</div>
@@ -330,8 +333,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
+          <a href="#" class="navbar-logo"><img src="assets/logo-white.png" alt="Vero logo" style="height:32px;width:auto;vertical-align:middle;" /></a>
           <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
           <div class="download-buttons">
             <a href="https://apps.apple.com/th/app/vero/id6759962937" target="_blank" rel="noopener">
@@ -469,6 +471,7 @@
         const progress = Math.min(window.scrollY / FADE_DISTANCE, 1);
         navbar.style.setProperty('--navbar-opacity', (1 - progress * 0.85).toFixed(2));
         navbar.style.setProperty('--navbar-blur', `${progress * 28}px`);
+        navbar.style.setProperty('--navbar-progress', progress.toFixed(2));
       };
       window.addEventListener('scroll', updateNavbarFade);
       updateNavbarFade();
@@ -482,6 +485,31 @@
           }
         }
       });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // ── Reveal on scroll ── (mirrors index.html)
+      // As each .sc section enters the viewport, its .sc-anim elements fade/rise
+      // in once, in DOM order, staggered by the section's data-step (default
+      // STEP). Runs on all devices; if .js-reveal is absent (no JS), .sc-anim
+      // never hides and everything shows in plain document flow.
+      const STEP = 450;
+
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const sc = entry.target;
+          obs.unobserve(sc);
+          const step = Number(sc.dataset.step) || STEP;
+          [...sc.querySelectorAll('.sc-anim')].forEach((el, i) => {
+            setTimeout(() => el.classList.add('sc-anim-visible'), i * step);
+          });
+        });
+      }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
+
+      document.querySelectorAll('.sc').forEach(sc => io.observe(sc));
     })();
   </script>
 </body>

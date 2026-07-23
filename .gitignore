@@ -2,6 +2,8 @@
 # Dependency directories
 node_modules/
 dist/
+# Astro build cache / generated types
+.astro/
 .build/
 .cache/
 .sass-cache/
