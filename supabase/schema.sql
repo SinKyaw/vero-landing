@@ -82,6 +82,18 @@ create policy "admins read allowlist"
   on public.admins for select
   using (public.is_admin());
 
+-- ── Data API grants (least privilege) ────────────────────────────────────
+-- With "Automatically expose new tables" DISABLED in project settings, new
+-- tables get NO Data API access by default. We grant only what's needed; the
+-- RLS policies above still decide which rows each role may touch.
+--   anon          = website visitors (server reads published posts)
+--   authenticated = a logged-in founder (writes/edits posts)
+-- The `admins` table is deliberately NOT granted: the client never queries it
+-- directly — is_admin() is SECURITY DEFINER and reads it internally.
+grant select on public.posts to anon;
+grant select, insert, update, delete on public.posts to authenticated;
+grant execute on function public.is_admin() to anon, authenticated;
+
 -- ── Storage: blog images ─────────────────────────────────────────────────
 -- Public bucket so <img> URLs work for visitors; only admins can upload.
 insert into storage.buckets (id, name, public)
