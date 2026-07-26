@@ -48,7 +48,17 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   }
 
   const isPublished = status === 'published';
-  const { html, text, cover } = await renderPost(content);
+
+  // Rendering the BlockNote doc to HTML runs a server-side editor that can throw;
+  // surface a real message instead of a bare 500 the client can't read.
+  let html: string, text: string, cover: string | null;
+  try {
+    ({ html, text, cover } = await renderPost(content));
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : String(err);
+    return json({ error: `Could not render post content: ${detail}` }, 500);
+  }
+
   const readTime = readTimeFromText(text);
   const excerpt = text.slice(0, 160);
 
