@@ -1,23 +1,22 @@
 ---
 // Site navbar — shared across every page. Links are root-relative so they work
-// from any route. The white logo shows at the top of the page and cross-fades
-// to the teal logo on scroll (driven by --navbar-progress, set in BaseLayout's
-// scroll script). The mobile "Download" button + hamburger are toggled by CSS.
+// from any route. The bar is white; the teal wordmark and dark links sit on it,
+// and a soft drop-shadow grows on scroll (driven by --navbar-progress, set in
+// BaseLayout's scroll script). The mobile "Download" button + hamburger are
+// toggled by CSS.
 ---
 
 <nav class="navbar">
   <div class="navbar-inner">
     <a href="/" class="navbar-logo">
-      <img src="/assets/logo-white.png" alt="Vero logo" class="navbar-logo-img navbar-logo-white" />
-      <img src="/assets/logo-primary.png" alt="" aria-hidden="true" class="navbar-logo-img navbar-logo-teal" />
+      <img src="/assets/logo-primary.png" alt="Vero logo" class="navbar-logo-img" />
     </a>
     <ul class="navbar-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/#features">Features</a></li>
       <li><a href="/about-us">About Us</a></li>
+      <li><a href="/blog">Blog</a></li>
       <li><a href="/#pricing">Pricing</a></li>
       <li><a href="/affiliate">Affiliate</a></li>
-      <li><a href="/blog">Blog</a></li>
       <!-- CTA shown only inside the mobile dropdown (desktop uses .navbar-right) -->
       <li class="navbar-menu-cta"><a href="#download-options" class="js-download-choice">Download Vero</a></li>
     </ul>

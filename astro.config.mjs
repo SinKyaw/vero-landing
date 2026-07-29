@@ -22,7 +22,9 @@ export default defineConfig({
   redirects: {
     '/about-us.html': { status: 301, destination: '/about-us' },
     '/affiliate.html': { status: 301, destination: '/affiliate' },
-    '/how-it-works.html': { status: 301, destination: '/how-it-works' },
+    // The standalone How-it-Works page was removed; send its old URLs home.
+    '/how-it-works': { status: 301, destination: '/' },
+    '/how-it-works.html': { status: 301, destination: '/' },
     '/privacy-policy.html': { status: 301, destination: '/privacy-policy' },
     '/terms.html': { status: 301, destination: '/terms' },
     '/post.html': { status: 301, destination: '/blog' },

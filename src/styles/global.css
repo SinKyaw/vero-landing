@@ -189,22 +189,19 @@ body::before {
 }
 
 .navbar-inner {
-  /* Diagonal vibrant-teal → deep-teal gradient. Kept dark enough that the
-     white logo and light links stay legible, but with a wider, angled range
-     than a flat bar so it reads as an intentional gradient. Both stops carry
-     --navbar-opacity so the scroll fade still works. */
-  background: linear-gradient(
-    130deg,
-    rgba(0, 138, 122, var(--navbar-opacity, 1)) 0%,
-    rgba(0, 58, 52, var(--navbar-opacity, 1)) 100%
-  );
+  /* Solid white bar. It sits on the near-white page background (--color-bg),
+     so the subtle tone difference gives the contrast. A soft drop-shadow grows
+     with --navbar-progress (0 at top → 1 scrolled) so the bar lifts off the
+     content as you scroll. */
+  background: #ffffff;
   display: flex;
   align-items: center;
   padding: 14px 28px;
-  backdrop-filter: blur(var(--navbar-blur, 0px));
-  -webkit-backdrop-filter: blur(var(--navbar-blur, 0px));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 32px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0, 81, 73, 0.08);
+  box-shadow:
+    0 1px 2px rgba(0, 81, 73, 0.04),
+    0 calc(var(--navbar-progress, 0) * 16px) calc(var(--navbar-progress, 0) * 40px)
+      rgba(0, 81, 73, calc(var(--navbar-progress, 0) * 0.12));
   border-radius: var(--glass-radius);
 }
 
@@ -221,33 +218,12 @@ body::before {
   line-height: 0;
 }
 
-/* Navbar logo crossfade: white wordmark on the dark bar at the top, fading to
-   the teal wordmark as the bar goes transparent on scroll. Driven by
-   --navbar-progress (0 at top → 1 scrolled), the same variable the links use. */
+/* Teal wordmark on the white bar. */
 .navbar-logo-img {
   height: 32px;
   width: auto;
   display: block;
-  transition: opacity 0.25s ease;
 }
-.navbar-logo-teal {
-  /* Sits on top of the white wordmark, sized naturally (inherits the 32px
-     height / auto width from .navbar-logo-img) — NOT stretched to the anchor,
-     which is flex:1 and would blow the logo up super wide. */
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.navbar-logo-white {
-  opacity: calc(1 - var(--navbar-progress, 0));
-}
-.navbar-logo-teal {
-  opacity: var(--navbar-progress, 0);
-}
-/* Mobile menu open = solid dark bar, so keep the white wordmark regardless
-   of how far the page was scrolled before opening the menu. */
-.navbar.open .navbar-logo-white { opacity: 1; }
-.navbar.open .navbar-logo-teal { opacity: 0; }
 
 .navbar-right {
   flex: 1;
@@ -266,28 +242,17 @@ body::before {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 14px;
-  /* Light label on the dark bar at the top; darkens toward the brand teal as
-     the navbar fades transparent on scroll (driven by --navbar-progress). */
-  color: color-mix(in srgb,
-    var(--color-glow-1),
-    var(--color-secondary) calc(var(--navbar-progress, 0) * 100%));
+  /* Dark brand teal on the white bar. */
+  color: var(--color-secondary);
   text-decoration: none;
   padding: 6px 12px;
   border-radius: 6px;
   transition: background 0.2s ease, color 0.2s ease;
-  /* The dark drop-shadow only helps over the dark bar — fade it out in step. */
-  text-shadow: 0 1px 6px rgba(0, 0, 0, calc(0.45 * (1 - var(--navbar-progress, 0))));
 }
 
 .navbar-links a:hover {
-  /* Pill + text both shift from light-on-dark to dark-on-light so the hover
-     stays legible whether the bar is opaque or transparent. */
-  background: color-mix(in srgb,
-    rgba(255, 255, 255, 0.14),
-    rgba(0, 81, 73, 0.10) calc(var(--navbar-progress, 0) * 100%));
-  color: color-mix(in srgb,
-    #ffffff,
-    var(--color-secondary) calc(var(--navbar-progress, 0) * 100%));
+  background: rgba(0, 81, 73, 0.08);
+  color: var(--color-primary-solid);
 }
 
 /* CTA menu item — only shown inside the mobile dropdown (see media query). */
@@ -303,16 +268,15 @@ body::before {
   position: relative;
   z-index: 131;
   margin: 0 auto;
-  /* Opaque horizontal gradient — identical to the panel, so the two read as one
-     continuous surface. Square the bottom corners and drop the bottom border so
-     the panel joins flush with no seam line or corner gaps. */
-  background: linear-gradient(90deg, rgb(0, 138, 122) 0%, rgb(0, 58, 52) 100%);
+  /* Solid white — identical to the panel, so the two read as one continuous
+     surface. Square the bottom corners and drop the bottom border so the panel
+     joins flush with no seam line or corner gaps. */
+  background: #ffffff;
   border-bottom: none;
   border-radius: var(--glass-radius) var(--glass-radius) 0 0;
-  /* Remove the downward drop shadow while open — it was falling on the panel's
-     top edge and reading as a separating line. Keep only the inset top sheen;
-     the panel below carries the combined drop shadow. */
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  /* Drop the scroll shadow while open — the panel below carries the combined
+     drop shadow. */
+  box-shadow: none;
 }
 
 .navbar.open .navbar-logo,
@@ -333,12 +297,12 @@ body::before {
 }
 
 .navbar.open .navbar-links a {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-secondary);
 }
 
 .navbar.open .navbar-links a:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-primary-solid);
+  background: rgba(0, 81, 73, 0.08);
 }
 
 
@@ -370,23 +334,35 @@ body::before {
 
 /* ── Hero Section ── */
 .hero {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: clamp(40px, min(8.9vh, 6.7vw), 80px) 24px clamp(28px, min(6.7vh, 5vw), 60px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   gap: clamp(22px, min(6.2vh, 4.7vw), 56px);
 }
 
+/* Desktop hero = two columns: text on the left, Verdi avatar on the right,
+   vertically centered against each other. Stacks to a single centered column
+   on mobile (see the <=1100px block). */
 .hero-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: clamp(14px, min(3.1vh, 2.3vw), 28px);
-  max-width: 820px;
+  justify-content: space-between;
+  gap: clamp(28px, 5vw, 72px);
   width: 100%;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: clamp(14px, min(3.1vh, 2.3vw), 28px);
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 /* Social Proof Badge */
@@ -492,7 +468,7 @@ body::before {
   color: var(--color-text-muted);
   max-width: 540px;
   line-height: 1.7;
-  text-align: center;
+  text-align: inherit;
 }
 
 /* Primary CTA */
@@ -556,7 +532,7 @@ body::before {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .hero-cta-secondary {
@@ -1029,6 +1005,100 @@ body::before {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   color: var(--color-text-muted);
+}
+
+/* ── "Tired of being broke" scattered-receipts composition ──
+   A relative "canvas": centered title + subtext lifted above a bottom-anchored
+   elephant, with expense cards absolutely scattered around. Positions and
+   rotations are intentionally approximate — tune each .broke-card--* freely. */
+
+/* The deck-mode band (.js-fade-sections) centers its flex child, which would
+   otherwise collapse this section to the narrow title width and trap the cards
+   in a skinny column. Force it to stretch so the scene spans the full band. */
+.section-band--problem .section {
+  align-self: stretch;
+  width: 100%;
+}
+
+.broke-scene {
+  position: relative;
+  width: 100%;
+  /* Wide landscape band — fills the section so the cards can spread out to the
+     left/right margins, well clear of the centered title. */
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: clamp(600px, 80vh, 780px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Title + subtext group, lifted above the elephant at the bottom. Capped narrow
+   so there's a big empty gap between it and the cards hugging the edges. */
+.broke-center {
+  position: relative;
+  z-index: 3;
+  max-width: 520px;
+  margin-bottom: clamp(170px, 24vw, 300px);
+}
+
+/* Elephant: largest single element, anchored to the bottom-center of the canvas. */
+.broke-elephant {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: clamp(240px, 32vw, 420px);
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Scattered "receipt" cards. */
+.broke-card {
+  position: absolute;
+  width: clamp(88px, 8vw, 132px);
+  height: auto;
+  z-index: 1;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.28));
+}
+
+/* Approximate positions + alternating left/right tilt. Left/right cards hug the
+   outer edges so the centered title has clear space; tune each freely. */
+.broke-card--video   { top: 3%;   left: 37%;  transform: rotate(-5deg); }
+.broke-card--cafe    { top: 9%;   left: 3%;   transform: rotate(-7deg); }
+.broke-card--rent    { top: 42%;  left: 0;    transform: rotate(5deg); }
+.broke-card--tube    { top: 71%;  left: 4%;   transform: rotate(-4deg); }
+.broke-card--fashion { top: 8%;   right: 3%;  transform: rotate(6deg); }
+.broke-card--music   { top: 42%;  right: 0;   transform: rotate(-5deg); }
+.broke-card--movie   { top: 71%;  right: 4%;  transform: rotate(6deg); }
+.broke-card--grocery { bottom: 6%; left: 24%; transform: rotate(-6deg); }
+.broke-card--online  { bottom: 8%; right: 22%; transform: rotate(7deg); }
+
+/* Mobile: thin the scatter to four corner cards so nothing overlaps. */
+@media (max-width: 768px) {
+  .broke-scene {
+    min-height: clamp(440px, 92vw, 560px);
+  }
+  .broke-card--mobile-hide {
+    display: none;
+  }
+  .broke-card {
+    width: clamp(64px, 22vw, 96px);
+  }
+  .broke-center {
+    max-width: 88%;
+    margin-bottom: clamp(150px, 44vw, 240px);
+  }
+  .broke-elephant {
+    width: clamp(200px, 56vw, 300px);
+  }
+  .broke-card--cafe    { top: 6%;   left: 2%; }
+  .broke-card--fashion { top: 5%;   right: 2%; }
+  .broke-card--grocery { bottom: 4%; left: 4%; }
+  .broke-card--online  { bottom: 6%; right: 4%; }
 }
 
 /* ── Insight / Core Belief Section ── */
@@ -1982,8 +2052,8 @@ body::before {
 .site-footer {
   width: 100%;
   padding: 48px 24px 40px;
-  background: rgb(0, 81, 73);
-  border-top: none;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 81, 73, 0.08);
   box-sizing: border-box;
 }
 
@@ -2007,14 +2077,14 @@ body::before {
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
   font-size: 22px;
-  color: #ffffff;
+  color: var(--color-secondary);
   text-decoration: none;
 }
 
 .footer-tagline {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-muted);
   max-width: 260px;
 }
 
@@ -2035,30 +2105,30 @@ body::before {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #ffffff;
+  color: var(--color-secondary);
   margin-bottom: 4px;
 }
 
 .footer-column a {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .footer-column a:hover {
-  color: #ffffff;
+  color: var(--color-primary-solid);
 }
 
 .footer-bottom {
   margin-top: 20px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(0, 81, 73, 0.10);
   text-align: center;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-text-muted);
 }
 
 /* ── Mobile Hamburger ── */
@@ -2082,7 +2152,7 @@ body::before {
   display: block;
   width: 22px;
   height: 2px;
-  background: #ffffff;
+  background: var(--color-secondary);
   border-radius: 2px;
 }
 
@@ -2098,9 +2168,17 @@ body::before {
     padding-bottom: 40px;
   }
 
+  /* Stack the two hero columns: centered text, buttons, then avatar last. */
   .hero-content {
+    flex-direction: column;
+    align-items: center;
     padding-top: 20px;
     gap: 20px;
+  }
+
+  .hero-text {
+    align-items: center;
+    text-align: center;
   }
 
   .hero-headline {
@@ -2114,6 +2192,8 @@ body::before {
 
   .hero-cta-row {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 12px;
   }
 
@@ -2155,14 +2235,13 @@ body::before {
     left: -1px;
     right: -1px;
     box-sizing: border-box;
-    /* Opaque horizontal gradient (left → right). Same colours + geometry as the
-       open bar; because a 90deg gradient depends only on x, the aligned edges
-       make bar + panel meet seamlessly. */
-    background: linear-gradient(90deg, rgb(0, 138, 122) 0%, rgb(0, 58, 52) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    /* Solid white — same fill as the open bar, so bar + panel read as one
+       continuous surface unrolling out of the toolbar. */
+    background: #ffffff;
+    border: 1px solid rgba(0, 81, 73, 0.08);
     border-top: none;
     border-radius: 0 0 var(--glass-radius) var(--glass-radius);
-    box-shadow: 0 14px 48px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 14px 48px rgba(0, 81, 73, 0.14);
     max-height: 0;
     padding: 0 10px;
     opacity: 0;
@@ -2190,7 +2269,7 @@ body::before {
     text-align: center;
     margin-top: 8px;
     padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-top: 1px solid rgba(0, 81, 73, 0.10);
   }
   .navbar.open .navbar-menu-cta a {
     display: inline-block;
@@ -3119,7 +3198,12 @@ body.menu-open {
    sections don't read as one flat white expanse. Kept very low so text
    contrast and the background glow are unaffected. */
 .section-band--problem {
-  background: color-mix(in srgb, var(--accent-blue) 4%, transparent);
+  background: #005149;
+}
+/* Dark section → pure white title + body (scoped so other sections are unaffected). */
+.section-band--problem .section-headline,
+.section-band--problem .section-body {
+  color: #ffffff;
 }
 .section-band--features {
   background: color-mix(in srgb, var(--accent-teal) 5%, transparent);
@@ -3201,10 +3285,11 @@ body.menu-open {
 }
 
 .hero-verdi {
-  width: 360px;
+  width: clamp(300px, 34vw, 440px);
   height: auto;
   display: block;
-  margin: 0 auto;
+  flex: 0 0 auto;
+  margin: 0;
   padding: 2px;
   filter: drop-shadow(0 8px 24px rgba(0, 192, 172, 0.20));
   transform: translateZ(0);
@@ -3217,6 +3302,7 @@ body.menu-open {
 
   .hero-verdi {
     width: 300px;
+    margin: 0 auto;
   }
 }
 

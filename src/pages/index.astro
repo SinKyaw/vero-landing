@@ -12,29 +12,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ── Hero Section ── -->
   <section id="hero" class="hero">
     <div class="hero-content">
-      <!-- Hero Headline -->
-      <h1 class="hero-headline" aria-label="Enjoy Life Because of Saving.">
-        <span id="typewriter-line1"></span><br />
-        <span id="typewriter-despite"></span><span id="typewriter-line2"></span><span id="typewriter-suffix"></span><span class="typewriter-cursor">|</span>
-      </h1>
+      <!-- Left column: title + subheadline + buttons -->
+      <div class="hero-text">
+        <!-- Hero Headline -->
+        <h1 class="hero-headline" aria-label="Enjoy Life Because of Saving.">
+          <span id="typewriter-line1"></span><br />
+          <span id="typewriter-despite"></span><span id="typewriter-line2"></span><span id="typewriter-suffix"></span><span class="typewriter-cursor">|</span>
+        </h1>
 
-      <!-- Subheadline -->
-      <p class="hero-subheadline">
-        Made by Gen Z, built for Gen Z.
-      </p>
+        <!-- Subheadline -->
+        <p class="hero-subheadline">
+          Made by Gen Z, built for Gen Z.
+        </p>
 
-      <!-- Verdi mascot -->
-      <img src="/assets/verdi-logging-expense.png" alt="Verdi, your financial companion" class="hero-verdi" />
-
-      <!-- CTA Buttons -->
-      <div class="hero-cta-row">
-        <a class="hero-cta js-download-choice" href="#download-options">
-          Try for Free
-        </a>
-        <a class="hero-cta-secondary" href="#features">
-          See how it works
-        </a>
+        <!-- CTA Buttons (always directly under the title, never under the image) -->
+        <div class="hero-cta-row">
+          <a class="hero-cta js-download-choice" href="#download-options">
+            Try for Free
+          </a>
+          <a class="hero-cta-secondary" href="#features">
+            See how it works
+          </a>
+        </div>
       </div>
+
+      <!-- Right column: Verdi mascot (drops below the buttons when stacked) -->
+      <img src="/assets/verdi-logging-expense.png" alt="Verdi, your financial companion" class="hero-verdi" />
     </div>
   </section>
 
@@ -42,32 +45,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="section-band section-band--problem">
     <section id="problem" class="section">
       <div class="sc" data-step="220">
-        <div class="problem">
-          <div class="problem-copy">
-            <p class="section-label sc-anim">The Problem</p>
+        <!-- Scattered-receipts composition: centered title + subtext, a bottom-
+             anchored elephant anchor, and expense "receipt" cards loosely
+             scattered around. Positions/rotations are approximate — treat as a
+             loose composition, easy to fine-tune per card below. Cards marked
+             .broke-card--mobile-hide drop off on small screens. -->
+        <div class="broke-scene">
+          <!-- Top center-ish -->
+          <img src="/assets/Video.png" alt="Video subscription" class="broke-card broke-card--video broke-card--mobile-hide" />
+
+          <!-- Left column: cafe (upper) → rent (mid) → tube (lower) -->
+          <img src="/assets/Cafe.png" alt="Cafe" class="broke-card broke-card--cafe" />
+          <img src="/assets/Rent.png" alt="Rent" class="broke-card broke-card--rent broke-card--mobile-hide" />
+          <img src="/assets/Tube.png" alt="Tube fare" class="broke-card broke-card--tube broke-card--mobile-hide" />
+
+          <!-- Right column: fashion (upper) → music (mid) → movie (lower) -->
+          <img src="/assets/Fashion.png" alt="Fashion" class="broke-card broke-card--fashion" />
+          <img src="/assets/Music.png" alt="Music subscription" class="broke-card broke-card--music broke-card--mobile-hide" />
+          <img src="/assets/Movie.png" alt="Movie" class="broke-card broke-card--movie broke-card--mobile-hide" />
+
+          <!-- Bottom, flanking the elephant -->
+          <img src="/assets/Grocery.png" alt="Grocery" class="broke-card broke-card--grocery" />
+          <img src="/assets/Online.png" alt="Online shopping" class="broke-card broke-card--online" />
+
+          <!-- Center: title + subtext, vertically centered as a group -->
+          <div class="broke-center">
             <h2 class="section-headline sc-anim">Tired of Always Feeling Broke?</h2>
             <p class="section-body sc-anim">
-              It's not about how much money you make — it's about <span class="hl">how you manage it</span>.
-              In today's world, spending is frictionless. One-click checkouts, targeted ads, and constant scrolling make
-              it easy to lose control without realising it.
+              Life pulls your money in every direction, but not your pocket.
             </p>
-            <!-- Placeholder image — swap for the final art later -->
-            <img src="/assets/verdi-sleep.png" alt="" aria-hidden="true" class="problem-image sc-anim" />
           </div>
-          <div class="problem-stats">
-            <div class="stat-card sc-anim sc-anim--right">
-              <div class="stat-number" data-target="56" data-suffix="%">0%</div>
-              <div class="stat-label">say impulse purchases are their biggest budgeting challenge</div>
-            </div>
-            <div class="stat-card sc-anim sc-anim--right">
-              <div class="stat-number" data-target="17000" data-prefix="£" data-separator=",">£0</div>
-              <div class="stat-label">lost over 5 years from £8/day unplanned purchases</div>
-            </div>
-            <div class="stat-card sc-anim sc-anim--right">
-              <div class="stat-number" data-target="49" data-suffix="%">0%</div>
-              <div class="stat-label">of UK Gen Z feel stressed or anxious about money most of the time</div>
-            </div>
-          </div>
+
+          <!-- Visual anchor: elephant, largest element, bottom-aligned -->
+          <img src="/assets/broke_verdi.png" alt="Verdi the elephant, feeling broke" class="broke-elephant" />
         </div>
       </div>
     </section>
