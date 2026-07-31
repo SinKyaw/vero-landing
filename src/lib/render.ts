@@ -1,33 +1,11 @@
-import sanitizeHtml from 'sanitize-html';
-
-// Defense-in-depth: even though only trusted founders author posts, scrub the
-// rendered HTML to a safe allowlist (no scripts, no javascript: URLs, no inline
-// styles/event handlers) before it's stored/served.
-const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
-  allowedTags: [
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'p', 'br', 'hr',
-    'ul', 'ol', 'li',
-    'strong', 'b', 'em', 'i', 'u', 's', 'strike', 'code', 'pre',
-    'blockquote', 'a', 'img',
-  ],
-  allowedAttributes: {
-    a: ['href', 'target', 'rel'],
-    img: ['src', 'alt', 'title'],
-  },
-  allowedSchemes: ['http', 'https', 'mailto'],
-  allowedSchemesByTag: { img: ['http', 'https'] },
-  // Any link with target=_blank gets rel=noopener noreferrer.
-  transformTags: {
-    a: (tagName, attribs) => ({
-      tagName,
-      attribs: {
-        ...attribs,
-        ...(attribs.target === '_blank' ? { rel: 'noopener noreferrer' } : {}),
-      },
-    }),
-  },
-};
+// Safety model: this renderer emits HTML *by construction*, never by passing
+// through author-supplied markup. Every text run is HTML-escaped (`escapeHtml`),
+// every URL is validated to http(s)/mailto and escaped (`safeUrl`), and only a
+// fixed allowlist of tags with fixed attributes is produced — there is no path
+// for scripts, event handlers, or arbitrary attributes to reach the output. So
+// a separate sanitizer pass is unnecessary. (We previously used `sanitize-html`
+// here, but it's CommonJS and `require()`s an ESM-only `htmlparser2`, which
+// crashes the serverless function on Vercel with ERR_REQUIRE_ESM.)
 
 export interface RenderedPost {
   /** Semantic HTML (h1–h3, p, ul/ol/li, img, strong/em) — matches the blog CSS. */
@@ -161,8 +139,8 @@ export async function renderPost(document: unknown): Promise<RenderedPost> {
   const blocks = Array.isArray(document) ? (document as BlockNoteBlock[]) : [];
   if (blocks.length === 0) return { html: '', text: '', cover: null };
 
-  const rawHtml = renderBlocks(blocks);
-  const html = sanitizeHtml(rawHtml, SANITIZE_OPTIONS);
+  // Safe by construction (see note at top) — no post-hoc sanitizer needed.
+  const html = renderBlocks(blocks);
 
   const text = html
     .replace(/<[^>]+>/g, ' ')

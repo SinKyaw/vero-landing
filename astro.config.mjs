@@ -29,5 +29,14 @@ export default defineConfig({
     '/terms.html': { status: 301, destination: '/terms' },
     '/post.html': { status: 301, destination: '/blog' },
     '/post': { status: 301, destination: '/blog' },
+    // Convenience: tacking `/admin` onto any static page jumps to the admin area
+    // (302, not cached as permanent). These must be explicit edge redirects
+    // because unmatched paths never reach the middleware on Vercel's static
+    // output. `/blog/admin` is handled by the middleware (it hits /blog/[slug]).
+    // Add a line here for any NEW top-level page.
+    '/about-us/admin': { status: 302, destination: '/admin' },
+    '/affiliate/admin': { status: 302, destination: '/admin' },
+    '/privacy-policy/admin': { status: 302, destination: '/admin' },
+    '/terms/admin': { status: 302, destination: '/admin' },
   },
 });
