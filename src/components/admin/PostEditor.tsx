@@ -88,6 +88,8 @@ export default function PostEditor({ post, defaultAuthorEmail }: Props) {
 
     const res = await fetch('/admin/api/save', {
       method: 'POST',
+      credentials: 'same-origin',
+      redirect: 'manual',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: post?.id ?? 'new',
@@ -100,9 +102,16 @@ export default function PostEditor({ post, defaultAuthorEmail }: Props) {
       }),
     });
 
-    const data = await res.json().catch(() => ({}));
+    if (res.type === 'opaqueredirect' || (res.status >= 300 && res.status < 400)) {
+      setError('Your admin session expired. Log in again, then save the post.');
+      setSaving(false);
+      return;
+    }
+
+    const contentType = res.headers.get('Content-Type') ?? '';
+    const data = contentType.includes('application/json') ? await res.json().catch(() => ({})) : {};
     if (!res.ok) {
-      setError(data.error || 'Save failed.');
+      setError(data.error || `Save failed (${res.status}).`);
       setSaving(false);
       return;
     }

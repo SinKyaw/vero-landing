@@ -92,7 +92,9 @@ create policy "admins read allowlist"
 -- directly — is_admin() is SECURITY DEFINER and reads it internally.
 grant select on public.posts to anon;
 grant select, insert, update, delete on public.posts to authenticated;
-grant execute on function public.is_admin() to anon, authenticated;
+grant select, insert, update, delete on public.posts to service_role;
+grant select, insert, update, delete on public.admins to service_role;
+grant execute on function public.is_admin() to anon, authenticated, service_role;
 
 -- ── Storage: blog images ─────────────────────────────────────────────────
 -- Public bucket so <img> URLs work for visitors; only admins can upload.

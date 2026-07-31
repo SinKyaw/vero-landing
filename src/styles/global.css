@@ -1059,23 +1059,36 @@ body::before {
 /* Scattered "receipt" cards. */
 .broke-card {
   position: absolute;
-  width: clamp(88px, 8vw, 132px);
+  width: clamp(120px, 11vw, 184px);
   height: auto;
   z-index: 1;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.28));
+  /* Use the independent `rotate`/`translate` properties so the float animation
+     (which drives `translate`) never fights the per-card tilt (`rotate`). */
+  rotate: var(--tilt, 0deg);
+  animation: broke-float 6s ease-in-out infinite;
+  will-change: translate;
+}
+
+/* Gentle bob so the receipts feel like they're floating around Verdi. */
+@keyframes broke-float {
+  0%,
+  100% { translate: 0 0; }
+  50%  { translate: 0 -14px; }
 }
 
 /* Approximate positions + alternating left/right tilt. Left/right cards hug the
-   outer edges so the centered title has clear space; tune each freely. */
-.broke-card--video   { top: 3%;   left: 37%;  transform: rotate(-5deg); }
-.broke-card--cafe    { top: 9%;   left: 3%;   transform: rotate(-7deg); }
-.broke-card--rent    { top: 42%;  left: 0;    transform: rotate(5deg); }
-.broke-card--tube    { top: 71%;  left: 4%;   transform: rotate(-4deg); }
-.broke-card--fashion { top: 8%;   right: 3%;  transform: rotate(6deg); }
-.broke-card--music   { top: 42%;  right: 0;   transform: rotate(-5deg); }
-.broke-card--movie   { top: 71%;  right: 4%;  transform: rotate(6deg); }
-.broke-card--grocery { bottom: 6%; left: 24%; transform: rotate(-6deg); }
-.broke-card--online  { bottom: 8%; right: 22%; transform: rotate(7deg); }
+   outer edges so the centered title has clear space; tune each freely. The
+   staggered delay/duration keeps the bob from moving in lockstep. */
+.broke-card--video   { top: 3%;   left: 37%;  --tilt: -5deg; width: clamp(150px, 14vw, 230px); animation-delay: -0.2s; animation-duration: 5.5s; }
+.broke-card--cafe    { top: 9%;   left: 9%;   --tilt: -7deg; animation-delay: -1.1s; animation-duration: 6.4s; }
+.broke-card--rent    { top: 42%;  left: 0;    --tilt: 5deg;  animation-delay: -2.3s; animation-duration: 5.8s; }
+.broke-card--tube    { top: 71%;  left: 4%;   --tilt: -4deg; animation-delay: -0.7s; animation-duration: 6.7s; }
+.broke-card--fashion { top: 8%;   right: 9%;  --tilt: 6deg;  animation-delay: -1.6s; animation-duration: 6.1s; }
+.broke-card--music   { top: 42%;  right: 0;   --tilt: -5deg; animation-delay: -2.9s; animation-duration: 5.6s; }
+.broke-card--movie   { top: 71%;  right: 4%;  --tilt: 6deg;  animation-delay: -0.4s; animation-duration: 6.9s; }
+.broke-card--grocery { bottom: 6%; left: 24%; --tilt: -6deg; width: clamp(150px, 14vw, 224px); animation-delay: -1.9s; animation-duration: 6.2s; }
+.broke-card--online  { bottom: 8%; right: 22%; --tilt: 7deg; animation-delay: -3.1s; animation-duration: 5.9s; }
 
 /* Mobile: thin the scatter to four corner cards so nothing overlaps. */
 @media (max-width: 768px) {
@@ -1086,7 +1099,7 @@ body::before {
     display: none;
   }
   .broke-card {
-    width: clamp(64px, 22vw, 96px);
+    width: clamp(88px, 28vw, 128px);
   }
   .broke-center {
     max-width: 88%;
@@ -3197,8 +3210,55 @@ body.menu-open {
 /* A whisper of tint (distinct hues) gives the page rhythm so consecutive
    sections don't read as one flat white expanse. Kept very low so text
    contrast and the background glow are unaffected. */
+/* Wavy TOP edge (bottom stays flat). Rather than covering the top strip with a
+   flat page-coloured shape — which hid the site's grain/glow and read as a plain
+   white patch — the teal is made ADDITIVE: the band background is transparent for
+   the top `--wave-depth`, then solid teal below, and a teal wave SVG fills that
+   strip up to a curvy crest. The dips stay transparent so the real (grainy) page
+   background shows through, and a soft drop-shadow traces the curve for depth.
+   One undulation (dips left) into one crest (rises right). */
 .section-band--problem {
-  background: #005149;
+  position: relative;
+  --wave-depth: clamp(52px, 6.5vw, 104px);
+  /* Shift the whole wave up above the band's top edge (same shape, translated). */
+  --wave-rise: clamp(30px, 4vw, 60px);
+  /* Teal starts 2px ABOVE the wave layer's bottom so the two teal fills overlap —
+     no hairline seam between the wave strip and the section body. */
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--wave-depth) - var(--wave-rise) - 2px),
+    #005149 calc(var(--wave-depth) - var(--wave-rise) - 2px)
+  );
+}
+/* Layer 1: the teal wave fill (no shadow — a drop-shadow here would trace the
+   straight bottom edge too and show as a horizontal line at the seam). */
+.section-band--problem::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--wave-rise));
+  left: 0;
+  right: 0;
+  height: var(--wave-depth);
+  z-index: 0;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='%23005149' d='M0,100 L0,42 C240,74 480,74 720,52 C960,30 1200,30 1440,46 L1440,100 Z'/%3E%3C/svg%3E") no-repeat;
+  background-size: 100% 100%;
+}
+/* Layer 2: shadow traced ONLY along the curve (a stroked path — no bottom edge),
+   softly blurred, so depth hugs the crest without any seam line. */
+.section-band--problem::after {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--wave-rise));
+  left: 0;
+  right: 0;
+  height: var(--wave-depth);
+  z-index: 0;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='none' stroke='rgba(0,0,0,0.38)' stroke-width='4' d='M0,42 C240,74 480,74 720,52 C960,30 1200,30 1440,46'/%3E%3C/svg%3E") no-repeat;
+  background-size: 100% 100%;
+  filter: blur(3px);
 }
 /* Dark section → pure white title + body (scoped so other sections are unaffected). */
 .section-band--problem .section-headline,

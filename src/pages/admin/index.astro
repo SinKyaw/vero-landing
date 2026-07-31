@@ -18,9 +18,7 @@ const { data: posts } = await supabase
       <h1>Blog posts</h1>
       <div style="display:flex; gap:10px;">
         <a class="admin-btn" href="/admin/edit/new">+ New post</a>
-        <form method="POST" action="/admin/logout">
-          <button class="admin-btn admin-btn--ghost" type="submit">Log out</button>
-        </form>
+        <a class="admin-btn admin-btn--ghost" href="/admin/logout">Log out</a>
       </div>
     </div>
 

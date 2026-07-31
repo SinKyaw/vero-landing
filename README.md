@@ -83,4 +83,24 @@ Scripts defined in `package.json`:
 ## License
 This project is provided as‑is. Feel free to use it as a reference or template.
 
+## Blog Images And Supabase Storage
+Blog images uploaded in the admin editor are stored in the Supabase Storage
+bucket called `blog-images`. On the Supabase Free plan, file storage is limited,
+so keep blog images web-sized before uploading.
+
+Practical guidance:
+- Prefer compressed `.jpg`/`.webp` images for photos.
+- Keep most blog images under about `500 KB` where possible.
+- Avoid uploading original phone/camera images directly if they are multiple MB.
+- The editor currently rejects images over `5 MB`.
+- The first image in a post becomes the blog listing thumbnail.
+
+To check or clean up image usage, open Supabase, then go to:
+
+`Storage` -> `blog-images`
+
+Delete unused uploads there if storage starts creeping up. The main things to
+watch on the Free plan are total Storage size and bandwidth/egress from heavily
+viewed images.
+
 ---

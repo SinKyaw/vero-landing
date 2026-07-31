@@ -25,6 +25,20 @@ async function ensureUniqueSlug(supabase: SupabaseClient, base: string, excludeI
 }
 
 export const POST: APIRoute = async ({ request, cookies }) => {
+  try {
+    return await handleSave({ request, cookies });
+  } catch (err) {
+    // Catch-all so an unexpected exception (missing env var, Supabase client init,
+    // network, etc.) surfaces a readable message instead of a bare HTML 500 the
+    // editor can only report as "Save failed (500)". Logged for Vercel too.
+    const message = err instanceof Error ? err.message : String(err);
+    const stack = err instanceof Error ? err.stack : undefined;
+    console.error('[admin/api/save] Unhandled error:', stack ?? message);
+    return json({ error: `Server error: ${message}`, stack }, 500);
+  }
+};
+
+async function handleSave({ request, cookies }: Pick<Parameters<APIRoute>[0], 'request' | 'cookies'>) {
   const supabase = createServerSupabase(cookies, request);
 
   // Re-verify auth + allowlist server-side (never trust the client).
@@ -100,4 +114,4 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     .single();
   if (error) return json({ error: error.message }, 400);
   return json({ id: data.id, slug: data.slug });
-};
+}
