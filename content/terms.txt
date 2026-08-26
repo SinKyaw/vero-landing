@@ -1,14 +1,10 @@
 These Terms of Service (“Terms”) govern your use of the Vero mobile application and website (together, the “Service”), operated by Vero Financial Ltd, a company registered in England and Wales (company number 16652225) (“Vero”, “we”, “us”, or “our”).
 
-
-
 By creating an account or using Vero, you agree to these Terms. If you do not agree, you must not use the Service.
 
-1.What is Vero (and  is not)
+1. What is Vero (and what it is not)
 
 Vero is a budgeting and financial wellbeing tool designed to help users manually track expenses, reflect on spending habits, and build healthier financial behaviours through insights and gamification.
-
-
 
 Vero is not:
 
@@ -20,27 +16,25 @@ Vero is not:
 
  • An investment platform
 
-
-
 Nothing in the Service constitutes financial, legal, or investment advice.
 
-2. Eligibility
+2. Eligibility and age verification
 
 You must:
 
- • Be at least 18 years old 
+ • Be at least 18 years old
 
  • Be legally capable of entering into a contract
 
-
-
 By using Vero, you confirm that you meet these requirements.
+
+We may, at any time, ask you to verify your age or identity before or after you create an account, access certain features, or claim any reward. We may use one or more methods to do so, including confirming details you provide, using third-party verification providers, or requesting supporting documentation.
+
+If you misrepresent your age or provide false information about your eligibility, we may suspend or terminate your account, withhold or cancel any rewards or benefits, and refuse you further access to the Service. Providing false eligibility information is a breach of these Terms.
 
 3. Your account
 
 To use Vero, you must create an account.
-
-
 
 You are responsible for:
 
@@ -50,15 +44,11 @@ You are responsible for:
 
  • All activity that occurs under your account
 
-
-
 You must notify us immediately if you believe your account has been compromised.
 
 4. How you may use Vero
 
 You agree to use the Service only for lawful, personal purposes.
-
-
 
 You must not:
 
@@ -70,33 +60,37 @@ You must not:
 
  • Use the Service in a way that could harm others or Vero
 
+In addition, in connection with rewards, tokens, referrals, streaks, experience points (“XP”), leaderboards, or any other incentive or gamified feature, you must not:
 
+ • Create or control more than one account, or use another person’s account, to claim or increase rewards, referral bonuses, tokens, or XP
+
+ • Refer yourself, or arrange for others to refer you, in order to obtain a referral bonus or other benefit
+
+ • Use false, duplicate, disposable, or another person’s identity, contact details, or device to register, claim rewards, or earn XP
+
+ • Manipulate, inflate, or falsify streaks, XP, leaderboard positions, or reward eligibility through automated tools, bots, scripts, exploits, or any other fraudulent, deceptive, or artificial means
+
+ • Collude with other users, or coordinate multiple accounts, to gain rewards or advantages not intended by the Service
 
 We reserve the right to suspend or terminate accounts that breach these Terms.
 
-5. User-entered financial data
+5. Your user-entered financial data
 
-To use Vero, you must create an account.
-
-
+All financial data in Vero is entered manually by you.
 
 You are responsible for:
 
- • Keeping your login credentials secure
+ • The accuracy of the data you input
 
- • Ensuring information you provide is accurate
+ • Keeping your account credentials secure
 
  • All activity that occurs under your account
-
-
 
 You must notify us immediately if you believe your account has been compromised.
 
 6. Gamification & insights
 
 Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial habits.
-
-
 
 These features:
 
@@ -106,57 +100,97 @@ These features:
 
  • Should not be relied upon as professional advice
 
-7. Your behaviour towards Vero 
+7. Rewards, Tokens & Referral Programme
 
-7.1 You must not access, interfere with, damage, disrupt, or attempt to compromise any part of the Service, its security measures, servers, systems, networks, or software. This includes introducing any harmful or malicious code, such as viruses, malware, worms, spyware, or similar technologies.
+From time to time, Vero may offer rewards, tokens, referral bonuses, or other benefits (together, “Rewards”) as part of the Service. Your participation in any Rewards or referral programme is subject to this section and any additional rules we publish for a specific promotion.
 
+7.1 One person, one account. Rewards and referrals are for individual personal use. Each person may hold and benefit from only one account for the purposes of earning, claiming, or redeeming Rewards. Rewards and referral bonuses are not transferable and have no cash value except where we state otherwise.
 
+7.2 Verification. We may require you to verify your identity, age, contact details, or device before or after you earn, claim, or redeem any Reward. We may decline or reverse a Reward where verification cannot be completed to our reasonable satisfaction.
 
-7.2 You must not inject content or code, or otherwise alter or interfere with how any part of the Service is displayed or functions on any device or browser.
+7.3 Eligibility conditions and misuse. Rewards are made available only where they are earned in accordance with these Terms and the applicable programme rules. Where we reasonably determine that a Reward was not validly earned — including where it results from multiple or linked accounts, self-referral, false or duplicate identities, automated or artificial activity, or any other breach of section 4 or this section — that Reward is not validly earned and:
 
+ • We may withhold, delay, or decline Rewards that have not yet been redeemed
 
+ • We may reverse or recover the value of Rewards that have already been redeemed
 
-7.3 You must not access or use the Service through unauthorised means, including automated tools such as bots, scripts, crawlers, or scrapers, unless expressly permitted by us.
+ • Unredeemed Rewards and tokens associated with the activity may be cancelled
 
+ • We may make the affected account, and any linked or associated accounts, ineligible for further Rewards
 
+ • We may remove or suspend any accounts we reasonably identify as part of the same pattern of misuse
 
-7.4 You must not modify, adapt, or alter the Service, or any other website or application, in a way that falsely suggests an association with or endorsement by Vero.
+7.4 Changing or ending the programme. We may change, suspend, or withdraw any Rewards or referral programme, or restrict a particular user’s access to Rewards, at any time. We may do this separately from, and without affecting, your general access to the rest of the Service.
 
+7.5 Third-party rewards. Some Rewards may be fulfilled by third parties (see section 10). Your use of those Rewards is also subject to the third party’s own terms.
 
+8. Subscription, billing & payments
 
-7.5 We do not accept unsolicited ideas, suggestions, proposals, or materials unless we have specifically invited them under defined terms.
+Some features of the Service may require a paid subscription (“Subscription”). Where you take out a Subscription, the following terms apply.
 
+8.1 Price and billing cycle. The price of your Subscription and the billing frequency whether monthly or annually will be shown to you at the point of purchase. The current price is £4.99. Unless stated otherwise, prices include applicable taxes.
 
+8.2 Free trial. Where we offer a free trial, it lasts for 7 or 14 days depending on the plan you choose. Unless you cancel before the trial ends, your Subscription will begin automatically and you will be charged the applicable fee.
 
-7.6 If you submit unsolicited content in breach of this section, you agree that we may use, adapt, or develop such content for any purpose without obligation to compensate or credit you.
+8.3 Auto-renewal. Your Subscription renews automatically at the end of each billing period at the then-current price, until you cancel. By subscribing, you authorise us (and our payment processor) to charge your chosen payment method for each renewal.
 
-8. Intellectual property
+8.4 Cancellation. You may cancel your Subscription at any time through our Pricing (located in the settings). Cancellation takes effect at the end of your current billing period. Unless required by law or stated otherwise, you will keep access to paid features until the end of the period you have already paid for, and you will not be charged again after that.
+
+8.5 Refunds. Subscriptions are purchased through the Apple App Store or Google Play, therefore payments and refund requests are handled by the relevant app store under its own terms and refund policies, not directly by Vero. If you would like a refund, you should request it through the app store you purchased from. This does not affect your statutory rights, including any cancellation rights described in section 9.
+
+8.6 Failed payments. If a payment fails, we may retry the charge, suspend your access to paid features, or downgrade your account to the free tier until payment is successfully collected. You remain responsible for any amounts properly due.
+
+8.7 Downgrades. If you downgrade or move to a free tier, you may lose access to paid features, and any content, data, or benefits tied to those features may become unavailable. We will not refund fees already paid except where required by law.
+
+8.8 Price changes. We may change Subscription prices from time to time. We will give you at least 30 days notice of any price change before it takes effect. Price changes will not apply to the billing period you have already paid for. If you do not agree to a price change, you may cancel before it takes effect.
+
+9. Cancellation and cooling-off rights
+
+If you are a consumer, you may have a legal right to cancel a Subscription within 14 days of purchase without giving a reason (the “cooling-off period”).
+
+Because Vero provides digital content and services, you agree that we may begin providing the Service to you during the cooling-off period. Where you have started using the paid Service during the cooling-off period, your right to cancel and receive a refund may be reduced or lost to the extent the Service has been supplied, in accordance with applicable consumer law.
+
+To exercise any cancellation right, contact us at vero.fincorp@gmail.com using the primary email address on your account. This section does not limit any other statutory rights you have as a consumer.
+
+10. Third-party gift cards and rewards partners
+
+Some Rewards, including gift cards, may be supplied and fulfilled by third-party partners or providers (for example, gift-card aggregation providers and the brands whose gift cards are offered).
+
+Vero is not the issuer of these gift cards or third-party rewards. We are not responsible for how partner brands or providers honour, restrict, expire, or otherwise deal with their own gift cards or rewards, including their availability, terms of use, geographic restrictions, or any changes they make to them.
+
+Once a third-party gift card or reward has been issued to you, your use of it is governed by the terms and conditions of the issuing brand or provider. Any dispute about the redemption or honouring of a third-party gift card should be raised with the relevant issuer. Where we are able to assist, we will use reasonable efforts to do so, but we do not guarantee any particular outcome.
+
+11. Your behaviour towards Vero
+
+11.1 You must not access, interfere with, damage, disrupt, or attempt to compromise any part of the Service, its security measures, servers, systems, networks, or software. This includes introducing any harmful or malicious code, such as viruses, malware, worms, spyware, or similar technologies.
+
+11.2 You must not inject content or code, or otherwise alter or interfere with how any part of the Service is displayed or functions on any device or browser.
+
+11.3 You must not access or use the Service through unauthorised means, including automated tools such as bots, scripts, crawlers, or scrapers, unless expressly permitted by us.
+
+11.4 You must not modify, adapt, or alter the Service, or any other website or application, in a way that falsely suggests an association with or endorsement by Vero.
+
+11.5 We do not accept unsolicited ideas, suggestions, proposals, or materials unless we have specifically invited them under defined terms.
+
+11.6 If you submit unsolicited content in breach of this section, you agree that we may use, adapt, or develop such content for any purpose without obligation to compensate or credit you.
+
+12. Intellectual property
 
 All content, software, branding, and design in Vero are owned by or licensed to Vero Financial Ltd.
 
-
-
 You may not copy, modify, distribute, or commercialise any part of the Service without our permission.
 
-9. Web data charges and security 
+13. Web data charges and security
 
-9.1 You are responsible for any data or internet charges incurred when using the Service, including charges from your mobile network or internet provider.
+13.1 You are responsible for any data or internet charges incurred when using the Service, including charges from your mobile network or internet provider.
 
+13.2 While we take reasonable steps to keep the Service secure, we cannot guarantee that it will be free from viruses or other harmful components. You are responsible for maintaining the security of your device and internet connection, including using appropriate protection software.
 
-
-9.2 While we take reasonable steps to keep the Service secure, we cannot guarantee that it will be free from viruses or other harmful components. You are responsible for maintaining the security of your device and internet connection, including using appropriate protection software.
-
-
-
-10. Account suspension and termination
+14. Account suspension and termination
 
 You may delete your account at any time through the app or by contacting us.
 
-
-
 We may suspend or terminate your account if:
-
-
 
  • You breach these Terms
 
@@ -164,15 +198,15 @@ We may suspend or terminate your account if:
 
  • We are required to do so by law
 
+Where we reasonably believe an account is involved in fraud, abuse of Rewards or referrals, or other breaches of these Terms, we may also suspend or terminate any other accounts we reasonably identify as linked to or associated with that account.
 
+We may suspend or withdraw your access to Rewards, the referral programme, or specific features separately from, and without, suspending or terminating your whole account.
 
 Upon termination, your access to the Service will end. To cancel your account email vero.fincorp@gmail.com with your primary email address.
 
-11. Limitation of liability
+15. Limitation of liability
 
 To the maximum extent permitted by law:
-
-
 
  • Vero is provided “as is”
 
@@ -180,23 +214,45 @@ To the maximum extent permitted by law:
 
  • We are not liable for financial decisions you make using the Service
 
-
-
 Nothing in these Terms limits liability where doing so would be unlawful.
 
-12. Changes to the Service or Terms
+16. Indemnification
+
+To the extent permitted by law, you agree to indemnify and hold harmless Vero Financial Ltd, and its directors, officers, employees, and agents, against any claims, losses, liabilities, damages, costs, and reasonable expenses (including reasonable legal fees) arising out of or connected with:
+
+ • Your breach of these Terms
+
+ • Your misuse of the Service
+
+ • Your infringement of any law or of the rights of any third party
+
+This section does not require you to indemnify us for losses caused by our own negligence, our breach of these Terms, or anything else that cannot be excluded under applicable law.
+
+17. Changes to the Service or Terms
 
 We may update the Service or these Terms from time to time as we improve Vero.
 
-
-
 If changes are material, we will take reasonable steps to notify users. Continued use of the Service after changes means you accept the updated Terms.
 
-13. Your privacy 
+18. Your privacy
 
 By using the Service, you agree to the terms of our Privacy Policy, which forms part of these Terms of use and our agreement with you. Click here for more information about our Privacy Policy.
 
-14.  Enquiries & complaints 
+19. Governing law and jurisdiction
+
+These Terms, and any dispute or claim arising out of or in connection with them or their subject matter (including non-contractual disputes or claims), are governed by and construed in accordance with the law of England and Wales.
+
+You and Vero agree that the courts of England and Wales have exclusive jurisdiction to settle any such dispute or claim. If you are a consumer resident elsewhere in the United Kingdom, nothing in this section deprives you of any protection or right to bring proceedings that the law of your home nation gives you.
+
+20. Entire agreement
+
+These Terms, together with our Privacy Policy and any additional rules we publish for specific features or promotions, make up the entire agreement between you and Vero relating to your use of the Service. They replace any earlier agreements, statements, or understandings between us on that subject, except for any statement we made fraudulently.
+
+21. Severability
+
+If any provision of these Terms is found by a court or other competent authority to be invalid, unlawful, or unenforceable, that provision will be treated as removed to the minimum extent necessary, and the remaining provisions will continue in full force and effect.
+
+22. Enquiries & complaints
 
 If you have any questions, concerns, or complaints about the Service, or if you would like to get in touch with us, please contact our support team at vero.fincorp@gmail.com.
 
