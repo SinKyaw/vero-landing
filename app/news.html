@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light only" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Vero News</title>
+  <link rel="icon" href="../assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --glow-top: #DFF5F1;
+      --text: #12312C;
+      --text-body: #2A4340;
+      --divider: rgba(0, 81, 73, 0.10);
+      --chip-bg: #F1F5F4;
+      --header-h: 60px;
+      --pad: 22px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-body);
+      font-family: 'Quicksand', ui-rounded, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: contain;
+    }
+
+    /* Soft mint glow behind the header, as in the app */
+    .glow {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 220px;
+      background: linear-gradient(180deg, var(--glow-top) 0%, rgba(223, 245, 241, 0) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---------- Header ---------- */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(var(--header-h) + env(safe-area-inset-top));
+      padding: env(safe-area-inset-top) var(--pad) 0;
+      background: linear-gradient(180deg, #E4F6F3 0%, rgba(228, 246, 243, 0.92) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header[hidden] { display: none; }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    /* ---------- Article ---------- */
+    .article {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 30px var(--pad) calc(56px + env(safe-area-inset-bottom));
+    }
+
+    .article > * + * { margin-top: 20px; }
+
+    .title {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+
+    .hero {
+      display: block;
+      width: min(74%, 340px);
+      height: auto;
+      margin: 28px auto 32px;
+    }
+
+    p { color: var(--text-body); }
+
+    .section-title {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+      margin-top: 34px;
+    }
+
+    /* ---------- Change blocks ---------- */
+    .change { margin-top: 26px; }
+
+    .change-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .change-head img {
+      flex: 0 0 auto;
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .change-head h3 {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .change p { margin: 0; }
+
+    /* Small phones */
+    @media (max-width: 360px) {
+      :root { --pad: 18px; }
+      body { font-size: 16px; }
+      .title { font-size: 23px; }
+      .change-head img { width: 46px; height: 46px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="header" id="header">
+    <h1>Vero News</h1>
+  </header>
+
+  <main class="article">
+    <h2 class="title">Tokens are more valuable now</h2>
+
+    <img class="hero" src="../assets/vero-news-hero.png" alt="Vero the elephant reading The Vero Post in an armchair" width="512" height="496" />
+
+    <p>Our herd is growing! So many of you have joined Vero recently, and just as many rewards have been redeemed.</p>
+
+    <p>To keep that momentum sustainable for everyone as we scale, we&rsquo;re making a few changes to how tokens work.</p>
+
+    <h3 class="section-title">What changed:</h3>
+
+    <section class="change">
+      <div class="change-head">
+        <img src="../assets/vero-token.png" alt="" width="52" height="52" />
+        <h3>Vero Tokens take a little more consistent effort to earn!</h3>
+      </div>
+      <p>Tracking your expenses will give you only 1 token now, so if you want to get 2 per day &mdash; you got to check that budget daily.</p>
+    </section>
+
+    <section class="change">
+      <div class="change-head">
+        <img src="../assets/vero-xp.png" alt="" width="52" height="52" />
+        <h3>XP matters more than ever!</h3>
+      </div>
+      <p>We&rsquo;re introducing leagues &mdash; tiers based on how active you are. Only the top leagues earns tokens, so start stacking that XP and climb your way out of the Silver Calf League!</p>
+    </section>
+
+    <section class="change">
+      <div class="change-head">
+        <img src="../assets/vero-elephant-face.png" alt="" width="224" height="175" />
+        <h3>Remember!</h3>
+      </div>
+      <p>Good habits are built slowly, not instantly. Making tokens a little harder to earn means the reward means more when it arrives, and the habit sticks longer than the payout does 🐘</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+
+      // Native shells that draw their own nav bar can pass ?header=hidden
+      if (params.get('header') === 'hidden') {
+        document.getElementById('header').hidden = true;
+      }
+    })();
+  </script>
+</body>
+</html>
