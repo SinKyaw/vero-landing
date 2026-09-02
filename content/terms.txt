@@ -34,9 +34,7 @@ If you misrepresent your age or provide false information about your eligibility
 
 3. Your account
 
-To use Vero, you must create an account.
-
-You are responsible for:
+To use Vero, you must create an account. You are responsible for:
 
  • Keeping your login credentials secure
 
@@ -48,9 +46,7 @@ You must notify us immediately if you believe your account has been compromised.
 
 4. How you may use Vero
 
-You agree to use the Service only for lawful, personal purposes.
-
-You must not:
+You agree to use the Service only for lawful, personal purposes. You must not:
 
  • Attempt to access another user’s data
 
@@ -72,13 +68,13 @@ In addition, in connection with rewards, tokens, referrals, streaks, experience 
 
  • Collude with other users, or coordinate multiple accounts, to gain rewards or advantages not intended by the Service
 
+ • Enter, log, or manipulate financial data — including unrealistically small, inflated, or repetitive or near-identical transactions entered on a recurring basis — in order to artificially meet or avoid a budget threshold, challenge target, or other reward or eligibility condition
+
 We reserve the right to suspend or terminate accounts that breach these Terms.
 
 5. Your user-entered financial data
 
-All financial data in Vero is entered manually by you.
-
-You are responsible for:
+All financial data in Vero is entered manually by you. You are responsible for:
 
  • The accuracy of the data you input
 
@@ -88,11 +84,11 @@ You are responsible for:
 
 You must notify us immediately if you believe your account has been compromised.
 
+Data that does not reasonably reflect your actual financial activity, including transactions entered primarily to influence reward or challenge outcomes rather than to track real spending, is not accurate data for the purposes of these Terms.
+
 6. Gamification & insights
 
-Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial habits.
-
-These features:
+Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial habits. These features:
 
  • Are informational and motivational only
 
@@ -108,7 +104,7 @@ From time to time, Vero may offer rewards, tokens, referral bonuses, or other be
 
 7.2 Verification. We may require you to verify your identity, age, contact details, or device before or after you earn, claim, or redeem any Reward. We may decline or reverse a Reward where verification cannot be completed to our reasonable satisfaction.
 
-7.3 Eligibility conditions and misuse. Rewards are made available only where they are earned in accordance with these Terms and the applicable programme rules. Where we reasonably determine that a Reward was not validly earned — including where it results from multiple or linked accounts, self-referral, false or duplicate identities, automated or artificial activity, or any other breach of section 4 or this section — that Reward is not validly earned and:
+7.3 Eligibility conditions and misuse. Rewards are made available only where they are earned in accordance with these Terms and the applicable programme rules. Where we reasonably determine that a Reward was not validly earned — including where it results from multiple or linked accounts, self-referral, false or duplicate identities, automated or artificial activity, spending or transaction data that does not reasonably reflect genuine financial activity (including patterns designed to artificially satisfy a challenge or reward condition), or any other breach of section 4 or this section — that Reward is not validly earned and:
 
  • We may withhold, delay, or decline Rewards that have not yet been redeemed
 
@@ -124,6 +120,10 @@ From time to time, Vero may offer rewards, tokens, referral bonuses, or other be
 
 7.5 Third-party rewards. Some Rewards may be fulfilled by third parties (see section 10). Your use of those Rewards is also subject to the third party’s own terms.
 
+7.6 Monitoring for eligibility. We may review account activity, including manually and through automated systems, to assess whether Rewards have been validly earned in accordance with this section. We are not obliged to disclose the specific methods or criteria used in this review.
+
+7.7 Rewards redemption is final. Once tokens have been redeemed for a reward, that redemption is final and non-refundable.
+
 8. Subscription, billing & payments
 
 Some features of the Service may require a paid subscription (“Subscription”). Where you take out a Subscription, the following terms apply.
@@ -134,15 +134,27 @@ Some features of the Service may require a paid subscription (“Subscription”
 
 8.3 Auto-renewal. Your Subscription renews automatically at the end of each billing period at the then-current price, until you cancel. By subscribing, you authorise us (and our payment processor) to charge your chosen payment method for each renewal.
 
-8.4 Cancellation. You may cancel your Subscription at any time through our Pricing (located in the settings). Cancellation takes effect at the end of your current billing period. Unless required by law or stated otherwise, you will keep access to paid features until the end of the period you have already paid for, and you will not be charged again after that.
+8.4 Cancellation. You may cancel your Subscription at any time through our Plans & Billing section (located in the settings). Cancellation takes effect at the end of your current billing period. Unless required by law or stated otherwise, you will keep access to paid features until the end of the period you have already paid for, and you will not be charged again after that.
 
-8.5 Refunds. Subscriptions are purchased through the Apple App Store or Google Play, therefore payments and refund requests are handled by the relevant app store under its own terms and refund policies, not directly by Vero. If you would like a refund, you should request it through the app store you purchased from. This does not affect your statutory rights, including any cancellation rights described in section 9.
+8.5 Refunds. Because Subscriptions are purchased through the Apple App Store or Google Play, payments and refund requests are handled by the relevant app store under its own terms and refund policies, not directly by Vero. If you would like a refund, you should request it through the app store you purchased from:
 
-8.6 Failed payments. If a payment fails, we may retry the charge, suspend your access to paid features, or downgrade your account to the free tier until payment is successfully collected. You remain responsible for any amounts properly due.
+ • Apple: request a refund via reportaproblem.apple.com or your Apple account settings.
+
+ • Google Play: request a refund through the Google Play Store or Google Play Help.
+
+We do not control whether an app store grants a refund, and app-store refund decisions are subject to their policies. If you believe you have been charged in error — for example, a duplicate charge or a renewal you did not expect — please also contact us at vero.fincorp@gmail.com and we will try to help you resolve it with the relevant app store, although the refund decision remains with them.
+
+Except where the app store grants a refund, or where you have a legal right to one, Subscriptions are non-refundable. In particular, if you cancel partway through a billing period you have already paid for, we do not refund that period — instead, you keep access to paid features until the end of it, and you are not charged again after that. Rewards that have been redeemed are also non-refundable, as described in section 7.7.
+
+Nothing in this section affects your statutory rights as a consumer, including your cancellation rights during the cooling-off period described in section 9, and your right to a refund or other remedy if the Service is faulty or not as described under applicable consumer law.
+
+8.6 Failed payments and grace period. If we are unable to collect a payment when due, you have a 3-day grace period to resolve it before your Subscription is paused or downgraded. We may retry the charge during this period. If payment is still not collected after the grace period, we may suspend your access to paid features or downgrade your account to the free tier until payment is successfully collected. You remain responsible for any amounts properly due.
 
 8.7 Downgrades. If you downgrade or move to a free tier, you may lose access to paid features, and any content, data, or benefits tied to those features may become unavailable. We will not refund fees already paid except where required by law.
 
 8.8 Price changes. We may change Subscription prices from time to time. We will give you at least 30 days notice of any price change before it takes effect. Price changes will not apply to the billing period you have already paid for. If you do not agree to a price change, you may cancel before it takes effect.
+
+8.9 Product changes. Vero is an early-stage startup. Features, rewards, tokens, and perks may be added, changed, or removed at any time as we develop the product. Your core subscription — tracking, insights, and Verdi — will remain consistent in value, but reward-related benefits are provided at our discretion and may change or be removed. By continuing to pay for Vero Plus, you accept these Terms. This does not affect your statutory rights, and nothing in this clause applies except as permitted by applicable consumer law.
 
 9. Cancellation and cooling-off rights
 
@@ -176,9 +188,7 @@ Once a third-party gift card or reward has been issued to you, your use of it is
 
 12. Intellectual property
 
-All content, software, branding, and design in Vero are owned by or licensed to Vero Financial Ltd.
-
-You may not copy, modify, distribute, or commercialise any part of the Service without our permission.
+All content, software, branding, and design in Vero are owned by or licensed to Vero Financial Ltd. You may not copy, modify, distribute, or commercialise any part of the Service without our permission.
 
 13. Web data charges and security
 
@@ -188,9 +198,7 @@ You may not copy, modify, distribute, or commercialise any part of the Service w
 
 14. Account suspension and termination
 
-You may delete your account at any time through the app or by contacting us.
-
-We may suspend or terminate your account if:
+You may delete your account at any time through the app or by contacting us. We may suspend or terminate your account if:
 
  • You breach these Terms
 
@@ -202,7 +210,7 @@ Where we reasonably believe an account is involved in fraud, abuse of Rewards or
 
 We may suspend or withdraw your access to Rewards, the referral programme, or specific features separately from, and without, suspending or terminating your whole account.
 
-Upon termination, your access to the Service will end. To cancel your account email vero.fincorp@gmail.com with your primary email address.
+Upon termination, your access to the Service will end. To cancel your account, email vero.fincorp@gmail.com with your primary email address.
 
 15. Limitation of liability
 
@@ -230,13 +238,11 @@ This section does not require you to indemnify us for losses caused by our own n
 
 17. Changes to the Service or Terms
 
-We may update the Service or these Terms from time to time as we improve Vero.
-
-If changes are material, we will take reasonable steps to notify users. Continued use of the Service after changes means you accept the updated Terms.
+We may update the Service or these Terms from time to time as we improve Vero. If changes are material, we will take reasonable steps to notify users. Continued use of the Service after changes means you accept the updated Terms.
 
 18. Your privacy
 
-By using the Service, you agree to the terms of our Privacy Policy, which forms part of these Terms of use and our agreement with you. Click here for more information about our Privacy Policy.
+By using the Service, you agree to the terms of our Privacy Policy, which forms part of these Terms of use and our agreement with you.
 
 19. Governing law and jurisdiction
 
