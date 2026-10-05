@@ -124,6 +124,8 @@ From time to time, Vero may offer rewards, tokens, referral bonuses, or other be
 
 7.7 Rewards redemption is final. Once tokens have been redeemed for a reward, that redemption is final and non-refundable.
 
+7.8 Redemption limits. Rewards exist to support the money habits you build with Vero, not as an end in themselves. To support that purpose and keep Rewards fair and sustainable, we may limit how many Rewards you can claim within a given period, require a minimum interval between claims, and set different limits for different plans, Rewards or partners. The limits that currently apply to your account will always be shown in the app. We may change them at any time under section 7.4.
+
 8. Subscription, billing & payments
 
 Some features of the Service may require a paid subscription (“Subscription”). Where you take out a Subscription, the following terms apply.
@@ -136,6 +138,8 @@ Some features of the Service may require a paid subscription (“Subscription”
 
 8.4 Cancellation. You may cancel your Subscription at any time through our Plans & Billing section (located in the settings). Cancellation takes effect at the end of your current billing period. Unless required by law or stated otherwise, you will keep access to paid features until the end of the period you have already paid for, and you will not be charged again after that.
 
+If you cancel your Vero Plus subscription after claiming a Reward, and before a further Reward has become available to claim under section 7.8, you will not be able to claim that further Reward. All other Vero Plus features remain available until the end of your current billing period.
+
 8.5 Refunds. Because Subscriptions are purchased through the Apple App Store or Google Play, payments and refund requests are handled by the relevant app store under its own terms and refund policies, not directly by Vero. If you would like a refund, you should request it through the app store you purchased from:
 
  • Apple: request a refund via reportaproblem.apple.com or your Apple account settings.
@@ -147,6 +151,8 @@ We do not control whether an app store grants a refund, and app-store refund dec
 Except where the app store grants a refund, or where you have a legal right to one, Subscriptions are non-refundable. In particular, if you cancel partway through a billing period you have already paid for, we do not refund that period — instead, you keep access to paid features until the end of it, and you are not charged again after that. Rewards that have been redeemed are also non-refundable, as described in section 7.7.
 
 Nothing in this section affects your statutory rights as a consumer, including your cancellation rights during the cooling-off period described in section 9, and your right to a refund or other remedy if the Service is faulty or not as described under applicable consumer law.
+
+8.5A Refunds after redeeming a Plus Reward. Plus-only Rewards form part of the value you receive from your Vero Plus Subscription. If you redeem a Plus-only Reward during a billing period, that period's Subscription is treated as used, and we will not support or assist a refund request for it. If an app store grants a refund for a billing period in which you redeemed a Plus-only Reward, we may cancel that Reward if it has not yet been issued, or recover its value, including by deducting tokens or withholding future Rewards. We may also restrict your access to Rewards under section 7.4.
 
 8.6 Failed payments and grace period. If we are unable to collect a payment when due, you have a 3-day grace period to resolve it before your Subscription is paused or downgraded. We may retry the charge during this period. If payment is still not collected after the grace period, we may suspend your access to paid features or downgrade your account to the free tier until payment is successfully collected. You remain responsible for any amounts properly due.
 
