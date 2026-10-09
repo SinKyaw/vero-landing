@@ -174,6 +174,8 @@ Email and notification services
 
 Analytics and error-monitoring tools
 
+App stores (Apple App Store, Google Play), which process your subscription payments. If you request a refund from an app store, we may tell it about your subscription and your use of it, as described in section 8.5B of our Terms
+
 
 
 All service providers are bound by contractual obligations to protect your data and process it only on our instructions.
