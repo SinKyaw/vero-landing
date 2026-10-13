@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light only" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Vero News</title>
+  <title>Meet your new Wallet</title>
   <link rel="icon" href="../assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,9 +16,8 @@
       --glow-top: #DFF5F1;
       --text: #12312C;
       --text-body: #2A4340;
-      --divider: rgba(0, 81, 73, 0.10);
-      --chip-bg: #F1F5F4;
-      --primary: #33A798;
+      --divider: rgba(18, 49, 44, 0.16);
+      --back-bg: #E9EEED;
       --header-h: 60px;
       --pad: 22px;
     }
@@ -58,9 +57,10 @@
       position: sticky;
       top: 0;
       z-index: 2;
-      display: flex;
+      display: grid;
+      grid-template-columns: 36px 1fr 36px;
       align-items: center;
-      justify-content: center;
+      gap: 12px;
       height: calc(var(--header-h) + env(safe-area-inset-top));
       padding: env(safe-area-inset-top) var(--pad) 0;
       background: linear-gradient(180deg, #E4F6F3 0%, rgba(228, 246, 243, 0.92) 100%);
@@ -70,6 +70,21 @@
 
     .header[hidden] { display: none; }
 
+    .back {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--back-bg);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .back[hidden] { visibility: hidden; }
+
     .header h1 {
       font-size: 22px;
       font-weight: 700;
@@ -77,6 +92,7 @@
       text-align: center;
       color: var(--text);
       letter-spacing: -0.01em;
+      grid-column: 2;
     }
 
     /* ---------- Article ---------- */
@@ -85,81 +101,70 @@
       z-index: 1;
       max-width: 560px;
       margin: 0 auto;
-      padding: 30px var(--pad) calc(56px + env(safe-area-inset-bottom));
-    }
-
-    .article > * + * { margin-top: 20px; }
-
-    .title {
-      font-size: 25px;
-      font-weight: 700;
-      line-height: 1.3;
-      text-align: center;
-      color: var(--text);
-      letter-spacing: -0.01em;
-      text-wrap: balance;
+      padding: 30px var(--pad) calc(40px + env(safe-area-inset-bottom));
     }
 
     .hero {
       display: block;
       width: min(74%, 340px);
       height: auto;
-      margin: 28px auto 32px;
+      margin: 24px auto 40px;
     }
 
     p { color: var(--text-body); }
 
-    strong { font-weight: 700; color: var(--text); }
+    p + p { margin-top: 10px; }
 
-    a { color: var(--primary); font-weight: 600; }
+    .mail { color: inherit; text-decoration: none; }
 
-    .section-title {
-      font-size: 21px;
-      font-weight: 700;
-      line-height: 1.3;
-      color: var(--text);
-      margin-top: 34px;
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--divider);
+      margin: 32px 0;
     }
 
+    .section-title {
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .section-title.spaced { margin-bottom: 26px; }
+
+    .section + .section { margin-top: 32px; }
+
     /* ---------- Wallet parts ---------- */
-    .part { margin-top: 26px; }
+    .part + .part { margin-top: 30px; }
 
     .part-head {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
-    .part-num {
+    .part-head img {
       flex: 0 0 auto;
-      display: grid;
-      place-items: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background: #E7FDFB;
-      color: var(--primary);
-      font-size: 19px;
-      font-weight: 700;
+      width: 58px;
+      height: auto;
     }
 
     .part-head h3 {
-      font-size: 19px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 600;
       line-height: 1.35;
       color: var(--text);
-      letter-spacing: -0.01em;
     }
-
-    .part p { margin: 0; }
 
 
     /* Small phones */
     @media (max-width: 360px) {
       :root { --pad: 18px; }
       body { font-size: 16px; }
-      .title { font-size: 23px; }
+      .header h1 { font-size: 20px; }
+      .part-head img { width: 52px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -171,21 +176,26 @@
   <div class="glow" aria-hidden="true"></div>
 
   <header class="header" id="header">
-    <h1>Vero News</h1>
+    <button class="back" id="back" type="button" aria-label="Back" hidden>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <h1>Meet your new Wallet</h1>
   </header>
 
   <main class="article">
-    <h2 class="title">Meet your new Wallet</h2>
-
-    <img class="hero" src="../assets/vero-news-hero.png" alt="Vero the elephant reading The Vero Post in an armchair" width="512" height="496" />
+    <img class="hero" src="../assets/vero-wallet-hero.png" alt="A teal Vero Wallet holding blue, pink and cream cards" width="512" height="497" />
 
     <p>You told us you wanted more ways to manage your money with Vero, so we built a set of features to help you organise your finances, plan ahead and see the bigger picture &mdash; all in one place.</p>
 
-    <h3 class="section-title">Wallet has two parts:</h3>
+    <hr class="divider" />
+
+    <h2 class="section-title spaced">Wallet has two parts:</h2>
 
     <section class="part">
       <div class="part-head">
-        <span class="part-num" aria-hidden="true">1</span>
+        <img src="../assets/vero-wallet-manage.png" alt="" width="512" height="476" />
         <h3>Manage your money</h3>
       </div>
       <p>Add your account balances, organise money into pockets (and share them with friends), set savings goals, plan for upcoming bills, and create spending plans for your week, month or next trip.</p>
@@ -193,25 +203,31 @@
 
     <section class="part">
       <div class="part-head">
-        <span class="part-num" aria-hidden="true">2</span>
+        <img src="../assets/vero-wallet-dashboard.png" alt="" width="512" height="458" />
         <h3>See the bigger picture</h3>
       </div>
       <p>Build your own dashboard with the charts and insights that matter most to you. Choose what you want to see, all in one place.</p>
     </section>
 
-    <h3 class="section-title">What happens to the Vero you know?</h3>
+    <hr class="divider" />
+
+    <h2 class="section-title">What happens to the Vero you know?</h2>
 
     <p>Nothing changes! Your money tracking, Ask Verdi, current budget and monthly challenge are all staying right where they are.</p>
 
     <p>Soon, new challenges and rewards will be built around what you set up in your Wallet. Start exploring now, and you&rsquo;ll be ready when they land.</p>
 
-    <h3 class="section-title">Ready to explore?</h3>
+    <hr class="divider" />
 
-    <p>Open your Wallet, make it your own, and help us shape what comes next.</p>
+    <section class="section">
+      <h2 class="section-title">Ready to explore?</h2>
+      <p>Open your Wallet, make it your own, and help us shape what comes next.</p>
+    </section>
 
-    <h3 class="section-title">Have feedback?</h3>
-
-    <p>Tap <em>Submit feedback</em> in the app or email us at <a href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
+    <section class="section">
+      <h2 class="section-title">Have feedback?</h2>
+      <p>Tap Submit feedback in the app or email us at <a class="mail" href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
+    </section>
   </main>
 
   <script>
@@ -221,6 +237,13 @@
       // Native shells that draw their own nav bar can pass ?header=hidden
       if (params.get('header') === 'hidden') {
         document.getElementById('header').hidden = true;
+      }
+
+      // Back only makes sense when there is somewhere to go back to
+      var back = document.getElementById('back');
+      if (window.history.length > 1) {
+        back.hidden = false;
+        back.addEventListener('click', function () { window.history.back(); });
       }
     })();
   </script>
