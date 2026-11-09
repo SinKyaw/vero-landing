@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light only" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Meet Verdi</title>
+  <link rel="icon" href="/assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --glow-top: #DFF5F1;
+      --text: #12312C;
+      --text-body: #2A4340;
+      --divider: rgba(18, 49, 44, 0.16);
+      --back-bg: #E9EEED;
+      --primary: #5BC0A8;
+      --primary-pressed: #49AD95;
+      --link: #2E8C77;
+      --header-h: 76px;
+      --pad: 22px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-body);
+      font-family: 'Quicksand', ui-rounded, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: contain;
+    }
+
+    /* Soft mint glow behind the header, as in the app */
+    .glow {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 220px;
+      background: linear-gradient(180deg, var(--glow-top) 0%, rgba(223, 245, 241, 0) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---------- Header ---------- */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 36px 1fr 36px;
+      align-items: center;
+      gap: 12px;
+      min-height: calc(var(--header-h) + env(safe-area-inset-top));
+      padding: calc(env(safe-area-inset-top) + 8px) var(--pad) 8px;
+      background: linear-gradient(180deg, #E4F6F3 0%, rgba(228, 246, 243, 0.92) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header[hidden] { display: none; }
+
+    .back {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--back-bg);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .back[hidden] { visibility: hidden; }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      grid-column: 2;
+    }
+
+    /* ---------- Article ---------- */
+    .article {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 26px var(--pad) calc(40px + env(safe-area-inset-bottom));
+    }
+
+    p { color: var(--text-body); }
+
+    p + p { margin-top: 10px; }
+
+    .intro p + p { margin-top: 22px; }
+
+    .lead {
+      margin-top: 30px;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    /* Companion preview: the PNG carries its own rounded card + shadow */
+    .companion {
+      display: block;
+      width: calc(100% + 16px);
+      max-width: none;
+      height: auto;
+      margin: 14px -8px 18px;
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--divider);
+      margin: 32px 0;
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .section + .section { margin-top: 32px; }
+
+    /* ---------- Feature blocks ---------- */
+    .feature + .feature { margin-top: 32px; }
+
+    .feature-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .feature-head img {
+      flex: 0 0 auto;
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+    }
+
+    .feature-head h3 {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .mail { color: inherit; text-decoration: none; }
+
+    /* ---------- Actions ---------- */
+    .actions {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      min-height: 54px;
+      border: 0;
+      border-radius: 16px;
+      background: var(--primary);
+      color: #FFFFFF;
+      font: inherit;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-primary:active {
+      background: var(--primary-pressed);
+      transform: scale(0.99);
+    }
+
+    .btn-link {
+      border: 0;
+      background: none;
+      padding: 8px 12px;
+      color: var(--link);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-primary:focus-visible,
+    .btn-link:focus-visible,
+    .back:focus-visible {
+      outline: 3px solid rgba(91, 192, 168, 0.45);
+      outline-offset: 2px;
+    }
+
+    /* Small phones */
+    @media (max-width: 360px) {
+      :root { --pad: 18px; }
+      body { font-size: 16px; }
+      .header h1 { font-size: 20px; }
+      .feature-head img { width: 48px; height: 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <header class="header" id="header">
+    <button class="back" id="back" type="button" aria-label="Back" hidden>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <h1>Introducing our most&#8209;awaited changes!</h1>
+  </header>
+
+  <main class="article">
+    <div class="intro">
+      <p>If you&rsquo;ve been with us for a while, you&rsquo;ll remember the old setup: complete money challenges, earn tokens, and swap them for gift cards.</p>
+      <p>But we wanted your habits to be the point, not just the thing you did to earn rewards.</p>
+    </div>
+
+    <h2 class="lead">So, meet Verdi &mdash; a little elephant who grows as your money habits do.</h2>
+
+    <img class="companion" src="/assets/verdi-companion.png" width="926" height="1200"
+      alt="Verdi, a blue elephant with green glasses, in his living room. Below him: a health bar of hearts at 25 of 100, Verdi&rsquo;s Vault with 1 of 3 rewards saved, and Verdi&rsquo;s Savings of £12.68." />
+
+    <section class="feature">
+      <div class="feature-head">
+        <img src="/assets/vero-token.png" alt="" width="429" height="425" />
+        <h3>Your tokens now go into Verdi&rsquo;s journey fund.</h3>
+      </div>
+      <p>Keep tracking, stick to your spending plan, and complete challenges to fill it up. Once it&rsquo;s ready, Verdi heads off on an adventure!</p>
+      <p>And what does he bring back? A trunk full of rewards &mdash; from everyday essentials to the fun stuff, with discounts at brands you already love.</p>
+    </section>
+
+    <section class="feature">
+      <div class="feature-head">
+        <img src="/assets/vero-vault.png" alt="" width="224" height="224" />
+        <h3>Not ready to use a reward yet? Pop it in the Vault.</h3>
+      </div>
+      <p>Rewards Verdi brings back need claiming within 24 hours. If you&rsquo;re not ready to use one yet, save it to the Vault and come back to it when you need it.</p>
+    </section>
+
+    <section class="feature">
+      <div class="feature-head">
+        <img src="/assets/vero-heart.png" alt="" width="224" height="224" />
+        <h3>His hearts reflect how your money habits are going.</h3>
+      </div>
+      <p>Keep tracking and stay within your spending plan to keep him adventure-ready. Miss a few days? He&rsquo;ll slow down, but he won&rsquo;t hold it against you.</p>
+    </section>
+
+    <section class="feature">
+      <div class="feature-head">
+        <img src="/assets/vero-piggy.png" alt="" width="224" height="224" />
+        <h3>Savings shows what you&rsquo;ve kept in your pocket.</h3>
+      </div>
+      <p>Every discount Verdi brings home adds up. Your piggy bank tracks how much you&rsquo;ve saved through his rewards, so you can see your good habits paying off.</p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section">
+      <h2 class="section-title">And the best part?</h2>
+      <p>There&rsquo;s no more cap on rewards! They work a little differently now, so send Verdi on his first adventure and see for yourself.</p>
+      <p>Your previously earned tokens are safe and sound, ready to fund his first trip.</p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section">
+      <h2 class="section-title">Got questions?</h2>
+      <p>Tap In-app Support or email us at <a class="mail" href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
+    </section>
+
+    <div class="actions">
+      <button class="btn-primary" id="meet-verdi" type="button">Meet Verdi</button>
+      <button class="btn-link" id="support" type="button">In-app Support</button>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+
+      // Native shells that draw their own nav bar can pass ?header=hidden
+      if (params.get('header') === 'hidden') {
+        document.getElementById('header').hidden = true;
+      }
+
+      // Back only makes sense when there is somewhere to go back to
+      var back = document.getElementById('back');
+      if (window.history.length > 1) {
+        back.hidden = false;
+        back.addEventListener('click', function () { window.history.back(); });
+      }
+
+      // Hand actions to the native app when embedded in a WebView.
+      // Returns false when no bridge is available.
+      function sendToApp(action) {
+        var msg = JSON.stringify({ source: 'verdi-companion', action: action });
+        try {
+          if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+            window.ReactNativeWebView.postMessage(msg);
+            return true;
+          }
+          if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.vero) {
+            window.webkit.messageHandlers.vero.postMessage(msg);
+            return true;
+          }
+          if (window.VeroBridge && window.VeroBridge.postMessage) {
+            window.VeroBridge.postMessage(msg);
+            return true;
+          }
+        } catch (e) { /* fall through to web fallback */ }
+        return false;
+      }
+
+      document.getElementById('meet-verdi').addEventListener('click', function () {
+        if (!sendToApp('meet_verdi')) window.location.href = '/';
+      });
+
+      document.getElementById('support').addEventListener('click', function () {
+        if (!sendToApp('open_support')) window.location.href = 'mailto:vero.fincorp@gmail.com';
+      });
+    })();
+  </script>
+</body>
+</html>
