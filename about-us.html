@@ -3,531 +3,415 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us - Vero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>About Vero – Built by Gen Z, for Gen Z</title>
+  <meta name="description" content="Vero was built by five Gen Z founders who think our generation’s money problem is about behaviour, not knowledge." />
+  <meta name="theme-color" content="#E7FDFB" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About Vero – Built by Gen Z, for Gen Z" />
+  <meta property="og:description" content="Vero was built by five Gen Z founders who think our generation’s money problem is about behaviour, not knowledge." />
   <link rel="icon" href="assets/favicon.ico" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .social-links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin: 24px auto 0;
-    }
-
-    .social-links a {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 96px;
-      min-width: 96px;
-      min-height: 110px;
-      border-radius: 22px;
-      background: rgba(45, 223, 193, 0.14);
-      align-items: center;
-      justify-content: center;
-      padding: 16px 0;
-      transition: transform 0.2s ease, background 0.2s ease;
-      text-decoration: none;
-    }
-
-    .social-links a:hover {
-      transform: translateY(-2px);
-      background: rgba(45, 223, 193, 0.26);
-    }
-
-    .social-links img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-
-    .social-icon--large {
-      width: 60px;
-      height: 60px;
-    }
-
-    .social-links a span {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #111111;
-      text-align: center;
-      line-height: 1.2;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/vero-ui.css" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <script>
+    /* Motion gate: content starts hidden only when JS will animate it in.
+       If the animation libraries fail to load, everything is shown after 2.5s. */
+    (function (d) {
+      d.documentElement.classList.add('js');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+      d.documentElement.classList.add('js-anim');
+      setTimeout(function () { if (!window.__veroMotion) d.documentElement.classList.remove('js-anim'); }, 2500);
+    })(document);
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
 </head>
 
 <body>
-  <!-- Background Glow Layers -->
-  <div class="bg-glow" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5.5 12.5l4.5 4.5L18.5 8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.5l2.1 6.4 6.4 2.1-6.4 2.1L12 19.5l-2.1-6.4L3.5 11l6.4-2.1z" fill="currentColor" /></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2" /><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2.2" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4" /><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" /></symbol>
+      <symbol id="i-bug" viewBox="0 0 24 24"><rect x="7" y="8" width="10" height="12" rx="5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M12 12v8M7 13H3.5M20.5 13H17M7.5 17.5 4.5 19.5M16.5 17.5l3 2M9 8.5 7.5 5M15 8.5 16.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /><circle cx="12" cy="16.6" r="1.2" fill="currentColor" /></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /></symbol>
+    </defs>
+  </svg>
 
-  <!-- Content Layer -->
-  <div class="content-layer">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- ── Navbar ── -->
-    <nav class="navbar">
-      <div class="navbar-inner">
-        <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
-        <ul class="navbar-links">
+  <!-- ── Navigation ── -->
+  <header class="site-nav" data-nav>
+    <div class="wrap site-nav__inner">
+      <a class="site-nav__logo" href="index.html" aria-label="Vero home">
+        <img src="assets/logo-primary.png" alt="Vero" width="97" height="32" />
+      </a>
+      <nav class="site-nav__menu" id="site-menu" aria-label="Main">
+        <ul class="site-nav__links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
-          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="about-us.html" aria-current="page">About Us</a></li>
           <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="affiliate.html" class="active">Affiliate</a></li>
-          <li><a href="post.html" class="active">Blog</a></li>
-          <li class="nav-cta-li">
-            <a href="#download-options" class="nav-cta js-download-choice">
-              Download Vero →
-            </a>
-          </li>
+          <li><a href="post.html">Blog</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
         </ul>
-        <!-- Mobile Download Button (replaces hamburger menu) -->
-        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
+      </nav>
+      <div class="site-nav__actions">
+        <a class="app-btn app-btn--sm js-download-choice" href="#download-options">
+          <span class="app-btn__face"><span class="app-btn__surface">Download Vero</span></span>
         </a>
-        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="site-nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+          <span></span><span></span>
         </button>
       </div>
-    </nav>
+    </div>
+  </header>
 
-    <!-- ── About Hero ── -->
-    <section class="about-hero">
-      <div class="about-hero-inner">
-        <h1 class="about-hero-headline">
-          We believe expense tracking isn’t enough,<br />
-          <span class="gradient-text">if your money habits are still crap</span>
+  <main id="main">
+    <!-- ── Page hero ── -->
+    <section class="page-hero" aria-labelledby="page-title" data-parallax>
+      <div class="page-hero__mood" aria-hidden="true"><div class="bg-grid"></div></div>
+      <div class="floaters" aria-hidden="true">
+        <img class="floater p1" data-depth="0.6" src="assets/home/token.webp" alt="" width="120" height="119" />
+        <img class="floater p2" data-depth="0.4" src="assets/home/sticker-star.webp" alt="" width="76" height="72" />
+        <img class="floater p3" data-depth="0.5" src="assets/home/streak.webp" alt="" width="64" height="54" />
+        <img class="floater p4" data-depth="0.35" src="assets/home/sticker-coffee.webp" alt="" width="120" height="64" />
+      </div>
+      <div class="wrap page-hero__inner">
+        <span class="eyebrow" data-page-in>About us</span>
+        <h1 class="h-display page-hero__title page-hero__title--wide" id="page-title">
+          <span class="line"><span class="line__in">We believe expense tracking</span></span>
+          <span class="line"><span class="line__in">isn’t enough, if your money</span></span>
+          <span class="line"><span class="line__in">habits are still <span class="marker">crap</span>.</span></span>
         </h1>
-        <div class="about-hero-ctas">
-        </div>
+        <p class="lede" data-page-in>Vero was built by five Gen Z founders who think our generation’s money problem is about behaviour, not knowledge.</p>
       </div>
     </section>
 
-    <!-- ── How it Started ── -->
-    <section class="section">
-      <div class="how-started">
-        <div class="how-started-content">
-          <p class="section-label">Our Story</p>
-          <h2 class="section-headline">How it Started</h2>
-          <p class="section-body">
-            Vero was built by five Gen Z founders from different countries and economic backgrounds, united by one
-            belief: our generation doesn’t have a financial knowledge problem — it has a behavioural one.
-          </p>
-          <p class="section-body" style="margin-top:16px;">
-            And behaviour is far harder to change, especially in a system designed to work against you...
-          </p>
+    <!-- ── Our story ── -->
+    <section class="section story" aria-labelledby="story-title">
+      <div class="wrap story__grid">
+        <div class="story__copy" data-reveal>
+          <span class="eyebrow">Our story</span>
+          <h2 class="h2" id="story-title">How it started</h2>
+          <p class="lede">Vero was built by five Gen Z founders from different countries and economic backgrounds, united by one belief: our generation doesn’t have a financial knowledge problem — it has a behavioural one.</p>
+          <p>And behaviour is far harder to change, especially in a system designed to work against you…</p>
         </div>
-        <div class="how-started-visual">
-          <div class="founder-quote-card">
-            <p class="founder-quote-text">“Our generation doesn’t have a financial knowledge problem — it has a
-              behavioural one.”</p>
-            <p class="founder-quote-attr">— The Vero Founders</p>
+        <figure class="quote-card" data-reveal data-tilt>
+          <div class="quote-card__face">
+            <div class="bg-grid" aria-hidden="true"></div>
+            <span class="quote-card__mark" aria-hidden="true">“</span>
+            <blockquote>Our generation doesn’t have a financial knowledge problem — it has a behavioural one.</blockquote>
+            <figcaption>The Vero founders</figcaption>
+            <img class="quote-card__verdi" src="assets/home/verdi-winks.webp" alt="" width="280" height="280" loading="lazy" />
           </div>
-        </div>
+        </figure>
       </div>
     </section>
 
-    <!-- ── The Problem ── -->
-    <section class="section problem-context-section">
-      <div class="problem-context-intro">
-        <p>Today’s digital economy makes spending effortless. One-click checkouts, targeted ads, and doomscrolling
-          encourage small decisions that quietly trap you into a cycle of impulse spending, guilt, and stress.</p>
-      </div>
-      <div class="problem-cards-dark">
-        <div class="problem-card-dark">
-          <h3 class="problem-card-title">Impulse</h3>
-          <p class="problem-card-text">£8 on daily ice matcha latte (or whatever trends next) turns into £2,800 wasted
-            per year.</p>
-        </div>
-        <div class="problem-card-dark">
-          <h3 class="problem-card-title">Guilt</h3>
-          <p class="problem-card-text">Nearly half of Gen Z adults avoid checking their bank accounts.</p>
-        </div>
-        <div class="problem-card-dark">
-          <h3 class="problem-card-title">Stress</h3>
-          <p class="problem-card-text">70% of Gen Z lose sleep because of money worries.</p>
-        </div>
-      </div>
-      <div class="problem-context-body">
-        <p>Despite the rise of budgeting apps and digital banking tools, financial discipline remains largely unsolved.
-          Most platforms only show where your money went, not how to change what happens next. Others reward spending
-          with cashback, points, and incentives — reinforcing the very behaviour users are trying to control.</p>
-      </div>
-    </section>
-
-    <!-- ── Why Vero Exists ── -->
-    <section class="section">
-      <div class="section-center">
-        <p class="section-label">Our Purpose</p>
-        <h2 class="section-headline">Why Vero Exists</h2>
-      </div>
-      <div class="mission-vision-grid">
-        <div class="mv-card">
-          <span class="mv-tag">Mission</span>
-          <p class="mv-text">Empower Gen Z to take control of their financial future, helping them build money habits
-            that last.</p>
-        </div>
-        <div class="mv-card">
-          <span class="mv-tag">Vision</span>
-          <p class="mv-text">Become the go-to financial wellbeing platform where young people feel in control of their
-            money.</p>
-        </div>
-      </div>
-      <div class="why-vero-body">
-        <p>Vero was created to help Gen Z build lasting financial habits through AI-powered personalised gamification —
-          turning everyday financial decisions into small challenges that encourage discipline and reward progress.</p>
-        <p>By supporting young people to build savings, spend more mindfully, and reduce financial stress, Vero
-          contributes to three key UN Sustainable Development Goals.</p>
-      </div>
-      <div class="sdg-grid">
-        <div class="sdg-card">
-          <div class="sdg-badge">SDG 3</div>
-          <h3 class="sdg-title">Health &amp; Wellbeing</h3>
-          <p class="sdg-text">Reducing financial stress and its impact on mental wellbeing.</p>
-        </div>
-        <div class="sdg-card">
-          <div class="sdg-badge">SDG 4</div>
-          <h3 class="sdg-title">Quality Education</h3>
-          <p class="sdg-text">Embedding practical financial literacy into everyday life.</p>
-        </div>
-        <div class="sdg-card">
-          <div class="sdg-badge">SDG 10</div>
-          <h3 class="sdg-title">Responsible Consumption</h3>
-          <p class="sdg-text">Encouraging mindful spending and sustainable consumption habits.</p>
-        </div>
+    <!-- ── The problem ── -->
+    <section class="section section--tint" aria-labelledby="problem-title">
+      <div class="wrap">
+        <header class="section-head section-head--center" data-reveal>
+          <span class="eyebrow">The problem</span>
+          <h2 class="h2" id="problem-title">Impulse, guilt, stress. <mark class="marker" data-sweep>Repeat.</mark></h2>
+          <p class="lede">Today’s digital economy makes spending effortless. One-click checkouts, targeted ads and doomscrolling encourage small decisions that quietly trap you in a cycle of impulse spending, guilt and stress.</p>
+        </header>
+        <ul class="stat-cards" data-stagger>
+          <li class="stat-card">
+            <p class="stat-card__tag">Impulse</p>
+            <p class="stat-card__num">£2,800</p>
+            <p>£8 on a daily iced matcha latte (or whatever trends next) turns into £2,800 wasted per year.</p>
+          </li>
+          <li class="stat-card">
+            <p class="stat-card__tag">Guilt</p>
+            <p class="stat-card__num">Nearly half</p>
+            <p>of Gen Z adults avoid checking their bank accounts.</p>
+          </li>
+          <li class="stat-card">
+            <p class="stat-card__tag">Stress</p>
+            <p class="stat-card__num">70%</p>
+            <p>of Gen Z lose sleep because of money worries.</p>
+          </li>
+        </ul>
+        <p class="narrow-copy" data-reveal>Despite the rise of budgeting apps and digital banking tools, financial discipline remains largely unsolved. Most platforms only show where your money went, not how to change what happens next. Others reward spending with cashback, points and incentives — reinforcing the very behaviour users are trying to control.</p>
       </div>
     </section>
 
-    <!-- ── Our Impact ── -->
-    <section class="section">
-      <div class="impact-header">
-        <p class="section-label">Early Results</p>
-        <h2 class="section-headline">Our Impact</h2>
-        <p class="section-body impact-subtext">After testing our MVP with 50 active early adopters over one month, we
-          observed encouraging early signals:</p>
+    <!-- ── Why Vero exists ── -->
+    <section class="section" aria-labelledby="purpose-title">
+      <div class="wrap">
+        <header class="section-head section-head--center" data-reveal>
+          <span class="eyebrow">Our purpose</span>
+          <h2 class="h2" id="purpose-title">Why Vero exists</h2>
+        </header>
+        <div class="mv-grid" data-stagger>
+          <article class="mv-card mv-card--deep">
+            <span class="mv-card__tag">Mission</span>
+            <p class="mv-card__text">Empower Gen Z to take control of their financial future, helping them build money habits that last.</p>
+            <img class="mv-card__art" src="assets/home/verdi-goals.webp" alt="" width="520" height="438" loading="lazy" />
+          </article>
+          <article class="mv-card">
+            <span class="mv-card__tag">Vision</span>
+            <p class="mv-card__text">Become the go-to financial wellbeing platform where young people feel in control of their money.</p>
+            <img class="mv-card__art" src="assets/home/verdi-podium.webp" alt="" width="261" height="281" loading="lazy" />
+          </article>
+        </div>
+        <div class="narrow-copy narrow-copy--stack" data-reveal>
+          <p>Vero was created to help Gen Z build lasting financial habits through AI-powered personalised gamification — turning everyday financial decisions into small challenges that encourage discipline and reward progress.</p>
+          <p>By supporting young people to build savings, spend more mindfully and reduce financial stress, Vero contributes to three key UN Sustainable Development Goals.</p>
+        </div>
+        <ul class="sdg-grid" data-stagger>
+          <li class="sdg-card">
+            <span class="sdg-card__badge">SDG 3</span>
+            <h3>Health &amp; Wellbeing</h3>
+            <p>Reducing financial stress and its impact on mental wellbeing.</p>
+          </li>
+          <li class="sdg-card">
+            <span class="sdg-card__badge">SDG 4</span>
+            <h3>Quality Education</h3>
+            <p>Embedding practical financial literacy into everyday life.</p>
+          </li>
+          <li class="sdg-card">
+            <span class="sdg-card__badge">SDG 10</span>
+            <h3>Responsible Consumption</h3>
+            <p>Encouraging mindful spending and sustainable consumption habits.</p>
+          </li>
+        </ul>
       </div>
-      <div class="impact-grid">
-        <div class="impact-card">
-          <div class="impact-number">82%</div>
-          <div class="impact-label">reported feeling more in control of their money</div>
-        </div>
-        <div class="impact-card">
-          <div class="impact-number">64%</div>
-          <div class="impact-label">said expense tracking became easier to stick to</div>
-        </div>
-        <div class="impact-card">
-          <div class="impact-number">55%</div>
-          <div class="impact-label">maintained a 7+ day tracking streak</div>
-        </div>
-        <div class="impact-card">
-          <div class="impact-number">42%</div>
-          <div class="impact-label">reported improvements in their financial stress levels</div>
-        </div>
+    </section>
+
+    <!-- ── Impact ── -->
+    <section class="section section--tint" aria-labelledby="impact-title">
+      <div class="wrap">
+        <header class="section-head section-head--center" data-reveal>
+          <span class="eyebrow">Early results</span>
+          <h2 class="h2" id="impact-title">Our impact</h2>
+          <p class="lede">After testing our MVP with 50 active early adopters over one month, we saw encouraging early signals:</p>
+        </header>
+        <ul class="impact-grid" data-stagger>
+          <li class="impact-card" style="--p:82%"><span class="impact-card__num" data-count="82" data-suffix="%">82%</span><span class="impact-card__bar" aria-hidden="true"><i></i></span><p>reported feeling more in control of their money</p></li>
+          <li class="impact-card" style="--p:64%"><span class="impact-card__num" data-count="64" data-suffix="%">64%</span><span class="impact-card__bar" aria-hidden="true"><i></i></span><p>said expense tracking became easier to stick to</p></li>
+          <li class="impact-card" style="--p:55%"><span class="impact-card__num" data-count="55" data-suffix="%">55%</span><span class="impact-card__bar" aria-hidden="true"><i></i></span><p>kept a 7+ day tracking streak</p></li>
+          <li class="impact-card" style="--p:42%"><span class="impact-card__num" data-count="42" data-suffix="%">42%</span><span class="impact-card__bar" aria-hidden="true"><i></i></span><p>reported lower financial stress</p></li>
+        </ul>
       </div>
     </section>
 
     <!-- ── Testimonials ── -->
-    <section class="section">
-      <div class="testimonials-header">
-        <p class="section-label">From Early Users</p>
-        <h2 class="section-headline">What They Said</h2>
+    <section class="voices" aria-labelledby="voices-title">
+      <div class="wrap">
+        <header class="section-head section-head--center" data-reveal>
+          <span class="eyebrow">From early users</span>
+          <h2 class="h2" id="voices-title">What they said</h2>
+        </header>
+        <ul class="voices__list voices__list--4" data-stagger>
+          <li class="voice" data-tilt>
+            <figure>
+              <img class="voice__art" src="assets/home/st-coffee.webp" alt="" width="159" height="158" loading="lazy" />
+              <span class="voice__mark" aria-hidden="true">“</span>
+              <blockquote>I used to record my spending on sheets, but it’s so much easier to type the message to a cute elephant instead.</blockquote>
+              <figcaption><span class="voice__avatar" aria-hidden="true">A</span><span><b>Anna</b><small>Age 24</small></span></figcaption>
+            </figure>
+          </li>
+          <li class="voice voice--mint" data-tilt>
+            <figure>
+              <img class="voice__art" src="assets/home/st-finish.webp" alt="" width="187" height="175" loading="lazy" />
+              <span class="voice__mark" aria-hidden="true">“</span>
+              <blockquote>Rewards motivate me the most, especially grocery vouchers — they actually help me save even more.</blockquote>
+              <figcaption><span class="voice__avatar" aria-hidden="true">E</span><span><b>Elly</b><small>Age 25</small></span></figcaption>
+            </figure>
+          </li>
+          <li class="voice" data-tilt>
+            <figure>
+              <img class="voice__art" src="assets/home/st-football.webp" alt="" width="139" height="176" loading="lazy" />
+              <span class="voice__mark" aria-hidden="true">“</span>
+              <blockquote>I started sticking with expense tracking because it feels like a game. As someone with ADHD, I didn’t expect that.</blockquote>
+              <figcaption><span class="voice__avatar" aria-hidden="true">A</span><span><b>Arvin</b><small>Age 21</small></span></figcaption>
+            </figure>
+          </li>
+          <li class="voice voice--mint" data-tilt>
+            <figure>
+              <img class="voice__art" src="assets/home/sticker-matcha.webp" alt="" width="120" height="120" loading="lazy" />
+              <span class="voice__mark" aria-hidden="true">“</span>
+              <blockquote>Insights show me how much my small purchases add up — I started thinking twice before buying.</blockquote>
+              <figcaption><span class="voice__avatar" aria-hidden="true">B</span><span><b>Bevis</b><small>Age 22</small></span></figcaption>
+            </figure>
+          </li>
+        </ul>
       </div>
-      <div class="testimonial-grid about-testimonial-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-quote">“I used to record my spending on sheets, but it’s so much easier to type the
-            message to a cute elephant, instead.”</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
-            <div>
-              <div class="testimonial-name">Anna</div>
-              <div class="testimonial-role">Age 24</div>
-            </div>
+    </section>
+
+    <!-- ── Values ── -->
+    <section class="section section--tint" aria-labelledby="values-title">
+      <div class="wrap">
+        <header class="section-head section-head--center" data-reveal>
+          <span class="eyebrow">What we stand for</span>
+          <h2 class="h2" id="values-title">Our values</h2>
+        </header>
+        <ol class="values-grid" data-stagger>
+          <li class="value-card"><span class="value-card__num">01</span><h3>Grounded in empathy</h3><p>We listen first, build second. Every feature starts with users, not market trends.</p></li>
+          <li class="value-card"><span class="value-card__num">02</span><h3>Reframe constraints</h3><p>We treat constraints as creative sparks, reframing problems into new possibilities.</p></li>
+          <li class="value-card"><span class="value-card__num">03</span><h3>Implement fast</h3><p>We test ideas early and challenge defaults. Speed is our ally in learning.</p></li>
+          <li class="value-card"><span class="value-card__num">04</span><h3>Take imperfect steps</h3><p>We move forward 1% better each day. Mistakes are important for growth!</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── Community ── -->
+    <section class="section" aria-labelledby="community-title">
+      <div class="wrap">
+        <header class="section-head section-head--center" data-reveal>
+          <span class="eyebrow">Vero’s socials</span>
+          <h2 class="h2" id="community-title">Our community</h2>
+          <p class="lede">Follow along, share your wins and meet the rest of the herd.</p>
+        </header>
+        <ul class="social-grid" data-stagger>
+          <li><a class="social-card" href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer"><img src="assets/instagram_logo.png" alt="" width="56" height="56" loading="lazy" /><span><b>Instagram</b><small>@vero.financial</small></span><svg aria-hidden="true"><use href="#i-arrow" /></svg></a></li>
+          <li><a class="social-card" href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer"><img src="assets/tiktok_logo.png" alt="" width="56" height="56" loading="lazy" /><span><b>TikTok</b><small>@vero.app</small></span><svg aria-hidden="true"><use href="#i-arrow" /></svg></a></li>
+          <li><a class="social-card" href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank" rel="noopener noreferrer"><img src="assets/linkedin_logo.png" alt="" width="56" height="56" loading="lazy" /><span><b>LinkedIn</b><small>Vero Financial</small></span><svg aria-hidden="true"><use href="#i-arrow" /></svg></a></li>
+          <li><a class="social-card" href="https://discord.gg/MZP9CDfy" target="_blank" rel="noopener noreferrer"><img src="assets/discord_logo.png" alt="" width="56" height="56" loading="lazy" /><span><b>Discord</b><small>Join the server</small></span><svg aria-hidden="true"><use href="#i-arrow" /></svg></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Final CTA ── -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap">
+        <div class="cta__panel" data-parallax="1.3">
+          <div class="cta__mood" aria-hidden="true">
+            <div class="cta__glow cta__glow--a"></div>
+            <div class="cta__glow cta__glow--b"></div>
+            <div class="bg-grid"></div>
+            <span class="cta__ghost">vero</span>
           </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote">“Rewards motivate me the most, especially grocery vouchers — they actually help
-            me save even more.”</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">E</div>
-            <div>
-              <div class="testimonial-name">Elly</div>
-              <div class="testimonial-role">Age 25</div>
+
+          <div class="cta__copy">
+            <p class="cta__reassure" data-cta-in><span class="cta__dot"></span>Free to start · No card needed</p>
+            <h2 class="cta__title" id="cta-title">
+              <span class="line"><span class="line__in">Start your</span></span>
+              <span class="line"><span class="line__in">streak today.</span></span>
+            </h2>
+            <p class="cta__lede" data-cta-in>Join the herd and let Verdi reward every step forward.</p>
+            <div data-cta-in>
+              <a class="app-btn app-btn--xl js-download-choice" href="#download-options" data-confetti>
+                <span class="app-btn__face"><span class="app-btn__surface">Get Vero free<svg aria-hidden="true"><use href="#i-arrow" /></svg></span></span>
+              </a>
             </div>
+            <p class="cta__fine" data-cta-in>Available on iPhone and Android.</p>
           </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote">“I started sticking with expense tracking because it feels like a game. As
-            someone with ADHD, I didn’t expect that.”</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">A</div>
-            <div>
-              <div class="testimonial-name">Arvin</div>
-              <div class="testimonial-role">Age 21</div>
+
+          <div class="cta__art" aria-hidden="true">
+            <div class="confetti" data-depth="0.25">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
             </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote">“Insights show me how much my small purchases add up — I started thinking twice
-            before buying.”</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">B</div>
-            <div>
-              <div class="testimonial-name">Bevis</div>
-              <div class="testimonial-role">Age 22</div>
-            </div>
+            <span class="cta__halo"></span>
+            <img class="cta__verdi" data-depth="0.45" src="assets/home/verdi-excited.webp" alt="" width="640" height="657" loading="lazy" />
+            <img class="cta__float cf1" data-depth="0.9" src="assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
+            <img class="cta__float cf2" data-depth="0.6" src="assets/home/xp.webp" alt="" width="64" height="60" loading="lazy" />
+            <img class="cta__float cf3" data-depth="1.1" src="assets/home/streak.webp" alt="" width="64" height="54" loading="lazy" />
+            <img class="cta__float cf4" data-depth="0.8" src="assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
+            <img class="cta__float cf5" data-depth="0.7" src="assets/home/sticker-star.webp" alt="" width="76" height="72" loading="lazy" />
           </div>
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- ── Our Values ── -->
-    <section class="section">
-      <div class="section-center">
-        <p class="section-label">What We Stand For</p>
-        <h2 class="section-headline">Our Values</h2>
-      </div>
-      <div class="values-grid">
-        <div class="value-card">
-          <h3 class="value-title">Grounded in empathy</h3>
-          <p class="value-text">We listen first, build second. Every feature starts with users, not market trends.</p>
-        </div>
-        <div class="value-card">
-          <h3 class="value-title">Reframe Constraints</h3>
-          <p class="value-text">We treat constraints as creative sparks, reframing problems into new possibilities.</p>
-        </div>
-        <div class="value-card">
-          <h3 class="value-title">Implement Fast</h3>
-          <p class="value-text">We test ideas early and challenge defaults. Speed is our ally in learning.</p>
-        </div>
-        <div class="value-card">
-          <h3 class="value-title">Take Imperfect Steps</h3>
-          <p class="value-text">We move forward 1% better each day. Mistakes are important for growth!</p>
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="wrap footer__top">
+      <div class="footer__brand">
+        <a href="index.html" aria-label="Vero home"><img src="assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
+        <p>Helping Gen Z build money habits that last.</p>
+        <div class="store-row store-row--start">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="135" height="45" loading="lazy" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="151" height="45" loading="lazy" />
+          </a>
         </div>
       </div>
-    </section>
+      <nav class="footer__cols" aria-label="Footer">
+        <div>
+          <p class="footer__h">Product</p>
+          <ul>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="#download-options" class="js-download-choice">Download</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Company</p>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="post.html">Blog</a></li>
+            <li><a href="verdi-companion.html">Meet Verdi</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Community</p>
+          <ul>
+            <li><a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://discord.gg/MZP9CDfy" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Legal</p>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© 2026 Vero. All rights reserved.</p>
+      <a class="footer__top-link" href="#main">Back to top<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+    </div>
+  </footer>
 
-    <!-- ── Our Community ── -->
-    <section class="section">
-      <div class="section-center">
-        <p class="section-label">Vero's Socials</p>
-        <h2 class="section-headline">Our Community</h2>
-      </div>
-      <div class="social-links">
-        <a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">
-          <img src="assets/instagram_logo.png" alt="Instagram" class="social-icon social-icon--large" />
-          <span>Instagram</span>
-        </a>
-        <a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">
-          <img src="assets/tiktok_logo.png" alt="TikTok" class="social-icon" />
-          <span>TikTok</span>
-        </a>
-        <a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank"
-          rel="noopener noreferrer">
-          <img src="assets/linkedin_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
-          <span>LinkedIn</span>
-        </a>
-        <a href="https://discord.gg/MZP9CDfy" target="_blank"
-          rel="noopener noreferrer">
-          <img src="assets/discord_logo.png" alt="LinkedIn" class="social-icon social-icon--large" />
-          <span>Discord</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ── Our Team ── -->
-    <!-- <section class="section">
-      <div class="section-center">
-        <p class="section-label">The People Behind Vero</p>
-        <h2 class="section-headline">Our Team</h2>
-      </div>
-      <div class="team-grid">
-        <div class="team-member">
-          <div class="team-avatar-lg">B</div>
-          <div class="team-name">Boss</div>
-          <div class="team-role">Co-Founder</div>
-        </div>
-        <div class="team-member">
-          <div class="team-avatar-lg">P</div>
-          <div class="team-name">Pepu</div>
-          <div class="team-role">Co-Founder</div>
-        </div>
-        <div class="team-member">
-          <div class="team-avatar-lg">S</div>
-          <div class="team-name">Sofia</div>
-          <div class="team-role">Co-Founder</div>
-        </div>
-        <div class="team-member">
-          <div class="team-avatar-lg">L</div>
-          <div class="team-name">Livia</div>
-          <div class="team-role">Co-Founder</div>
-        </div>
-        <div class="team-member">
-          <div class="team-avatar-lg">J</div>
-          <div class="team-name">Judy</div>
-          <div class="team-role">Co-Founder</div>
-        </div>
-      </div>
-    </section> -->
-
-    <!-- ── Footer ── -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
-          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <div class="download-buttons">
-            <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener">
-              <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-              rel="noopener">
-              <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" class="download-badge" />
-            </a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <span class="footer-column-title">Product</span>
-            <a href="#how-it-works">How it Works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank"
-              rel="noopener noreferrer">Download</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Company</span>
-            <a href="about-us.html">About Us</a>
-            <a href="post.html">Blog</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Legal</span>
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms.html">Terms &amp; Conditions</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        © 2026 Vero. All rights reserved.
-      </div>
-    </footer>
-
-  </div>
-
-  <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
-    aria-hidden="true">
-    <div class="download-modal-backdrop" data-download-close></div>
-    <div class="download-modal-panel" role="document">
-      <button class="download-modal-close" type="button" aria-label="Close download options" data-download-close>
-        &times;
+  <!-- ── Download dialog ── -->
+  <div class="modal modal--download" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title" aria-hidden="true" inert>
+    <div class="modal__backdrop" data-dialog-close></div>
+    <div class="modal__panel">
+      <img class="modal__verdi" src="assets/home/verdi-peek.webp" alt="" width="440" height="270" />
+      <button class="modal__close" type="button" aria-label="Close download options" data-dialog-close>
+        <svg aria-hidden="true"><use href="#i-close" /></svg>
       </button>
-      <div class="download-modal-copy">
-        <p class="section-label">Download Vero</p>
-      </div>
-      <div class="download-modal-buttons">
-        <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
-          <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-modal-badge" />
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-          rel="noopener noreferrer">
-          <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play"
-            class="download-modal-badge" />
-        </a>
-      </div>
+      <h2 class="modal__title" id="download-title">Get Vero free</h2>
+      <p>Download the app and start your first challenge today.</p>
+      <div class="store-row">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="150" height="50" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="168" height="50" />
+          </a>
+        </div>
     </div>
   </div>
-
-  <script>
-    (() => {
-      const modal = document.querySelector('.download-modal');
-      const triggers = document.querySelectorAll('.js-download-choice');
-      const closeControls = document.querySelectorAll('[data-download-close]');
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-      let previousFocus = null;
-
-      const openModal = () => {
-        previousFocus = document.activeElement;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        modal.querySelector('.download-modal-close').focus();
-      };
-
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-
-        if (previousFocus) {
-          previousFocus.focus();
-        }
-      };
-
-      const toggleMenu = (shouldOpen) => {
-        navbar.classList.toggle('open', shouldOpen);
-        hamburger.setAttribute('aria-expanded', String(shouldOpen));
-        document.body.classList.toggle('menu-open', shouldOpen);
-      };
-
-      triggers.forEach((trigger) => {
-        trigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          openModal();
-        });
-      });
-
-      closeControls.forEach((control) => {
-        control.addEventListener('click', closeModal);
-      });
-
-      if (hamburger) {
-        hamburger.addEventListener('click', () => {
-          toggleMenu(!navbar.classList.contains('open'));
-        });
-      }
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          if (navbar.classList.contains('open')) {
-            toggleMenu(false);
-          }
-        });
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!navbar.classList.contains('open')) return;
-        if (navbar.contains(event.target) || (hamburger && hamburger.contains(event.target))) return;
-        toggleMenu(false);
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900 && navbar.classList.contains('open')) {
-          toggleMenu(false);
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          if (modal.classList.contains('is-open')) {
-            closeModal();
-          } else if (navbar.classList.contains('open')) {
-            toggleMenu(false);
-          }
-        }
-      });
-    })();
-  </script>
 </body>
 
 </html>

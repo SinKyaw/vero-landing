@@ -1,0 +1,460 @@
+/* ==========================================================================
+   Vero UI — the web port of the Vero design system
+   Source of truth: vero-mobile (tailwind.config.js, skill/design-guidelines.md,
+   base/ui/AppButton.tsx). Anything marked "web extension" is new for the site
+   and follows the same rules: Quicksand, teal-first, rounded, no bounce.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Brand colours (vero-mobile tailwind.config.js) ---- */
+  --vero-primary: #33A798;
+  --vero-secondary: #065E53;
+  --vero-deep-teal: #005149;
+  --vero-teal: #5AC7BC;
+  --vero-accent: #50E3C2;
+  --vero-tertiary: #E7FDFB;
+  --vero-dark-bg: #171C1A;
+
+  /* ---- Web extension: tints and depths derived from the brand ---- */
+  --vero-mint: #D4EDEB;
+  --vero-mint-50: #F2FAF9;
+  --vero-mint-100: #E6F6F3;
+  --vero-deep-800: #00443D;
+  --vero-deep-900: #003A34;
+  --vero-gold: #F9C440;
+  --vero-gold-ink: #6B3F00;
+  --vero-coral: #F26B6B;
+
+  /* ---- Semantic ---- */
+  --ink: var(--vero-deep-teal);          /* headings — 9.2:1 on white */
+  --ink-body: #45605C;                   /* body — 6.8:1 on white */
+  --ink-muted: #5A716D;                  /* captions — 5.2:1 on white */
+  --ink-accent: var(--vero-secondary);   /* small teal text — 7.7:1 */
+  --line: #DCEDEA;
+  --line-strong: #C6E3DE;
+  --surface: #FFFFFF;
+  --surface-tint: var(--vero-mint-50);
+
+  /* ---- Type ----
+     Quicksand for everything you read; Lilita One (web extension) for
+     headlines only. Lilita One has a single weight (400), so headline rules
+     set font-weight: 400 and turn synthesis off — never a faux bold. */
+  --font: "Quicksand", ui-rounded, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Lilita One", "Quicksand", ui-rounded, system-ui, sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;   /* mobile overrides text-xl to 22px */
+  --fs-2xl: 1.5rem;
+  --fs-h3: clamp(1.6rem, 1.1rem + 1.6vw, 2.3rem);
+  --fs-h2: clamp(2.15rem, 1.3rem + 3.2vw, 3.6rem);
+  --fs-display: clamp(2.9rem, 1.2rem + 6.4vw, 6.2rem);  /* web extension */
+
+  /* ---- Radius (mobile vocabulary + web extension for section panels) ---- */
+  --r-lg: 8px;      /* icon containers, small chips */
+  --r-xl: 12px;     /* inputs, button inner layer */
+  --r-2xl: 16px;    /* buttons, tappable rows */
+  --r-3xl: 24px;    /* cards, modals */
+  --r-4xl: 32px;    /* web extension: large panels */
+  --r-5xl: 40px;    /* web extension: section panels */
+  --r-full: 999px;
+
+  /* ---- Shadows (mobile tokens + web extension elevations) ---- */
+  --shadow-soft: 0 0 1px 0 rgba(0, 0, 0, 0.2);
+  --shadow-dark: 0 0 12px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.15);
+  --shadow-card: 0 1px 2px rgba(0, 81, 73, 0.05), 0 12px 32px -14px rgba(0, 81, 73, 0.2);
+  --shadow-lift: 0 2px 4px rgba(0, 81, 73, 0.06), 0 22px 44px -18px rgba(0, 81, 73, 0.28);
+  --shadow-float: 0 40px 80px -28px rgba(0, 58, 52, 0.45), 0 14px 28px -14px rgba(0, 58, 52, 0.3);
+
+  /* ---- Motion (base/ui/motion.ts — out-cubic, in-out-cubic, never a bounce) ---- */
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-press: 70ms;
+  --dur-release: 140ms;
+  --dur: 300ms;
+
+  /* ---- Layout ---- */
+  --wrap: 1200px;
+  --gutter: 20px;  /* px-5, the mobile page padding */
+  --nav-h: 72px;
+
+  /* ---- Texture (web extension) ---- */
+  --grid-line: rgba(0, 81, 73, 0.075);
+  --grid-size: 56px;
+  --grid-mask: radial-gradient(ellipse 72% 62% at 50% 32%, #000 22%, transparent 76%);
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 32px; }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink-body);
+  font: 500 var(--fs-base)/1.6 var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+p { margin: 0; text-wrap: pretty; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--vero-primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection { background: var(--vero-mint); color: var(--vero-deep-teal); }
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--wrap) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px));
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px; left: 12px;
+  z-index: 200;
+  padding: 10px 16px;
+  border-radius: var(--r-xl);
+  background: var(--vero-deep-teal);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform var(--dur) var(--ease-out);
+}
+.skip-link:focus { transform: none; }
+
+/* ---------- Typography helpers ---------- */
+.font-display,
+.h-display,
+.h2,
+.h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-synthesis: none;
+}
+.h-display {
+  font-size: var(--fs-display);
+  line-height: 1;
+  letter-spacing: -0.005em;
+}
+.h2 { font-size: var(--fs-h2); letter-spacing: 0; line-height: 1.06; }
+.h3 { font-size: var(--fs-h3); letter-spacing: 0.005em; line-height: 1.12; }
+.lede { font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem); line-height: 1.6; color: var(--ink-body); }
+
+/* ==========================================================================
+   AppButton — CSS port of base/ui/AppButton.tsx
+   Layers, as the blueprint: solid background + 45° surface centred inside it
+   (= headroom); a solid depth the same size, `--depth` px lower, is the
+   shadow. Pressing lowers the headroom onto the depth; the footprint
+   (height + depth) never changes.
+
+   <a class="app-btn" href="…">
+     <span class="app-btn__face"><span class="app-btn__surface">Label</span></span>
+   </a>
+   ========================================================================== */
+.app-btn {
+  /* geometry — mobile defaults: face 41, depth 4, headroom 4, radius 16 */
+  --h: 41px;
+  --depth: 4px;
+  --headroom: 4px;
+  --r: 16px;
+  --px: 16px;
+  --fs: 1.0625rem;
+  /* palette — primary, light scheme (exact mobile values) */
+  --bg: #5DD5C8;
+  --s1: #5AC7BC;
+  --s2: #5DD5C8;
+  --s3: #70EADD;
+  --d: #4FB6AB;
+  /* label: deep teal on the web so it passes WCAG AA (5.2:1). The app uses
+     #FFFFFF (1.8:1). Set --fg: #fff to match the app exactly. */
+  --fg: var(--vero-deep-teal);
+
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0 0 var(--depth);
+  border: 0;
+  border-radius: var(--r);
+  background: none;
+  color: var(--fg);
+  font: 700 var(--fs)/1 var(--font);
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Depth — same size as the background, --depth px lower */
+.app-btn::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: var(--depth) 0 auto;
+  height: var(--h);
+  border-radius: var(--r);
+  background: var(--d);
+}
+
+/* HeadRoom — background with the surface centred inside it */
+.app-btn__face {
+  display: block;
+  height: var(--h);
+  padding: var(--headroom);
+  border-radius: var(--r);
+  background: var(--bg);
+  transition: transform var(--dur-release) var(--ease-out), filter var(--dur) var(--ease-out);
+}
+
+/* Surface — `to bottom right` puts the middle stop exactly on the
+   bottom-left and top-right corners at any width, as the RN component does */
+.app-btn__surface {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 var(--px);
+  border-radius: calc(var(--r) - var(--headroom));
+  background: linear-gradient(to bottom right, var(--s1), var(--s2) 50%, var(--s3));
+  white-space: nowrap;
+}
+
+.app-btn__surface svg {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .app-btn:hover .app-btn__face { transform: translateY(-1px); filter: brightness(1.03) saturate(1.04); }
+  .app-btn:hover .app-btn__surface svg:last-child { transform: translateX(3px); }
+}
+
+.app-btn:active .app-btn__face {
+  transform: translateY(var(--depth));
+  transition-duration: var(--dur-press);
+}
+
+.app-btn:focus-visible {
+  outline: 3px solid var(--vero-deep-teal);
+  outline-offset: 3px;
+  border-radius: var(--r);
+}
+
+/* Sizes (web extension: the mobile button is one size, these keep its ratios) */
+.app-btn--sm { --h: 36px; --depth: 3px; --headroom: 3px; --r: 13px; --px: 14px; --fs: 0.9375rem; }
+.app-btn--lg { --h: 50px; --depth: 5px; --headroom: 4px; --r: 16px; --px: 22px; --fs: 1.125rem; }
+.app-btn--xl { --h: 58px; --depth: 6px; --headroom: 5px; --r: 18px; --px: 28px; --fs: 1.1875rem; }
+.app-btn--block { display: flex; width: 100%; }
+
+/* Variants (exact mobile palettes; labels darkened where the app's fail AA) */
+.app-btn--secondary { --bg: #EAEAEA; --s1: #E8E8E8; --s2: #EFEFEF; --s3: #F7F7F7; --d: #CCCCCC; --fg: #575757; }
+.app-btn--destructive { --bg: #F26B6B; --s1: #EA5E5E; --s2: #F26B6B; --s3: #FA7E7E; --d: #D44F4F; --fg: #fff; }
+.app-btn--exclusive { --bg: #F9C440; --s1: #F2B52A; --s2: #F9C440; --s3: #FFD666; --d: #D9971A; --fg: #6B3F00; }
+/* Web extension: a themed-card CTA, built through the same `colors` override the RN prop allows */
+.app-btn--white { --bg: #F4FBFA; --s1: #E9F6F3; --s2: #F4FBFA; --s3: #FFFFFF; --d: #C9E4DF; --fg: var(--vero-deep-teal); }
+
+/* Reflection — on for `exclusive`, like the app: a sheen runs, rests, runs */
+.app-btn--exclusive .app-btn__surface::after,
+.app-btn--shine .app-btn__surface::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  bottom: -120%;
+  left: 0;
+  width: 34%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  transform: translateX(-180%) rotate(20deg);
+  animation: app-btn-shine 1.9s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+@keyframes app-btn-shine {
+  0%, 58% { transform: translateX(-180%) rotate(20deg); }
+  100% { transform: translateX(420%) rotate(20deg); }
+}
+
+.app-btn[aria-disabled="true"] {
+  --bg: #DADADA; --s1: #D2D2D2; --s2: #DADADA; --s3: #E3E3E3; --d: #C7C7C7; --fg: #fff;
+  pointer-events: none;
+}
+
+/* ---------- Eyebrow pill (web extension) ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--ink-accent);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--vero-teal);
+  box-shadow: 0 0 0 3px rgba(90, 199, 188, 0.25);
+}
+
+/* ---------- Check list ---------- */
+.ticks { display: grid; gap: 12px; }
+.ticks li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  align-items: start;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.ticks li::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  margin-top: -1px;
+  border-radius: 50%;
+  background: var(--vero-mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.5 3.5 7.5-8' fill='none' stroke='%23005149' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;
+}
+
+/* ---------- 3D icon badge (web extension, AppButton's depth idea on a circle) ---------- */
+.icon-badge {
+  --size: 64px;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #FFFFFF, #F4FBFA 50%, #EAF7F4);
+  box-shadow: 0 0 0 3px #fff, 0 5px 0 3px var(--vero-mint), 0 16px 26px -8px rgba(0, 81, 73, 0.25);
+}
+.icon-badge img { width: 62%; height: 62%; object-fit: contain; }
+
+/* ---------- Texture: faded grid (web extension) ---------- */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: calc(50% + var(--grid-size) / 2) 0;
+  -webkit-mask-image: var(--grid-mask);
+  mask-image: var(--grid-mask);
+}
+
+/* ---------- Phone mockup frame (web extension) ----------
+   Screens are drawn in em: 1em = 10px when the phone is 280px wide,
+   so a screen scales with --pw and nothing else. */
+.phone {
+  --pw: 280px;
+  position: relative;
+  width: var(--pw);
+  aspect-ratio: 280 / 584;
+  padding: calc(var(--pw) * 0.03);
+  border-radius: calc(var(--pw) * 0.158);
+  background: linear-gradient(145deg, #2C3B38, #0E1816 40%, #1C2A27);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.12),
+    inset 0 0 0 calc(var(--pw) * 0.012) #0B1312,
+    var(--shadow-float);
+}
+.phone__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--pw) * 0.13);
+  background: #fff;
+  color: #17302C;
+  font-size: calc(var(--pw) / 28);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.phone__island {
+  position: absolute;
+  z-index: 20;
+  top: 1em;
+  left: 50%;
+  width: 8.6em;
+  height: 2.5em;
+  border-radius: 2em;
+  background: #000;
+  transform: translateX(-50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

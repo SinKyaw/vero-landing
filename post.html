@@ -3,641 +3,241 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog Post - Vero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Blog – Vero</title>
+  <meta name="description" content="Money habits, product news and life with Verdi, from the Vero team." />
+  <meta name="theme-color" content="#E7FDFB" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog – Vero" />
+  <meta property="og:description" content="Money habits, product news and life with Verdi, from the Vero team." />
   <link rel="icon" href="assets/favicon.ico" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .social-links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin: 24px auto 0;
-    }
-
-    .social-links a {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 96px;
-      min-width: 96px;
-      min-height: 110px;
-      border-radius: 22px;
-      background: rgba(45, 223, 193, 0.14);
-      align-items: center;
-      justify-content: center;
-      padding: 16px 0;
-      transition: transform 0.2s ease, background 0.2s ease;
-      text-decoration: none;
-    }
-
-    .social-links a:hover {
-      transform: translateY(-2px);
-      background: rgba(45, 223, 193, 0.26);
-    }
-
-    .social-links img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-
-    .social-icon--large {
-      width: 60px;
-      height: 60px;
-    }
-
-    .social-links a span {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #111111;
-      text-align: center;
-      line-height: 1.2;
-    }
-
-    /*blog byline (author/read time/date row)*/
-    .blog-byline {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      color: #555;
-      margin: 8px 0 24px;
-    }
-
-    .byline-author {
-      font-weight: 600;
-      color: #111;
-    }
-
-    .byline-dot {
-      color: #999;
-    }
-
-    /*author avatar pulled from notion callout icon - kept small, separate from blog-content img rule below*/
-    .byline-avatar {
-      width: 28px;
-      height: 28px;
-      min-width: 28px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    /*blog body spacing*/
-    #post-content p,
-    #post-content li {
-      line-height: 2;
-      margin-bottom: 15px;
-    }
-
-
-    #post-content h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      margin-top: 32px;
-      margin-bottom: 16px;
-    }
-
-    #post-content h2 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-top: 28px;
-      margin-bottom: 14px;
-    }
-
-    #post-content h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-top: 24px;
-      margin-bottom: 12px;
-    }
-
-    #post-content h4 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-
-    .blog-card {
-      display: flex;
-      align-items: stretch;
-      min-height: 280px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .blog-card-image {
-      width: 50%;
-      max-width: 50%;
-      min-height: 280px;
-      flex-shrink: 0;
-      object-fit: cover;
-      background: rgba(45, 223, 193, 0.10);
-      display: block;
-    }
-
-    .blog-card-body {
-      width: 50%;
-      min-width: 0;
-      padding: 48px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .blog-card-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #2DDFC1;
-    }
-
-    .blog-card-title {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: #111;
-      line-height: 1.3;
-      margin: 0;
-    }
-
-    .blog-card-date {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: #666;
-    }
-
-    .blog-card-link {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 10px 20px;
-      border: 1px solid #005149;
-      border-radius: 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      color: #fff;
-      background-color: #005149;
-      text-decoration: none;
-      width: fit-content;
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .blog-card-link:hover {
-      background-color: #003d36;
-      border-color: #003d36;
-      color: #fff;
-    }
-
-    .post-loading {
-      padding: 48px 24px;
-      text-align: center;
-      color: #666;
-      font-family: 'Inter', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    @media (max-width: 768px) {
-      .blog-card {
-        flex-direction: column;
-      }
-
-      .blog-card-image {
-        width: 100%;
-        max-width: 100%;
-        min-height: 220px;
-      }
-
-      .blog-card-body {
-        width: 100%;
-        padding: 24px;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/vero-ui.css" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <script>
+    /* Motion gate: content starts hidden only when JS will animate it in.
+       If the animation libraries fail to load, everything is shown after 2.5s. */
+    (function (d) {
+      d.documentElement.classList.add('js');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+      d.documentElement.classList.add('js-anim');
+      setTimeout(function () { if (!window.__veroMotion) d.documentElement.classList.remove('js-anim'); }, 2500);
+    })(document);
+  </script>
+  <script>
+    // A post URL (post.html?id=…) shows one story; without an id it shows the list.
+    if (/[?&]id=/.test(location.search)) document.documentElement.classList.add('is-post');
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/blog.js" defer></script>
 </head>
 
-
-
-
 <body>
-  <!-- Background Glow Layers -->
-  <div class="bg-glow" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5.5 12.5l4.5 4.5L18.5 8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.5l2.1 6.4 6.4 2.1-6.4 2.1L12 19.5l-2.1-6.4L3.5 11l6.4-2.1z" fill="currentColor" /></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2" /><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2.2" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4" /><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" /></symbol>
+      <symbol id="i-bug" viewBox="0 0 24 24"><rect x="7" y="8" width="10" height="12" rx="5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M12 12v8M7 13H3.5M20.5 13H17M7.5 17.5 4.5 19.5M16.5 17.5l3 2M9 8.5 7.5 5M15 8.5 16.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /><circle cx="12" cy="16.6" r="1.2" fill="currentColor" /></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /></symbol>
+    </defs>
+  </svg>
 
-  <!-- Content Layer -->
-  <div class="content-layer">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!--Navbar-->
-    <nav class="navbar">
-      <div class="navbar-inner">
-        <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
-        <ul class="navbar-links">
+  <!-- ── Navigation ── -->
+  <header class="site-nav" data-nav>
+    <div class="wrap site-nav__inner">
+      <a class="site-nav__logo" href="index.html" aria-label="Vero home">
+        <img src="assets/logo-primary.png" alt="Vero" width="97" height="32" />
+      </a>
+      <nav class="site-nav__menu" id="site-menu" aria-label="Main">
+        <ul class="site-nav__links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
           <li><a href="about-us.html">About Us</a></li>
           <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="affiliate.html">Affiliate</a></li>
-          <li><a href="post.html">Blog</a></li>
-          <li class="nav-cta-li"><a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a></li>
+          <li><a href="post.html" aria-current="page">Blog</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
         </ul>
-        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
+      </nav>
+      <div class="site-nav__actions">
+        <a class="app-btn app-btn--sm js-download-choice" href="#download-options">
+          <span class="app-btn__face"><span class="app-btn__surface">Download Vero</span></span>
         </a>
-        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="site-nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+          <span></span><span></span>
         </button>
       </div>
-    </nav>
+    </div>
+  </header>
 
+  <main id="main">
+    <!-- ── Page hero ── -->
+    <section class="page-hero" aria-labelledby="page-title" data-parallax>
+      <div class="page-hero__mood" aria-hidden="true"><div class="bg-grid"></div></div>
+      <div class="floaters" aria-hidden="true">
+        <img class="floater p1" data-depth="0.6" src="assets/home/token.webp" alt="" width="120" height="119" />
+        <img class="floater p2" data-depth="0.4" src="assets/home/sticker-star.webp" alt="" width="76" height="72" />
+        <img class="floater p3" data-depth="0.5" src="assets/home/streak.webp" alt="" width="64" height="54" />
+        <img class="floater p4" data-depth="0.35" src="assets/home/sticker-coffee.webp" alt="" width="120" height="64" />
+      </div>
+      <div class="wrap page-hero__inner">
+        <a class="back-link" href="post.html" data-post-only><svg aria-hidden="true"><use href="#i-back" /></svg>All stories</a>
+        <span class="eyebrow" data-page-in>Our blog</span>
+        <h1 class="h-display page-hero__title " id="page-title">
+          <span class="line"><span class="line__in"><span data-post-title>The latest stories about Vero</span></span></span>
+        </h1>
+        <p class="lede" data-page-in>Money habits, product news and life with Verdi.</p>
+        <div class="byline" data-post-byline data-post-only></div>
+      </div>
+    </section>
 
+    <!-- ── Posts ── -->
+    <section class="section blog" aria-label="Blog">
+      <div class="wrap">
+        <div class="blog-grid" id="blog-listing" data-list-only aria-live="polite" aria-busy="true"></div>
+        <article class="prose post" id="post-content" data-post-only aria-live="polite" aria-busy="true"></article>
+      </div>
+    </section>
 
-    <!-- blog content -->
-    <main>
-      <div class="blog-content">
+    <!-- ── Final CTA ── -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap">
+        <div class="cta__panel" data-parallax="1.3">
+          <div class="cta__mood" aria-hidden="true">
+            <div class="cta__glow cta__glow--a"></div>
+            <div class="cta__glow cta__glow--b"></div>
+            <div class="bg-grid"></div>
+            <span class="cta__ghost">vero</span>
+          </div>
 
-            <!-- listing header -->
-        <div id="blog-intro" class="solution-content blog-intro">
-          <p class="section-label">Our Blog</p>
-          <h1 class="section-headline">The latest stories about Vero</h1>
+          <div class="cta__copy">
+            <p class="cta__reassure" data-cta-in><span class="cta__dot"></span>Free to start · No card needed</p>
+            <h2 class="cta__title" id="cta-title">
+              <span class="line"><span class="line__in">Start your</span></span>
+              <span class="line"><span class="line__in">streak today.</span></span>
+            </h2>
+            <p class="cta__lede" data-cta-in>Join the herd and let Verdi reward every step forward.</p>
+            <div data-cta-in>
+              <a class="app-btn app-btn--xl js-download-choice" href="#download-options" data-confetti>
+                <span class="app-btn__face"><span class="app-btn__surface">Get Vero free<svg aria-hidden="true"><use href="#i-arrow" /></svg></span></span>
+              </a>
+            </div>
+            <p class="cta__fine" data-cta-in>Available on iPhone and Android.</p>
+          </div>
+
+          <div class="cta__art" aria-hidden="true">
+            <div class="confetti" data-depth="0.25">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <span class="cta__halo"></span>
+            <img class="cta__verdi" data-depth="0.45" src="assets/home/verdi-excited.webp" alt="" width="640" height="657" loading="lazy" />
+            <img class="cta__float cf1" data-depth="0.9" src="assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
+            <img class="cta__float cf2" data-depth="0.6" src="assets/home/xp.webp" alt="" width="64" height="60" loading="lazy" />
+            <img class="cta__float cf3" data-depth="1.1" src="assets/home/streak.webp" alt="" width="64" height="54" loading="lazy" />
+            <img class="cta__float cf4" data-depth="0.8" src="assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
+            <img class="cta__float cf5" data-depth="0.7" src="assets/home/sticker-star.webp" alt="" width="76" height="72" loading="lazy" />
+          </div>
         </div>
+      </div>
+    </section>
+  </main>
 
-        <!-- listing view -->
-        <div id="blog-listing"></div>
-
-        <!-- single post view -->
-        <div id="post-content" style="display:none;" aria-live="polite">
-          <div class="post-loading">Loading post...</div>
-        </div>
-
-        <!-- CTA (single post only) -->
-        <section id="final-cta" class="section final-cta" style="display:none; padding:0;">
-          <a class="final-cta-btn js-download-choice" href="#download-options">
-            Download Vero
-            <span class="cta-arrow">→</span>
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="wrap footer__top">
+      <div class="footer__brand">
+        <a href="index.html" aria-label="Vero home"><img src="assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
+        <p>Helping Gen Z build money habits that last.</p>
+        <div class="store-row store-row--start">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="135" height="45" loading="lazy" />
           </a>
-          <br />
-        </section>
-
-      </div>
-    </main>
-
-    <!--Footer -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="#" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:32px;width:auto;vertical-align:middle;" /></a>
-          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <div class="download-buttons">
-            <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener">
-              <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-badge" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-              rel="noopener">
-              <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" class="download-badge" />
-            </a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <span class="footer-column-title">Product</span>
-            <a href="#how-it-works">How it Works</a>
-            <a href="#pricing">Pricing</a>
-            <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank"
-              rel="noopener noreferrer">Download</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Company</span>
-            <a href="about-us.html">About Us</a>
-            <a href="post.html">Blog</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Legal</span>
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms.html">Terms &amp; Conditions</a>
-          </div>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="151" height="45" loading="lazy" />
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        © 2026 Vero. All rights reserved.
-      </div>
-    </footer>
+      <nav class="footer__cols" aria-label="Footer">
+        <div>
+          <p class="footer__h">Product</p>
+          <ul>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="#download-options" class="js-download-choice">Download</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Company</p>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="post.html">Blog</a></li>
+            <li><a href="verdi-companion.html">Meet Verdi</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Community</p>
+          <ul>
+            <li><a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://discord.gg/MZP9CDfy" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Legal</p>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© 2026 Vero. All rights reserved.</p>
+      <a class="footer__top-link" href="#main">Back to top<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+    </div>
+  </footer>
 
-  </div>
-
-  <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
-    aria-hidden="true">
-    <div class="download-modal-backdrop" data-download-close></div>
-    <div class="download-modal-panel" role="document">
-      <button class="download-modal-close" type="button" aria-label="Close download options" data-download-close>
-        &times;
+  <!-- ── Download dialog ── -->
+  <div class="modal modal--download" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title" aria-hidden="true" inert>
+    <div class="modal__backdrop" data-dialog-close></div>
+    <div class="modal__panel">
+      <img class="modal__verdi" src="assets/home/verdi-peek.webp" alt="" width="440" height="270" />
+      <button class="modal__close" type="button" aria-label="Close download options" data-dialog-close>
+        <svg aria-hidden="true"><use href="#i-close" /></svg>
       </button>
-      <div class="download-modal-copy">
-        <p class="section-label">Download Vero</p>
-      </div>
-      <div class="download-modal-buttons">
-        <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
-          <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-modal-badge" />
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-          rel="noopener noreferrer">
-          <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play"
-            class="download-modal-badge" />
-        </a>
-      </div>
+      <h2 class="modal__title" id="download-title">Get Vero free</h2>
+      <p>Download the app and start your first challenge today.</p>
+      <div class="store-row">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="150" height="50" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="168" height="50" />
+          </a>
+        </div>
     </div>
   </div>
-
-
-
-
-  <!-- Hamburger menu and modal controls -->
-  <script>
-    (() => {
-      // Grab the UI pieces for the modal and mobile navigation.
-      const modal = document.querySelector('.download-modal');
-      const triggers = document.querySelectorAll('.js-download-choice');
-      const closeControls = document.querySelectorAll('[data-download-close]');
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-      let previousFocus = null;
-
-      // Open the download modal and keep focus inside it.
-      const openModal = () => {
-        previousFocus = document.activeElement;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        modal.querySelector('.download-modal-close').focus();
-      };
-
-      // Close the modal and return focus to the trigger.
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        if (previousFocus) previousFocus.focus();
-      };
-
-      // Toggle the mobile nav open and closed.
-      const toggleMenu = (shouldOpen) => {
-        navbar.classList.toggle('open', shouldOpen);
-        hamburger.setAttribute('aria-expanded', String(shouldOpen));
-        document.body.classList.toggle('menu-open', shouldOpen);
-      };
-
-      triggers.forEach((trigger) => {
-        trigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          openModal();
-        });
-      });
-
-      closeControls.forEach((control) => {
-        control.addEventListener('click', closeModal);
-      });
-
-      if (hamburger) {
-        hamburger.addEventListener('click', () => {
-          toggleMenu(!navbar.classList.contains('open'));
-        });
-      }
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          if (navbar.classList.contains('open')) {
-            toggleMenu(false);
-          }
-        });
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!navbar.classList.contains('open')) return;
-        if (navbar.contains(event.target) || (hamburger && hamburger.contains(event.target))) return;
-        toggleMenu(false);
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900 && navbar.classList.contains('open')) {
-          toggleMenu(false);
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          if (modal.classList.contains('is-open')) {
-            closeModal();
-          } else if (navbar.classList.contains('open')) {
-            toggleMenu(false);
-          }
-        }
-      });
-    })();
-  </script>
-
-
-  <!-- Render Notion content into the post page -->
-  <script>
-    // Turn a Notion block into the matching HTML for the page.
-    function renderBlock(block) {
-      switch (block.type) {
-        case 'heading_1':
-          return `<h1>${extractText(block.heading_1.rich_text)}</h1>`;
-        case 'heading_2':
-          return `<h2>${extractText(block.heading_2.rich_text)}</h2>`;
-        case 'heading_3':
-          return `<h3>${extractText(block.heading_3.rich_text)}</h3>`;
-        case 'heading_4':
-          return `<h4>${extractText(block.heading_4.rich_text)}</h4>`;
-        case 'paragraph':
-          return `<p>${extractText(block.paragraph.rich_text)}</p>`;
-        case 'bulleted_list_item':
-          return `<li>${extractText(block.bulleted_list_item.rich_text)}</li>`;
-        case 'image': {
-          const url = block.image.type === 'external'
-            ? block.image.external.url
-            : block.image.file.url;
-          return `<img src="${url}" style="max-width:100%" alt="" />`;
-        }
-        default:
-          return '';
-      }
-    }
-
-    // Pull the plain text from a Notion rich text array.
-    function extractText(richText) {
-      return richText.map(t => {
-        let text = t.plain_text;
-        if (t.annotations.bold) text = `<strong>${text}</strong>`;
-        if (t.annotations.italic) text = `<em>${text}</em>`;
-        return text;
-      }).join('');
-    }
-
-    // Find the first image block so the listing can show a thumbnail.
-    function getFirstImageUrl(blocks) {
-      const imageBlock = blocks.find(b => b.type === 'image');
-      if (!imageBlock) return null;
-      return imageBlock.image.type === 'external'
-        ? imageBlock.image.external.url
-        : imageBlock.image.file.url;
-    }
-
-    // Fetch the content blocks for one blog page.
-    async function fetchBlocks(pageId) {
-      const res = await fetch(`/api/blog?id=${encodeURIComponent(pageId)}`);
-      return res.json();
-    }
-
-    // Build the blog listing page from the Notion pages.
-    async function loadBlogListing() {
-      const listing = document.getElementById('blog-listing');
-      listing.innerHTML = '<p style="text-align:center; font-size:2rem; font-weight:700;">Loading posts...</p>';
-      const res = await fetch('/api/blogs');
-      const pages = await res.json();
-
-      if (!pages.length) {
-        listing.innerHTML = '<p>No posts found.</p>';
-        return;
-      }
-
-      // fetch blocks for all pages to get image + date from callout
-      const blocksMap = {};
-      await Promise.all(pages.map(async (page) => {
-        try {
-          blocksMap[page.id] = await fetchBlocks(page.id);
-        } catch {
-          blocksMap[page.id] = [];
-        }
-      }));
-
-      listing.innerHTML = pages.map(page => {
-        const blocks = blocksMap[page.id] || [];
-
-        // extract date from callout
-        let date = '';
-        const firstBlock = blocks[0];
-        if (firstBlock && firstBlock.type === 'callout') {
-          const text = firstBlock.callout.rich_text.map(t => t.plain_text).join('');
-          const dateMatch = text.match(/date:\s*(.*?)(\s*\||$)/i);
-          date = dateMatch ? dateMatch[1].trim() : '';
-        }
-
-        // extract first image
-        const imgUrl = getFirstImageUrl(blocks);
-
-        return `
-          <div class="blog-card">
-            ${imgUrl
-              ? `<img src="${imgUrl}" class="blog-card-image" alt="" />`
-              : `<div class="blog-card-image"></div>`
-            }
-            <div class="blog-card-body">
-              <h2 class="blog-card-title">${page.child_page.title}</h2>
-              ${date ? `<span class="blog-card-date">${date}</span>` : ''}
-              <a class="blog-card-link" href="/post.html?id=${encodeURIComponent(page.id)}">Read More +</a>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // Render the selected post page and hide the intro section.
-    async function loadPostPage() {
-      const postContent = document.getElementById('post-content');
-      const blogIntro = document.getElementById('blog-intro');
-      const finalCta = document.getElementById('final-cta');
-
-      postContent.innerHTML = '<div class="post-loading">Loading post...</div>';
-      postContent.style.display = 'block';
-      blogIntro.style.display = 'none';
-      finalCta.style.display = 'none';
-
-      const res = await fetch('/api/blogs');
-      const pages = await res.json();
-
-      if (!pages.length) {
-        postContent.innerHTML = '<p>No posts found.</p>';
-        return;
-      }
-
-      const requestedId = new URLSearchParams(window.location.search).get('id');
-      const page = requestedId
-        ? pages.find(p => p.id === requestedId) || pages[0]
-        : pages[0];
-
-      const allBlocks = await fetchBlocks(page.id);
-      const pageTitle = page.child_page.title;
-
-      let author = '', readTime = '', date = '', avatarUrl = '';
-      const metaBlockIds = new Set();
-      const firstBlock = allBlocks[0];
-
-      if (firstBlock && firstBlock.type === 'callout') {
-        const text = extractText(firstBlock.callout.rich_text);
-        const icon = firstBlock.callout.icon;
-
-        if (icon) {
-          if (icon.type === 'file') avatarUrl = icon.file.url;
-          else if (icon.type === 'external') avatarUrl = icon.external.url;
-          else if (icon.type === 'custom_emoji') avatarUrl = icon.custom_emoji.url;
-        }
-
-        if (/author:/i.test(text)) {
-          const authorMatch = text.match(/author:\s*(.*?)(\s*\||$)/i);
-          const readTimeMatch = text.match(/read time:\s*(.*?)(\s*\||$)/i);
-          const dateMatch = text.match(/date:\s*(.*?)(\s*\||$)/i);
-          author = authorMatch ? authorMatch[1].trim() : '';
-          readTime = readTimeMatch ? `${readTimeMatch[1].trim()} read` : '';
-          date = dateMatch ? dateMatch[1].trim() : '';
-          metaBlockIds.add(firstBlock.id);
-        }
-      }
-
-      const contentBlocks = allBlocks.filter(b => !metaBlockIds.has(b.id));
-      const bylineParts = [author, readTime, date].filter(Boolean);
-      const bylineHtml = bylineParts.length > 0
-        ? `<div class="blog-byline">
-            ${avatarUrl ? `<img src="${avatarUrl}" class="byline-avatar" alt="" />` : ''}
-            ${bylineParts.map((part, i) => `
-              ${i > 0 ? '<span class="byline-dot">·</span>' : ''}
-              <span class="${i === 0 ? 'byline-author' : 'byline-meta'}">${part}</span>
-            `).join('')}
-          </div>`
-        : '';
-
-      postContent.innerHTML = `<h1>${pageTitle}</h1>${bylineHtml}${contentBlocks.map(renderBlock).join('')}`;
-      postContent.style.display = 'block';
-      document.getElementById('blog-intro').style.display = 'none'; // hide on single post
-      document.getElementById('final-cta').style.display = 'block';
-    }
-
-    // Route based on whether the URL has a post id.
-    const requestedId = new URLSearchParams(window.location.search).get('id');
-    if (requestedId) {
-      loadPostPage();
-    } else {
-      loadBlogListing();
-    }
-  </script>
 </body>
 
 </html>

@@ -3,381 +3,378 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy Policy - Vero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Privacy Policy – Vero</title>
+  <meta name="description" content="How Vero Financial Ltd collects, uses and protects your personal data." />
+  <meta name="theme-color" content="#E7FDFB" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Privacy Policy – Vero" />
+  <meta property="og:description" content="How Vero Financial Ltd collects, uses and protects your personal data." />
   <link rel="icon" href="assets/favicon.ico" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/vero-ui.css" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <script>
+    /* Motion gate: content starts hidden only when JS will animate it in.
+       If the animation libraries fail to load, everything is shown after 2.5s. */
+    (function (d) {
+      d.documentElement.classList.add('js');
+      // Inside the Vero app's web view the app draws its own header, so the site chrome steps aside.
+      var ua = navigator.userAgent || '';
+      var social = /FBAN|FBAV|Instagram|Line\/|TikTok|musical_ly|Bytedance|Snapchat|LinkedInApp|Twitter|Pinterest|GSA\/|CriOS|FxiOS|EdgiOS/.test(ua);
+      var webview = /VeroApp/.test(ua) || (!social && (/; wv\)/.test(ua) || /(iPhone|iPad|iPod).*AppleWebKit(?!.*Safari)/.test(ua)));
+      if (window.ReactNativeWebView || webview || /[?&]embed=app\b/.test(location.search)) d.documentElement.classList.add('is-embedded');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+      d.documentElement.classList.add('js-anim');
+      setTimeout(function () { if (!window.__veroMotion) d.documentElement.classList.remove('js-anim'); }, 2500);
+    })(document);
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/legal.js" defer></script>
 </head>
 
 <body>
-  <!-- Background Glow Layers -->
-  <div class="bg-glow" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5.5 12.5l4.5 4.5L18.5 8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.5l2.1 6.4 6.4 2.1-6.4 2.1L12 19.5l-2.1-6.4L3.5 11l6.4-2.1z" fill="currentColor" /></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2" /><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2.2" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4" /><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" /></symbol>
+      <symbol id="i-bug" viewBox="0 0 24 24"><rect x="7" y="8" width="10" height="12" rx="5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M12 12v8M7 13H3.5M20.5 13H17M7.5 17.5 4.5 19.5M16.5 17.5l3 2M9 8.5 7.5 5M15 8.5 16.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /><circle cx="12" cy="16.6" r="1.2" fill="currentColor" /></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /></symbol>
+    </defs>
+  </svg>
 
-  <!-- Content Layer -->
-  <div class="content-layer">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- ── Navbar ── -->
-    <nav class="navbar">
-      <div class="navbar-inner">
-        <a href="index.html" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
-        <ul class="navbar-links">
+  <!-- ── Navigation ── -->
+  <header class="site-nav" data-nav>
+    <div class="wrap site-nav__inner">
+      <a class="site-nav__logo" href="index.html" aria-label="Vero home">
+        <img src="assets/logo-primary.png" alt="Vero" width="97" height="32" />
+      </a>
+      <nav class="site-nav__menu" id="site-menu" aria-label="Main">
+        <ul class="site-nav__links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
           <li><a href="about-us.html">About Us</a></li>
           <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="affiliate.html">Affiliate</a></li>
           <li><a href="post.html">Blog</a></li>
-          <li class="nav-cta-li"><a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
         </ul>
-        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
+      </nav>
+      <div class="site-nav__actions">
+        <a class="app-btn app-btn--sm js-download-choice" href="#download-options">
+          <span class="app-btn__face"><span class="app-btn__surface">Download Vero</span></span>
         </a>
-        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="site-nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+          <span></span><span></span>
         </button>
       </div>
-    </nav>
-
-    <!-- ── Legal Hero ── -->
-    <div class="legal-hero">
-      <p class="section-label">Legal</p>
-      <h1 class="legal-hero-title">Privacy Policy</h1>
-      <p class="legal-hero-meta">Vero Financial Ltd &middot; Company No. 16652225 &middot; ICO Ref: ZC084647</p>
     </div>
+  </header>
 
-    <!-- ── Legal Content ── -->
-    <div class="legal-container">
-      <div class="legal-body">
-
-        <div class="legal-intro-box">
-          <p>Vero Financial Ltd (“we”, “us”, or “our”) is a company registered in England and Wales (company number
-            16652225). We are committed to protecting and respecting your privacy and to providing clear, transparent
-            information about how your personal data is used.</p>
-          <p style="margin-top:12px;">We are the data controller for the personal data we collect through our website
-            and mobile application. We are registered with the Information Commissioner’s Office (ICO), registration
-            reference: ZC084647.</p>
-        </div>
-
-        <div class="legal-divider"></div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Definitions</h2>
-          <p>For the purposes of this Privacy Policy, <strong>Personal Data</strong> means any information relating to
-            an identified or identifiable individual. This includes, for example, your name, email address, account
-            identifiers, online identifiers, and information you choose to provide when using the Services.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Collection of personal data</h2>
-          <p>When you use the Services, we collect and process personal data that you voluntarily provide to us,
-            including:</p>
-          <ul>
-            <li>Account details (such as email address and username)</li>
-            <li>Expenses and financial information you manually enter</li>
-            <li>Budget preferences and goals</li>
-            <li>Gamification and progress data</li>
-            <li>Communications with our support team</li>
-          </ul>
-          <p>We do not access your bank accounts, collect bank credentials, or retrieve data from third-party financial
-            institutions in the MVP version of Vero.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">What data we collect</h2>
-          <p>We collect only the data necessary to operate the Service and deliver its features.</p>
-
-          <h3 class="legal-subsection-heading">a) Account information</h3>
-          <ul>
-            <li>Email address</li>
-            <li>Username or display name</li>
-            <li>Encrypted password</li>
-            <li>User ID</li>
-          </ul>
-
-          <h3 class="legal-subsection-heading">b) User-entered financial data</h3>
-          <ul>
-            <li>Expenses you manually input (amounts, categories, dates, optional notes)</li>
-            <li>Budget goals and preferences</li>
-            <li>AI-generated insights based solely on the data you provide</li>
-            <li>Gamification data (XP, streaks, challenges, progress)</li>
-          </ul>
-
-          <h3 class="legal-subsection-heading">c) Technical &amp; usage data</h3>
-          <ul>
-            <li>IP address</li>
-            <li>Device type, operating system, and app version</li>
-            <li>Log files and error reports</li>
-            <li>Basic usage analytics to improve app performance</li>
-          </ul>
-
-          <h3 class="legal-subsection-heading">d) Communications</h3>
-          <ul>
-            <li>Messages you send to our support team</li>
-            <li>Email preferences and communication history</li>
-          </ul>
-
-          <p>If you choose to upload images (for example, attaching a receipt to an expense or adding a profile
-            picture), we will store and process those images solely to provide the relevant feature. Uploading images is
-            optional.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Use of your personal data</h2>
-          <p>We use the personal data you provide to:</p>
-          <ul>
-            <li>Operate and deliver the Services</li>
-            <li>Enable manual expense tracking and budgeting</li>
-            <li>Generate AI-powered insights based on your inputs</li>
-            <li>Provide gamified features that support positive financial habits</li>
-            <li>Maintain the security and performance of the Services</li>
-            <li>Communicate with you about your account or support requests</li>
-          </ul>
-          <p>The information we collect is used only for the purposes described in this Privacy Policy and in
-            accordance with applicable data protection laws.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Legal basis for processing (GDPR)</h2>
-          <p>We process your personal data under the following legal bases:</p>
-          <ul>
-            <li><strong>Contract</strong> &ndash; to provide the Service you sign up for</li>
-            <li><strong>Legitimate interests</strong> &ndash; to secure, maintain, and improve the Service</li>
-            <li><strong>Consent</strong> &ndash; for optional communications such as marketing emails (where
-              applicable)</li>
-          </ul>
-          <p>You may withdraw consent at any time.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Automated processing &amp; insights</h2>
-          <p>Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial
-            habits. These features:</p>
-          <ul>
-            <li>Are informational and motivational only</li>
-            <li>Do not guarantee specific financial outcomes</li>
-            <li>Should not be relied upon as professional advice</li>
-          </ul>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">How long we keep your data</h2>
-          <ul>
-            <li>Your personal data is stored while your account remains active</li>
-            <li>You may delete your account at any time</li>
-            <li>Once deleted, your personal data is permanently erased or anonymised within a reasonable timeframe</li>
-            <li>Technical logs are retained only as long as necessary for security and diagnostics</li>
-          </ul>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Who we share data with</h2>
-          <p>We do not sell your personal data. We may share limited data with trusted third-party service providers
-            who help us operate Vero, such as:</p>
-          <ul>
-            <li>Cloud hosting providers</li>
-            <li>Email and notification services</li>
-            <li>Analytics and error-monitoring tools</li>
-            <li>App stores (Apple App Store, Google Play), which process your subscription payments. If you request a
-              refund from an app store, we may tell it about your subscription and your use of it, as described in
-              section 8.5B of our Terms</li>
-          </ul>
-          <p>All service providers are bound by contractual obligations to protect your data and process it only on our
-            instructions.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Where your data is stored</h2>
-          <p>Your data is stored on secure servers located in the United Kingdom and/or European Economic Area (EEA).
-            If data is transferred outside these regions in the future, appropriate safeguards will be applied in
-            accordance with data protection laws.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Your rights</h2>
-          <p>You have the right to:</p>
-          <ul>
-            <li>Access your personal data</li>
-            <li>Correct inaccurate or incomplete data</li>
-            <li>Delete your data</li>
-            <li>Export your data in a portable format</li>
-            <li>Withdraw consent (where applicable)</li>
-            <li>Object to certain processing activities</li>
-          </ul>
-          <p>You can exercise these rights through in-app settings or by contacting us. We respond to requests within
-            30 days.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Security</h2>
-          <p>We use appropriate technical and organisational measures to protect your data, including:</p>
-          <ul>
-            <li>Encrypted connections (HTTPS)</li>
-            <li>Secure password hashing</li>
-            <li>Access controls and monitoring</li>
-            <li>Regular system updates and security reviews</li>
-          </ul>
-          <p>No system is completely secure, but we take reasonable steps to safeguard your information.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">Changes to this policy</h2>
-          <p>We may update this Privacy Policy from time to time. If changes are material, we will notify you through
-            the app or by email. The latest version will always be available on our website.</p>
-        </div>
-
-        <div class="legal-contact-card">
-          <h2 class="legal-section-heading" style="margin-bottom:10px;">Contact us</h2>
-          <p>If you have any questions, concerns, or complaints about the Service, or if you would like to get in touch
-            with us, please contact our support team at <a
-              href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
-        </div>
-
+  <main id="main">
+    <!-- ── Page hero ── -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-hero__mood" aria-hidden="true"><div class="bg-grid"></div></div>
+      <div class="wrap page-hero__inner">
+        <span class="eyebrow" data-page-in>Legal</span>
+        <h1 class="h-display page-hero__title " id="page-title">
+          <span class="line"><span class="line__in">Privacy Policy</span></span>
+        </h1>
+        <p class="page-hero__meta" data-page-in>Vero Financial Ltd &middot; Company No. 16652225 &middot; ICO Ref: ZC084647</p>
       </div>
-    </div>
+    </section>
 
-    <!-- ── Footer ── -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="index.html" class="footer-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:28px;width:auto;vertical-align:middle;" /></a>
-          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener">
-            <img src="assets/appstore-download.png" alt="Download on the App Store"
-              style="height:38px;width:auto;margin-top:14px;" />
+    <!-- ── Document ── -->
+    <div class="wrap legal">
+      <nav class="legal__toc" aria-label="On this page" data-lenis-prevent>
+        <p class="legal__toc-h">On this page</p>
+        <ol data-toc></ol>
+      </nav>
+      <article class="legal__body" data-legal aria-labelledby="page-title">
+
+
+          <div class="legal-intro-box">
+            <p>Vero Financial Ltd (“we”, “us”, or “our”) is a company registered in England and Wales (company number
+              16652225). We are committed to protecting and respecting your privacy and to providing clear, transparent
+              information about how your personal data is used.</p>
+            <p style="margin-top:12px;">We are the data controller for the personal data we collect through our website
+              and mobile application. We are registered with the Information Commissioner’s Office (ICO), registration
+              reference: ZC084647.</p>
+          </div>
+
+          <div class="legal-divider"></div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Definitions</h2>
+            <p>For the purposes of this Privacy Policy, <strong>Personal Data</strong> means any information relating to
+              an identified or identifiable individual. This includes, for example, your name, email address, account
+              identifiers, online identifiers, and information you choose to provide when using the Services.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Collection of personal data</h2>
+            <p>When you use the Services, we collect and process personal data that you voluntarily provide to us,
+              including:</p>
+            <ul>
+              <li>Account details (such as email address and username)</li>
+              <li>Expenses and financial information you manually enter</li>
+              <li>Budget preferences and goals</li>
+              <li>Gamification and progress data</li>
+              <li>Communications with our support team</li>
+            </ul>
+            <p>We do not access your bank accounts, collect bank credentials, or retrieve data from third-party financial
+              institutions in the MVP version of Vero.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">What data we collect</h2>
+            <p>We collect only the data necessary to operate the Service and deliver its features.</p>
+
+            <h3 class="legal-subsection-heading">a) Account information</h3>
+            <ul>
+              <li>Email address</li>
+              <li>Username or display name</li>
+              <li>Encrypted password</li>
+              <li>User ID</li>
+            </ul>
+
+            <h3 class="legal-subsection-heading">b) User-entered financial data</h3>
+            <ul>
+              <li>Expenses you manually input (amounts, categories, dates, optional notes)</li>
+              <li>Budget goals and preferences</li>
+              <li>AI-generated insights based solely on the data you provide</li>
+              <li>Gamification data (XP, streaks, challenges, progress)</li>
+            </ul>
+
+            <h3 class="legal-subsection-heading">c) Technical &amp; usage data</h3>
+            <ul>
+              <li>IP address</li>
+              <li>Device type, operating system, and app version</li>
+              <li>Log files and error reports</li>
+              <li>Basic usage analytics to improve app performance</li>
+            </ul>
+
+            <h3 class="legal-subsection-heading">d) Communications</h3>
+            <ul>
+              <li>Messages you send to our support team</li>
+              <li>Email preferences and communication history</li>
+            </ul>
+
+            <p>If you choose to upload images (for example, attaching a receipt to an expense or adding a profile
+              picture), we will store and process those images solely to provide the relevant feature. Uploading images is
+              optional.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Use of your personal data</h2>
+            <p>We use the personal data you provide to:</p>
+            <ul>
+              <li>Operate and deliver the Services</li>
+              <li>Enable manual expense tracking and budgeting</li>
+              <li>Generate AI-powered insights based on your inputs</li>
+              <li>Provide gamified features that support positive financial habits</li>
+              <li>Maintain the security and performance of the Services</li>
+              <li>Communicate with you about your account or support requests</li>
+            </ul>
+            <p>The information we collect is used only for the purposes described in this Privacy Policy and in
+              accordance with applicable data protection laws.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Legal basis for processing (GDPR)</h2>
+            <p>We process your personal data under the following legal bases:</p>
+            <ul>
+              <li><strong>Contract</strong> &ndash; to provide the Service you sign up for</li>
+              <li><strong>Legitimate interests</strong> &ndash; to secure, maintain, and improve the Service</li>
+              <li><strong>Consent</strong> &ndash; for optional communications such as marketing emails (where
+                applicable)</li>
+            </ul>
+            <p>You may withdraw consent at any time.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Automated processing &amp; insights</h2>
+            <p>Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial
+              habits. These features:</p>
+            <ul>
+              <li>Are informational and motivational only</li>
+              <li>Do not guarantee specific financial outcomes</li>
+              <li>Should not be relied upon as professional advice</li>
+            </ul>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">How long we keep your data</h2>
+            <ul>
+              <li>Your personal data is stored while your account remains active</li>
+              <li>You may delete your account at any time</li>
+              <li>Once deleted, your personal data is permanently erased or anonymised within a reasonable timeframe</li>
+              <li>Technical logs are retained only as long as necessary for security and diagnostics</li>
+            </ul>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Who we share data with</h2>
+            <p>We do not sell your personal data. We may share limited data with trusted third-party service providers
+              who help us operate Vero, such as:</p>
+            <ul>
+              <li>Cloud hosting providers</li>
+              <li>Email and notification services</li>
+              <li>Analytics and error-monitoring tools</li>
+              <li>App stores (Apple App Store, Google Play), which process your subscription payments. If you request a
+                refund from an app store, we may tell it about your subscription and your use of it, as described in
+                section 8.5B of our Terms</li>
+            </ul>
+            <p>All service providers are bound by contractual obligations to protect your data and process it only on our
+              instructions.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Where your data is stored</h2>
+            <p>Your data is stored on secure servers located in the United Kingdom and/or European Economic Area (EEA).
+              If data is transferred outside these regions in the future, appropriate safeguards will be applied in
+              accordance with data protection laws.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Your rights</h2>
+            <p>You have the right to:</p>
+            <ul>
+              <li>Access your personal data</li>
+              <li>Correct inaccurate or incomplete data</li>
+              <li>Delete your data</li>
+              <li>Export your data in a portable format</li>
+              <li>Withdraw consent (where applicable)</li>
+              <li>Object to certain processing activities</li>
+            </ul>
+            <p>You can exercise these rights through in-app settings or by contacting us. We respond to requests within
+              30 days.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Security</h2>
+            <p>We use appropriate technical and organisational measures to protect your data, including:</p>
+            <ul>
+              <li>Encrypted connections (HTTPS)</li>
+              <li>Secure password hashing</li>
+              <li>Access controls and monitoring</li>
+              <li>Regular system updates and security reviews</li>
+            </ul>
+            <p>No system is completely secure, but we take reasonable steps to safeguard your information.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">Changes to this policy</h2>
+            <p>We may update this Privacy Policy from time to time. If changes are material, we will notify you through
+              the app or by email. The latest version will always be available on our website.</p>
+          </div>
+
+          <div class="legal-contact-card">
+            <h2 class="legal-section-heading" style="margin-bottom:10px;">Contact us</h2>
+            <p>If you have any questions, concerns, or complaints about the Service, or if you would like to get in touch
+              with us, please contact our support team at <a
+                href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
+          </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="wrap footer__top">
+      <div class="footer__brand">
+        <a href="index.html" aria-label="Vero home"><img src="assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
+        <p>Helping Gen Z build money habits that last.</p>
+        <div class="store-row store-row--start">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="135" height="45" loading="lazy" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="151" height="45" loading="lazy" />
           </a>
         </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <span class="footer-column-title">Product</span>
-            <a href="index.html#how-it-works">How it Works</a>
-            <a href="index.html#pricing">Pricing</a>
-            <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank"
-              rel="noopener noreferrer">Download</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Company</span>
-            <a href="about-us.html">About Us</a>
-            <a href="post.html">Blog</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Legal</span>
-            <a href="privacy-policy.html" class="nav-link-active">Privacy Policy</a>
-            <a href="terms.html">Terms &amp; Conditions</a>
-          </div>
+      </div>
+      <nav class="footer__cols" aria-label="Footer">
+        <div>
+          <p class="footer__h">Product</p>
+          <ul>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="#download-options" class="js-download-choice">Download</a></li>
+          </ul>
         </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; 2026 Vero. All rights reserved.
-      </div>
-    </footer>
+        <div>
+          <p class="footer__h">Company</p>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="post.html">Blog</a></li>
+            <li><a href="verdi-companion.html">Meet Verdi</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Community</p>
+          <ul>
+            <li><a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://discord.gg/MZP9CDfy" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Legal</p>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© 2026 Vero. All rights reserved.</p>
+      <a class="footer__top-link" href="#main">Back to top<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+    </div>
+  </footer>
 
-  </div>
-  <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
-    aria-hidden="true">
-    <div class="download-modal-backdrop" data-download-close></div>
-    <div class="download-modal-panel" role="document">
-      <button class="download-modal-close" type="button" aria-label="Close download options" data-download-close>
-        &times;
+  <!-- ── Download dialog ── -->
+  <div class="modal modal--download" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title" aria-hidden="true" inert>
+    <div class="modal__backdrop" data-dialog-close></div>
+    <div class="modal__panel">
+      <img class="modal__verdi" src="assets/home/verdi-peek.webp" alt="" width="440" height="270" />
+      <button class="modal__close" type="button" aria-label="Close download options" data-dialog-close>
+        <svg aria-hidden="true"><use href="#i-close" /></svg>
       </button>
-      <div class="download-modal-copy">
-        <p class="section-label">Download Vero</p>
-      </div>
-      <div class="download-modal-buttons">
-        <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
-          <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-modal-badge" />
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-          rel="noopener noreferrer">
-          <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play"
-            class="download-modal-badge" />
-        </a>
-      </div>
+      <h2 class="modal__title" id="download-title">Get Vero free</h2>
+      <p>Download the app and start your first challenge today.</p>
+      <div class="store-row">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="150" height="50" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="168" height="50" />
+          </a>
+        </div>
     </div>
   </div>
-
-  <script>
-    (() => {
-      const modal = document.querySelector('.download-modal');
-      const triggers = document.querySelectorAll('.js-download-choice');
-      const closeControls = document.querySelectorAll('[data-download-close]');
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-      let previousFocus = null;
-
-      const openModal = () => {
-        previousFocus = document.activeElement;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        modal.querySelector('.download-modal-close').focus();
-      };
-
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        if (previousFocus) previousFocus.focus();
-      };
-
-      triggers.forEach((trigger) => {
-        trigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          openModal();
-        });
-      });
-
-      closeControls.forEach((control) => {
-        control.addEventListener('click', closeModal);
-      });
-
-      if (!hamburger || !navbar) return;
-
-      const toggleMenu = (shouldOpen) => {
-        navbar.classList.toggle('open', shouldOpen);
-        hamburger.setAttribute('aria-expanded', String(shouldOpen));
-        document.body.classList.toggle('menu-open', shouldOpen);
-      };
-
-      hamburger.addEventListener('click', () => {
-        toggleMenu(!navbar.classList.contains('open'));
-      });
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', () => toggleMenu(false));
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!navbar.classList.contains('open')) return;
-        if (navbar.contains(event.target) || hamburger.contains(event.target)) return;
-        toggleMenu(false);
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900 && navbar.classList.contains('open')) {
-          toggleMenu(false);
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          if (modal.classList.contains('is-open')) {
-            closeModal();
-          } else if (navbar.classList.contains('open')) {
-            toggleMenu(false);
-          }
-        }
-      });
-    })();
-  </script>
 </body>
 
 </html>

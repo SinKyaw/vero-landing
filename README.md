@@ -3,9 +3,9 @@
 A static HTML/CSS landing page for the Vero financial‑wellness app.
 
 ## Tech Stack
-- HTML5
-- CSS3 (plain stylesheet)
-- No JavaScript framework (pure HTML/CSS)
+- HTML5 and plain CSS, no build step
+- Home page motion: GSAP 3.12.5 + ScrollTrigger and Lenis 1.1.13 (smooth scroll), loaded from CDN.
+  The page works without them, and they are skipped for `prefers-reduced-motion`.
 
 ## How to run locally
 
@@ -37,11 +37,29 @@ Install the "Live Server" extension, then click **Go Live** while `index.html` i
 vero-landing/
 ├── index.html          # Home page
 ├── about-us.html
-├── affiliate.html
+├── post.html           # Blog list and single posts (Notion via /api)
+├── feedback.html       # Community feedback board (mock UI, sample data)
+├── verdi-companion.html
 ├── privacy-policy.html
-├── terms.html
-├── style.css           # Main stylesheet
+├── terms.html          # Terms, Privacy and Verdi's page hide the site nav/footer
+│                       # inside the app's web view (or with ?embed=app)
+├── affiliate-v1.html   # Legacy page, still on style.css
+├── style.css           # Legacy stylesheet (affiliate-v1 only)
 ├── assets/
+│   ├── css/
+│   │   ├── vero-ui.css  # Web port of the Vero design system (tokens, AppButton, …)
+│   │   ├── site.css     # Shared chrome: nav, page hero, CTA, testimonials, footer, dialogs
+│   │   ├── home.css     # Home page sections and app-screen mockups
+│   │   ├── pages.css    # About, Blog, Legal, Meet Verdi
+│   │   └── feedback.css # Feedback board
+│   ├── js/
+│   │   ├── site.js      # Shared: nav, dialogs, smooth scroll, reveals, pointer parallax
+│   │   ├── home.js      # Home: app screens, tabs, FAQ, hero motion
+│   │   ├── blog.js      # Blog rendering
+│   │   ├── legal.js     # "On this page" contents for legal pages
+│   │   └── feedback.js  # Feedback board (local preview sign-in)
+│   ├── home/           # Optimised webp art for the home page
+│   ├── companion/      # Images for Meet Verdi
 │   ├── appstore-download.png
 │   ├── favicon.ico
 │   ├── logo-primary.png

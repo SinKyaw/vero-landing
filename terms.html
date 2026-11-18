@@ -3,567 +3,564 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms of Service - Vero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Terms of Service – Vero</title>
+  <meta name="description" content="The terms that govern your use of the Vero app and website." />
+  <meta name="theme-color" content="#E7FDFB" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Terms of Service – Vero" />
+  <meta property="og:description" content="The terms that govern your use of the Vero app and website." />
   <link rel="icon" href="assets/favicon.ico" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Inter:wght@400;500&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/vero-ui.css" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <script>
+    /* Motion gate: content starts hidden only when JS will animate it in.
+       If the animation libraries fail to load, everything is shown after 2.5s. */
+    (function (d) {
+      d.documentElement.classList.add('js');
+      // Inside the Vero app's web view the app draws its own header, so the site chrome steps aside.
+      var ua = navigator.userAgent || '';
+      var social = /FBAN|FBAV|Instagram|Line\/|TikTok|musical_ly|Bytedance|Snapchat|LinkedInApp|Twitter|Pinterest|GSA\/|CriOS|FxiOS|EdgiOS/.test(ua);
+      var webview = /VeroApp/.test(ua) || (!social && (/; wv\)/.test(ua) || /(iPhone|iPad|iPod).*AppleWebKit(?!.*Safari)/.test(ua)));
+      if (window.ReactNativeWebView || webview || /[?&]embed=app\b/.test(location.search)) d.documentElement.classList.add('is-embedded');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+      d.documentElement.classList.add('js-anim');
+      setTimeout(function () { if (!window.__veroMotion) d.documentElement.classList.remove('js-anim'); }, 2500);
+    })(document);
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/legal.js" defer></script>
 </head>
 
 <body>
-  <!-- Background Glow Layers -->
-  <div class="bg-glow" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5.5 12.5l4.5 4.5L18.5 8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.5l2.1 6.4 6.4 2.1-6.4 2.1L12 19.5l-2.1-6.4L3.5 11l6.4-2.1z" fill="currentColor" /></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2" /><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2.2" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4" /><path d="M16 16l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" /></symbol>
+      <symbol id="i-bug" viewBox="0 0 24 24"><rect x="7" y="8" width="10" height="12" rx="5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M12 12v8M7 13H3.5M20.5 13H17M7.5 17.5 4.5 19.5M16.5 17.5l3 2M9 8.5 7.5 5M15 8.5 16.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /><circle cx="12" cy="16.6" r="1.2" fill="currentColor" /></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2" /></symbol>
+    </defs>
+  </svg>
 
-  <!-- Content Layer -->
-  <div class="content-layer">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- ── Navbar ── -->
-    <nav class="navbar">
-      <div class="navbar-inner">
-        <a href="index.html" class="navbar-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-            style="height:32px;width:auto;vertical-align:middle;" /></a>
-        <ul class="navbar-links">
+  <!-- ── Navigation ── -->
+  <header class="site-nav" data-nav>
+    <div class="wrap site-nav__inner">
+      <a class="site-nav__logo" href="index.html" aria-label="Vero home">
+        <img src="assets/logo-primary.png" alt="Vero" width="97" height="32" />
+      </a>
+      <nav class="site-nav__menu" id="site-menu" aria-label="Main">
+        <ul class="site-nav__links">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#features">Features</a></li>
           <li><a href="about-us.html">About Us</a></li>
           <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="affiliate.html">Affiliate</a></li>
           <li><a href="post.html">Blog</a></li>
-          <li class="nav-cta-li"><a href="#download-options" class="nav-cta js-download-choice">Download Vero →</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
         </ul>
-        <a href="#download-options" class="nav-cta mobile-download-btn js-download-choice" style="display:none;">
-          Download Vero →
+      </nav>
+      <div class="site-nav__actions">
+        <a class="app-btn app-btn--sm js-download-choice" href="#download-options">
+          <span class="app-btn__face"><span class="app-btn__surface">Download Vero</span></span>
         </a>
-        <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+        <button class="site-nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+          <span></span><span></span>
         </button>
       </div>
-    </nav>
-
-    <!-- ── Legal Hero ── -->
-    <div class="legal-hero">
-      <p class="section-label">Legal</p>
-      <h1 class="legal-hero-title">Terms of Service</h1>
-      <p class="legal-hero-meta">Vero Financial Ltd &middot; Company No. 16652225 &middot; England &amp; Wales</p>
     </div>
+  </header>
 
-    <!-- ── Legal Content ── -->
-    <div class="legal-container">
-      <div class="legal-body">
-
-        <div class="legal-intro-box">
-          <p>These Terms of Service (“Terms”) govern your use of the Vero mobile application and website (together,
-            the “Service”), operated by Vero Financial Ltd, a company registered in England and Wales (company number
-            16652225) (“Vero”, “we”, “us”, or “our”).</p>
-          <p style="margin-top:12px;">By creating an account or using Vero, you agree to these Terms. If you do not
-            agree, you must not use the Service.</p>
-        </div>
-
-        <div class="legal-divider"></div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">1. What is Vero (and what it is not)</h2>
-          <p>Vero is a budgeting and financial wellbeing tool designed to help users manually track expenses, reflect on
-            spending habits, and build healthier financial behaviours through insights and gamification.</p>
-          <p>Vero is <strong>not</strong>:</p>
-          <ul>
-            <li>A bank</li>
-            <li>A payment service provider</li>
-            <li>A financial adviser</li>
-            <li>An investment platform</li>
-          </ul>
-          <p>Nothing in the Service constitutes financial, legal, or investment advice.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">2. Eligibility and age verification</h2>
-          <p>You must:</p>
-          <ul>
-            <li>Be at least 18 years old</li>
-            <li>Be legally capable of entering into a contract</li>
-          </ul>
-          <p>By using Vero, you confirm that you meet these requirements.</p>
-          <p>We may, at any time, ask you to verify your age or identity before or after you create an account, access
-            certain features, or claim any reward. We may use one or more methods to do so, including confirming
-            details you provide, using third-party verification providers, or requesting supporting documentation.</p>
-          <p>If you misrepresent your age or provide false information about your eligibility, we may suspend or
-            terminate your account, withhold or cancel any rewards or benefits, and refuse you further access to the
-            Service. Providing false eligibility information is a breach of these Terms.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">3. Your account</h2>
-          <p>To use Vero, you must create an account. You are responsible for:</p>
-          <ul>
-            <li>Keeping your login credentials secure</li>
-            <li>Ensuring information you provide is accurate</li>
-            <li>All activity that occurs under your account</li>
-          </ul>
-          <p>You must notify us immediately if you believe your account has been compromised.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">4. How you may use Vero</h2>
-          <p>You agree to use the Service only for lawful, personal purposes. You must not:</p>
-          <ul>
-            <li>Attempt to access another user’s data</li>
-            <li>Reverse engineer or interfere with the Service</li>
-            <li>Upload false, misleading, or abusive content</li>
-            <li>Use the Service in a way that could harm others or Vero</li>
-          </ul>
-          <p>In addition, in connection with rewards, tokens, referrals, streaks, experience points (“XP”),
-            leaderboards, or any other incentive or gamified feature, you must not:</p>
-          <ul>
-            <li>Create or control more than one account, or use another person’s account, to claim or increase
-              rewards, referral bonuses, tokens, or XP</li>
-            <li>Refer yourself, or arrange for others to refer you, in order to obtain a referral bonus or other
-              benefit</li>
-            <li>Use false, duplicate, disposable, or another person’s identity, contact details, or device to
-              register, claim rewards, or earn XP</li>
-            <li>Manipulate, inflate, or falsify streaks, XP, leaderboard positions, or reward eligibility through
-              automated tools, bots, scripts, exploits, or any other fraudulent, deceptive, or artificial means</li>
-            <li>Collude with other users, or coordinate multiple accounts, to gain rewards or advantages not intended
-              by the Service</li>
-            <li>Enter, log, or manipulate financial data — including unrealistically small, inflated, or repetitive
-              or near-identical transactions entered on a recurring basis — in order to artificially meet or avoid a
-              budget threshold, challenge target, or other reward or eligibility condition</li>
-          </ul>
-          <p>We reserve the right to suspend or terminate accounts that breach these Terms.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">5. Your user-entered financial data</h2>
-          <p>All financial data in Vero is entered manually by you. You are responsible for:</p>
-          <ul>
-            <li>The accuracy of the data you input</li>
-            <li>Keeping your account credentials secure</li>
-            <li>All activity that occurs under your account</li>
-          </ul>
-          <p>You must notify us immediately if you believe your account has been compromised.</p>
-          <p>Data that does not reasonably reflect your actual financial activity, including transactions entered
-            primarily to influence reward or challenge outcomes rather than to track real spending, is not accurate
-            data for the purposes of these Terms.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">6. Gamification &amp; insights</h2>
-          <p>Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial
-            habits. These features:</p>
-          <ul>
-            <li>Are informational and motivational only</li>
-            <li>Do not guarantee specific financial outcomes</li>
-            <li>Should not be relied upon as professional advice</li>
-          </ul>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">7. Rewards, Tokens &amp; Referral Programme</h2>
-          <p>From time to time, Vero may offer rewards, tokens, referral bonuses, or other benefits (together,
-            “Rewards”) as part of the Service. Your participation in any Rewards or referral programme is subject to
-            this section and any additional rules we publish for a specific promotion.</p>
-          <p><strong>7.1 One person, one account.</strong> Rewards and referrals are for individual personal use. Each
-            person may hold and benefit from only one account for the purposes of earning, claiming, or redeeming
-            Rewards. Rewards and referral bonuses are not transferable and have no cash value except where we state
-            otherwise.</p>
-          <p><strong>7.2 Verification.</strong> We may require you to verify your identity, age, contact details, or
-            device before or after you earn, claim, or redeem any Reward. We may decline or reverse a Reward where
-            verification cannot be completed to our reasonable satisfaction.</p>
-          <p><strong>7.3 Eligibility conditions and misuse.</strong> Rewards are made available only where they are
-            earned in accordance with these Terms and the applicable programme rules. Where we reasonably determine
-            that a Reward was not validly earned — including where it results from multiple or linked accounts,
-            self-referral, false or duplicate identities, automated or artificial activity, spending or transaction
-            data that does not reasonably reflect genuine financial activity (including patterns designed to
-            artificially satisfy a challenge or reward condition), or any other breach of section 4 or this section —
-            that Reward is not validly earned and:</p>
-          <ul>
-            <li>We may withhold, delay, or decline Rewards that have not yet been redeemed</li>
-            <li>We may reverse or recover the value of Rewards that have already been redeemed</li>
-            <li>Unredeemed Rewards and tokens associated with the activity may be cancelled</li>
-            <li>We may make the affected account, and any linked or associated accounts, ineligible for further
-              Rewards</li>
-            <li>We may remove or suspend any accounts we reasonably identify as part of the same pattern of misuse</li>
-          </ul>
-          <p><strong>7.4 Changing or ending the programme.</strong> We may change, suspend, or withdraw any Rewards or
-            referral programme, or restrict a particular user’s access to Rewards, at any time. We may do this
-            separately from, and without affecting, your general access to the rest of the Service.</p>
-          <p><strong>7.5 Third-party rewards.</strong> Some Rewards may be fulfilled by third parties (see section 10).
-            Your use of those Rewards is also subject to the third party’s own terms.</p>
-          <p><strong>7.6 Monitoring for eligibility.</strong> We may review account activity, including manually and
-            through automated systems, to assess whether Rewards have been validly earned in accordance with this
-            section. We are not obliged to disclose the specific methods or criteria used in this review.</p>
-          <p><strong>7.7 Rewards redemption is final.</strong> Once tokens have been redeemed for a reward, that
-            redemption is final and non-refundable.</p>
-          <p><strong>7.8 Redemption limits.</strong> Rewards exist to support the money habits you build with Vero, not
-            as an end in themselves. To support that purpose and keep Rewards fair and sustainable, we may limit how
-            many Rewards you can claim within a given period, require a minimum interval between claims, and set
-            different limits for different plans, Rewards or partners. The limits that currently apply to your account
-            will always be shown in the app. We may change them at any time under section 7.4.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">8. Subscription, billing &amp; payments</h2>
-          <p>Some features of the Service may require a paid subscription (“Subscription”). Where you take out a
-            Subscription, the following terms apply.</p>
-          <p><strong>8.1 Price and billing cycle.</strong> The price of your Subscription and the billing frequency
-            whether monthly or annually will be shown to you at the point of purchase. The current price is £4.99.
-            Unless stated otherwise, prices include applicable taxes.</p>
-          <p><strong>8.2 Free trial.</strong> Where we offer a free trial, it lasts for 7 or 14 days depending on the
-            plan you choose. Unless you cancel before the trial ends, your Subscription will begin automatically and
-            you will be charged the applicable fee.</p>
-          <p><strong>8.3 Auto-renewal.</strong> Your Subscription renews automatically at the end of each billing
-            period at the then-current price, until you cancel. By subscribing, you authorise us (and our payment
-            processor) to charge your chosen payment method for each renewal.</p>
-          <p><strong>8.4 Cancellation.</strong> You may cancel your Subscription at any time through our Plans &amp;
-            Billing section (located in the settings). Cancellation takes effect at the end of your current billing
-            period. Unless required by law or stated otherwise, you will keep access to paid features until the end of
-            the period you have already paid for, and you will not be charged again after that.</p>
-          <p>If you cancel your Vero Plus subscription after claiming a Reward, and before a further Reward has become
-            available to claim under section 7.8, you will not be able to claim that further Reward. All other Vero Plus
-            features remain available until the end of your current billing period.</p>
-          <p><strong>8.5 Refunds.</strong> Because Subscriptions are purchased through the Apple App Store or Google
-            Play, payments and refund requests are handled by the relevant app store under its own terms and refund
-            policies, not directly by Vero. If you would like a refund, you should request it through the app store
-            you purchased from:</p>
-          <ul>
-            <li>Apple: request a refund via reportaproblem.apple.com or your Apple account settings.</li>
-            <li>Google Play: request a refund through the Google Play Store or Google Play Help.</li>
-          </ul>
-          <p>We do not control whether an app store grants a refund, and app-store refund decisions are subject to
-            their policies. If you believe you have been charged in error — for example, a duplicate charge or a
-            renewal you did not expect — please also contact us at <a
-              href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a> and we will try to help you resolve it
-            with the relevant app store, although the refund decision remains with them.</p>
-          <p>Except where the app store grants a refund, or where you have a legal right to one, Subscriptions are
-            non-refundable. In particular, if you cancel partway through a billing period you have already paid for,
-            we do not refund that period — instead, you keep access to paid features until the end of it, and you are
-            not charged again after that. Rewards that have been redeemed are also non-refundable, as described in
-            section 7.7.</p>
-          <p>Nothing in this section affects your statutory rights as a consumer, including your cancellation rights
-            during the cooling-off period described in section 9, and your right to a refund or other remedy if the
-            Service is faulty or not as described under applicable consumer law.</p>
-          <p><strong>8.5A Refunds after redeeming a Plus Reward.</strong> Plus-only Rewards form part of the value you
-            receive from your Vero Plus Subscription. If you redeem a Plus-only Reward during a billing period, that
-            period's Subscription is treated as used, and we will not support or assist a refund request for it. If an
-            app store grants a refund for a billing period in which you redeemed a Plus-only Reward, we may cancel that
-            Reward if it has not yet been issued, or recover its value, including by deducting tokens or withholding
-            future Rewards. We may also restrict your access to Rewards under section 7.4.</p>
-          <p><strong>8.5B Information we share with app stores about refund requests.</strong> When you ask an app
-            store for a refund, the app store may ask us for information to help it decide. By subscribing, you agree
-            that we may share with the relevant app store information about your Subscription and your use of it, such
-            as whether your Subscription was delivered and working, whether a free version of Vero was available to you
-            before you subscribed, and our preference on the refund. The app store makes the final decision on any
-            refund. See our Privacy Policy for more detail.</p>
-          <p><strong>8.6 Failed payments and grace period.</strong> If we are unable to collect a payment when due,
-            you have a 3-day grace period to resolve it before your Subscription is paused or downgraded. We may retry
-            the charge during this period. If payment is still not collected after the grace period, we may suspend
-            your access to paid features or downgrade your account to the free tier until payment is successfully
-            collected. You remain responsible for any amounts properly due.</p>
-          <p><strong>8.7 Downgrades.</strong> If you downgrade or move to a free tier, you may lose access to paid
-            features, and any content, data, or benefits tied to those features may become unavailable. We will not
-            refund fees already paid except where required by law.</p>
-          <p><strong>8.8 Price changes.</strong> We may change Subscription prices from time to time. We will give you
-            at least 30 days notice of any price change before it takes effect. Price changes will not apply to the
-            billing period you have already paid for. If you do not agree to a price change, you may cancel before it
-            takes effect.</p>
-          <p><strong>8.9 Product changes.</strong> Vero is an early-stage startup. Features, rewards, tokens, and
-            perks may be added, changed, or removed at any time as we develop the product. Your core subscription
-            — tracking, insights, and Verdi — will remain consistent in value, but reward-related benefits are
-            provided at our discretion and may change or be removed. By continuing to pay for Vero Plus, you accept
-            these Terms. This does not affect your statutory rights, and nothing in this clause applies except as
-            permitted by applicable consumer law.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">9. Cancellation and cooling-off rights</h2>
-          <p>If you are a consumer, you may have a legal right to cancel a Subscription within 14 days of purchase
-            without giving a reason (the “cooling-off period”).</p>
-          <p>Because Vero provides digital content and services, you agree that we may begin providing the Service to
-            you during the cooling-off period. Where you have started using the paid Service during the cooling-off
-            period, your right to cancel and receive a refund may be reduced or lost to the extent the Service has
-            been supplied, in accordance with applicable consumer law.</p>
-          <p>To exercise any cancellation right, contact us at <a
-              href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a> using the primary email address on your
-            account. This section does not limit any other statutory rights you have as a consumer.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">10. Third-party gift cards and rewards partners</h2>
-          <p>Some Rewards, including gift cards, may be supplied and fulfilled by third-party partners or providers
-            (for example, gift-card aggregation providers and the brands whose gift cards are offered).</p>
-          <p>Vero is not the issuer of these gift cards or third-party rewards. We are not responsible for how partner
-            brands or providers honour, restrict, expire, or otherwise deal with their own gift cards or rewards,
-            including their availability, terms of use, geographic restrictions, or any changes they make to them.</p>
-          <p>Once a third-party gift card or reward has been issued to you, your use of it is governed by the terms
-            and conditions of the issuing brand or provider. Any dispute about the redemption or honouring of a
-            third-party gift card should be raised with the relevant issuer. Where we are able to assist, we will use
-            reasonable efforts to do so, but we do not guarantee any particular outcome.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">11. Your behaviour towards Vero</h2>
-          <p>11.1 You must not access, interfere with, damage, disrupt, or attempt to compromise any part of the
-            Service, its security measures, servers, systems, networks, or software. This includes introducing any
-            harmful or malicious code, such as viruses, malware, worms, spyware, or similar technologies.</p>
-          <p>11.2 You must not inject content or code, or otherwise alter or interfere with how any part of the Service
-            is displayed or functions on any device or browser.</p>
-          <p>11.3 You must not access or use the Service through unauthorised means, including automated tools such as
-            bots, scripts, crawlers, or scrapers, unless expressly permitted by us.</p>
-          <p>11.4 You must not modify, adapt, or alter the Service, or any other website or application, in a way that
-            falsely suggests an association with or endorsement by Vero.</p>
-          <p>11.5 We do not accept unsolicited ideas, suggestions, proposals, or materials unless we have specifically
-            invited them under defined terms.</p>
-          <p>11.6 If you submit unsolicited content in breach of this section, you agree that we may use, adapt, or
-            develop such content for any purpose without obligation to compensate or credit you.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">12. Intellectual property</h2>
-          <p>All content, software, branding, and design in Vero are owned by or licensed to Vero Financial Ltd. You
-            may not copy, modify, distribute, or commercialise any part of the Service without our permission.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">13. Web data charges and security</h2>
-          <p>13.1 You are responsible for any data or internet charges incurred when using the Service, including
-            charges from your mobile network or internet provider.</p>
-          <p>13.2 While we take reasonable steps to keep the Service secure, we cannot guarantee that it will be free
-            from viruses or other harmful components. You are responsible for maintaining the security of your device
-            and internet connection, including using appropriate protection software.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">14. Account suspension and termination</h2>
-          <p>You may delete your account at any time through the app or by contacting us. We may suspend or terminate
-            your account if:</p>
-          <ul>
-            <li>You breach these Terms</li>
-            <li>You misuse the Service</li>
-            <li>We are required to do so by law</li>
-          </ul>
-          <p>Where we reasonably believe an account is involved in fraud, abuse of Rewards or referrals, or other
-            breaches of these Terms, we may also suspend or terminate any other accounts we reasonably identify as
-            linked to or associated with that account.</p>
-          <p>We may suspend or withdraw your access to Rewards, the referral programme, or specific features
-            separately from, and without, suspending or terminating your whole account.</p>
-          <p>Upon termination, your access to the Service will end. To cancel your account, email <a
-              href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a> with your primary email address.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">15. Limitation of liability</h2>
-          <p>To the maximum extent permitted by law:</p>
-          <ul>
-            <li>Vero is provided “as is”</li>
-            <li>We do not guarantee uninterrupted or error-free service</li>
-            <li>We are not liable for financial decisions you make using the Service</li>
-          </ul>
-          <p>Nothing in these Terms limits liability where doing so would be unlawful.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">16. Indemnification</h2>
-          <p>To the extent permitted by law, you agree to indemnify and hold harmless Vero Financial Ltd, and its
-            directors, officers, employees, and agents, against any claims, losses, liabilities, damages, costs, and
-            reasonable expenses (including reasonable legal fees) arising out of or connected with:</p>
-          <ul>
-            <li>Your breach of these Terms</li>
-            <li>Your misuse of the Service</li>
-            <li>Your infringement of any law or of the rights of any third party</li>
-          </ul>
-          <p>This section does not require you to indemnify us for losses caused by our own negligence, our breach of
-            these Terms, or anything else that cannot be excluded under applicable law.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">17. Changes to the Service or Terms</h2>
-          <p>We may update the Service or these Terms from time to time as we improve Vero. If changes are material,
-            we will take reasonable steps to notify users. Continued use of the Service after changes means you accept
-            the updated Terms.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">18. Your privacy</h2>
-          <p>By using the Service, you agree to the terms of our <a href="privacy-policy.html">Privacy Policy</a>,
-            which forms part of these Terms of use and our agreement with you.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">19. Governing law and jurisdiction</h2>
-          <p>These Terms, and any dispute or claim arising out of or in connection with them or their subject matter
-            (including non-contractual disputes or claims), are governed by and construed in accordance with the law
-            of England and Wales.</p>
-          <p>You and Vero agree that the courts of England and Wales have exclusive jurisdiction to settle any such
-            dispute or claim. If you are a consumer resident elsewhere in the United Kingdom, nothing in this section
-            deprives you of any protection or right to bring proceedings that the law of your home nation gives you.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">20. Entire agreement</h2>
-          <p>These Terms, together with our Privacy Policy and any additional rules we publish for specific features
-            or promotions, make up the entire agreement between you and Vero relating to your use of the Service. They
-            replace any earlier agreements, statements, or understandings between us on that subject, except for any
-            statement we made fraudulently.</p>
-        </div>
-
-        <div class="legal-section">
-          <h2 class="legal-section-heading">21. Severability</h2>
-          <p>If any provision of these Terms is found by a court or other competent authority to be invalid, unlawful,
-            or unenforceable, that provision will be treated as removed to the minimum extent necessary, and the
-            remaining provisions will continue in full force and effect.</p>
-        </div>
-
-        <div class="legal-contact-card">
-          <h2 class="legal-section-heading" style="margin-bottom:10px;">22. Enquiries &amp; complaints</h2>
-          <p>If you have any questions, concerns, or complaints about the Service, or if you would like to get in touch
-            with us, please contact our support team at <a
-              href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
-          <p style="margin-top:10px;">Thank you for using our service!</p>
-        </div>
-
+  <main id="main">
+    <!-- ── Page hero ── -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-hero__mood" aria-hidden="true"><div class="bg-grid"></div></div>
+      <div class="wrap page-hero__inner">
+        <span class="eyebrow" data-page-in>Legal</span>
+        <h1 class="h-display page-hero__title " id="page-title">
+          <span class="line"><span class="line__in">Terms of Service</span></span>
+        </h1>
+        <p class="page-hero__meta" data-page-in>Vero Financial Ltd &middot; Company No. 16652225 &middot; England &amp; Wales</p>
       </div>
-    </div>
+    </section>
 
-    <!-- ── Footer ── -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <a href="index.html" class="footer-logo"><img src="assets/logo-primary.png" alt="Vero logo"
-              style="height:28px;width:auto;vertical-align:middle;" /></a>
-          <p class="footer-tagline">Help Gen Z build lasting financial habits through gamification and AI.</p>
-          <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener">
-            <img src="assets/appstore-download.png" alt="Download on the App Store"
-              style="height:38px;width:auto;margin-top:14px;" />
+    <!-- ── Document ── -->
+    <div class="wrap legal">
+      <nav class="legal__toc" aria-label="On this page" data-lenis-prevent>
+        <p class="legal__toc-h">On this page</p>
+        <ol data-toc></ol>
+      </nav>
+      <article class="legal__body" data-legal aria-labelledby="page-title">
+
+
+          <div class="legal-intro-box">
+            <p>These Terms of Service (“Terms”) govern your use of the Vero mobile application and website (together,
+              the “Service”), operated by Vero Financial Ltd, a company registered in England and Wales (company number
+              16652225) (“Vero”, “we”, “us”, or “our”).</p>
+            <p style="margin-top:12px;">By creating an account or using Vero, you agree to these Terms. If you do not
+              agree, you must not use the Service.</p>
+          </div>
+
+          <div class="legal-divider"></div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">1. What is Vero (and what it is not)</h2>
+            <p>Vero is a budgeting and financial wellbeing tool designed to help users manually track expenses, reflect on
+              spending habits, and build healthier financial behaviours through insights and gamification.</p>
+            <p>Vero is <strong>not</strong>:</p>
+            <ul>
+              <li>A bank</li>
+              <li>A payment service provider</li>
+              <li>A financial adviser</li>
+              <li>An investment platform</li>
+            </ul>
+            <p>Nothing in the Service constitutes financial, legal, or investment advice.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">2. Eligibility and age verification</h2>
+            <p>You must:</p>
+            <ul>
+              <li>Be at least 18 years old</li>
+              <li>Be legally capable of entering into a contract</li>
+            </ul>
+            <p>By using Vero, you confirm that you meet these requirements.</p>
+            <p>We may, at any time, ask you to verify your age or identity before or after you create an account, access
+              certain features, or claim any reward. We may use one or more methods to do so, including confirming
+              details you provide, using third-party verification providers, or requesting supporting documentation.</p>
+            <p>If you misrepresent your age or provide false information about your eligibility, we may suspend or
+              terminate your account, withhold or cancel any rewards or benefits, and refuse you further access to the
+              Service. Providing false eligibility information is a breach of these Terms.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">3. Your account</h2>
+            <p>To use Vero, you must create an account. You are responsible for:</p>
+            <ul>
+              <li>Keeping your login credentials secure</li>
+              <li>Ensuring information you provide is accurate</li>
+              <li>All activity that occurs under your account</li>
+            </ul>
+            <p>You must notify us immediately if you believe your account has been compromised.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">4. How you may use Vero</h2>
+            <p>You agree to use the Service only for lawful, personal purposes. You must not:</p>
+            <ul>
+              <li>Attempt to access another user’s data</li>
+              <li>Reverse engineer or interfere with the Service</li>
+              <li>Upload false, misleading, or abusive content</li>
+              <li>Use the Service in a way that could harm others or Vero</li>
+            </ul>
+            <p>In addition, in connection with rewards, tokens, referrals, streaks, experience points (“XP”),
+              leaderboards, or any other incentive or gamified feature, you must not:</p>
+            <ul>
+              <li>Create or control more than one account, or use another person’s account, to claim or increase
+                rewards, referral bonuses, tokens, or XP</li>
+              <li>Refer yourself, or arrange for others to refer you, in order to obtain a referral bonus or other
+                benefit</li>
+              <li>Use false, duplicate, disposable, or another person’s identity, contact details, or device to
+                register, claim rewards, or earn XP</li>
+              <li>Manipulate, inflate, or falsify streaks, XP, leaderboard positions, or reward eligibility through
+                automated tools, bots, scripts, exploits, or any other fraudulent, deceptive, or artificial means</li>
+              <li>Collude with other users, or coordinate multiple accounts, to gain rewards or advantages not intended
+                by the Service</li>
+              <li>Enter, log, or manipulate financial data — including unrealistically small, inflated, or repetitive
+                or near-identical transactions entered on a recurring basis — in order to artificially meet or avoid a
+                budget threshold, challenge target, or other reward or eligibility condition</li>
+            </ul>
+            <p>We reserve the right to suspend or terminate accounts that breach these Terms.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">5. Your user-entered financial data</h2>
+            <p>All financial data in Vero is entered manually by you. You are responsible for:</p>
+            <ul>
+              <li>The accuracy of the data you input</li>
+              <li>Keeping your account credentials secure</li>
+              <li>All activity that occurs under your account</li>
+            </ul>
+            <p>You must notify us immediately if you believe your account has been compromised.</p>
+            <p>Data that does not reasonably reflect your actual financial activity, including transactions entered
+              primarily to influence reward or challenge outcomes rather than to track real spending, is not accurate
+              data for the purposes of these Terms.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">6. Gamification &amp; insights</h2>
+            <p>Vero uses behavioural insights, challenges, rewards, and visual feedback to encourage positive financial
+              habits. These features:</p>
+            <ul>
+              <li>Are informational and motivational only</li>
+              <li>Do not guarantee specific financial outcomes</li>
+              <li>Should not be relied upon as professional advice</li>
+            </ul>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">7. Rewards, Tokens &amp; Referral Programme</h2>
+            <p>From time to time, Vero may offer rewards, tokens, referral bonuses, or other benefits (together,
+              “Rewards”) as part of the Service. Your participation in any Rewards or referral programme is subject to
+              this section and any additional rules we publish for a specific promotion.</p>
+            <p><strong>7.1 One person, one account.</strong> Rewards and referrals are for individual personal use. Each
+              person may hold and benefit from only one account for the purposes of earning, claiming, or redeeming
+              Rewards. Rewards and referral bonuses are not transferable and have no cash value except where we state
+              otherwise.</p>
+            <p><strong>7.2 Verification.</strong> We may require you to verify your identity, age, contact details, or
+              device before or after you earn, claim, or redeem any Reward. We may decline or reverse a Reward where
+              verification cannot be completed to our reasonable satisfaction.</p>
+            <p><strong>7.3 Eligibility conditions and misuse.</strong> Rewards are made available only where they are
+              earned in accordance with these Terms and the applicable programme rules. Where we reasonably determine
+              that a Reward was not validly earned — including where it results from multiple or linked accounts,
+              self-referral, false or duplicate identities, automated or artificial activity, spending or transaction
+              data that does not reasonably reflect genuine financial activity (including patterns designed to
+              artificially satisfy a challenge or reward condition), or any other breach of section 4 or this section —
+              that Reward is not validly earned and:</p>
+            <ul>
+              <li>We may withhold, delay, or decline Rewards that have not yet been redeemed</li>
+              <li>We may reverse or recover the value of Rewards that have already been redeemed</li>
+              <li>Unredeemed Rewards and tokens associated with the activity may be cancelled</li>
+              <li>We may make the affected account, and any linked or associated accounts, ineligible for further
+                Rewards</li>
+              <li>We may remove or suspend any accounts we reasonably identify as part of the same pattern of misuse</li>
+            </ul>
+            <p><strong>7.4 Changing or ending the programme.</strong> We may change, suspend, or withdraw any Rewards or
+              referral programme, or restrict a particular user’s access to Rewards, at any time. We may do this
+              separately from, and without affecting, your general access to the rest of the Service.</p>
+            <p><strong>7.5 Third-party rewards.</strong> Some Rewards may be fulfilled by third parties (see section 10).
+              Your use of those Rewards is also subject to the third party’s own terms.</p>
+            <p><strong>7.6 Monitoring for eligibility.</strong> We may review account activity, including manually and
+              through automated systems, to assess whether Rewards have been validly earned in accordance with this
+              section. We are not obliged to disclose the specific methods or criteria used in this review.</p>
+            <p><strong>7.7 Rewards redemption is final.</strong> Once tokens have been redeemed for a reward, that
+              redemption is final and non-refundable.</p>
+            <p><strong>7.8 Redemption limits.</strong> Rewards exist to support the money habits you build with Vero, not
+              as an end in themselves. To support that purpose and keep Rewards fair and sustainable, we may limit how
+              many Rewards you can claim within a given period, require a minimum interval between claims, and set
+              different limits for different plans, Rewards or partners. The limits that currently apply to your account
+              will always be shown in the app. We may change them at any time under section 7.4.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">8. Subscription, billing &amp; payments</h2>
+            <p>Some features of the Service may require a paid subscription (“Subscription”). Where you take out a
+              Subscription, the following terms apply.</p>
+            <p><strong>8.1 Price and billing cycle.</strong> The price of your Subscription and the billing frequency
+              whether monthly or annually will be shown to you at the point of purchase. The current price is £4.99.
+              Unless stated otherwise, prices include applicable taxes.</p>
+            <p><strong>8.2 Free trial.</strong> Where we offer a free trial, it lasts for 7 or 14 days depending on the
+              plan you choose. Unless you cancel before the trial ends, your Subscription will begin automatically and
+              you will be charged the applicable fee.</p>
+            <p><strong>8.3 Auto-renewal.</strong> Your Subscription renews automatically at the end of each billing
+              period at the then-current price, until you cancel. By subscribing, you authorise us (and our payment
+              processor) to charge your chosen payment method for each renewal.</p>
+            <p><strong>8.4 Cancellation.</strong> You may cancel your Subscription at any time through our Plans &amp;
+              Billing section (located in the settings). Cancellation takes effect at the end of your current billing
+              period. Unless required by law or stated otherwise, you will keep access to paid features until the end of
+              the period you have already paid for, and you will not be charged again after that.</p>
+            <p>If you cancel your Vero Plus subscription after claiming a Reward, and before a further Reward has become
+              available to claim under section 7.8, you will not be able to claim that further Reward. All other Vero Plus
+              features remain available until the end of your current billing period.</p>
+            <p><strong>8.5 Refunds.</strong> Because Subscriptions are purchased through the Apple App Store or Google
+              Play, payments and refund requests are handled by the relevant app store under its own terms and refund
+              policies, not directly by Vero. If you would like a refund, you should request it through the app store
+              you purchased from:</p>
+            <ul>
+              <li>Apple: request a refund via reportaproblem.apple.com or your Apple account settings.</li>
+              <li>Google Play: request a refund through the Google Play Store or Google Play Help.</li>
+            </ul>
+            <p>We do not control whether an app store grants a refund, and app-store refund decisions are subject to
+              their policies. If you believe you have been charged in error — for example, a duplicate charge or a
+              renewal you did not expect — please also contact us at <a
+                href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a> and we will try to help you resolve it
+              with the relevant app store, although the refund decision remains with them.</p>
+            <p>Except where the app store grants a refund, or where you have a legal right to one, Subscriptions are
+              non-refundable. In particular, if you cancel partway through a billing period you have already paid for,
+              we do not refund that period — instead, you keep access to paid features until the end of it, and you are
+              not charged again after that. Rewards that have been redeemed are also non-refundable, as described in
+              section 7.7.</p>
+            <p>Nothing in this section affects your statutory rights as a consumer, including your cancellation rights
+              during the cooling-off period described in section 9, and your right to a refund or other remedy if the
+              Service is faulty or not as described under applicable consumer law.</p>
+            <p><strong>8.5A Refunds after redeeming a Plus Reward.</strong> Plus-only Rewards form part of the value you
+              receive from your Vero Plus Subscription. If you redeem a Plus-only Reward during a billing period, that
+              period's Subscription is treated as used, and we will not support or assist a refund request for it. If an
+              app store grants a refund for a billing period in which you redeemed a Plus-only Reward, we may cancel that
+              Reward if it has not yet been issued, or recover its value, including by deducting tokens or withholding
+              future Rewards. We may also restrict your access to Rewards under section 7.4.</p>
+            <p><strong>8.5B Information we share with app stores about refund requests.</strong> When you ask an app
+              store for a refund, the app store may ask us for information to help it decide. By subscribing, you agree
+              that we may share with the relevant app store information about your Subscription and your use of it, such
+              as whether your Subscription was delivered and working, whether a free version of Vero was available to you
+              before you subscribed, and our preference on the refund. The app store makes the final decision on any
+              refund. See our Privacy Policy for more detail.</p>
+            <p><strong>8.6 Failed payments and grace period.</strong> If we are unable to collect a payment when due,
+              you have a 3-day grace period to resolve it before your Subscription is paused or downgraded. We may retry
+              the charge during this period. If payment is still not collected after the grace period, we may suspend
+              your access to paid features or downgrade your account to the free tier until payment is successfully
+              collected. You remain responsible for any amounts properly due.</p>
+            <p><strong>8.7 Downgrades.</strong> If you downgrade or move to a free tier, you may lose access to paid
+              features, and any content, data, or benefits tied to those features may become unavailable. We will not
+              refund fees already paid except where required by law.</p>
+            <p><strong>8.8 Price changes.</strong> We may change Subscription prices from time to time. We will give you
+              at least 30 days notice of any price change before it takes effect. Price changes will not apply to the
+              billing period you have already paid for. If you do not agree to a price change, you may cancel before it
+              takes effect.</p>
+            <p><strong>8.9 Product changes.</strong> Vero is an early-stage startup. Features, rewards, tokens, and
+              perks may be added, changed, or removed at any time as we develop the product. Your core subscription
+              — tracking, insights, and Verdi — will remain consistent in value, but reward-related benefits are
+              provided at our discretion and may change or be removed. By continuing to pay for Vero Plus, you accept
+              these Terms. This does not affect your statutory rights, and nothing in this clause applies except as
+              permitted by applicable consumer law.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">9. Cancellation and cooling-off rights</h2>
+            <p>If you are a consumer, you may have a legal right to cancel a Subscription within 14 days of purchase
+              without giving a reason (the “cooling-off period”).</p>
+            <p>Because Vero provides digital content and services, you agree that we may begin providing the Service to
+              you during the cooling-off period. Where you have started using the paid Service during the cooling-off
+              period, your right to cancel and receive a refund may be reduced or lost to the extent the Service has
+              been supplied, in accordance with applicable consumer law.</p>
+            <p>To exercise any cancellation right, contact us at <a
+                href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a> using the primary email address on your
+              account. This section does not limit any other statutory rights you have as a consumer.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">10. Third-party gift cards and rewards partners</h2>
+            <p>Some Rewards, including gift cards, may be supplied and fulfilled by third-party partners or providers
+              (for example, gift-card aggregation providers and the brands whose gift cards are offered).</p>
+            <p>Vero is not the issuer of these gift cards or third-party rewards. We are not responsible for how partner
+              brands or providers honour, restrict, expire, or otherwise deal with their own gift cards or rewards,
+              including their availability, terms of use, geographic restrictions, or any changes they make to them.</p>
+            <p>Once a third-party gift card or reward has been issued to you, your use of it is governed by the terms
+              and conditions of the issuing brand or provider. Any dispute about the redemption or honouring of a
+              third-party gift card should be raised with the relevant issuer. Where we are able to assist, we will use
+              reasonable efforts to do so, but we do not guarantee any particular outcome.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">11. Your behaviour towards Vero</h2>
+            <p>11.1 You must not access, interfere with, damage, disrupt, or attempt to compromise any part of the
+              Service, its security measures, servers, systems, networks, or software. This includes introducing any
+              harmful or malicious code, such as viruses, malware, worms, spyware, or similar technologies.</p>
+            <p>11.2 You must not inject content or code, or otherwise alter or interfere with how any part of the Service
+              is displayed or functions on any device or browser.</p>
+            <p>11.3 You must not access or use the Service through unauthorised means, including automated tools such as
+              bots, scripts, crawlers, or scrapers, unless expressly permitted by us.</p>
+            <p>11.4 You must not modify, adapt, or alter the Service, or any other website or application, in a way that
+              falsely suggests an association with or endorsement by Vero.</p>
+            <p>11.5 We do not accept unsolicited ideas, suggestions, proposals, or materials unless we have specifically
+              invited them under defined terms.</p>
+            <p>11.6 If you submit unsolicited content in breach of this section, you agree that we may use, adapt, or
+              develop such content for any purpose without obligation to compensate or credit you.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">12. Intellectual property</h2>
+            <p>All content, software, branding, and design in Vero are owned by or licensed to Vero Financial Ltd. You
+              may not copy, modify, distribute, or commercialise any part of the Service without our permission.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">13. Web data charges and security</h2>
+            <p>13.1 You are responsible for any data or internet charges incurred when using the Service, including
+              charges from your mobile network or internet provider.</p>
+            <p>13.2 While we take reasonable steps to keep the Service secure, we cannot guarantee that it will be free
+              from viruses or other harmful components. You are responsible for maintaining the security of your device
+              and internet connection, including using appropriate protection software.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">14. Account suspension and termination</h2>
+            <p>You may delete your account at any time through the app or by contacting us. We may suspend or terminate
+              your account if:</p>
+            <ul>
+              <li>You breach these Terms</li>
+              <li>You misuse the Service</li>
+              <li>We are required to do so by law</li>
+            </ul>
+            <p>Where we reasonably believe an account is involved in fraud, abuse of Rewards or referrals, or other
+              breaches of these Terms, we may also suspend or terminate any other accounts we reasonably identify as
+              linked to or associated with that account.</p>
+            <p>We may suspend or withdraw your access to Rewards, the referral programme, or specific features
+              separately from, and without, suspending or terminating your whole account.</p>
+            <p>Upon termination, your access to the Service will end. To cancel your account, email <a
+                href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a> with your primary email address.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">15. Limitation of liability</h2>
+            <p>To the maximum extent permitted by law:</p>
+            <ul>
+              <li>Vero is provided “as is”</li>
+              <li>We do not guarantee uninterrupted or error-free service</li>
+              <li>We are not liable for financial decisions you make using the Service</li>
+            </ul>
+            <p>Nothing in these Terms limits liability where doing so would be unlawful.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">16. Indemnification</h2>
+            <p>To the extent permitted by law, you agree to indemnify and hold harmless Vero Financial Ltd, and its
+              directors, officers, employees, and agents, against any claims, losses, liabilities, damages, costs, and
+              reasonable expenses (including reasonable legal fees) arising out of or connected with:</p>
+            <ul>
+              <li>Your breach of these Terms</li>
+              <li>Your misuse of the Service</li>
+              <li>Your infringement of any law or of the rights of any third party</li>
+            </ul>
+            <p>This section does not require you to indemnify us for losses caused by our own negligence, our breach of
+              these Terms, or anything else that cannot be excluded under applicable law.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">17. Changes to the Service or Terms</h2>
+            <p>We may update the Service or these Terms from time to time as we improve Vero. If changes are material,
+              we will take reasonable steps to notify users. Continued use of the Service after changes means you accept
+              the updated Terms.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">18. Your privacy</h2>
+            <p>By using the Service, you agree to the terms of our <a href="privacy-policy.html">Privacy Policy</a>,
+              which forms part of these Terms of use and our agreement with you.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">19. Governing law and jurisdiction</h2>
+            <p>These Terms, and any dispute or claim arising out of or in connection with them or their subject matter
+              (including non-contractual disputes or claims), are governed by and construed in accordance with the law
+              of England and Wales.</p>
+            <p>You and Vero agree that the courts of England and Wales have exclusive jurisdiction to settle any such
+              dispute or claim. If you are a consumer resident elsewhere in the United Kingdom, nothing in this section
+              deprives you of any protection or right to bring proceedings that the law of your home nation gives you.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">20. Entire agreement</h2>
+            <p>These Terms, together with our Privacy Policy and any additional rules we publish for specific features
+              or promotions, make up the entire agreement between you and Vero relating to your use of the Service. They
+              replace any earlier agreements, statements, or understandings between us on that subject, except for any
+              statement we made fraudulently.</p>
+          </div>
+
+          <div class="legal-section">
+            <h2 class="legal-section-heading">21. Severability</h2>
+            <p>If any provision of these Terms is found by a court or other competent authority to be invalid, unlawful,
+              or unenforceable, that provision will be treated as removed to the minimum extent necessary, and the
+              remaining provisions will continue in full force and effect.</p>
+          </div>
+
+          <div class="legal-contact-card">
+            <h2 class="legal-section-heading" style="margin-bottom:10px;">22. Enquiries &amp; complaints</h2>
+            <p>If you have any questions, concerns, or complaints about the Service, or if you would like to get in touch
+              with us, please contact our support team at <a
+                href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a>.</p>
+            <p style="margin-top:10px;">Thank you for using our service!</p>
+          </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="wrap footer__top">
+      <div class="footer__brand">
+        <a href="index.html" aria-label="Vero home"><img src="assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
+        <p>Helping Gen Z build money habits that last.</p>
+        <div class="store-row store-row--start">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="135" height="45" loading="lazy" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="151" height="45" loading="lazy" />
           </a>
         </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <span class="footer-column-title">Product</span>
-            <a href="index.html#how-it-works">How it Works</a>
-            <a href="index.html#pricing">Pricing</a>
-            <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank"
-              rel="noopener noreferrer">Download</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Company</span>
-            <a href="about-us.html">About Us</a>
-            <a href="post.html">Blog</a>
-          </div>
-          <div class="footer-column">
-            <span class="footer-column-title">Legal</span>
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms.html" class="nav-link-active">Terms &amp; Conditions</a>
-          </div>
+      </div>
+      <nav class="footer__cols" aria-label="Footer">
+        <div>
+          <p class="footer__h">Product</p>
+          <ul>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="#download-options" class="js-download-choice">Download</a></li>
+          </ul>
         </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; 2026 Vero. All rights reserved.
-      </div>
-    </footer>
+        <div>
+          <p class="footer__h">Company</p>
+          <ul>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="post.html">Blog</a></li>
+            <li><a href="verdi-companion.html">Meet Verdi</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Community</p>
+          <ul>
+            <li><a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://discord.gg/MZP9CDfy" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Legal</p>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© 2026 Vero. All rights reserved.</p>
+      <a class="footer__top-link" href="#main">Back to top<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+    </div>
+  </footer>
 
-  </div>
-  <div class="download-modal" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title"
-    aria-hidden="true">
-    <div class="download-modal-backdrop" data-download-close></div>
-    <div class="download-modal-panel" role="document">
-      <button class="download-modal-close" type="button" aria-label="Close download options" data-download-close>
-        &times;
+  <!-- ── Download dialog ── -->
+  <div class="modal modal--download" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title" aria-hidden="true" inert>
+    <div class="modal__backdrop" data-dialog-close></div>
+    <div class="modal__panel">
+      <img class="modal__verdi" src="assets/home/verdi-peek.webp" alt="" width="440" height="270" />
+      <button class="modal__close" type="button" aria-label="Close download options" data-dialog-close>
+        <svg aria-hidden="true"><use href="#i-close" /></svg>
       </button>
-      <div class="download-modal-copy">
-        <p class="section-label">Download Vero</p>
-      </div>
-      <div class="download-modal-buttons">
-        <a href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
-          <img src="assets/appstore-download.png" alt="Download on the App Store" class="download-modal-badge" />
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank"
-          rel="noopener noreferrer">
-          <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play"
-            class="download-modal-badge" />
-        </a>
-      </div>
+      <h2 class="modal__title" id="download-title">Get Vero free</h2>
+      <p>Download the app and start your first challenge today.</p>
+      <div class="store-row">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="assets/appstore-download.png" alt="Download on the App Store" width="150" height="50" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="168" height="50" />
+          </a>
+        </div>
     </div>
   </div>
-
-  <script>
-    (() => {
-      const modal = document.querySelector('.download-modal');
-      const triggers = document.querySelectorAll('.js-download-choice');
-      const closeControls = document.querySelectorAll('[data-download-close]');
-      const hamburger = document.querySelector('.hamburger');
-      const navbar = document.querySelector('.navbar');
-      const navbarLinks = document.querySelectorAll('.navbar-links a');
-      let previousFocus = null;
-
-      const openModal = () => {
-        previousFocus = document.activeElement;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        modal.querySelector('.download-modal-close').focus();
-      };
-
-      const closeModal = () => {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        if (previousFocus) previousFocus.focus();
-      };
-
-      triggers.forEach((trigger) => {
-        trigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          openModal();
-        });
-      });
-
-      closeControls.forEach((control) => {
-        control.addEventListener('click', closeModal);
-      });
-
-      if (!hamburger || !navbar) return;
-
-      const toggleMenu = (shouldOpen) => {
-        navbar.classList.toggle('open', shouldOpen);
-        hamburger.setAttribute('aria-expanded', String(shouldOpen));
-        document.body.classList.toggle('menu-open', shouldOpen);
-      };
-
-      hamburger.addEventListener('click', () => {
-        toggleMenu(!navbar.classList.contains('open'));
-      });
-
-      navbarLinks.forEach((link) => {
-        link.addEventListener('click', () => toggleMenu(false));
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!navbar.classList.contains('open')) return;
-        if (navbar.contains(event.target) || hamburger.contains(event.target)) return;
-        toggleMenu(false);
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900 && navbar.classList.contains('open')) {
-          toggleMenu(false);
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          if (modal.classList.contains('is-open')) {
-            closeModal();
-          } else if (navbar.classList.contains('open')) {
-            toggleMenu(false);
-          }
-        }
-      });
-    })();
-  </script>
 </body>
 
 </html>
