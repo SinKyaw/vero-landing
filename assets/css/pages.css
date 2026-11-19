@@ -488,3 +488,93 @@
 @media (prefers-reduced-motion: reduce) {
   .post-card { animation: none; }
 }
+
+/* ---------- Plans: comparison table ----------
+   Same language as the home pricing cards: white card for Free, the deep-teal
+   gradient with gold accents for Vero Plus, which runs down the whole right
+   column. Real <table> markup so screen readers get row/column headers. */
+.cmp-sec { padding-block: 0 clamp(72px, 9vw, 128px); }
+.cmp {
+  max-width: 980px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(0, 81, 73, 0.09);
+  border-radius: 32px;
+  background: #fff;
+  box-shadow: var(--shadow-card);
+}
+.cmp__table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.cmp__table th,
+.cmp__table td { border-bottom: 1px solid var(--line); text-align: center; vertical-align: middle; }
+.cmp__table tbody tr:last-child > * { border-bottom: 0; }
+
+/* Header row */
+.cmp__table thead th { padding: clamp(28px, 3.4vw, 40px) clamp(14px, 2.6vw, 28px); vertical-align: top; }
+.cmp__table thead .cmp__corner { width: 40%; text-align: left; vertical-align: bottom; }
+.cmp__corner span { color: var(--ink-muted); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.cmp__plan > * { display: block; }
+.cmp__name { color: var(--ink-accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.cmp__price { margin-top: 8px; }
+.cmp__price b {
+  display: inline;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 2rem + 2vw, 3.8rem);
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.cmp__price small { margin-left: 6px; color: var(--ink-muted); font-size: 1rem; font-weight: 600; }
+.cmp__qual { min-height: 2.8em; margin-top: 8px; color: var(--ink-muted); font-size: 0.92rem; font-weight: 600; line-height: 1.4; }
+.cmp__cta { margin-top: 14px; }
+
+/* Vero Plus column */
+.cmp__table .cmp__plan--plus,
+.cmp__table td:last-child { background-color: #004A43; border-bottom-color: rgba(255, 255, 255, 0.12); }
+.cmp__table .cmp__plan--plus { background-image: radial-gradient(100% 100% at 0% 0%, #006A60 0%, #004A43 100%); }
+.cmp__plan--plus .cmp__name { color: #FFD666; }
+.cmp__plan--plus .cmp__price b { color: #fff; }
+.cmp__plan--plus .cmp__price small,
+.cmp__plan--plus .cmp__qual { color: #B7E3DD; }
+
+/* Feature rows */
+.cmp__table tbody th { padding: 22px clamp(14px, 2.6vw, 28px); color: var(--ink); font-size: 1.02rem; font-weight: 700; line-height: 1.3; text-align: left; }
+.cmp__table tbody th small { display: block; margin-top: 3px; color: var(--ink-muted); font-size: 0.85rem; font-weight: 600; }
+.cmp__table tbody td { padding: 16px 14px; }
+.cmp__text { color: var(--ink-body); font-size: 0.95rem; font-weight: 700; line-height: 1.35; }
+.cmp__table td:last-child .cmp__text { color: #fff; }
+
+/* Tick / cross marks (same mint disc as .ticks) */
+.cmp__yes,
+.cmp__no { display: inline-block; width: 28px; height: 28px; border-radius: 50%; vertical-align: middle; }
+.cmp__yes {
+  background: var(--vero-mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.5 3.5 7.5-8' fill='none' stroke='%23005149' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/17px no-repeat;
+}
+.cmp__table td:last-child .cmp__yes {
+  background-color: rgba(249, 196, 64, 0.18);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 12.5l3.5 3.5 7.5-8' fill='none' stroke='%23FFD666' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.cmp__no {
+  background: var(--vero-mint-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 8l8 8M16 8l-8 8' fill='none' stroke='%239AB5B0' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center/16px no-repeat;
+}
+
+.cmp-actions { display: none; }
+.cmp__note { max-width: 40rem; margin: 24px auto 0; color: var(--ink-muted); font-size: 0.9rem; text-align: center; }
+
+@media (max-width: 767px) {
+  .cmp { border-radius: 24px; }
+  .cmp__table thead .cmp__corner { width: 36%; }
+  .cmp__table thead th { padding: 22px 10px 20px; }
+  .cmp__corner span { font-size: 0.7rem; letter-spacing: 0.12em; }
+  .cmp__name { font-size: 0.68rem; letter-spacing: 0.1em; }
+  .cmp__price b { font-size: 2.1rem; }
+  .cmp__price small { display: block; margin: 4px 0 0; font-size: 0.82rem; }
+  .cmp__qual,
+  .cmp__cta { display: none; }
+  .cmp__table tbody th { padding: 16px 12px; font-size: 0.92rem; }
+  .cmp__table tbody th small { font-size: 0.78rem; }
+  .cmp__table tbody td { padding: 12px 6px; }
+  .cmp__text { font-size: 0.82rem; }
+  .cmp-actions { display: grid; gap: 14px; max-width: 420px; margin: 28px auto 0; }
+}
