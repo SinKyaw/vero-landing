@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.suparat.verofinance",
+    "sha256_cert_fingerprints": ["1F:05:DB:29:3B:44:B9:15:2B:11:5C:9E:24:A7:28:4F:BD:D7:05:84:0F:6C:18:02:AE:2E:1A:7B:DE:2E:53:59"]
+  }
+}]
