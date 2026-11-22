@@ -49,7 +49,7 @@
 
     <a id="open" class="btn primary" href="#">Open in Vero</a>
 
-    <p class="hint">Don't have Vero yet? Get it, sign up, then tap the invite link again.</p>
+    <p class="hint" id="hint">Don't have Vero yet? Get it and sign up — your invite will be waiting.</p>
     <div class="stores">
       <a id="ios" href="https://apps.apple.com/th/app/vero/id6759962937">
         <img src="/assets/appstore-download.png" alt="Download on the App Store" />
@@ -94,8 +94,30 @@
         ? 'Someone shared money you owe each other on Vero. Open it to see it from your side and get reminders.'
         : 'Someone shared a pocket with you on Vero. Open it in the app to join.';
 
+      // Android: the invite rides through the Play install in the referrer, and the app reads
+      // it on first launch (expo-application getInstallReferrerAsync). Format: o:<token>.
+      var referrer = 'vero_invite=' + encodeURIComponent((isObligation ? 'o:' : 's:') + token);
+      document.getElementById('android').href =
+        'https://play.google.com/store/apps/details?id=com.suparat.verofinance&referrer=' +
+        encodeURIComponent(referrer);
+
+      // iOS has no install referrer. Copy the invite link as they head to the App Store; on
+      // first sign-in the app offers to paste it (it checks for a link without reading it).
+      var iosLink = document.getElementById('ios');
+      iosLink.addEventListener('click', function () {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(location.origin + location.pathname);
+          }
+        } catch (e) { /* the store still opens; they can tap the link again */ }
+      });
+
       // Show only the relevant store on a phone.
       var ua = navigator.userAgent || '';
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        document.getElementById('hint').textContent =
+          "Don't have Vero yet? Get it from the App Store — we'll copy your invite so you can paste it after you sign up.";
+      }
       if (/iPhone|iPad|iPod/i.test(ua)) document.getElementById('android').classList.add('hidden');
       if (/Android/i.test(ua)) document.getElementById('ios').classList.add('hidden');
 
