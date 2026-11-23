@@ -49,17 +49,16 @@ const headTags = ({ title, description, url, image, type = 'website', noindex = 
 const heroTitle = (text) =>
   `        <h1 class="h-display page-hero__title" id="page-title"><span class="line"><span class="line__in">${escapeHtml(text)}</span></span></h1>`;
 
-const card = (p, lead = false) => {
+const card = (p) => {
   const media = p.coverImageUrl
     ? `<img src="${escapeHtml(p.coverImageUrl)}" alt="${escapeHtml(p.coverImageAlt)}"${p.coverWidth && p.coverHeight ? ` width="${p.coverWidth}" height="${p.coverHeight}"` : ''} loading="lazy" decoding="async" />`
     : '<img src="/assets/home/verdi-peek.webp" alt="" width="440" height="270" loading="lazy" />';
-  return `<a class="post-card${lead ? ' post-card--lead' : ''}" href="/blog/${escapeHtml(p.slug)}">
+  return `<a class="post-card" href="/blog/${escapeHtml(p.slug)}">
   <span class="post-card__media${p.coverImageUrl ? '' : ' post-card__media--empty'}">${media}</span>
   <span class="post-card__body">
     <span class="post-card__date">${fmtDate(p.publishedAt)} · ${p.readMinutes} min read</span>
     <span class="post-card__title">${escapeHtml(p.title)}</span>
     ${p.excerpt ? `<span class="post-card__excerpt">${escapeHtml(p.excerpt)}</span>` : ''}
-    <span class="post-card__more">Read the story<svg aria-hidden="true"><use href="#i-arrow" /></svg></span>
   </span>
 </a>`;
 };
@@ -71,7 +70,7 @@ export const indexPage = (posts) => {
   const title = 'Blog – Vero';
   const description = 'Money habits, budgeting tips, product news and life with Verdi, from the Vero team.';
   const content = posts.length
-    ? `        <div class="blog-grid">\n${posts.map((p, i) => card(p, i === 0)).join('\n')}\n        </div>`
+    ? `        <div class="blog-grid">\n${posts.map((p) => card(p)).join('\n')}\n        </div>`
     : `        <div class="blog-grid"><div class="blog-state"><img src="/assets/home/verdi-peek.webp" alt="" width="440" height="270" /><h2>Stories are on the way</h2><p>Check back soon.</p></div></div>`;
   return fill({
     head: headTags({
