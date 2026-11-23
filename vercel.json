@@ -14,6 +14,11 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown"
+    },
     { "source": "/blog", "destination": "/api/blog-index" },
     { "source": "/blog/:slug", "destination": "/api/blog-post?slug=:slug" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
@@ -29,7 +34,8 @@
   "functions": {
     "api/blog-index.js": { "includeFiles": "api/_lib/template.html" },
     "api/blog-post.js": { "includeFiles": "api/_lib/template.html" },
-    "api/sitemap.js": { "includeFiles": "api/_lib/template.html" }
+    "api/sitemap.js": { "includeFiles": "api/_lib/template.html" },
+    "api/markdown.js": { "includeFiles": "content/md/index.md" }
   },
   "headers": [
     {
@@ -38,7 +44,8 @@
         {
           "key": "Link",
           "value": "<https://verofin.uk/sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\", <https://verofin.uk/llms.txt>; rel=\"describedby\"; type=\"text/plain\""
-        }
+        },
+        { "key": "Vary", "value": "Accept" }
       ]
     },
     {
