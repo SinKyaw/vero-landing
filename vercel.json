@@ -14,11 +14,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
-      "destination": "/api/markdown"
-    },
     { "source": "/blog", "destination": "/api/blog-index" },
     { "source": "/blog/:slug", "destination": "/api/blog-post?slug=:slug" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
