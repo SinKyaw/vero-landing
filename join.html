@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>You're invited – Vero</title>
+  <meta name="description" content="Open this invite in the Vero app." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#E7FDFB" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="You're invited to Vero" />
+  <meta property="og:description" content="Track it together on Vero — open the invite in the app." />
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      font-family: 'Quicksand', system-ui, sans-serif; background: #E7FDFB; color: #0F2E2A;
+      padding: 24px;
+    }
+    .card {
+      width: 100%; max-width: 420px; background: #fff; border-radius: 28px; padding: 32px 24px;
+      text-align: center; box-shadow: 0 10px 40px rgba(6, 94, 83, 0.12);
+    }
+    .logo { width: 72px; height: 72px; }
+    h1 { font-family: 'Lilita One', cursive; font-weight: 400; font-size: 28px; margin: 16px 0 8px; }
+    p { margin: 0 0 20px; color: #4B5563; font-weight: 500; line-height: 1.5; }
+    .btn {
+      display: block; width: 100%; padding: 14px; border-radius: 16px; font-weight: 700;
+      font-size: 16px; text-decoration: none; margin-bottom: 12px;
+    }
+    .primary { background: #33A798; color: #fff; }
+    .stores { display: flex; gap: 12px; justify-content: center; margin-top: 8px; }
+    .stores img { height: 44px; }
+    .hint { font-size: 13px; color: #9CA3AF; margin: 16px 0 0; }
+    .hidden { display: none; }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <img class="logo" src="/assets/vero-elephant-face.png" alt="Vero" />
+    <h1 id="title">You're invited</h1>
+    <p id="lead">Open this invite in the Vero app.</p>
+
+    <a id="open" class="btn primary" href="#">Open in Vero</a>
+
+    <p class="hint" id="hint">Don't have Vero yet? Get it and sign up — your invite will be waiting.</p>
+    <div class="stores">
+      <a id="ios" href="https://apps.apple.com/th/app/vero/id6759962937">
+        <img src="/assets/appstore-download.png" alt="Download on the App Store" />
+      </a>
+      <a id="android" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance">
+        <img src="/assets/google-play-download-cropped.png" alt="Get it on Google Play" />
+      </a>
+    </div>
+  </main>
+
+  <script>
+    /*
+     * Fallback for invite links — https://www.verofin.uk/join/<token> (pocket/bucket share) and
+     * https://www.verofin.uk/join/o/<token> (obligation). vercel.json rewrites both here.
+     *
+     * With the app installed, iOS/Android open these links straight in the app (universal /
+     * App Links) and this page is never seen. It shows when the app is missing, or when the
+     * link was opened inside a browser. "Open in Vero" uses the app's own scheme, because a
+     * link to the same domain from this page would not be handed to the app.
+     */
+    (function () {
+      var parts = location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+      // ["join", "<token>"] or ["join", "o", "<token>"]
+      var isObligation = parts[1] === 'o';
+      var token = isObligation ? parts[2] : parts[1];
+      var openBtn = document.getElementById('open');
+
+      if (!token) {
+        document.getElementById('lead').textContent = 'This invite link looks incomplete. Ask for a new one.';
+        openBtn.classList.add('hidden');
+        return;
+      }
+
+      var screen = isObligation ? 'obligation-invite' : 'share-invite';
+      var deepLink = 'veromobile:///' + screen + '?token=' + encodeURIComponent(token);
+      openBtn.href = deepLink;
+
+      document.getElementById('title').textContent = isObligation
+        ? "Let's track it together"
+        : "You've been invited";
+      document.getElementById('lead').textContent = isObligation
+        ? 'Someone shared money you owe each other on Vero. Open it to see it from your side and get reminders.'
+        : 'Someone shared a pocket with you on Vero. Open it in the app to join.';
+
+      // Android: the invite rides through the Play install in the referrer, and the app reads
+      // it on first launch (expo-application getInstallReferrerAsync). Format: o:<token>.
+      var referrer = 'vero_invite=' + encodeURIComponent((isObligation ? 'o:' : 's:') + token);
+      document.getElementById('android').href =
+        'https://play.google.com/store/apps/details?id=com.suparat.verofinance&referrer=' +
+        encodeURIComponent(referrer);
+
+      // iOS has no install referrer. Copy the invite link as they head to the App Store; on
+      // first sign-in the app offers to paste it (it checks for a link without reading it).
+      var iosLink = document.getElementById('ios');
+      iosLink.addEventListener('click', function () {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(location.origin + location.pathname);
+          }
+        } catch (e) { /* the store still opens; they can tap the link again */ }
+      });
+
+      // Show only the relevant store on a phone.
+      var ua = navigator.userAgent || '';
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        document.getElementById('hint').textContent =
+          "Don't have Vero yet? Get it from the App Store — we'll copy your invite so you can paste it after you sign up.";
+      }
+      if (/iPhone|iPad|iPod/i.test(ua)) document.getElementById('android').classList.add('hidden');
+      if (/Android/i.test(ua)) document.getElementById('ios').classList.add('hidden');
+
+      // Android: try the app once straight away — if it isn't installed, nothing happens and
+      // the page stays. Not on iOS: Safari answers a missing app with an "address is invalid"
+      // alert, so there the user taps "Open in Vero" instead.
+      if (/Android/i.test(ua)) {
+        setTimeout(function () { location.href = deepLink; }, 300);
+      }
+    })();
+  </script>
+</body>
+
+</html>

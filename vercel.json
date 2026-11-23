@@ -5,16 +5,49 @@
   "redirects": [
     { "source": "/post.html", "destination": "/blog", "permanent": true },
     { "source": "/post", "destination": "/blog", "permanent": true },
-    { "source": "/blog.html", "destination": "/blog", "permanent": true }
+    { "source": "/blog.html", "destination": "/blog", "permanent": true },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.verofin.uk" }],
+      "destination": "https://verofin.uk/:path*",
+      "permanent": true
+    }
   ],
   "rewrites": [
     { "source": "/blog", "destination": "/api/blog-index" },
     { "source": "/blog/:slug", "destination": "/api/blog-post?slug=:slug" },
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    {
+      "source": "/join/o/:token",
+      "destination": "/join.html"
+    },
+    {
+      "source": "/join/:token",
+      "destination": "/join.html"
+    }
   ],
   "functions": {
     "api/blog-index.js": { "includeFiles": "api/_lib/template.html" },
     "api/blog-post.js": { "includeFiles": "api/_lib/template.html" },
     "api/sitemap.js": { "includeFiles": "api/_lib/template.html" }
-  }
+  },
+  "headers": [
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "source": "/(blog|affiliate-v1)(\\.html)?",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    }
+  ]
 }

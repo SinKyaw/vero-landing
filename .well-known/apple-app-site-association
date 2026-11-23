@@ -1,0 +1,7 @@
+{
+  "applinks": {
+    "details": [
+      { "appIDs": ["SRZH4LY44U.com.suparat.verofinance"], "components": [{ "/": "/join/*" }] }
+    ]
+  }
+}

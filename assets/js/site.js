@@ -216,7 +216,7 @@
 
   // Links to a spot on this page glide there (and move focus for keyboard users)
   const samePage = (a) => {
-    const strip = (p) => p.replace(/index\.html$/, '');
+    const strip = (p) => p.replace(/(index(\.html)?)?$/, '');
     return a.origin === location.origin && strip(a.pathname) === strip(location.pathname);
   };
   doc.addEventListener('click', (e) => {
