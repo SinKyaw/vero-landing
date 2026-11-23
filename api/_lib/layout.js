@@ -65,12 +65,37 @@ const card = (p) => {
 
 // ── /blog ────────────────────────────────────────────────────────────────
 
-export const indexPage = (posts) => {
-  const url = `${SITE_URL}/blog`;
-  const title = 'Blog – Vero';
+export const POSTS_PER_PAGE = 10;
+
+const pageHref = (n) => (n === 1 ? '/blog' : `/blog?page=${n}`);
+
+/** Prev / numbered pages / next. Nothing when everything fits on one page. */
+const pagination = (page, totalPages) => {
+  if (totalPages <= 1) return '';
+  const arrow = (n, label, icon, rel, cls) =>
+    n >= 1 && n <= totalPages
+      ? `<a class="pager__step ${cls}" href="${pageHref(n)}" rel="${rel}">${icon}<span>${label}</span></a>`
+      : `<span class="pager__step ${cls}" aria-disabled="true">${icon}<span>${label}</span></span>`;
+  const numbers = Array.from({ length: totalPages }, (_, i) => i + 1)
+    .map((n) =>
+      n === page
+        ? `<li><span class="pager__num" aria-current="page">${n}</span></li>`
+        : `<li><a class="pager__num" href="${pageHref(n)}" aria-label="Page ${n}">${n}</a></li>`
+    )
+    .join('');
+  return `        <nav class="pager" aria-label="Blog pages">
+          ${arrow(page - 1, 'Newer', '<svg aria-hidden="true"><use href="#i-back" /></svg>', 'prev', 'pager__step--prev')}
+          <ol class="pager__list">${numbers}</ol>
+          ${arrow(page + 1, 'Older', '<svg aria-hidden="true"><use href="#i-arrow" /></svg>', 'next', 'pager__step--next')}
+        </nav>`;
+};
+
+export const indexPage = (posts, { page = 1, totalPages = 1 } = {}) => {
+  const url = `${SITE_URL}${pageHref(page)}`;
+  const title = page > 1 ? `Blog – Page ${page} – Vero` : 'Blog – Vero';
   const description = 'Money habits, budgeting tips, product news and life with Verdi, from the Vero team.';
   const content = posts.length
-    ? `        <div class="blog-grid">\n${posts.map((p) => card(p)).join('\n')}\n        </div>`
+    ? `        <div class="blog-grid">\n${posts.map((p) => card(p)).join('\n')}\n        </div>\n${pagination(page, totalPages)}`
     : `        <div class="blog-grid"><div class="blog-state"><img src="/assets/home/verdi-peek.webp" alt="" width="440" height="270" /><h2>Stories are on the way</h2><p>Check back soon.</p></div></div>`;
   return fill({
     head: headTags({
@@ -78,6 +103,8 @@ export const indexPage = (posts) => {
       description,
       url,
       extra: [
+        page > 1 ? `  <link rel="prev" href="${SITE_URL}${pageHref(page - 1)}" />` : null,
+        page < totalPages ? `  <link rel="next" href="${SITE_URL}${pageHref(page + 1)}" />` : null,
         jsonLd({
           '@context': 'https://schema.org',
           '@type': 'Blog',
