@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /app/
 Disallow: /api/
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 Sitemap: https://verofin.uk/sitemap.xml

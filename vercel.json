@@ -33,6 +33,19 @@
   },
   "headers": [
     {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://verofin.uk/sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\", <https://verofin.uk/llms.txt>; rel=\"describedby\"; type=\"text/plain\""
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    },
+    {
       "source": "/.well-known/apple-app-site-association",
       "headers": [
         {

@@ -49,7 +49,8 @@ vero-landing/
 │   ├── sitemap.js      # /sitemap.xml
 │   └── _lib/           # serialize.js (Plate JSON → HTML), layout.js + template.html (page shell), api.js
 ├── vercel.json         # Clean URLs, blog rewrites, old post.html redirects
-├── robots.txt
+├── robots.txt          # Includes Content-Signal (ai-train=no)
+├── llms.txt            # Summary for AI agents (llmstxt.org)
 ├── style.css           # Legacy stylesheet (affiliate-v1 only)
 ├── assets/
 │   ├── css/

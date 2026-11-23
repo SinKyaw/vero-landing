@@ -1,0 +1,28 @@
+# Vero
+
+> Vero is the gamified budgeting app for Gen Z. Log spending in seconds without open banking, plan your month and earn real rewards with Verdi.
+
+Vero is a mobile app for iOS and Android, made by Vero Financial Ltd. It does not connect to or access your bank account. Vero is free to use, with an optional Vero Plus plan for £4.99 a month.
+
+## Product
+
+- [Home](https://verofin.uk/): What Vero does, how it works, and answers to common questions about data safety, tokens and rewards
+- [How Vero works](https://verofin.uk/#how-it-works): Know what's safe to spend every day, log spending your way in seconds, and turn good habits into tokens you spend on Verdi's trips for real rewards
+- [Pricing](https://verofin.uk/#pricing): Vero Free and Vero Plus at a glance
+- [Plans](https://verofin.uk/plans): Compare Vero Free and Vero Plus. Start free, then upgrade for automated logging, deeper insights and more challenges
+- [Meet Verdi](https://verofin.uk/verdi-companion): Verdi is a little elephant who grows as your money habits do. Earn tokens, fund his trips and collect rewards
+
+## Company
+
+- [About us](https://verofin.uk/about-us): Vero was built by five Gen Z founders who think our generation's money problem is about behaviour, not knowledge
+- [Blog](https://verofin.uk/blog): Money habits, budgeting tips, product news and life with Verdi, from the Vero team
+- [Feedback](https://verofin.uk/feedback): Share ideas, report issues and see what the Vero community is asking for
+
+## Legal
+
+- [Privacy policy](https://verofin.uk/privacy-policy): How Vero Financial Ltd collects, uses and protects your personal data
+- [Terms of service](https://verofin.uk/terms): The terms that govern your use of the Vero app and website
+
+## Optional
+
+- [Sitemap](https://verofin.uk/sitemap.xml): Every indexable page, including all blog posts

@@ -918,6 +918,7 @@
 .faq__intro h2 span { display: block; color: #1F8075; }
 .faq__verdi { width: min(270px, 70%); margin-top: 4px; filter: drop-shadow(0 18px 22px rgba(0, 58, 52, 0.14)); }
 .faq__contact { color: var(--ink-muted); font-weight: 600; }
+.faq__updated { margin-top: 0.5rem; color: var(--ink-muted); font-size: 0.875rem; }
 .faq__contact a,
 .faq-item__inner a {
   color: var(--ink);

@@ -48,6 +48,8 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script src="assets/js/site.js" defer></script>
   <script src="assets/js/home.js" defer></script>
+  <!-- The FAQPage node must match the visible FAQ (#faq) word for word. Edit both together.
+       Bump WebPage.dateModified and the "Last updated" line under the FAQ when page content changes. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -63,7 +65,6 @@
           "https://www.instagram.com/vero.financial/",
           "https://www.tiktok.com/@vero.app",
           "https://www.linkedin.com/company/vero-financial/",
-          "https://discord.gg/MZP9CDfy",
           "https://apps.apple.com/gb/app/vero/id6759962937",
           "https://play.google.com/store/apps/details?id=com.suparat.verofinance"
         ]
@@ -89,6 +90,31 @@
         ],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
         "publisher": { "@id": "https://verofin.uk/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://verofin.uk/#webpage",
+        "url": "https://verofin.uk/",
+        "name": "Vero: Gamified Budgeting App, No Open Banking Needed",
+        "isPartOf": { "@id": "https://verofin.uk/#website" },
+        "about": { "@id": "https://verofin.uk/#organization" },
+        "dateModified": "2026-11-23",
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://verofin.uk/#faq",
+        "isPartOf": { "@id": "https://verofin.uk/#webpage" },
+        "mainEntity": [
+          { "@type": "Question", "name": "Is my data safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Vero doesn't connect to or access your bank account, and your data stays private." } },
+          { "@type": "Question", "name": "Is Vero free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Vero is free to use, with an optional Vero Plus plan for £4.99 a month." } },
+          { "@type": "Question", "name": "What can Vero tokens do?", "acceptedAnswer": { "@type": "Answer", "text": "You earn tokens from money challenges and use them to fund Verdi's trips. When he comes back, he brings rewards with him." } },
+          { "@type": "Question", "name": "Do rewards encourage spending?", "acceptedAnswer": { "@type": "Answer", "text": "No. You earn tokens for tracking, sticking to your budget and finishing challenges. Spending more never earns you more." } },
+          { "@type": "Question", "name": "How do I redeem rewards?", "acceptedAnswer": { "@type": "Answer", "text": "When Verdi brings back a reward, open it in the app and follow the steps to claim your discount at the partner brand." } },
+          { "@type": "Question", "name": "How does auto-tracking work without open banking?", "acceptedAnswer": { "@type": "Answer", "text": "Automated logging (on Vero Plus) reads your payment notifications, so it works while notifications are on. On iPhone you set it up once in Shortcuts; on Android you allow it in the Vero app. You can also type or speak what you spent." } },
+          { "@type": "Question", "name": "Can Vero help me save money?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your monthly plan, pockets, money challenges and spending reflections help you spend on purpose and cut what you don't need." } },
+          { "@type": "Question", "name": "Who is Verdi?", "acceptedAnswer": { "@type": "Answer", "text": "Verdi is your elephant mate in the app. He cheers you on, goes on trips funded by your tokens and comes back with rewards. <a href=\"https://verofin.uk/verdi-companion\">Meet Verdi</a>." } }
+        ]
       }
     ]
   }
@@ -526,6 +552,7 @@
           <p class="lede">Getting started, our plans, and how tokens and rewards work.</p>
           <img class="faq__verdi" src="assets/home/verdi-thinking.webp" alt="" width="560" height="441" loading="lazy" />
           <p class="faq__contact">Still stuck? Email <a href="mailto:vero.fincorp@gmail.com">vero.fincorp@gmail.com</a></p>
+          <p class="faq__updated">Last updated: <time datetime="2026-11-23">23 November 2026</time></p>
         </div>
 
         <div class="faq__list" data-accordion data-stagger>
