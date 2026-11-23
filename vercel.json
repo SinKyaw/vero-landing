@@ -57,7 +57,7 @@
       ]
     },
     {
-      "source": "/(blog|affiliate-v1)(\\.html)?",
+      "source": "/affiliate-v1(\\.html)?",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     },
     {
