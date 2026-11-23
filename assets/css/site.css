@@ -373,7 +373,7 @@
 .footer__brand img { width: 120px; }
 .footer__brand p { max-width: 30ch; margin: 14px 0 24px; color: #A9D9D2; }
 .footer .store-badge img { height: 44px; }
-.footer__cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.footer__cols { display: grid; grid-template-columns: repeat(5, minmax(0, auto)); justify-content: space-between; gap: 24px; }
 .footer__h { margin-bottom: 16px; color: #5DD5C8; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
 .footer__cols ul { display: grid; gap: 12px; }
 .footer__cols a { color: #fff; font-weight: 600; text-decoration: none; transition: color 200ms var(--ease-out); }

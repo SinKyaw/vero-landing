@@ -5,7 +5,18 @@ import { SITE_URL } from './_lib/layout.js';
 import { escapeHtml } from './_lib/serialize.js';
 
 /** Indexable static pages. The noindex app/ pages and the retired affiliate page are left out. */
-const STATIC_PATHS = ['/', '/about-us', '/plans', '/verdi-companion', '/feedback', '/blog', '/privacy-policy', '/terms'];
+const STATIC_PATHS = [
+  '/', '/about-us', '/plans', '/verdi-companion', '/feedback', '/blog', '/privacy-policy', '/terms',
+  // Static guides and comparisons (guides.html, vs/*.html and the guide pages at the root)
+  '/guides',
+  '/best-budgeting-apps-without-open-banking',
+  '/is-open-banking-safe',
+  '/gamified-budgeting-apps',
+  '/how-to-budget-on-your-first-salary',
+  '/vs/cleo',
+  '/vs/emma',
+  '/vs/ynab',
+];
 
 export default async function handler(req, res) {
   let posts = [];

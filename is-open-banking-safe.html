@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" class="is-post is-article">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Is Open Banking Safe for Budgeting Apps? A Plain-English Guide – Vero</title>
+  <meta name="description" content="How open banking works, what a budgeting app can and can’t see, how UK rules protect you, and how to check or switch off an app’s access." />
+  <meta name="theme-color" content="#E7FDFB" />
+  <link rel="canonical" href="https://verofin.uk/is-open-banking-safe" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Vero" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:title" content="Is Open Banking Safe for Budgeting Apps? A Plain-English Guide – Vero" />
+  <meta property="og:description" content="How open banking works, what a budgeting app can and can’t see, how UK rules protect you, and how to check or switch off an app’s access." />
+  <meta property="og:url" content="https://verofin.uk/is-open-banking-safe" />
+  <meta property="og:image" content="https://verofin.uk/assets/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Is Open Banking Safe for Budgeting Apps? A Plain-English Guide – Vero" />
+  <meta name="twitter:description" content="How open banking works, what a budgeting app can and can’t see, how UK rules protect you, and how to check or switch off an app’s access." />
+  <meta name="twitter:image" content="https://verofin.uk/assets/og-default.png" />
+  <meta property="article:published_time" content="2026-11-24" />
+  <meta property="article:modified_time" content="2026-11-24" />
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/vero-ui.css" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/guides.css" />
+  <script>
+    /* Motion gate: content starts hidden only when JS will animate it in.
+       If the animation libraries fail to load, everything is shown after 2.5s. */
+    (function (d) {
+      d.documentElement.classList.add('js');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+      d.documentElement.classList.add('js-anim');
+      setTimeout(function () { if (!window.__veroMotion) d.documentElement.classList.remove('js-anim'); }, 2500);
+    })(document);
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/post.js" defer></script>
+  <script src="/assets/js/guides.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Is open banking safe for budgeting apps?",
+    "description": "How open banking works, what a budgeting app can and can’t see, how UK rules protect you, and how to check or switch off an app’s access.",
+    "image": [
+      "https://verofin.uk/assets/og-default.png"
+    ],
+    "datePublished": "2026-11-24",
+    "dateModified": "2026-11-24",
+    "inLanguage": "en-GB",
+    "author": {
+      "@type": "Organization",
+      "name": "Vero team",
+      "url": "https://verofin.uk/about-us"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Vero",
+      "url": "https://verofin.uk/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://verofin.uk/assets/logo-primary.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://verofin.uk/is-open-banking-safe"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://verofin.uk/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://verofin.uk/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Is open banking safe for budgeting apps?",
+        "item": "https://verofin.uk/is-open-banking-safe"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can a budgeting app take money from my account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not with read-only access. Budgeting apps use account information access, which lets them see data but not move money. Payments need separate approval with your bank each time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my budgeting app ask me to reconnect every 90 days?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "UK rules require apps to reconfirm your consent every 90 days. It’s a check that you still want to share your data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is open banking the same as giving an app my login?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. With open banking, you log in with your bank and the app never sees your password. Be wary of any service that asks for your bank login directly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know if an app is regulated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Search for the company on the FCA register. Regulated apps usually also name their FCA status at the bottom of their website."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <div class="read-progress" aria-hidden="true"><span data-read-progress></span></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" /></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2.5l2.1 6.4 6.4 2.1-6.4 2.1L12 19.5l-2.1-6.4L3.5 11l6.4-2.1z" fill="currentColor" /></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2" /><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2.2" /></symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="M13.5 6.5l4 4" fill="none" stroke="currentColor" stroke-width="2" /></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="M10 20.5a2.2 2.2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+      <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3.5 9.5L12 4l8.5 5.5zM5 20h14M6.5 10.5v7M10.5 10.5v7M13.5 10.5v7M17.5 10.5v7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" /></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="2" /><path d="M10.5 18h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4" fill="none" stroke="currentColor" stroke-width="2" /><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5.5 12.5l4.5 4.5L18.5 8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /><path d="M8.8 12.2l2.3 2.3 4.2-4.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-app" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M8 14.5l2.5-3 2.5 2 3-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="2" /><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── Navigation ── -->
+  <header class="site-nav" data-nav>
+    <div class="wrap site-nav__inner">
+      <a class="site-nav__logo" href="/" aria-label="Vero home">
+        <img src="/assets/logo-primary.png" alt="Vero" width="97" height="32" />
+      </a>
+      <nav class="site-nav__menu" id="site-menu" aria-label="Main">
+        <ul class="site-nav__links">
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/feedback">Feedback</a></li>
+        </ul>
+      </nav>
+      <div class="site-nav__actions">
+        <a class="app-btn app-btn--sm js-download-choice" href="#download-options">
+          <span class="app-btn__face"><span class="app-btn__surface">Download Vero</span></span>
+        </a>
+        <button class="site-nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ── Page hero ── -->
+    <section class="page-hero" aria-labelledby="page-title" data-parallax>
+      <div class="page-hero__mood" aria-hidden="true"><div class="bg-grid"></div></div>
+      <div class="floaters" aria-hidden="true">
+        <img class="floater p1" data-depth="0.6" src="/assets/home/token.webp" alt="" width="120" height="119" />
+        <img class="floater p2" data-depth="0.4" src="/assets/home/sticker-star.webp" alt="" width="76" height="72" />
+        <img class="floater p4" data-depth="0.35" src="/assets/home/sticker-coffee.webp" alt="" width="120" height="64" />
+      </div>
+      <div class="wrap page-hero__inner">
+        <a class="back-link" href="/guides" data-post-only><svg aria-hidden="true"><use href="#i-back" /></svg>All guides</a>
+        <span class="eyebrow" data-page-in>Explainer</span>
+        <h1 class="h-display page-hero__title" id="page-title"><span class="line"><span class="line__in">Is open banking safe</span></span><span class="line"><span class="line__in">for budgeting apps?</span></span></h1>
+        <p class="byline" data-post-only>By <b>the Vero team</b><span class="byline__dot" aria-hidden="true">•</span>Updated <time datetime="2026-11-24">24 November 2026</time><span class="byline__dot" aria-hidden="true">•</span>4 min read</p>
+        <hr class="post-divider" />
+      </div>
+    </section>
+
+    <!-- ── Guide ── -->
+    <section class="section blog" aria-label="Guide">
+      <div class="wrap">
+        <div class="post-layout">
+          <article class="prose post guide" data-post-body>
+
+<div class="g-disclose"><img src="/assets/home/sticker-verdi.webp" alt="" width="40" height="40" /><p><b>Written by the Vero team.</b> We built Vero without open banking, so we have a point of view. This guide sticks to how open banking works, so you can decide for yourself. Facts checked on 24 November 2026. This is general information, not financial advice.</p></div>
+
+<div class="g-answer"><p class="g-answer__h"><svg aria-hidden="true"><use href="#i-sparkle" /></svg>Short answer</p><p>Generally, yes. Open banking in the UK is regulated, you never give an app your bank password, and budgeting apps get <strong>read-only</strong> access that you can switch off at any time.</p>
+<p>The bigger question is usually not the connection itself, but <strong>what the app does with your data</strong> once it has it.</p></div>
+
+<h2 id="how">How open banking works</h2>
+<p>Open banking lets you give a regulated app permission to see your bank account data. Instead of sharing your login, you approve access inside your own bank’s app or website.</p>
+
+<figure class="illo" role="img" aria-label="Four steps. You choose your bank in the app. You are sent to your bank’s own app to log in. You approve what to share. The app gets read-only access to your data.">
+<p class="illo__title" aria-hidden="true">Connecting an app with open banking</p><div aria-hidden="true">
+<div class="flow" style="--n:4">
+<div class="flow__step"><span class="flow__link" data-a="line" style="--i:1"></span><span class="flow__dot" data-a="pop" style="--i:0"><svg aria-hidden="true"><use href="#i-app" /></svg></span><span class="flow__name" data-a style="--i:0">Choose your bank</span><span class="flow__text" data-a style="--i:1">Inside the budgeting app</span></div>
+<div class="flow__step"><span class="flow__link" data-a="line" style="--i:3"></span><span class="flow__dot" data-a="pop" style="--i:2"><svg aria-hidden="true"><use href="#i-bank" /></svg></span><span class="flow__name" data-a style="--i:2">Log in with your bank</span><span class="flow__text" data-a style="--i:3">In your bank’s own app or site</span></div>
+<div class="flow__step"><span class="flow__link" data-a="line" style="--i:5"></span><span class="flow__dot" data-a="pop" style="--i:4"><svg aria-hidden="true"><use href="#i-check" /></svg></span><span class="flow__name" data-a style="--i:4">Approve access</span><span class="flow__text" data-a style="--i:5">You see what will be shared</span></div>
+<div class="flow__step flow__step--key"><span class="flow__dot" data-a="pop" style="--i:6"><svg aria-hidden="true"><use href="#i-shield" /></svg></span><span class="flow__name" data-a style="--i:6">Read-only access</span><span class="flow__text" data-a style="--i:7">The app sees data, can’t move money</span></div>
+</div>
+</div>
+<figcaption class="illo__cap">Your password only ever goes to your bank. The app gets a permission, not your login.</figcaption>
+</figure>
+
+<p>Apps that only read your data are called <strong>account information services</strong>. Apps that make payments for you need a separate permission each time, which you approve with your bank.</p>
+
+<h2 id="see">What an app can and can’t do</h2>
+<div class="g-table-wrap" role="region" aria-label="What a budgeting app with open banking access can do." tabindex="0">
+<table class="g-table g-table--fit" style="--tmin:420px">
+<caption>What a budgeting app with open banking access can do.</caption>
+<thead><tr><th scope="col">With open banking, a budgeting app…</th><th scope="col">Can it?</th></tr></thead>
+<tbody>
+<tr><th scope="row">See your balances</th><td><span class="mk mk--yes">Yes</span></td></tr>
+<tr><th scope="row">See your transactions, including past ones</th><td><span class="mk mk--yes">Yes</span></td></tr>
+<tr><th scope="row">See account details like your sort code</th><td><span class="mk mk--yes">Yes</span></td></tr>
+<tr><th scope="row">Move money or make payments</th><td><span class="mk mk--no">No</span><small>Not with read-only access</small></td></tr>
+<tr><th scope="row">See or store your bank password</th><td><span class="mk mk--no">No</span></td></tr>
+<tr><th scope="row">Keep access forever without asking</th><td><span class="mk mk--no">No</span><small>It must ask you to reconfirm every 90 days</small></td></tr>
+</tbody>
+</table>
+</div>
+<p>Exactly what’s shared depends on the permissions you approve, which your bank shows you before you agree.</p>
+
+<h2 id="rules">How UK rules protect you</h2>
+<ul>
+<li><strong>Regulated providers.</strong> Apps that access your account data must be authorised or registered with the Financial Conduct Authority (FCA), or work as an agent of a firm that is.</li>
+<li><strong>No password sharing.</strong> You log in with your bank, not with the app.</li>
+<li><strong>Your consent, regularly checked.</strong> Since 2022, apps must ask you to reconfirm their access every 90 days.</li>
+<li><strong>You can switch it off.</strong> You can remove access in the app, and many banks let you do it from their app too.</li>
+</ul>
+<p class="g-note g-note--warn"><b>Check an app before you connect.</b> Search for the company on the <a href="https://register.fca.org.uk/" target="_blank" rel="noopener">FCA register</a>. If it isn’t there, and isn’t an agent of a firm that is, don’t connect it.</p>
+
+<h2 id="risks">The real risks</h2>
+<p>The open banking connection is the well-protected part. The risks sit around it.</p>
+<ul>
+<li><strong>What the app does with your data.</strong> Some apps analyse your spending to suggest products, and may earn money if you take them out. Read the privacy policy.</li>
+<li><strong>Data breaches.</strong> Any company holding your data could be hacked. A read-only breach can’t move money, but your transactions are personal.</li>
+<li><strong>Fake apps and scams.</strong> Scammers may pose as a well-known app. Only download from the official app stores and check the developer name.</li>
+<li><strong>Older connections.</strong> A few services still ask for your bank login directly, known as screen scraping. Avoid giving any app your bank password.</li>
+</ul>
+
+<h2 id="before">Before you connect: a quick checklist</h2>
+<ul>
+<li>The company is on the FCA register, or is an agent of a firm that is.</li>
+<li>You were sent to your bank’s own app or site to approve access.</li>
+<li>You understand what the app will see, and for how long.</li>
+<li>The privacy policy says how your data is used and whether it’s shared.</li>
+<li>You know how to remove access later.</li>
+</ul>
+
+<h2 id="revoke">How to switch off an app’s access</h2>
+<p>You can stop sharing at any time. Usually there are two ways:</p>
+<ul>
+<li><strong>In the budgeting app:</strong> look for “connected accounts” or similar in settings, and disconnect the bank.</li>
+<li><strong>In your bank’s app:</strong> many banks list connected third-party apps in their settings, where you can remove access.</li>
+</ul>
+<p>Removing access stops new data being shared. To delete what the app already holds, ask the app to delete your data under UK data protection law.</p>
+
+<h2 id="without">Prefer not to share? There are other ways</h2>
+<p>Open banking is one way to feed a budgeting app, not the only one. Some apps work with what you tell them, or with what your payment notifications say.</p>
+<figure class="illo" role="img" aria-label="Logging spending yourself shares only what you log. Reading payment notifications shares what each alert says. Open banking shares balances, transactions and history.">
+<p class="illo__title" aria-hidden="true">How much each method shares</p><div aria-hidden="true">
+<div class="ladder">
+<div class="ladder__row" data-a style="--i:0"><span class="ladder__icon"><svg aria-hidden="true"><use href="#i-pen" /></svg></span><span class="ladder__name">You log it<small>Typing, chat or voice</small></span><span class="ladder__meter"><span>Only what you tell it</span><span class="ladder__bar"><i data-a="grow" style="--w:22%;--i:2"></i></span></span></div>
+<div class="ladder__row" data-a style="--i:1"><span class="ladder__icon"><svg aria-hidden="true"><use href="#i-bell" /></svg></span><span class="ladder__name">Payment notifications<small>Read from your phone</small></span><span class="ladder__meter"><span>What each alert says</span><span class="ladder__bar"><i data-a="grow" style="--w:48%;--i:3"></i></span></span></div>
+<div class="ladder__row ladder__row--hi" data-a style="--i:2"><span class="ladder__icon"><svg aria-hidden="true"><use href="#i-bank" /></svg></span><span class="ladder__name">Open banking<small>Linked to your bank</small></span><span class="ladder__meter"><span>Balances, transactions, history</span><span class="ladder__bar"><i data-a="grow" style="--w:92%;--i:4"></i></span></span></div>
+</div>
+</div>
+
+</figure>
+<p>See our round-up of <a href="/best-budgeting-apps-without-open-banking">budgeting apps that work without open banking</a>. Vero is one of them: it never connects to your bank.</p>
+
+<h2 id="faq">Questions people ask</h2>
+<div class="g-faq">
+<details data-faq>
+<summary>Can a budgeting app take money from my account?</summary>
+<div><p>Not with read-only access. Budgeting apps use account information access, which lets them see data but not move money. Payments need separate approval with your bank each time.</p></div>
+</details>
+<details data-faq>
+<summary>Why does my budgeting app ask me to reconnect every 90 days?</summary>
+<div><p>UK rules require apps to reconfirm your consent every 90 days. It’s a check that you still want to share your data.</p></div>
+</details>
+<details data-faq>
+<summary>Is open banking the same as giving an app my login?</summary>
+<div><p>No. With open banking, you log in with your bank and the app never sees your password. Be wary of any service that asks for your bank login directly.</p></div>
+</details>
+<details data-faq>
+<summary>How do I know if an app is regulated?</summary>
+<div><p>Search for the company on the FCA register. Regulated apps usually also name their FCA status at the bottom of their website.</p></div>
+</details>
+</div>
+
+<div class="blog-cta"><div class="blog-cta__copy"><p class="blog-cta__title">Budget without a bank connection</p><p>Vero never connects to your bank. Log spending by chat or voice, plan your month and earn rewards with Verdi.</p></div><a class="app-btn app-btn--lg js-download-choice" href="#download-options"><span class="app-btn__face"><span class="app-btn__surface">Get Vero free<svg aria-hidden="true"><use href="#i-arrow" /></svg></span></span></a></div>
+
+<aside class="g-sources" aria-label="Sources"><p class="g-sources__h">Sources</p><ul><li><a href="https://register.fca.org.uk/" rel="noopener" target="_blank">FCA register</a></li><li><a href="https://www.openbanking.org.uk/" rel="noopener" target="_blank">Open Banking</a></li><li><a href="https://finextra.com/newsarticle/39307/fca-boosts-open-banking-by-removing-3-month-re-authentication-requirement" rel="noopener" target="_blank">Finextra: FCA removes 90-day re-authentication requirement</a></li><li><a href="https://support.truelayer.com/hc/en-us/articles/4418813282449-How-has-TrueLayer-implemented-the-FCA-s-changes-to-the-90-day-re-authentication-process" rel="noopener" target="_blank">TrueLayer: how the FCA’s 90-day changes work</a></li></ul><p>Checked on 24 November 2026. This is general information, not legal or financial advice.</p></aside>
+
+          </article>
+          <aside class="post-toc">
+            <nav class="legal__toc" aria-label="On this page">
+              <p class="legal__toc-h">On this page</p>
+              <ol data-post-toc>
+                <li><a href="#how">How open banking works</a></li>
+                <li><a href="#see">What an app can and can’t do</a></li>
+                <li><a href="#rules">How UK rules protect you</a></li>
+                <li><a href="#risks">The real risks</a></li>
+                <li><a href="#before">Before you connect: a quick checklist</a></li>
+                <li><a href="#revoke">How to switch off an app’s access</a></li>
+                <li><a href="#without">Prefer not to share? There are other ways</a></li>
+                <li><a href="#faq">Questions people ask</a></li>
+              </ol>
+            </nav>
+          </aside>
+        </div>
+
+        <aside class="g-more" aria-labelledby="more-title">
+          <h2 class="g-more__title" id="more-title">More guides</h2>
+          <div class="g-grid">
+            <a class="g-card" href="/best-budgeting-apps-without-open-banking">
+              <span class="g-card__kind">Round-up</span>
+              <span class="g-card__title">The best budgeting apps without open banking</span>
+              <span class="g-card__text">Six ways to budget in the UK without sharing your bank login, compared on price and effort.</span>
+            </a>
+            <a class="g-card" href="/vs/cleo">
+              <span class="g-card__kind">Comparison</span>
+              <span class="g-card__title">Vero vs Cleo</span>
+              <span class="g-card__text">Two chat-first money apps. One connects to your bank, one doesn’t.</span>
+            </a>
+            <a class="g-card" href="/vs/emma">
+              <span class="g-card__kind">Comparison</span>
+              <span class="g-card__title">Vero vs Emma</span>
+              <span class="g-card__text">Open banking overview or log-it-yourself habits: which fits how you manage money.</span>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__top">
+      <div class="footer__brand">
+        <a href="/" aria-label="Vero home"><img src="/assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
+        <p>Helping Gen Z build money habits that last.</p>
+        <div class="store-row store-row--start">
+          <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/appstore-download.png" alt="Download on the App Store" width="135" height="45" loading="lazy" />
+          </a>
+          <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/google-play-download-cropped.png" alt="Get it on Google Play" width="151" height="45" loading="lazy" />
+          </a>
+        </div>
+      </div>
+      <nav class="footer__cols" aria-label="Footer">
+        <div>
+          <p class="footer__h">Product</p>
+          <ul>
+            <li><a href="/#how-it-works">How it works</a></li>
+            <li><a href="/#pricing">Pricing</a></li>
+            <li><a href="#download-options" class="js-download-choice">Download</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Company</p>
+          <ul>
+            <li><a href="/about-us">About Us</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/verdi-companion">Meet Verdi</a></li>
+            <li><a href="/feedback">Feedback</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Guides</p>
+          <ul>
+            <li><a href="/guides">All guides</a></li>
+            <li><a href="/best-budgeting-apps-without-open-banking">Apps without open banking</a></li>
+            <li><a href="/is-open-banking-safe">Is open banking safe?</a></li>
+            <li><a href="/how-to-budget-on-your-first-salary">First salary budget</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Community</p>
+          <ul>
+            <li><a href="https://www.instagram.com/vero.financial/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@vero.app" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href="https://www.linkedin.com/company/vero-financial/posts/?feedView=all" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://discord.gg/MZP9CDfy" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__h">Legal</p>
+          <ul>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© 2026 Vero. All rights reserved.</p>
+      <a class="footer__top-link" href="#main">Back to top<svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+    </div>
+  </footer>
+
+  <!-- ── Download dialog ── -->
+  <div class="modal modal--download" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title" aria-hidden="true" inert>
+    <div class="modal__backdrop" data-dialog-close></div>
+    <div class="modal__panel">
+      <img class="modal__verdi" src="/assets/home/verdi-peek.webp" alt="" width="440" height="270" />
+      <button class="modal__close" type="button" aria-label="Close download options" data-dialog-close>
+        <svg aria-hidden="true"><use href="#i-close" /></svg>
+      </button>
+      <h2 class="modal__title" id="download-title">Get Vero free</h2>
+      <p>Download the app and start your first challenge today.</p>
+      <div class="store-row">
+        <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
+          <img src="/assets/appstore-download.png" alt="Download on the App Store" width="150" height="50" />
+        </a>
+        <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
+          <img src="/assets/google-play-download-cropped.png" alt="Get it on Google Play" width="168" height="50" />
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

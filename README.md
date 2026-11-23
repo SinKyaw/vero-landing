@@ -109,6 +109,23 @@ This project is provided as‑is. Feel free to use it as a reference or template
 
 ---
 
+## Guides (static SEO pages)
+
+Evergreen guides and comparisons are plain static HTML, served with clean URLs:
+
+- `guides.html` → `/guides` (hub)
+- `best-budgeting-apps-without-open-banking.html`, `is-open-banking-safe.html`,
+  `gamified-budgeting-apps.html`, `how-to-budget-on-your-first-salary.html`
+- `vs/cleo.html`, `vs/emma.html`, `vs/ynab.html` → `/vs/cleo` etc.
+
+They reuse the blog's reading layout (`pages.css` + `assets/js/post.js` for the progress bar and
+"On this page"), plus `assets/css/guides.css` (tables, callouts, illustrations) and
+`assets/js/guides.js`, which plays each illustration **once** when it scrolls into view (nothing loops).
+
+When you add or rename one: add it to `STATIC_PATHS` in `api/sitemap.js`, to `llms.txt`, and to the
+hub. Every competitor price or feature must link to a source and carry a "checked on" date; update
+both the visible date and `dateModified` in the JSON-LD when you re-check.
+
 ## Blog
 
 Posts are written in vero-admin (`/dashboard/blog`, Plate editor) and stored in vero-backend.
