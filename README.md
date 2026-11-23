@@ -37,13 +37,19 @@ Install the "Live Server" extension, then click **Go Live** while `index.html` i
 vero-landing/
 ├── index.html          # Home page
 ├── about-us.html
-├── post.html           # Blog list and single posts (Notion via /api)
 ├── feedback.html       # Community feedback board (mock UI, sample data)
 ├── verdi-companion.html
 ├── privacy-policy.html
 ├── terms.html          # Terms, Privacy and Verdi's page hide the site nav/footer
 │                       # inside the app's web view (or with ?embed=app)
 ├── affiliate-v1.html   # Legacy page, still on style.css
+├── api/                # Vercel functions: the server-rendered blog (see "Blog" below)
+│   ├── blog-index.js   # /blog
+│   ├── blog-post.js    # /blog/:slug
+│   ├── sitemap.js      # /sitemap.xml
+│   └── _lib/           # serialize.js (Plate JSON → HTML), layout.js + template.html (page shell), api.js
+├── vercel.json         # Clean URLs, blog rewrites, old post.html redirects
+├── robots.txt
 ├── style.css           # Legacy stylesheet (affiliate-v1 only)
 ├── assets/
 │   ├── css/
@@ -55,7 +61,6 @@ vero-landing/
 │   ├── js/
 │   │   ├── site.js      # Shared: nav, dialogs, smooth scroll, reveals, pointer parallax
 │   │   ├── home.js      # Home: app screens, tabs, FAQ, hero motion
-│   │   ├── blog.js      # Blog rendering
 │   │   ├── legal.js     # "On this page" contents for legal pages
 │   │   └── feedback.js  # Feedback board (local preview sign-in)
 │   ├── home/           # Optimised webp art for the home page
@@ -102,3 +107,21 @@ Scripts defined in `package.json`:
 This project is provided as‑is. Feel free to use it as a reference or template.
 
 ---
+
+## Blog
+
+Posts are written in vero-admin (`/dashboard/blog`, Plate editor) and stored in vero-backend.
+`/blog`, `/blog/:slug` and `/sitemap.xml` are Vercel functions (`api/`) that fetch the public
+blog API and return complete HTML, so search engines get the text, title, canonical and
+JSON-LD without running JavaScript. The CDN caches each page for 5 minutes
+(`s-maxage=300, stale-while-revalidate`), so a publish shows up within about 5 minutes.
+
+- **Env var:** `VERO_API_BASE_URL` = the backend origin including `/api` (set in Vercel).
+- **Page shell:** `api/_lib/template.html` carries its own nav and footer. Change them there
+  too when you change the other pages.
+- **New editor block?** Add it to `api/_lib/serialize.js`, or it renders as plain text.
+- **Post pages** also load `assets/js/post.js`: reading-progress bar, the "On this page" index
+  (built from the post's H2/H3s) and click-to-play YouTube.
+- **Local:** `npx vercel dev --listen 3200` with `VERO_API_BASE_URL` pointing at a local backend.
+  A plain static server (`npx serve`) shows the static pages only.
+

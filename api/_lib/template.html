@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"{{HTML_CLASS}}>
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Blog – Vero</title>
-  <meta name="description" content="Money habits, product news and life with Verdi, from the Vero team." />
-  <meta name="theme-color" content="#E7FDFB" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Blog – Vero" />
-  <meta property="og:description" content="Money habits, product news and life with Verdi, from the Vero team." />
-  <link rel="icon" href="assets/favicon.ico" type="image/png" />
+{{HEAD}}
+  <link rel="icon" href="/assets/favicon.ico" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/vero-ui.css" />
-  <link rel="stylesheet" href="assets/css/site.css" />
-  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="/assets/css/vero-ui.css" />
+  <link rel="stylesheet" href="/assets/css/site.css" />
+  <link rel="stylesheet" href="/assets/css/pages.css" />
   <script>
     /* Motion gate: content starts hidden only when JS will animate it in.
        If the animation libraries fail to load, everything is shown after 2.5s. */
@@ -28,15 +23,10 @@
       setTimeout(function () { if (!window.__veroMotion) d.documentElement.classList.remove('js-anim'); }, 2500);
     })(document);
   </script>
-  <script>
-    // A post URL (post.html?id=…) shows one story; without an id it shows the list.
-    if (/[?&]id=/.test(location.search)) document.documentElement.classList.add('is-post');
-  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="assets/js/site.js" defer></script>
-  <script src="assets/js/blog.js" defer></script>
+  <script src="/assets/js/site.js" defer></script>
 </head>
 
 <body>
@@ -65,15 +55,15 @@
   <!-- ── Navigation ── -->
   <header class="site-nav" data-nav>
     <div class="wrap site-nav__inner">
-      <a class="site-nav__logo" href="index.html" aria-label="Vero home">
-        <img src="assets/logo-primary.png" alt="Vero" width="97" height="32" />
+      <a class="site-nav__logo" href="/" aria-label="Vero home">
+        <img src="/assets/logo-primary.png" alt="Vero" width="97" height="32" />
       </a>
       <nav class="site-nav__menu" id="site-menu" aria-label="Main">
         <ul class="site-nav__links">
-          <li><a href="about-us.html">About Us</a></li>
-          <li><a href="index.html#pricing">Pricing</a></li>
-          <li><a href="post.html" aria-current="page">Blog</a></li>
-          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="/about-us">About Us</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+          <li><a href="/blog" aria-current="page">Blog</a></li>
+          <li><a href="/feedback">Feedback</a></li>
         </ul>
       </nav>
       <div class="site-nav__actions">
@@ -92,27 +82,20 @@
     <section class="page-hero" aria-labelledby="page-title" data-parallax>
       <div class="page-hero__mood" aria-hidden="true"><div class="bg-grid"></div></div>
       <div class="floaters" aria-hidden="true">
-        <img class="floater p1" data-depth="0.6" src="assets/home/token.webp" alt="" width="120" height="119" />
-        <img class="floater p2" data-depth="0.4" src="assets/home/sticker-star.webp" alt="" width="76" height="72" />
-        <img class="floater p3" data-depth="0.5" src="assets/home/streak.webp" alt="" width="64" height="54" />
-        <img class="floater p4" data-depth="0.35" src="assets/home/sticker-coffee.webp" alt="" width="120" height="64" />
+        <img class="floater p1" data-depth="0.6" src="/assets/home/token.webp" alt="" width="120" height="119" />
+        <img class="floater p2" data-depth="0.4" src="/assets/home/sticker-star.webp" alt="" width="76" height="72" />
+        <img class="floater p3" data-depth="0.5" src="/assets/home/streak.webp" alt="" width="64" height="54" />
+        <img class="floater p4" data-depth="0.35" src="/assets/home/sticker-coffee.webp" alt="" width="120" height="64" />
       </div>
       <div class="wrap page-hero__inner">
-        <a class="back-link" href="post.html" data-post-only><svg aria-hidden="true"><use href="#i-back" /></svg>All stories</a>
-        <span class="eyebrow" data-page-in>Our blog</span>
-        <h1 class="h-display page-hero__title " id="page-title">
-          <span class="line"><span class="line__in"><span data-post-title>The latest stories about Vero</span></span></span>
-        </h1>
-        <p class="lede" data-page-in>Money habits, product news and life with Verdi.</p>
-        <div class="byline" data-post-byline data-post-only></div>
+{{HERO}}
       </div>
     </section>
 
     <!-- ── Posts ── -->
     <section class="section blog" aria-label="Blog">
       <div class="wrap">
-        <div class="blog-grid" id="blog-listing" data-list-only aria-live="polite" aria-busy="true"></div>
-        <article class="prose post" id="post-content" data-post-only aria-live="polite" aria-busy="true"></article>
+{{CONTENT}}
       </div>
     </section>
 
@@ -147,12 +130,12 @@
               <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
             </div>
             <span class="cta__halo"></span>
-            <img class="cta__verdi" data-depth="0.45" src="assets/home/verdi-excited.webp" alt="" width="640" height="657" loading="lazy" />
-            <img class="cta__float cf1" data-depth="0.9" src="assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
-            <img class="cta__float cf2" data-depth="0.6" src="assets/home/xp.webp" alt="" width="64" height="60" loading="lazy" />
-            <img class="cta__float cf3" data-depth="1.1" src="assets/home/streak.webp" alt="" width="64" height="54" loading="lazy" />
-            <img class="cta__float cf4" data-depth="0.8" src="assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
-            <img class="cta__float cf5" data-depth="0.7" src="assets/home/sticker-star.webp" alt="" width="76" height="72" loading="lazy" />
+            <img class="cta__verdi" data-depth="0.45" src="/assets/home/verdi-excited.webp" alt="" width="640" height="657" loading="lazy" />
+            <img class="cta__float cf1" data-depth="0.9" src="/assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
+            <img class="cta__float cf2" data-depth="0.6" src="/assets/home/xp.webp" alt="" width="64" height="60" loading="lazy" />
+            <img class="cta__float cf3" data-depth="1.1" src="/assets/home/streak.webp" alt="" width="64" height="54" loading="lazy" />
+            <img class="cta__float cf4" data-depth="0.8" src="/assets/home/token.webp" alt="" width="120" height="119" loading="lazy" />
+            <img class="cta__float cf5" data-depth="0.7" src="/assets/home/sticker-star.webp" alt="" width="76" height="72" loading="lazy" />
           </div>
         </div>
       </div>
@@ -163,14 +146,14 @@
   <footer class="footer">
     <div class="wrap footer__top">
       <div class="footer__brand">
-        <a href="index.html" aria-label="Vero home"><img src="assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
+        <a href="/" aria-label="Vero home"><img src="/assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
         <p>Helping Gen Z build money habits that last.</p>
         <div class="store-row store-row--start">
           <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
-            <img src="assets/appstore-download.png" alt="Download on the App Store" width="135" height="45" loading="lazy" />
+            <img src="/assets/appstore-download.png" alt="Download on the App Store" width="135" height="45" loading="lazy" />
           </a>
           <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
-            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="151" height="45" loading="lazy" />
+            <img src="/assets/google-play-download-cropped.png" alt="Get it on Google Play" width="151" height="45" loading="lazy" />
           </a>
         </div>
       </div>
@@ -178,18 +161,18 @@
         <div>
           <p class="footer__h">Product</p>
           <ul>
-            <li><a href="index.html#how-it-works">How it works</a></li>
-            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="/#how-it-works">How it works</a></li>
+            <li><a href="/#pricing">Pricing</a></li>
             <li><a href="#download-options" class="js-download-choice">Download</a></li>
           </ul>
         </div>
         <div>
           <p class="footer__h">Company</p>
           <ul>
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="post.html">Blog</a></li>
-            <li><a href="verdi-companion.html">Meet Verdi</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="/about-us">About Us</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/verdi-companion">Meet Verdi</a></li>
+            <li><a href="/feedback">Feedback</a></li>
           </ul>
         </div>
         <div>
@@ -204,8 +187,8 @@
         <div>
           <p class="footer__h">Legal</p>
           <ul>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms &amp; Conditions</a></li>
           </ul>
         </div>
       </nav>
@@ -220,7 +203,7 @@
   <div class="modal modal--download" id="download-options" role="dialog" aria-modal="true" aria-labelledby="download-title" aria-hidden="true" inert>
     <div class="modal__backdrop" data-dialog-close></div>
     <div class="modal__panel">
-      <img class="modal__verdi" src="assets/home/verdi-peek.webp" alt="" width="440" height="270" />
+      <img class="modal__verdi" src="/assets/home/verdi-peek.webp" alt="" width="440" height="270" />
       <button class="modal__close" type="button" aria-label="Close download options" data-dialog-close>
         <svg aria-hidden="true"><use href="#i-close" /></svg>
       </button>
@@ -228,10 +211,10 @@
       <p>Download the app and start your first challenge today.</p>
       <div class="store-row">
           <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
-            <img src="assets/appstore-download.png" alt="Download on the App Store" width="150" height="50" />
+            <img src="/assets/appstore-download.png" alt="Download on the App Store" width="150" height="50" />
           </a>
           <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.suparat.verofinance" target="_blank" rel="noopener noreferrer">
-            <img src="assets/google-play-download-cropped.png" alt="Get it on Google Play" width="168" height="50" />
+            <img src="/assets/google-play-download-cropped.png" alt="Get it on Google Play" width="168" height="50" />
           </a>
         </div>
     </div>

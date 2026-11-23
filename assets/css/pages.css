@@ -312,6 +312,128 @@
 .post > li::before { content: ""; position: absolute; left: 0.2em; top: 0.68em; width: 8px; height: 8px; border-radius: 50%; background: var(--vero-teal); }
 .post > li + li { margin-top: 0.5em; }
 
+/* ---------- Post reading layout (api/_lib/layout.js, html.is-article) ---------- */
+.is-article {
+  --post-main: 680px;
+  --post-aside: 220px;
+  --post-gap: 64px;
+  --post-w: calc(var(--post-main) + var(--post-gap) + var(--post-aside));
+}
+.is-article .page-hero { padding-bottom: clamp(32px, 4vw, 48px); text-align: left; }
+/* The hero's inner box is also a .wrap, so its gutter is added back to line up with the article. */
+.is-article .page-hero__inner { justify-items: start; gap: 16px; max-width: calc(var(--post-w) + var(--gutter) * 2); }
+.is-article .page-hero__title { max-width: 24ch; }
+.is-article .byline { justify-content: flex-start; }
+.is-article .page-hero .floater.p3 { display: none; }
+.post-divider {
+  width: 100%;
+  height: 1px;
+  margin: 12px 0 0;
+  border: 0;
+  background: linear-gradient(90deg, var(--line-strong, #C9E2DE) 0%, var(--line) 45%, rgba(220, 237, 234, 0) 100%);
+}
+.is-article .blog { padding-top: clamp(16px, 2vw, 24px); }
+
+.post-layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--post-main)) var(--post-aside);
+  gap: var(--post-gap);
+  justify-content: center;
+  align-items: start;
+}
+.prose.post { max-width: var(--post-main); margin-inline: 0; }
+.post img { box-shadow: none; }
+.post-toc { align-self: stretch; }
+.post-toc .legal__toc { padding: 18px 14px; }
+.post-toc .legal__toc li.is-sub a { padding-left: 22px; font-size: 0.84rem; }
+
+/* Reading progress, pinned to the very top edge of the screen above the nav */
+.read-progress { position: fixed; inset: 0 0 auto; z-index: 55; height: 3px; pointer-events: none; }
+.read-progress span {
+  display: block;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--vero-teal), var(--vero-primary));
+}
+
+/* YouTube block: a thumbnail until play is pressed (assets/js/post.js) */
+.post-video { margin: 1.6em 0; }
+.post-video__poster,
+.post-video iframe {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--r-3xl);
+  background: var(--vero-deep-900);
+}
+/* YouTube's hqdefault thumbnail is 4:3 with the 16:9 frame letterboxed inside; cover crops the bars off. */
+.prose .post-video__poster img { width: 100%; height: 100%; margin: 0; border-radius: 0; object-fit: cover; }
+.post-video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 58, 52, 0.86);
+  transform: translate(-50%, -50%);
+  transition: background-color 200ms var(--ease-out);
+}
+.post-video__play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  border-style: solid;
+  border-width: 13px 0 13px 21px;
+  border-color: transparent transparent transparent #fff;
+  transform: translate(-50%, -50%);
+}
+.post-video__poster:hover .post-video__play { background: var(--vero-primary); }
+.post-video figcaption { margin-top: 10px; color: var(--ink-muted); font-size: 0.92rem; text-align: center; }
+
+@media (max-width: 1080px) {
+  .is-article { --post-aside: 0px; --post-gap: 0px; }
+  .post-layout { grid-template-columns: minmax(0, var(--post-main)); }
+  .post-toc { display: none; }
+}
+
+/* ---------- Server-rendered posts (api/_lib/serialize.js) ---------- */
+.prose figure { margin: 1.6em 0; }
+.prose figure img { height: auto; margin-block: 0; }
+.prose .post__cover { margin-top: 0; }
+.prose blockquote { padding: 4px 0 4px 1.1em; border-left: 4px solid var(--vero-teal); color: var(--ink); font-weight: 600; }
+.prose blockquote > * + * { margin-top: 0.6em; }
+.prose hr { height: 2px; margin-block: 2.2em; border: none; border-radius: 2px; background: var(--line); }
+.prose code { padding: 0.1em 0.4em; border-radius: 6px; background: var(--vero-mint-100); font-size: 0.92em; }
+.prose h2[id], .prose h3[id] { scroll-margin-top: calc(var(--nav-h) + 24px); }
+.post-card__excerpt { color: var(--ink-muted); font-size: 0.98rem; line-height: 1.5; }
+
+.blog-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-block: 2em;
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: var(--r-3xl);
+  background: var(--vero-mint-100);
+  box-shadow: inset 0 0 0 1px rgba(0, 81, 73, 0.06);
+}
+.blog-cta__title { color: var(--ink); font-family: var(--font-display); font-size: 1.6rem; line-height: 1.15; }
+.blog-cta__copy p + p { margin-top: 4px; }
+.blog-cta .store-badge img { width: auto; height: 42px; margin: 0; border-radius: 0; box-shadow: none; }
+
+.post-related { max-width: 1100px; margin: clamp(56px, 8vw, 96px) auto 0; }
+.post-related .blog-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 340px)); justify-content: center; }
+.post-related__title { margin-bottom: 24px; color: var(--ink); font-family: var(--font-display); font-size: clamp(1.7rem, 1.3rem + 1vw, 2.2rem); font-weight: 400; text-align: center; }
+.blog-state p { color: var(--ink-muted); }
+
 /* ---------- Legal ---------- */
 .legal {
   display: grid;
