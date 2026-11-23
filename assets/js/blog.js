@@ -114,7 +114,7 @@
           ? `<span class="post-card__media"><img src="${src}" alt="" loading="lazy" /></span>`
           : '<span class="post-card__media post-card__media--empty"><img src="assets/home/verdi-phone.webp" alt="" /></span>';
         return `
-          <a class="post-card${i === 0 ? ' post-card--lead' : ''}" href="post.html?id=${encodeURIComponent(p.id)}" style="animation-delay:${Math.min(i, 6) * 70}ms">
+          <a class="post-card${i === 0 ? ' post-card--lead' : ''}" href="/post?id=${encodeURIComponent(p.id)}" style="animation-delay:${Math.min(i, 6) * 70}ms">
             ${media}
             <span class="post-card__body">
               ${date ? `<span class="post-card__date">${esc(date)}</span>` : ''}

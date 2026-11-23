@@ -11,7 +11,21 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Vero – Build money habits that stick" />
   <meta property="og:description" content="Plan your month, log spending in seconds and earn real rewards with Verdi, your elephant mate." />
-  <link rel="icon" href="assets/favicon.ico" type="image/png" />
+  <link rel="canonical" href="https://verofin.uk/" />
+  <meta property="og:url" content="https://verofin.uk/" />
+  <meta property="og:site_name" content="Vero" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:image" content="https://verofin.uk/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Verdi the elephant next to the Vero logo and the line Build money habits that stick" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vero – Build money habits that stick" />
+  <meta name="twitter:description" content="Plan your month, log spending in seconds and earn real rewards with Verdi, your elephant mate." />
+  <meta name="twitter:image" content="https://verofin.uk/assets/og-image.png" />
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -34,6 +48,51 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script src="assets/js/site.js" defer></script>
   <script src="assets/js/home.js" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://verofin.uk/#organization",
+        "name": "Vero",
+        "legalName": "Vero Financial Ltd",
+        "url": "https://verofin.uk/",
+        "logo": "https://verofin.uk/assets/logo-primary.png",
+        "sameAs": [
+          "https://www.instagram.com/vero.financial/",
+          "https://www.tiktok.com/@vero.app",
+          "https://www.linkedin.com/company/vero-financial/",
+          "https://discord.gg/MZP9CDfy",
+          "https://apps.apple.com/gb/app/vero/id6759962937",
+          "https://play.google.com/store/apps/details?id=com.suparat.verofinance"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://verofin.uk/#website",
+        "url": "https://verofin.uk/",
+        "name": "Vero",
+        "inLanguage": "en-GB",
+        "publisher": { "@id": "https://verofin.uk/#organization" }
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Vero",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "FinanceApplication",
+        "description": "Vero helps Gen Z plan their month, log spending in seconds and earn real rewards with Verdi, an elephant mate who rewards every step forward.",
+        "image": "https://verofin.uk/assets/og-image.png",
+        "installUrl": [
+          "https://apps.apple.com/gb/app/vero/id6759962937",
+          "https://play.google.com/store/apps/details?id=com.suparat.verofinance"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+        "publisher": { "@id": "https://verofin.uk/#organization" }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -66,15 +125,15 @@
   <!-- ── Navigation ── -->
   <header class="site-nav" data-nav>
     <div class="wrap site-nav__inner">
-      <a class="site-nav__logo" href="index.html" aria-label="Vero home">
+      <a class="site-nav__logo" href="/" aria-label="Vero home">
         <img src="assets/logo-primary.png" alt="Vero" width="97" height="32" />
       </a>
       <nav class="site-nav__menu" id="site-menu" aria-label="Main">
         <ul class="site-nav__links">
-          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="/about-us">About Us</a></li>
           <li><a href="#pricing">Pricing</a></li>
-          <li><a href="post.html">Blog</a></li>
-          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="/post">Blog</a></li>
+          <li><a href="/feedback">Feedback</a></li>
         </ul>
       </nav>
       <div class="site-nav__actions">
@@ -450,7 +509,7 @@
           </article>
         </div>
         <div class="pricing__cta" data-reveal>
-          <a class="app-btn app-btn--white app-btn--lg" href="plans.html">
+          <a class="app-btn app-btn--white app-btn--lg" href="/plans">
             <span class="app-btn__face"><span class="app-btn__surface">Compare all plans<svg aria-hidden="true"><use href="#i-arrow" /></svg></span></span>
           </a>
         </div>
@@ -500,7 +559,7 @@
           </div>
           <div class="faq-item">
             <h3><button class="faq-item__q" type="button" id="faq-q8" aria-expanded="false" aria-controls="faq-a8">Who is Verdi?<span class="faq-item__icon" aria-hidden="true"><svg><use href="#i-plus" /></svg></span></button></h3>
-            <div class="faq-item__a" id="faq-a8" role="region" aria-labelledby="faq-q8"><div class="faq-item__inner"><p>Verdi is your elephant mate in the app. He cheers you on, goes on trips funded by your tokens and comes back with rewards. <a href="verdi-companion.html">Meet Verdi</a>.</p></div></div>
+            <div class="faq-item__a" id="faq-a8" role="region" aria-labelledby="faq-q8"><div class="faq-item__inner"><p>Verdi is your elephant mate in the app. He cheers you on, goes on trips funded by your tokens and comes back with rewards. <a href="/verdi-companion">Meet Verdi</a>.</p></div></div>
           </div>
         </div>
       </div>
@@ -553,7 +612,7 @@
   <footer class="footer">
     <div class="wrap footer__top">
       <div class="footer__brand">
-        <a href="index.html" aria-label="Vero home"><img src="assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
+        <a href="/" aria-label="Vero home"><img src="assets/home/logo-white.webp" alt="Vero" width="120" height="41" loading="lazy" /></a>
         <p>Helping Gen Z build money habits that last.</p>
         <div class="store-row store-row--start">
           <a class="store-badge" href="https://apps.apple.com/gb/app/vero/id6759962937" target="_blank" rel="noopener noreferrer">
@@ -576,10 +635,10 @@
         <div>
           <p class="footer__h">Company</p>
           <ul>
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="post.html">Blog</a></li>
-            <li><a href="verdi-companion.html">Meet Verdi</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="/about-us">About Us</a></li>
+            <li><a href="/post">Blog</a></li>
+            <li><a href="/verdi-companion">Meet Verdi</a></li>
+            <li><a href="/feedback">Feedback</a></li>
           </ul>
         </div>
         <div>
@@ -594,8 +653,8 @@
         <div>
           <p class="footer__h">Legal</p>
           <ul>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms &amp; Conditions</a></li>
           </ul>
         </div>
       </nav>

@@ -1,4 +1,14 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.verofin.uk" }],
+      "destination": "https://verofin.uk/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/.well-known/apple-app-site-association",
@@ -8,6 +18,14 @@
           "value": "application/json"
         }
       ]
+    },
+    {
+      "source": "/(blog|affiliate-v1)(\\.html)?",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     }
   ],
   "rewrites": [

@@ -12,7 +12,7 @@
     container.innerHTML = pages.map(page => `
       <article>
         <h2>
-          <a href="/post.html?id=${page.id}">${page.child_page.title}</a>
+          <a href="/post?id=${page.id}">${page.child_page.title}</a>
         </h2>
       </article>
     `).join('');
