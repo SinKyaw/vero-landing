@@ -20,6 +20,44 @@
   window.vero = vero;
   const navHeight = () => parseFloat(getComputedStyle(root).getPropertyValue('--nav-h')) || 72;
 
+  /* ── Page-load bar: pages are server-rendered, so after a click the old page stays up until the
+     next one arrives. A thin bar along the top edge shows that something is happening. ── */
+  const loadBar = doc.createElement('div');
+  loadBar.className = 'load-bar';
+  loadBar.setAttribute('aria-hidden', 'true');
+  loadBar.innerHTML = '<span></span>';
+  doc.body.appendChild(loadBar);
+  const loadFill = loadBar.firstChild;
+  let loadTimer = 0;
+  const loadStart = () => {
+    if (loadTimer) return;
+    let p = 0.08;
+    loadBar.classList.add('is-on');
+    loadFill.style.transform = `scaleX(${p})`;
+    // Ease towards 90% and wait there; the new page replaces this one when it is ready.
+    loadTimer = window.setInterval(() => {
+      p += (0.9 - p) * 0.12;
+      loadFill.style.transform = `scaleX(${p.toFixed(3)})`;
+    }, 200);
+  };
+  const loadReset = () => {
+    window.clearInterval(loadTimer);
+    loadTimer = 0;
+    loadBar.classList.remove('is-on');
+    loadFill.style.transform = 'scaleX(0)';
+  };
+  doc.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || !/^https?:$/.test(url.protocol)) return;
+    if (url.pathname === location.pathname && url.search === location.search) return; // same page or #anchor
+    loadStart();
+  });
+  // Back/forward can restore this page from the bfcache with the bar still running.
+  window.addEventListener('pageshow', (e) => { if (e.persisted) loadReset(); });
+
   /* ── Navigation ── */
   const nav = $('[data-nav]');
   const burger = nav && $('.site-nav__burger', nav);
@@ -206,8 +244,9 @@
   gsap.defaults({ ease: 'power3.out' }); // the app's out-cubic family, never a bounce
   vero.gsap = gsap;
 
-  // Smooth scroll
-  if (window.Lenis) {
+  // Smooth scroll (off on the blog list, the guides hub and every article-layout page, which scroll natively)
+  const nativeScroll = /^\/(blog|guides)(\/|$)/.test(location.pathname) || root.classList.contains('is-article');
+  if (window.Lenis && !nativeScroll) {
     vero.lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
     vero.lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => vero.lenis.raf(time * 1000));
@@ -232,7 +271,10 @@
       target.focus({ preventScroll: true });
     };
     if (vero.lenis) vero.lenis.scrollTo(id === '#main' ? 0 : target, { offset: -(navHeight() + 12), duration: 1.3, onComplete: done });
-    else { target.scrollIntoView({ behavior: 'smooth' }); done(); }
+    else if (nativeScroll) {
+      window.scrollTo({ top: id === '#main' ? 0 : target.getBoundingClientRect().top + window.scrollY - (navHeight() + 12), behavior: 'instant' });
+      done();
+    } else { target.scrollIntoView({ behavior: 'smooth' }); done(); }
     history.replaceState(null, '', id);
   });
 

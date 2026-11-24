@@ -9,6 +9,7 @@ const STATIC_PATHS = [
   '/', '/about-us', '/plans', '/verdi-companion', '/feedback', '/blog', '/privacy-policy', '/terms',
   // Static guides and comparisons (guides.html, vs/*.html and the guide pages at the root)
   '/guides',
+  '/compare',
   '/best-budgeting-apps-without-open-banking',
   '/is-open-banking-safe',
   '/gamified-budgeting-apps',

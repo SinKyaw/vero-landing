@@ -15,13 +15,14 @@ Vero is a mobile app for iOS and Android, made by Vero Financial Ltd. It does no
 ## Guides
 
 - [All guides](https://verofin.uk/guides): Plain-English budgeting guides and fair app comparisons from the Vero team
+- [Compare apps](https://verofin.uk/compare): Every comparison and round-up in one place
 - [Best budgeting apps without open banking](https://verofin.uk/best-budgeting-apps-without-open-banking): Vero, Goodbudget, YNAB, Spendee, Fudget and a spreadsheet compared for UK users
 - [Is open banking safe?](https://verofin.uk/is-open-banking-safe): What a budgeting app can and can't see, UK rules, and how to switch off access
 - [Gamified budgeting apps](https://verofin.uk/gamified-budgeting-apps): How streaks, points and rewards help or hurt, and how to choose an app
 - [How to budget on your first salary](https://verofin.uk/how-to-budget-on-your-first-salary): A step-by-step UK guide for 2026/27
-- [Vero vs Cleo](https://verofin.uk/vs/cleo): Two chat-first money apps compared; Cleo connects to your bank, Vero doesn't
-- [Vero vs Emma](https://verofin.uk/vs/emma): Open banking overview against log-it-yourself habits
-- [Vero vs YNAB](https://verofin.uk/vs/ynab): Zero-based budgeting against a daily safe-to-spend number, plus UK alternatives
+- [Cleo alternative: Vero vs Cleo](https://verofin.uk/vs/cleo): What Cleo does well, and how Vero builds a spending habit without a bank connection
+- [Emma alternative: Vero vs Emma](https://verofin.uk/vs/emma): An automatic open banking overview against a daily habit with no bank link, and how to use both
+- [YNAB alternatives: Vero vs YNAB](https://verofin.uk/vs/ynab): YNAB's zero-based method against Vero's lighter plans, plus other UK alternatives priced in pounds
 
 ## Company
 

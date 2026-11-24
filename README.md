@@ -114,6 +114,7 @@ This project is provided as‑is. Feel free to use it as a reference or template
 Evergreen guides and comparisons are plain static HTML, served with clean URLs:
 
 - `guides.html` → `/guides` (hub)
+- `compare.html` → `/compare` (hub for the `/vs/` alternatives and round-ups; linked from every footer)
 - `best-budgeting-apps-without-open-banking.html`, `is-open-banking-safe.html`,
   `gamified-budgeting-apps.html`, `how-to-budget-on-your-first-salary.html`
 - `vs/cleo.html`, `vs/emma.html`, `vs/ynab.html` → `/vs/cleo` etc.
