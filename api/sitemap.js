@@ -14,9 +14,13 @@ const STATIC_PATHS = [
   '/is-open-banking-safe',
   '/gamified-budgeting-apps',
   '/how-to-budget-on-your-first-salary',
+  '/how-to-budget-with-monzo-pots',
   '/vs/cleo',
   '/vs/emma',
   '/vs/ynab',
+  '/vs/goodbudget',
+  '/vs/snoop',
+  '/vs/fortune-city',
 ];
 
 export default async function handler(req, res) {

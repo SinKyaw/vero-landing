@@ -179,6 +179,8 @@
 .why-card p { font-size: 0.97rem; line-height: 1.55; }
 .why__col--l .why-card:nth-child(2) { margin-inline: -18px 18px; }
 .why__col--r .why-card:nth-child(2) { margin-inline: 18px -18px; }
+.why-card .icon-badge--art { --size: 76px; top: -38px; }
+.icon-badge--art img { width: 86%; height: 86%; }
 
 .why__hero { position: relative; display: grid; place-items: center; aspect-ratio: 1; }
 .why__disc {
@@ -200,6 +202,7 @@
   margin-top: 12%;
   filter: drop-shadow(0 26px 30px rgba(0, 48, 43, 0.35));
 }
+.why__verdi--phone { width: auto; height: 96%; margin-top: 0; filter: none; }
 .why__coin { position: absolute; filter: drop-shadow(0 16px 18px rgba(0, 58, 52, 0.25)); }
 .why__coin.c1 { left: 0; top: 10%; width: 20%; rotate: -14deg; }
 .why__coin.c2 { right: 2%; bottom: 14%; width: 15%; rotate: 16deg; }
@@ -438,6 +441,10 @@
 }
 .step-visual__sticker--sm { width: 24%; }
 
+/* Composed step artwork (phone + Verdi + chips baked into one image) */
+.step-visual.step-visual--shot { height: auto; aspect-ratio: 1200 / 1066; background: #E3F6F2; }
+.step-visual__shot { display: block; width: 100%; height: 100%; object-fit: cover; }
+
 .float-chip {
   position: absolute;
   z-index: 3;
@@ -476,6 +483,12 @@
 .step-panel.is-active .step-visual .phone { animation: rise-in 640ms var(--ease-out) 60ms both; --rise: 48px; }
 .step-panel.is-active .step-visual__sticker { animation: rise-in 600ms var(--ease-out) 160ms both; }
 .step-panel.is-active .float-chip { animation: pop-in 480ms var(--ease-out) 260ms both; }
+.step-panel.is-active .step-visual__shot { animation: rise-in 600ms var(--ease-out) 60ms both; --rise: 32px; }
+
+/* Testimonials: Verdi dressed as each early user */
+.voice__art--persona { top: -78px; right: 14px; width: 104px; filter: none; }
+.voice:hover .voice__art--persona { transform: translateY(-4px) rotate(-3deg); }
+.voices__list:has(.voice__art--persona) { padding-top: 72px; }
 
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(var(--rise, 14px)); }

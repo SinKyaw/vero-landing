@@ -22,6 +22,10 @@ Vero is a mobile app for iOS and Android, made by Vero Financial Ltd. It does no
 - [How to budget on your first salary](https://verofin.uk/how-to-budget-on-your-first-salary): A step-by-step UK guide for 2026/27
 - [Cleo alternative: Vero vs Cleo](https://verofin.uk/vs/cleo): What Cleo does well, and how Vero builds a spending habit without a bank connection
 - [Emma alternative: Vero vs Emma](https://verofin.uk/vs/emma): An automatic open banking overview against a daily habit with no bank link, and how to use both
+- [How to budget with Monzo Pots](https://verofin.uk/how-to-budget-with-monzo-pots): A simple Pots setup for bills, savings and spending, Salary Sorter, and what's free versus paid
+- [Goodbudget alternative: Vero vs Goodbudget](https://verofin.uk/vs/goodbudget): Envelope budgeting typed in by hand against quick logging with no bank link, priced in pounds
+- [Snoop alternative: Vero vs Snoop](https://verofin.uk/vs/snoop): Cutting bills from your bank feed against changing everyday spending with no bank link, and using both
+- [Fortune City alternative: Vero vs Fortune City](https://verofin.uk/vs/fortune-city): Two gamified money apps; in-game city rewards against real-world discounts
 - [YNAB alternatives: Vero vs YNAB](https://verofin.uk/vs/ynab): YNAB's zero-based method against Vero's lighter plans, plus other UK alternatives priced in pounds
 
 ## Company

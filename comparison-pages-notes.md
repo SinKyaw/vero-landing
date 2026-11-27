@@ -19,6 +19,16 @@ Deliberately left out until confirmed: **Savings Challenges** (backend migration
 
 If **Verdi chat** gets an entry point again, update the Cleo page. It now says Vero has no AI chat "at the moment" (table row, "What Cleo does well", FAQ 1).
 
+### The four new pages (added 24 Nov 2026)
+
+`/vs/goodbudget`, `/vs/snoop`, `/vs/fortune-city` and `/how-to-budget-with-monzo-pots` depend on the same answers:
+
+- **`budgetManagement`:** the pockets bullet and Moving section on Goodbudget, the "Bills you add" row on Snoop, and "Mirror your Pots" on Monzo.
+- **`journeyEnabled`:** the whole angle of the Fortune City page ("rewards that leave the app"), and on Snoop the line "Vero earns … from gift cards bought through Verdi’s trips". If Journey isn't public, the Fortune City page needs a rethink, not just an edit.
+- **Fortune City search demand is unverified.** It's a global app, so check UK volume for "Fortune City alternative" in a keyword tool before promoting it.
+- **No cover images yet.** The pages use the default social image, and hub cards show a Vero illustration (`.g-card__media--art`). Add `assets/covers/vs-goodbudget.*`, `vs-snoop.*`, `vs-fortune-city.*` and `how-to-budget-with-monzo-pots.*` when ready, then switch the cards and `og:image`.
+- **Monzo facts not stated on Monzo’s pages, so left out:** Trends and spending targets, whether Bills Pot and locking are free, and savings rates (the page contradicted itself).
+
 ## 2. Screenshots needed (item 6: show the real product)
 
 The App Store screenshots on disk (`Deployment/App Store/…`, March 2026) show retired screens (old leaderboard, old monthly plan, Rewards Shop), so I didn't use them. The pages use design-system illustrations drawn from the real flows instead. Fresh screenshots of these would replace them:
