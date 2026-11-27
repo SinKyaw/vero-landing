@@ -21,6 +21,16 @@ const STATIC_PATHS = [
   '/vs/goodbudget',
   '/vs/snoop',
   '/vs/fortune-city',
+  // How budget management works in Vero (budget-management.html + budget-management/*.html)
+  '/budget-management',
+  '/budget-management/accounts',
+  '/budget-management/pockets',
+  '/budget-management/groups',
+  '/budget-management/goals',
+  '/budget-management/plans',
+  '/budget-management/bills-and-ious',
+  '/budget-management/sharing',
+  '/budget-management/manage-and-dashboard',
 ];
 
 export default async function handler(req, res) {

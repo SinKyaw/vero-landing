@@ -118,6 +118,11 @@ Evergreen guides and comparisons are plain static HTML, served with clean URLs:
 - `best-budgeting-apps-without-open-banking.html`, `is-open-banking-safe.html`,
   `gamified-budgeting-apps.html`, `how-to-budget-on-your-first-salary.html`, `how-to-budget-with-monzo-pots.html`
 - `vs/cleo.html`, `vs/emma.html`, `vs/ynab.html`, `vs/goodbudget.html`, `vs/snoop.html`, `vs/fortune-city.html` → `/vs/cleo` etc.
+- `budget-management.html` → `/budget-management` (hub) and `budget-management/*.html` → `/budget-management/pockets` etc.:
+  how Vero's budget management works (accounts, pockets, groups, goals, plans, bills and IOUs, sharing,
+  Manage and Dashboard). One storyline (Mia) with shared numbers across every page; linked from every
+  footer, the home page's "Plan your month" step and `/guides`. Illustrations are in
+  `assets/budget-management/`; their source is `vero+/blogs/assets/_src-budget-management/` (`render.sh`).
 
 They reuse the blog's reading layout (`pages.css` + `assets/js/post.js` for the progress bar and
 "On this page"), plus `assets/css/guides.css` (tables, callouts, illustrations) and

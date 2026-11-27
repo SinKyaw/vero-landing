@@ -408,6 +408,18 @@
   letter-spacing: 0;
   line-height: 1;
 }
+.step-panel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vero-secondary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+.step-panel__link svg { width: 16px; height: 16px; }
+.step-panel__link:hover { color: var(--vero-primary); }
 .ticks--grid { grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin: 4px 0 6px; }
 .ticks--grid li {
   padding: 12px 14px;

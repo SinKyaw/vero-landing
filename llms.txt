@@ -12,6 +12,18 @@ Vero is a mobile app for iOS and Android, made by Vero Financial Ltd. It does no
 - [Plans](https://verofin.uk/plans): Compare Vero Free and Vero Plus. Start free, then upgrade for automated logging, deeper insights and more challenges
 - [Meet Verdi](https://verofin.uk/verdi-companion): Verdi is a little elephant who grows as your money habits do. Earn tokens, fund his trips and collect rewards
 
+## Budget management
+
+- [Budget management in Vero](https://verofin.uk/budget-management): How accounts, pockets, groups, goals, plans, bills and sharing fit together, and how they add up to a safe-to-spend number
+- [Accounts and safe to spend](https://verofin.uk/budget-management/accounts): Add your real accounts with a rough balance, no bank login; safe to spend is money with no job yet, minus bills still due that their own pocket can't cover
+- [Pockets](https://verofin.uk/budget-management/pockets): Named pots for a purpose (rent, family, fun), filled with Move money, which is neither spending nor income
+- [Groups](https://verofin.uk/budget-management/groups): Optional folders for pockets, with a total for each
+- [Goals](https://verofin.uk/budget-management/goals): Pockets with a target and an optional date, a single pace line, and amber (never red) when behind
+- [Plans](https://verofin.uk/budget-management/plans): A month, week or custom period with spending caps on categories, pockets or groups, a save side for goals, and bills
+- [Bills and IOUs](https://verofin.uk/budget-management/bills-and-ious): What you pay and what you're owed, as a calendar or list, with IOUs you can share by link
+- [Sharing](https://verofin.uk/budget-management/sharing): Share a pocket or group with someone who can view or can add spending; only the owner changes what pockets hold
+- [Manage and Dashboard](https://verofin.uk/budget-management/manage-and-dashboard): Manage lists everything you've set up; Dashboard is tabs of blocks you build yourself
+
 ## Guides
 
 - [All guides](https://verofin.uk/guides): Plain-English budgeting guides and fair app comparisons from the Vero team
